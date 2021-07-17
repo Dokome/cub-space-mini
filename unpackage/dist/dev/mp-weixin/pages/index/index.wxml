@@ -1,1 +1,1 @@
-<view class="content"><image class="logo" src="/static/logo.png"></image><view class="text-area"><text class="title">{{title}}</text></view></view>
+<view class="data-v-57280228">我是广场<u-tabbar vue-id="8dd740cc-1" list="{{list}}" mid-button="{{midButton}}" inactive-color="{{inactiveColor}}" activeColor="{{activeColor}}" change="{{navChange}}" border-top="{{borderTop}}" class="data-v-57280228" bind:__l="__l"></u-tabbar></view>

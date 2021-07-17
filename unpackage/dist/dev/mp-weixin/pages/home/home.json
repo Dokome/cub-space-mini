@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "我的",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "navbar": "/components/navbar/navbar",
+    "u-avatar": "/uview-ui/components/u-avatar/u-avatar",
+    "u-tag": "/uview-ui/components/u-tag/u-tag",
+    "u-tabbar": "/uview-ui/components/u-tabbar/u-tabbar"
+  }
+}

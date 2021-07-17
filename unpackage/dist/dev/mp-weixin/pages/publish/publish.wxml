@@ -1,0 +1,1 @@
+<view class="data-v-177a8126">我是广场<u-tabbar vue-id="5053b6c0-1" list="{{list}}" mid-button="{{midButton}}" inactive-color="{{inactiveColor}}" activeColor="{{activeColor}}" change="{{navChange}}" border-top="{{borderTop}}" class="data-v-177a8126" bind:__l="__l"></u-tabbar></view>

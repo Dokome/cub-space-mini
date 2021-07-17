@@ -1,0 +1,1 @@
+<view style="{{'height:'+(CustomBar-StatusBar+'px')+';'+('display:'+(ifNavDisplay)+';')}}"><view class="flex justify-center align-center" style="{{'height:'+(CustomBar-StatusBar+'px')+';'+('margin-top:'+(StatusBar+'px')+';')}}">标题</view></view>
