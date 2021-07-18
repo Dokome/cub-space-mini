@@ -11,7 +11,8 @@
 					Vue.prototype.Custom = custom;
 					Vue.prototype.CustomBar = custom.bottom + custom.top - e.statusBarHeight;
 					// #endif		
-				}
+					Vue.prototype.windowHeight = e.windowHeight;
+				},
 			})
 		},
 		onShow: function() {
@@ -32,4 +33,14 @@
 	page {
 		background-color: #F5F5F5;
 	}
+	/* #ifdef MP-WEIXIN || APP-PLUS */
+		::-webkit-scrollbar {
+			display: none;
+			width: 0 !important;
+			height: 0 !important;
+			-webkit-appearance: none;
+			background: transparent;
+			color: transparent;
+		}
+	/* #endif */
 </style> 

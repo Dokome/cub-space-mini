@@ -104,6 +104,7 @@ var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));function _i
         _vue.default.prototype.Custom = custom;
         _vue.default.prototype.CustomBar = custom.bottom + custom.top - e.statusBarHeight;
 
+        _vue.default.prototype.windowHeight = e.windowHeight;
       } });
 
   },

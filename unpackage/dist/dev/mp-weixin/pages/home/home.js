@@ -96,13 +96,19 @@ var components
 try {
   components = {
     navbar: function() {
-      return __webpack_require__.e(/*! import() | components/navbar/navbar */ "components/navbar/navbar").then(__webpack_require__.bind(null, /*! @/components/navbar/navbar.vue */ 112))
+      return __webpack_require__.e(/*! import() | components/navbar/navbar */ "components/navbar/navbar").then(__webpack_require__.bind(null, /*! @/components/navbar/navbar.vue */ 89))
     },
-    uAvatar: function() {
-      return __webpack_require__.e(/*! import() | uview-ui/components/u-avatar/u-avatar */ "uview-ui/components/u-avatar/u-avatar").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-avatar/u-avatar.vue */ 117))
+    homeHeader: function() {
+      return __webpack_require__.e(/*! import() | components/home-header/home-header */ "components/home-header/home-header").then(__webpack_require__.bind(null, /*! @/components/home-header/home-header.vue */ 149))
     },
-    uTag: function() {
-      return __webpack_require__.e(/*! import() | uview-ui/components/u-tag/u-tag */ "uview-ui/components/u-tag/u-tag").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-tag/u-tag.vue */ 125))
+    uSwiper: function() {
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-swiper/u-swiper */ "uview-ui/components/u-swiper/u-swiper").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-swiper/u-swiper.vue */ 133))
+    },
+    uCellItem: function() {
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-cell-item/u-cell-item */ "uview-ui/components/u-cell-item/u-cell-item").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-cell-item/u-cell-item.vue */ 141))
+    },
+    uIcon: function() {
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-icon/u-icon */ "uview-ui/components/u-icon/u-icon").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-icon/u-icon.vue */ 108))
     },
     uTabbar: function() {
       return Promise.all(/*! import() | uview-ui/components/u-tabbar/u-tabbar */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-tabbar/u-tabbar")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-tabbar/u-tabbar.vue */ 82))
@@ -207,28 +213,68 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 var _vuex = __webpack_require__(/*! vuex */ 41);function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var _default =
 {
   data: function data() {
     return {
-      list: this.$store.state.list };
+      //是否显示关注/关闭公众号部分
+      officialButtonShow: true,
+      // tabbar参数
+      list: this.$store.state.list,
+      // 页面高度(通过App.vue获取而来)
+      PageHeight: this.windowHeight,
+      // 图片列表
+      imgList: [
+      'https://img2.baidu.com/it/u=376454713,1672600792&fm=26&fmt=auto&gp=0.jpg',
+      'https://img2.baidu.com/it/u=275837859,1845605843&fm=26&fmt=auto&gp=0.jpg',
+      'https://img1.baidu.com/it/u=2482470290,1487532761&fm=26&fmt=auto&gp=0.jpg'],
+
+      // 页面功能列表
+      funcList: [
+      {
+        title: '我的动态',
+        path: '/static/home/mynews.png' },
+
+      {
+        title: '账号资料',
+        path: '/static/home/info.png' },
+
+      {
+        title: '学校认证',
+        path: '/static/home/identify.png' },
+
+      {
+        title: '意见反馈',
+        path: '/static/home/feedback.png' },
+
+      {
+        title: '商务合作',
+        path: '/static/home/business.png' },
+
+      {
+        title: '关于我们',
+        path: '/static/home/aboutus.png' },
+
+      {
+        title: '设置',
+        path: '/static/home/setting.png' },
+
+      {
+        title: '分享小程序',
+        path: '/static/home/share.png' }] };
+
+
 
   },
-  methods: {},
-
+  methods: {
+    //关闭公众号
+    closeOfficial: function closeOfficial() {
+      this.officialButtonShow = false;
+    },
+    // 关注公众号
+    focusOfficial: function focusOfficial() {
+      console.log("关注成功");
+    } },
 
   computed: _objectSpread({},
   (0, _vuex.mapState)(['midButton', 'inactiveColor', 'activeColor', 'borderTop'])) };exports.default = _default;

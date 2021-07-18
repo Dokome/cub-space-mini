@@ -22,7 +22,7 @@
 				titleStyle
 			]"
 		>
-			<block v-if="title !== ''">{{ title }}</block>
+			<block v-if="title !== ''"><text class="text-bold">{{ title }}</text></block>
 			<slot name="title" v-else></slot>
 
 			<view class="u-cell__label" v-if="label || $slots.label" :style="[labelStyle]">

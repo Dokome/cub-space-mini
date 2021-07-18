@@ -5,7 +5,7 @@
 		'u-shape-' + shape,
 		'u-mode-' + mode + '-' + type
 	]"
-	 class="u-tag margin-right-lg" :style="[customStyle]" @tap="clickTag">
+	 class="u-tag margin-right" :style="[customStyle]" @tap="clickTag">
 		<text class="text-bold">{{text}}</text>
 		<view class="u-icon-wrap" @tap.stop>
 			<u-icon @click="close" size="22" v-if="closeable" :color="closeIconColor" 

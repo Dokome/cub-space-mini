@@ -1,5 +1,17 @@
 /* uni.scss */
-.u-demo-area.data-v-92bb8f34 {
-  margin: 0 -40rpx;
+.outWrapper.data-v-92bb8f34 {
+  overflow: hidden;
+}
+.scroll-wrapper.data-v-92bb8f34 {
+  overflow: hidden;
+}
+.listIcon.data-v-92bb8f34 {
+  position: absolute;
+  height: 50rpx;
+  width: 50rpx;
+  top: 50%;
+  -webkit-transform: translateY(-50%) translateX(50%);
+          transform: translateY(-50%) translateX(50%);
+  z-index: 9999;
 }
 
