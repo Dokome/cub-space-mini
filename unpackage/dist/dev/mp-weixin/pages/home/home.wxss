@@ -10,8 +10,8 @@
   height: 50rpx;
   width: 50rpx;
   top: 50%;
-  -webkit-transform: translateY(-50%) translateX(50%);
-          transform: translateY(-50%) translateX(50%);
+  -webkit-transform: translateY(-50%) translateX(30rpx);
+          transform: translateY(-50%) translateX(30rpx);
   z-index: 9999;
 }
 

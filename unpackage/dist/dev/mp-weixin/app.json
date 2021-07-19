@@ -4,7 +4,12 @@
     "pages/home/home",
     "pages/publish/publish",
     "pages/meet/meet",
-    "pages/chat/chat"
+    "pages/chat/chat",
+    "pages/home/fans_focus",
+    "pages/home/about_business",
+    "pages/home/identify",
+    "pages/home/info",
+    "pages/home/feedback"
   ],
   "subPackages": [],
   "window": {

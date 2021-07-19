@@ -19,12 +19,12 @@
 					<image src="/static/Img/follow.png" style="width: 100%; height: 100%;"></image>
 				</view>
 				<!-- 功能列表 -->
-				<view class="margin-tb-xs bg-white">
-					<view class="" v-for="(item, index) in funcList" style="position: relative;" :id="index">
-						<view class="listIcon" style="">
+				<view class="margin-tb-xs bg-white" @click="enterFuncPage">
+					<view class="" v-for="(item, index) in funcList" style="position: relative;" :key="index">
+						<view class="listIcon" style="" :data-page="item.page">
 							<image :src="item.path" mode="" style="width: 100%; height: 100%;"></image>
 						</view>
-						<u-cell-item :title="item.title">
+						<u-cell-item :title="item.title" :data-page="item.page">
 							<u-icon slot="icon" size="80" name="search" color="transparent"></u-icon>
 						</u-cell-item>
 					</view>
@@ -67,15 +67,18 @@
 					},
 					{
 						title: '账号资料',
-						path: '/static/home/info.png'
+						path: '/static/home/info.png',
+						page: '/pages/home/info'
 					},
 					{
 						title: '学校认证',
-						path: '/static/home/identify.png'
+						path: '/static/home/identify.png',
+						page: '/pages/home/identify'
 					},
 					{
 						title: '意见反馈',
-						path: '/static/home/feedback.png'
+						path: '/static/home/feedback.png',
+						page: '/pages/home/feedback'
 					},
 					{
 						title: '商务合作',
@@ -104,6 +107,12 @@
 			// 关注公众号
 			focusOfficial() {
 				console.log("关注成功");
+			},
+			// 进入功能页面
+			enterFuncPage(e) {
+				uni.navigateTo({
+					url: e.target.dataset.page
+				})
 			}
 		},
 		computed: {
@@ -125,7 +134,7 @@
 		height: 50rpx;
 		width: 50rpx;
 		top: 50%;
-		transform: translateY(-50%) translateX(50%);
+		transform: translateY(-50%) translateX(30rpx);
 		z-index: 9999;
 	}
 </style>

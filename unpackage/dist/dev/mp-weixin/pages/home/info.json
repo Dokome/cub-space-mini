@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "",
+  "enablePullDownRefresh": false,
+  "navigationBarTextStyle": "black",
+  "usingComponents": {
+    "navbar": "/components/navbar/navbar",
+    "u-button": "/uview-ui/components/u-button/u-button"
+  }
+}

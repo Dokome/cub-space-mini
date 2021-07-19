@@ -113,4 +113,7 @@
 .u-cell_right.data-v-65423b64 {
   line-height: 1;
 }
+.letter_spacing.data-v-65423b64 {
+  letter-spacing: 2rpx;
+}
 

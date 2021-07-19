@@ -96,22 +96,22 @@ var components
 try {
   components = {
     navbar: function() {
-      return __webpack_require__.e(/*! import() | components/navbar/navbar */ "components/navbar/navbar").then(__webpack_require__.bind(null, /*! @/components/navbar/navbar.vue */ 89))
+      return __webpack_require__.e(/*! import() | components/navbar/navbar */ "components/navbar/navbar").then(__webpack_require__.bind(null, /*! @/components/navbar/navbar.vue */ 119))
     },
     homeHeader: function() {
-      return __webpack_require__.e(/*! import() | components/home-header/home-header */ "components/home-header/home-header").then(__webpack_require__.bind(null, /*! @/components/home-header/home-header.vue */ 149))
+      return __webpack_require__.e(/*! import() | components/home-header/home-header */ "components/home-header/home-header").then(__webpack_require__.bind(null, /*! @/components/home-header/home-header.vue */ 126))
     },
     uSwiper: function() {
-      return __webpack_require__.e(/*! import() | uview-ui/components/u-swiper/u-swiper */ "uview-ui/components/u-swiper/u-swiper").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-swiper/u-swiper.vue */ 133))
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-swiper/u-swiper */ "uview-ui/components/u-swiper/u-swiper").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-swiper/u-swiper.vue */ 131))
     },
     uCellItem: function() {
-      return __webpack_require__.e(/*! import() | uview-ui/components/u-cell-item/u-cell-item */ "uview-ui/components/u-cell-item/u-cell-item").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-cell-item/u-cell-item.vue */ 141))
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-cell-item/u-cell-item */ "uview-ui/components/u-cell-item/u-cell-item").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-cell-item/u-cell-item.vue */ 138))
     },
     uIcon: function() {
-      return __webpack_require__.e(/*! import() | uview-ui/components/u-icon/u-icon */ "uview-ui/components/u-icon/u-icon").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-icon/u-icon.vue */ 108))
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-icon/u-icon */ "uview-ui/components/u-icon/u-icon").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-icon/u-icon.vue */ 145))
     },
     uTabbar: function() {
-      return Promise.all(/*! import() | uview-ui/components/u-tabbar/u-tabbar */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-tabbar/u-tabbar")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-tabbar/u-tabbar.vue */ 82))
+      return Promise.all(/*! import() | uview-ui/components/u-tabbar/u-tabbar */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-tabbar/u-tabbar")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-tabbar/u-tabbar.vue */ 112))
     }
   }
 } catch (e) {
@@ -168,7 +168,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
 
 
 
@@ -237,15 +237,18 @@ var _vuex = __webpack_require__(/*! vuex */ 41);function ownKeys(object, enumera
 
       {
         title: '账号资料',
-        path: '/static/home/info.png' },
+        path: '/static/home/info.png',
+        page: '/pages/home/info' },
 
       {
         title: '学校认证',
-        path: '/static/home/identify.png' },
+        path: '/static/home/identify.png',
+        page: '/pages/home/identify' },
 
       {
         title: '意见反馈',
-        path: '/static/home/feedback.png' },
+        path: '/static/home/feedback.png',
+        page: '/pages/home/feedback' },
 
       {
         title: '商务合作',
@@ -274,10 +277,17 @@ var _vuex = __webpack_require__(/*! vuex */ 41);function ownKeys(object, enumera
     // 关注公众号
     focusOfficial: function focusOfficial() {
       console.log("关注成功");
+    },
+    // 进入功能页面
+    enterFuncPage: function enterFuncPage(e) {
+      uni.navigateTo({
+        url: e.target.dataset.page });
+
     } },
 
   computed: _objectSpread({},
   (0, _vuex.mapState)(['midButton', 'inactiveColor', 'activeColor', 'borderTop'])) };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 
