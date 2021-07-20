@@ -33,49 +33,61 @@
 				"enablePullDownRefresh": false
 			}
 
-		}, {
-			"path": "pages/home/fans_focus",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false,
-				"navigationBarTextStyle": "black"
-			}
-
-		}, {
-			"path": "pages/home/about_business",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false,
-				"navigationBarTextStyle": "black"
-			}
-
-		}, {
-			"path": "pages/home/identify",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false,
-				"navigationBarTextStyle": "black"
-			}
-
-		}, {
-			"path": "pages/home/info",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false,
-				"navigationBarTextStyle": "black"
-			}
-
 		}
-	    ,{
-            "path" : "pages/home/feedback",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-    ],
+	],
+	"subPackages": [
+		//home页面模块
+		{
+			"root": "pagesHome",
+			"pages": [{
+				"path": "fans_focus",
+				"style": {
+					"navigationBarTitleText": "",
+					"enablePullDownRefresh": false,
+					"navigationBarTextStyle": "black"
+				}
+
+			}, {
+				"path": "about_business",
+				"style": {
+					"navigationBarTitleText": "",
+					"enablePullDownRefresh": false,
+					"navigationBarTextStyle": "black"
+				}
+
+			}, {
+				"path": "identify",
+				"style": {
+					"navigationBarTitleText": "",
+					"enablePullDownRefresh": false,
+					"navigationBarTextStyle": "black"
+				}
+
+			}, {
+				"path": "info",
+				"style": {
+					"navigationBarTitleText": "",
+					"enablePullDownRefresh": false,
+					"navigationBarTextStyle": "black"
+				}
+
+			}, {
+				"path": "feedback",
+				"style": {
+					"navigationBarTitleText": "",
+					"enablePullDownRefresh": false
+				}
+
+			}]
+		}
+	],
+	// 包预加载
+	"preloadRule": {
+		"pages/home/home": {
+			"network": "all",
+			"packages": ["pagesHome"]
+		}
+	},
 	//全局样式
 	"globalStyle": {
 		"navigationBarTextStyle": "white",

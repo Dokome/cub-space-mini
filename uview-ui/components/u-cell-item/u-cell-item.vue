@@ -218,7 +218,7 @@ export default {
 	box-sizing: border-box;
 	/* #endif */
 	width: 100%;
-	padding: 26rpx 32rpx;
+	padding: 20rpx 32rpx;
 	font-size: 28rpx;
 	line-height: 54rpx;
 	color: $u-content-color;
@@ -317,5 +317,6 @@ export default {
 //调节字符间距
 .letter_spacing {
 	letter-spacing: 2rpx;
+	margin-left: -15rpx;
 } 
 </style>

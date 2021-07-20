@@ -4,14 +4,20 @@
     "pages/home/home",
     "pages/publish/publish",
     "pages/meet/meet",
-    "pages/chat/chat",
-    "pages/home/fans_focus",
-    "pages/home/about_business",
-    "pages/home/identify",
-    "pages/home/info",
-    "pages/home/feedback"
+    "pages/chat/chat"
   ],
-  "subPackages": [],
+  "subPackages": [
+    {
+      "root": "pagesHome",
+      "pages": [
+        "fans_focus",
+        "about_business",
+        "identify",
+        "info",
+        "feedback"
+      ]
+    }
+  ],
   "window": {
     "navigationBarTextStyle": "white",
     "navigationBarTitleText": "uni-app",
@@ -42,6 +48,14 @@
         "text": "消息"
       }
     ]
+  },
+  "preloadRule": {
+    "pages/home/home": {
+      "network": "all",
+      "packages": [
+        "pagesHome"
+      ]
+    }
   },
   "usingComponents": {},
   "sitemapLocation": "sitemap.json"

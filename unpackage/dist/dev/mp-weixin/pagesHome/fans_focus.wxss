@@ -1,0 +1,9 @@
+/* uni.scss */
+.scroll-wrapper.data-v-243f171a {
+  overflow: hidden;
+}
+.focusButton.data-v-243f171a {
+  position: absolute;
+  right: 50rpx;
+}
+

@@ -21,6 +21,11 @@
 				<!-- 功能列表 -->
 				<view class="margin-tb-xs bg-white" @click="enterFuncPage">
 					<view class="" v-for="(item, index) in funcList" style="position: relative;" :key="index">
+						<view class="" style="position: absolute; width: 100%; height: 100%; z-index: 9999; opacity: 0;"
+									v-if="item.title === '分享小程序'" @click="shareApp"
+						>
+						<u-button open-type="share">分享</u-button>
+						</view>
 						<view class="listIcon" style="" :data-page="item.page">
 							<image :src="item.path" mode="" style="width: 100%; height: 100%;"></image>
 						</view>
@@ -68,25 +73,27 @@
 					{
 						title: '账号资料',
 						path: '/static/home/info.png',
-						page: '/pages/home/info'
+						page: '/pagesHome/info'
 					},
 					{
 						title: '学校认证',
 						path: '/static/home/identify.png',
-						page: '/pages/home/identify'
+						page: '/pagesHome/identify'
 					},
 					{
 						title: '意见反馈',
 						path: '/static/home/feedback.png',
-						page: '/pages/home/feedback'
+						page: '/pagesHome/feedback'
 					},
 					{
 						title: '商务合作',
-						path: '/static/home/business.png'
+						path: '/static/home/business.png',
+						page: '/pagesHome/about_business?page=business'
 					},
 					{
 						title: '关于我们',
-						path: '/static/home/aboutus.png'
+						path: '/static/home/aboutus.png',
+						page: '/pagesHome/about_business?page=about'
 					},
 					{
 						title: '设置',
@@ -113,11 +120,23 @@
 				uni.navigateTo({
 					url: e.target.dataset.page
 				})
+			},
+			shareApp() {
+				
 			}
 		},
 		computed: {
 			...mapState(['midButton', 'inactiveColor', 'activeColor', 'borderTop']),
 		},
+		onLoad() {
+			this.$u.mpShare = {
+				title: '遇见有趣的~', // 默认为小程序名称，可自定义
+				path: '', // 默认为当前页面路径，一般无需修改，QQ小程序不支持
+				// 分享图标，路径可以是本地文件路径、代码包文件路径或者网络图片路径。
+				// 支持PNG及JPG，默认为当前页面的截图
+				imageUrl: 'https://cub.image.emily.red/operation/logo.png'
+			}
+		}
 	}
 </script>
 

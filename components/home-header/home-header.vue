@@ -30,10 +30,10 @@
 					<text class="text-bold text-sm text-cut text-gray">总有些惊奇的际遇，比方说当我遇见你！</text>
 				</view>
 				<!-- 个人数据 -->
-				<view class="flex align-end flex-sub padding-bottom-xs" style="width: 70%;">
-					<view class="" v-for="(item, index) in userData">
-						<text class="text-bold text-black text-xl margin-right-xs">{{item.count}}</text>
-						<text class="text-bold margin-right text-gray">{{item.title}}</text>
+				<view class="flex align-end flex-sub padding-bottom-xs" style="width: 70%;" @click="enterFuncPage">
+					<view class="" v-for="(item, index) in userData" :key="index">
+						<text class="text-bold text-black text-xl margin-right-xs" :data-page="item.page">{{item.count}}</text>
+						<text class="text-bold margin-right text-gray" :data-page="item.page">{{item.title}}</text>
 					</view>
 				</view>
 			</view>
@@ -50,18 +50,30 @@
 				[
 					{
 						title: '动态',
-						count: 8
+						count: 8,
+						page: '/pages/home/home'
 					},
 					{
 						title: '粉丝',
-						count: 62
+						count: 62,
+						page: '/pagesHome/fans_focus?page=fans'
 					},
 					{
 						title: '关注',
-						count: 3
+						count: 3,
+						page: '/pagesHome/fans_focus?page=focus'
 					}
 				]
 			};
+		},
+		methods: {
+			// 进入功能页面
+			enterFuncPage(e) {
+				console.log(123);
+				uni.navigateTo({
+					url: e.target.dataset.page
+				})
+			},
 		}
 	}
 </script>
