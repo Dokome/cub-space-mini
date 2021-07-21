@@ -16,7 +16,7 @@
 				<view class="listIcon" style="" @click="back">
 					<image src="/static/Img/back.png" mode="" style="width: 100%; height: 100%;"></image>
 				</view>
-				<text class="text-lg text-bold text-black">{{title}}</text>
+				<text class="text-lg text-bold text-black" style="font-weight: 500;">{{title}}</text>
 			</view>
 		</view>		
 	</view>

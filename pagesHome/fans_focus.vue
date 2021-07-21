@@ -11,9 +11,11 @@
 					<!-- 信息 -->
 					<view class="margin-left flex flex-direction justify-between">
 						<!-- 昵称 -->
-						<text class="text-lg text-bold text-black">Niubility</text>
+						<text class="text-lg text-bold text-black" style="font-weight: 500;">Niubility</text>
 						<!-- 学校 -->
-						<text class="text-sm text-gray margin-top">江西师范大学</text>
+						<text class="text-sm text-gray margin-top-xs">江西师范大学</text>
+						<!-- 签名 -->
+						<text class="text-sm text-gray margin-top-sm">总有些惊奇的际遇，比方说当我遇见你！</text>
 					</view>
 					<!-- 按钮 -->
 					<view class="focusButton">

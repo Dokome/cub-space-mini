@@ -8,7 +8,7 @@
 				<home-header></home-header>
 				<!-- 小轮播图 -->
 				<view class="bg-white margin-top-xs" style="height: 140rpx; width: 100%;">
-					<u-swiper height="160" :list="imgList" :border-radius="0"></u-swiper>
+					<u-swiper height="160" mode="dot" :list="imgList" :border-radius="0"></u-swiper>
 				</view>
 				<!-- 关注公众号 -->
 				<view class="margin-top" style="height: 90rpx; width: 100%; position: relative;" v-if="officialButtonShow">

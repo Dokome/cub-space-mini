@@ -9,7 +9,7 @@
 			<!-- 信息与头像间隔的地方 -->
 			<view class="bg-white flex align-center padding-left-lg" style="height: 40rpx;">
 				<!-- 头像 -->
-				<u-avatar
+				<u-avatar style="border: 5rpx solid #FFFFFF;border-radius: 75rpx;" mode="circle" show-sex="true" sex-icon="man"
 					:size="150" 
 					:src="'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Ftx-free-imgs.acfun.cn%2Fcontent%2F2019_7_21%2F1.5636994914764566E9.png%3Fimageslim&refer=http%3A%2F%2Ftx-free-imgs.acfun.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1629122958&t=ddad2dd6664dee4cc4dea6e21c807aa1'" 
 				></u-avatar>
@@ -26,14 +26,14 @@
 					<u-tag :text="'学校:江西师范大学'" shape="circle" color="#A8A8A8" bg-color="#F5F5F5" border-color="#F5F5F5"/>
 				</view>
 				<!-- 个性签名 -->
-				<view class="">
-					<text class=" text-sm text-cut text-gray">总有些惊奇的际遇，比方说当我遇见你！</text>
+				<view class="text-sm text-gray u-line-1">
+					总有些惊奇的际遇，比方说当我遇见你！
 				</view>
 				<!-- 个人数据 -->
 				<view class="flex align-end flex-sub padding-bottom-xs" style="width: 70%;" @click="enterFuncPage">
 					<view class="" v-for="(item, index) in userData" :key="index">
-						<text class="text-bold text-black text-xl margin-right-xs" :data-page="item.page">{{item.count}}</text>
-						<text class=" margin-right text-gray" :data-page="item.page">{{item.title}}</text>
+						<text class="text-black text-xl margin-right-xs" :data-page="item.page">{{item.count}}</text>
+						<text class="margin-right text-gray" :data-page="item.page">{{item.title}}</text>
 					</view>
 				</view>
 			</view>

@@ -21,7 +21,7 @@
 					<view>
 						<!-- 轮播图/热榜等 -->
 						<view class="margin-top-xs" style="height: 320rpx; width: 100%;" v-show="current === 1">
-							<u-swiper height="320" :list="imgList" :border-radius="0"></u-swiper>
+							<u-swiper height="320" mode="dot" :list="imgList" :border-radius="0"></u-swiper>
 						</view>
 						<!-- 动态数据 -->
 						<card v-for="(item, index) in 30" :key="index"></card>

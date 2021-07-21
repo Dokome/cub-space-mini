@@ -2,7 +2,7 @@
 	<view>
 		<navbar title="意见反馈"></navbar>
 		<view class="margin-bottom-xs"></view>
-		<u-input type="textarea" maxlength="800" height="900" :custom-style="{ background: 'white' }" placeholder="请输入反馈内容"></u-input>
+		<u-input type="textarea" maxlength="800" height="900" :custom-style="{ background: 'white' }" placeholder="请输入反馈内容(0/140)"></u-input>
 		<view class="flex justify-center padding-top-xl"><u-button size="medium" type="primary">提交</u-button></view>
 	</view>
 </template>
