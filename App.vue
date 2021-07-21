@@ -10,6 +10,7 @@
 					let custom = wx.getMenuButtonBoundingClientRect();
 					Vue.prototype.Custom = custom;
 					Vue.prototype.CustomBar = custom.bottom + custom.top - e.statusBarHeight;
+					Vue.prototype.ViewPart = custom.bottom + custom.top - e.statusBarHeight + e.statusBarHeight;
 					// #endif		
 					Vue.prototype.windowHeight = e.windowHeight;
 				},

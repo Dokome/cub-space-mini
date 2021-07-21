@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<!-- 背景图 -->
-		<view class="" style="height: 630rpx;">
+		<view class="" style="height: 500rpx;">
 			<image src="/static/Img/bgc.jpg" mode="aspectFill" style=" width: 100%; height: 100%;"></image>
 		</view>
 		<!-- 头像框/个人信息 -->
@@ -27,13 +27,13 @@
 				</view>
 				<!-- 个性签名 -->
 				<view class="">
-					<text class="text-bold text-sm text-cut text-gray">总有些惊奇的际遇，比方说当我遇见你！</text>
+					<text class=" text-sm text-cut text-gray">总有些惊奇的际遇，比方说当我遇见你！</text>
 				</view>
 				<!-- 个人数据 -->
 				<view class="flex align-end flex-sub padding-bottom-xs" style="width: 70%;" @click="enterFuncPage">
 					<view class="" v-for="(item, index) in userData" :key="index">
 						<text class="text-bold text-black text-xl margin-right-xs" :data-page="item.page">{{item.count}}</text>
-						<text class="text-bold margin-right text-gray" :data-page="item.page">{{item.title}}</text>
+						<text class=" margin-right text-gray" :data-page="item.page">{{item.title}}</text>
 					</view>
 				</view>
 			</view>

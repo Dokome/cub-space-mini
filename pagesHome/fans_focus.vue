@@ -4,7 +4,8 @@
 		<!-- 列表 -->
 		<scroll-view scroll-y="true" :style="{ height: PageHeight + 'px' }" class="scroll-wrapper">
 			<view>
-				<view class="bg-white margin-top-xs flex align-center padding-lg" style="height: 170rpx; position: relative;" v-for="item in 100">
+				<view class="bg-white margin-top-xs flex align-center padding-lg" 
+				style="height: 170rpx; position: relative;" v-for="item in 100" :key="item">
 					<!-- 头像 -->
 					<u-avatar size="large" :src="'https://img2.baidu.com/it/u=2537426187,1713205820&fm=26&fmt=auto&gp=0.jpg'"></u-avatar>
 					<!-- 信息 -->

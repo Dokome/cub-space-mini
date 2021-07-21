@@ -2,4 +2,10 @@
 .u-demo-area.data-v-57280228 {
   margin: 0 -40rpx;
 }
+.outWrapper.data-v-57280228 {
+  overflow: hidden;
+}
+.viewPart.data-v-57280228 {
+  height: 100vh;
+}
 
