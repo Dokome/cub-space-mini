@@ -692,3 +692,49 @@
 .lines-white {
 	color: #ffffff;
 }
+
+/* 多图模式 */
+.img_Con {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+[class^="img_"] {
+	position: relative;
+	flex-shrink: 0;
+}
+
+[class^="img_"] .show_img {
+	/* border-radius: 10rpx; */
+	position: absolute;
+	width: calc(100% - 10rpx);
+	height: calc(100% - 10rpx);
+	top: 0;
+	left: 0;
+}
+
+.img_2,
+.img_4 {
+	width: 50%;
+	padding-top: 50%;
+}
+
+.img_3,
+.img_5,
+.img_6,
+.img_7,
+.img_8,
+.img_9 {
+	width: 33.3333%;
+	padding-top: 33.3333%;
+}
+
+.clamp {
+	 /* 多余内容省略号处理-多行 */
+	 word-break: break-all;
+	 text-overflow: ellipsis;
+	 display: -webkit-box; 
+	 -webkit-box-orient: vertical; 
+	 -webkit-line-clamp: 3; 
+	 overflow: hidden; 
+}
