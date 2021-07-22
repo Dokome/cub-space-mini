@@ -13,17 +13,17 @@
 			<view class="margin-left-xs padding-top-xs">
 				<!-- 名字/时间 -->
 				<view class="flex align-center">
-					<view class="u-main-color u-font-14" style="font-weight: 500">杨超越</view>
-					<view class="u-light-color u-font-12 margin-left-xs">2021/7/21 21:57</view>
+					<view class="u-main-color u-font-16" style="font-weight: 600">杨超越</view>
+					<view class="u-light-color u-font-14 margin-left-xs" style="font-weight: 400">2021/7/21 21:57</view>
 				</view>
 				<!-- 学校 -->
 				<view class="margin-top-xs padding-bottom-xs">
-					<view class="u-light-color u-font-12">江西师范大学</view>
+					<view class="u-light-color u-font-14" style="font-weight: 400">江西师范大学</view>
 				</view>
 			</view>
 		</view>
 		<!-- 文字栏 -->
-		<view class="margin-tb-xs u-content-color u-line-3 u-font-14">
+		<view class="margin-tb-xs u-content-color u-line-5 u-font-16" style="font-weight: 400">
 			但说实话，背包九讲对于小白来说确实不太友好，看起来还是有点费劲的，且都是伪代码理解起来也吃力。但说实话，背包九讲对于小白来说确实不太友好，看起来还是有点费劲的，且都是伪代码理解起来也吃力。
 		</view>
 		<!-- 图片栏 -->
