@@ -23,7 +23,7 @@
 			</view>
 		</view>
 		<!-- 文字栏 -->
-		<view class="margin-tb-xs u-content-color u-line-5 u-font-16" style="font-weight: 400">
+		<view class="margin-tb-xs u-main-color u-line-5 u-font-16" style="font-weight: 400">
 			但说实话，背包九讲对于小白来说确实不太友好，看起来还是有点费劲的，且都是伪代码理解起来也吃力。但说实话，背包九讲对于小白来说确实不太友好，看起来还是有点费劲的，且都是伪代码理解起来也吃力。
 		</view>
 		<!-- 图片栏 -->
