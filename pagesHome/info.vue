@@ -35,7 +35,7 @@
 			<image src="/static/Img/info.png" style="width: 100%; height: 100%;"></image>
 		</view>
 		<view class="margin-bottom-xs"></view>
-		<view class="flex justify-center padding-top"><u-button size="medium" type="primary">修改</u-button></view>
+		<view class="flex justify-center padding-top"><u-button size="default" type="primary" ripple="true" shape="circle">修改</u-button></view>
 	</view>
 </template>
 
