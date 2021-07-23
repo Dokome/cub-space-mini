@@ -16,6 +16,13 @@
         "info",
         "feedback"
       ]
+    },
+    {
+      "root": "pagesInteractive",
+      "pages": [
+        "usersIndex",
+        "hotList"
+      ]
     }
   ],
   "window": {
@@ -54,6 +61,12 @@
       "network": "all",
       "packages": [
         "pagesHome"
+      ]
+    },
+    "pages/index/index": {
+      "network": "all",
+      "packages": [
+        "pagesInteractive"
       ]
     }
   },

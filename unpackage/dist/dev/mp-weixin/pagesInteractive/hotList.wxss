@@ -1,0 +1,26 @@
+/* uni.scss */
+.listNumber_0 text.data-v-d6519af0 {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 32rpx;
+  height: 32rpx;
+  background-color: #FC4141;
+}
+.listNumber_1 text.data-v-d6519af0 {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 32rpx;
+  height: 32rpx;
+  background-color: #FE8603;
+}
+.listNumber_2 text.data-v-d6519af0 {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 32rpx;
+  height: 32rpx;
+  background-color: #E3AB6E;
+}
+

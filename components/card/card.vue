@@ -56,7 +56,15 @@
 		data() {
 			return {
 				imgList: [
-					
+					{
+						url: '/static/Img/bgc.jpg',
+					},
+					{
+						url: '/static/Img/bgc.jpg',
+					},
+					{
+						url: '/static/Img/bgc.jpg',
+					},
 				],
 				singleImg: null
 			};

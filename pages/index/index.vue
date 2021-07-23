@@ -20,7 +20,22 @@
 				<scroll-view scroll-y="true" style="height: 100%;">
 					<view>
 						<!-- 轮播图/热榜等 -->
-						<view class="margin-top-xs" style="height: 320rpx; width: 100%;" v-show="current === 1">
+						<!-- 热榜 -->
+						<view class="margin-xs bg-white padding-sm" style="height: 280rpx;" v-show="current === 2" @click="enterHotList">
+							<!-- 头部 -->
+							<view class="">
+								<text class="text-bold text-black text-lg">校园热榜</text>
+							</view>
+							<!-- 内容 -->
+							<view class="">
+								<view class="flex align-center margin-top-sm" v-for="(item, index) in 3" :key="index">
+									<image :src="`/static/Img/hotList${index + 1}.png`" mode="" style="width: 40rpx; height: 40rpx;flex-shrink: 0;"></image>
+									<text class="text-black text-cut margin-left">新的事物再怎么陌生，都逃不开熟悉事物的影新的事物再怎么陌生，都逃不开熟悉事物的影</text>
+								</view>
+							</view> 
+						</view>
+						<!-- 轮播图 -->
+						<view class="margin-top-xs" style="height: 320rpx; width: 100%;" v-show="current === 1 || current === 2">
 							<u-swiper height="320" mode="dot" :list="imgList" :border-radius="0"></u-swiper>
 						</view>
 						<!-- 动态数据 -->
@@ -91,6 +106,12 @@
 				this.swiperCurrent = current;
 				this.current = current;
 			},
+			//进入热榜页面
+			enterHotList() {
+				uni.navigateTo({
+					url: '/pagesInteractive/hotList'
+				})
+			}
 		},
 		computed: {
 			...mapState(['midButton', 'inactiveColor', 'activeColor', 'borderTop']),
