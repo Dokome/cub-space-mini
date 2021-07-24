@@ -17,23 +17,23 @@
 			<!-- 信息 -->
 			<view class="padding-lr-lg flex-sub flex flex-direction" style="margin-top: 80rpx;">
 				<!-- 名字 -->
-				<view class=""><text class="text-bold text-lg text-black text-xxl">mate川丶</text></view>
+				<view class=""><text class="text-lg text-black text-xxl" style="font-weight: 500;">mate川丶</text></view>
 				<!-- 标签 -->
 				<view class="margin-tb-sm">
 					<!-- ID -->
-					<u-tag :text="'UID:1098265675'" shape="circle" color="#A8A8A8" bg-color="#F5F5F5" border-color="#F5F5F5" />
+					<u-tag :text="'UID:1098265675'" shape="circle" color="#909399" bg-color="#F5F5F5" border-color="#F5F5F5" />
 					<!-- 学校 -->
-					<u-tag :text="'学校:江西师范大学'" shape="circle" color="#A8A8A8" bg-color="#F5F5F5" border-color="#F5F5F5"/>
+					<u-tag :text="'学校:江西师范大学'" shape="circle" color="#909399" bg-color="#F5F5F5" border-color="#F5F5F5"/>
 				</view>
 				<!-- 个性签名 -->
-				<view class="text-sm text-gray u-line-1">
+				<view class="text-sm u-line-1 u-tips-color">
 					总有些惊奇的际遇，比方说当我遇见你！
 				</view>
 				<!-- 个人数据 -->
 				<view class="flex align-end flex-sub padding-bottom-xs" style="width: 70%;" @click="enterFuncPage">
 					<view class="" v-for="(item, index) in userData" :key="index">
 						<text class="text-black text-xl margin-right-xs" :data-page="item.page">{{item.count}}</text>
-						<text class="margin-right text-gray" :data-page="item.page">{{item.title}}</text>
+						<text class="margin-right u-tips-color" :data-page="item.page">{{item.title}}</text>
 					</view>
 				</view>
 			</view>

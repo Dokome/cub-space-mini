@@ -30,7 +30,7 @@
 							<view class="">
 								<view class="flex align-center margin-top-sm" v-for="(item, index) in 3" :key="index">
 									<image :src="`/static/Img/hotList${index + 1}.png`" mode="" style="width: 40rpx; height: 40rpx;flex-shrink: 0;"></image>
-									<text class="text-black text-cut margin-left">新的事物再怎么陌生，都逃不开熟悉事物的影新的事物再怎么陌生，都逃不开熟悉事物的影</text>
+									<text class="text-black text-cut margin-left-xs">新的事物再怎么陌生，都逃不开熟悉事物的影新的事物再怎么陌生，都逃不开熟悉事物的影</text>
 								</view>
 							</view> 
 						</view>
