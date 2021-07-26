@@ -3,8 +3,8 @@
 		<navbar :title="page"></navbar>
 		<view class="align-center justify-center flex flex-direction container">
 			<image :src="img" mode="aspectFill" style="width: 400rpx; height: 400rpx;"></image>
-			<view v-if="page !== '商务合作'" class="margin-top"><text class="text-bold text-xxl text-gray" style="font-weight: 500;">次方空间</text></view>
-			<view class="margin-top"><text class="text-bold text-gray" style="font-weight: 500;">{{ page === '商务合作' ? bussiness : aboutus }}</text></view>
+			<view v-if="page !== '商务合作'" class="margin-top"><text class="text-bold text-xxl text-gray" >次方空间</text></view>
+			<view class="margin-top"><text class="text-bold text-gray" >{{ page === '商务合作' ? bussiness : aboutus }}</text></view>
 		</view>
 	</view>
 </template>

@@ -11,10 +11,10 @@
 				{ marginTop: StatusBar + 'px' },
 			]"
 			>
-			<slot style="width: 100%;" v-if="!title"></slot>
-			<view style="width: 100%;position: relative;" v-else class="flex justify-center">
+			<slot class="wmax" v-if="!title"></slot>
+			<view style="position: relative;" v-else class="flex justify-center wmax">
 				<view class="listIcon" style="" @click="back">
-					<image src="/static/Img/back.png" mode="" style="width: 100%; height: 100%;"></image>
+					<image src="/static/Img/back.png" mode="" class="hwmax"></image>
 				</view>
 				<text class="text-lg text-bold text-black" style="font-weight: 500;">{{title}}</text>
 			</view>
@@ -44,9 +44,7 @@
 		methods: {
 			//返回上一页
 			back() {
-				uni.navigateBack({
-					delta: 1
-				})
+				this.$api.routerHandle.goback();
 			}
 		}
 	}

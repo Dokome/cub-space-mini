@@ -119,6 +119,11 @@
 	-webkit-justify-content: space-around;
 	        justify-content: space-around;
 }
+.justify-evenly {
+	-webkit-box-pack: space-evenly;
+	-webkit-justify-content: space-evenly;
+	        justify-content: space-evenly;
+}
 /* ==================
           文本
  ==================== */
@@ -166,7 +171,7 @@
 	overflow: hidden;
 }
 .text-bold {
-	font-weight: bold;
+	font-weight: 600;
 }
 .text-center {
 	text-align: center;
@@ -616,14 +621,42 @@
 	width: 33.3333%;
 	padding-top: 33.3333%;
 }
-.clamp {
-	 /* 多余内容省略号处理-多行 */
-	 word-break: break-all;
-	 text-overflow: ellipsis;
-	 display: -webkit-box; 
-	 -webkit-box-orient: vertical; 
-	 -webkit-line-clamp: 3; 
-	 overflow: hidden;
+/* 控制行数 */
+.clamp1 {
+	/* 多余内容省略号处理-多行 */
+	word-break: break-all;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+	-webkit-line-clamp: 1;
+}
+.clamp2 {
+	word-break: break-all;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+	-webkit-line-clamp: 2;
+}
+.clamp3 {
+	word-break: break-all;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+	-webkit-line-clamp: 3;
+}
+/* 其他 */
+.hmax {
+	height: 100%;
+}
+.wmax {
+	width: 100%;
+}
+.hwmax {
+	width: 100%;
+	height: 100%;
 }
 .u-relative,
 .u-rela {

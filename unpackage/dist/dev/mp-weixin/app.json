@@ -21,7 +21,8 @@
       "root": "pagesInteractive",
       "pages": [
         "usersIndex",
-        "hotList"
+        "hotList",
+        "newsdetail"
       ]
     }
   ],
@@ -70,5 +71,6 @@
       ]
     }
   },
-  "usingComponents": {}
+  "usingComponents": {},
+  "sitemapLocation": "sitemap.json"
 }

@@ -13,14 +13,14 @@
 			<view class="margin-left-xs padding-top-xs">
 				<!-- 名字/学校 -->
 				<view class="flex align-center">
-					<view class="text-sm text-black" style="font-weight: 600">APEX</view>
+					<view class="text-sm text-black" style="text-bold">APEX</view>
 				</view>
 				<!-- 时间 -->
 				<view class="u-tips-color text-sm">2021/7/21 21:57</view>
 			</view>
 		</view>
 		<!-- 文字栏 -->
-		<view class="margin-tb-xs clamp text-black text-content text-df">
+		<view class="margin-tb-xs clamp3 text-black text-content">
 			但说实话，背包九讲对于小白来说确实不太友好，看起来还是有点费劲的，且都是伪代码理解起来也吃力。
 			但说实话，背包九讲对于小白来说确实不太友好，看起来还是有点费劲的，且都是伪代码理解起来也吃力。
 		</view>
@@ -77,33 +77,7 @@
 		},
 		computed: {
 			imgStyle() {
-				let singleImg = '';
-				//单图特殊格式
-				if (this.imgList.length === 1) {
-					//定义宽高
-					let [width, height] = [this.imgList[0].width, this.imgList[0].height];
-					//比例系数
-					let scale = width / height;
-					if (scale >= 1) {
-						// 宽图
-						if (scale >= 3) {
-							singleImg = `height: 120rpx; width: 360rpx `;
-						} else {
-							// 正常范围
-							singleImg = `height: ${ 360 * scale }rpx; width: 360rpx `;
-						}
-					} else {
-						// 高图
-						if (scale <= 0.3) {
-							singleImg = `height: 360rpx; width: 120rpx `;
-						} else {
-							// 正常范围
-							singleImg =  `height: 360rpx; width: ${ 360 * scale }rpx `;
-						}
-					}
-				}
-				//返回对应css类
-				return singleImg || `img_${ this.imgList.length }`;
+				return this.$api.imgHandle.multiImgShow.call(this);
 			}
 		}
 	}

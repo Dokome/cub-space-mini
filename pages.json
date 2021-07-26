@@ -101,6 +101,15 @@
                 }
                 
                 }
+                ,{
+                    "path" : "newsdetail",
+                    "style" :                                                                                    
+                {
+                    "navigationBarTitleText": "",
+                    "enablePullDownRefresh": false
+                }
+                
+                }
             ]
 		}
 	],

@@ -308,8 +308,9 @@ export default {
 
 .fild-body {
 	@include vue-flex;
-	flex: 1;
-	align-items: center;
+	// flex: 1;
+	// align-items: center;
+	width: 100%;
 }
 
 .u-arror-right {

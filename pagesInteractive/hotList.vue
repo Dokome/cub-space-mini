@@ -14,7 +14,7 @@
 					<view class="flex-sub flex align-start">
 					<!-- 左侧 -->
 					<view class="flex-sub">
-						<text class="clamp">{{item.content}}</text>
+						<text class="clamp3">{{item.content}}</text>
 					</view>
 					<!-- 右侧 -->
 					<view class="margin-left-sm" style="width: 200rpx; height: 130rpx;" v-if="item.imgList && item.imgList.length">

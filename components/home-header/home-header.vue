@@ -2,10 +2,10 @@
 	<view>
 		<!-- 背景图 -->
 		<view class="" style="height: 500rpx;">
-			<image src="/static/Img/bgc.jpg" mode="aspectFill" style=" width: 100%; height: 100%;"></image>
+			<image src="/static/Img/bgc.jpg" mode="aspectFill" class="hwmax"></image>
 		</view>
 		<!-- 头像框/个人信息 -->
-		<view class="bg-white flex flex-direction" style="height: 365rpx; width: 100%;">
+		<view class="bg-white flex flex-direction wmax" style="height: 365rpx;">
 			<!-- 信息与头像间隔的地方 -->
 			<view class="bg-white flex align-center padding-left-lg" style="height: 40rpx;">
 				<!-- 头像 -->
@@ -69,10 +69,7 @@
 		methods: {
 			// 进入功能页面
 			enterFuncPage(e) {
-				console.log(123);
-				uni.navigateTo({
-					url: e.target.dataset.page
-				})
+				this.$api.routerHandle.goto(e.target.dataset.page);
 			},
 		}
 	}

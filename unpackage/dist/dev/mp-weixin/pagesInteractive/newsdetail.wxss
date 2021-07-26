@@ -1,0 +1,43 @@
+/* uni.scss */
+.replyStyle {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  width: 100%;
+  position: fixed;
+}
+.inputBox {
+  width: 520rpx;
+  border-radius: 10rpx;
+}
+.textarea {
+  background-color: #F3F4F6;
+  padding: 20rpx;
+  margin: 0 25rpx;
+  border-radius: 15rpx;
+}
+.imgchoose {
+  position: absolute;
+  bottom: 100%;
+  height: 200rpx;
+  width: 100%;
+  background-color: #fff;
+  left: 0;
+}
+.imgBox {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-wrap: nowrap;
+          flex-wrap: nowrap;
+}
+.imgBox .imgBox-item {
+  -webkit-flex-shrink: 0;
+          flex-shrink: 0;
+}
+.imgBox .imgBox-item .imgBox-img {
+  padding: 10rpx;
+  width: 180rpx;
+  height: 180rpx;
+  border-radius: 20%;
+}
+

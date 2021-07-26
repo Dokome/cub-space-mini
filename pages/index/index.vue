@@ -17,8 +17,8 @@
 			<!-- 由于顶部是固定位置，底部是非绝对定位，所及此处计算固定高度 防止头部随页面滚动或出现滑动条 -->
 			<swiper-item v-for="item in navlist" :key="item">
 				<!-- 视图区域 -->
-				<scroll-view scroll-y="true" style="height: 100%;">
-					<view>
+				<scroll-view scroll-y="true" class="hmax">
+					<view> 
 						<!-- 轮播图/热榜等 -->
 						<!-- 热榜 -->
 						<view class="margin-xs bg-white padding-sm" style="height: 280rpx;" v-show="current === 2" @click="enterHotList">
@@ -35,11 +35,11 @@
 							</view> 
 						</view>
 						<!-- 轮播图 -->
-						<view class="margin-top-xs" style="height: 320rpx; width: 100%;" v-show="current === 1 || current === 2">
+						<view class="margin-top-xs hmax" style="height: 320rpx;" v-show="current === 1 || current === 2">
 							<u-swiper height="320" mode="dot" :list="imgList" :border-radius="0"></u-swiper>
 						</view>
 						<!-- 动态数据 -->
-						<card v-for="(item, index) in 30" :key="index"></card>
+						<card v-for="(item, index) in 30" :key="index" @click.native="enterDetail"></card>
 					</view>
 				</scroll-view>
 				<!--  -->
@@ -90,7 +90,6 @@
 		},
 		methods: {
 			tabsChange(index) {
-				console.log(index);
 				this.swiperCurrent = index;
 			},
 			// swiper-item左右移动，通知tabs的滑块跟随移动
@@ -108,9 +107,11 @@
 			},
 			//进入热榜页面
 			enterHotList() {
-				uni.navigateTo({
-					url: '/pagesInteractive/hotList'
-				})
+				this.$api.routerHandle.goto('/pagesInteractive/hotList');
+			},
+			//进入动态详情
+			enterDetail() {
+				this.$api.routerHandle.goto('/pagesInteractive/newsdetail');
 			}
 		},
 		computed: {

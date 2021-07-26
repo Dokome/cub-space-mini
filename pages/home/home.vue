@@ -7,27 +7,27 @@
 				<!-- 背景图以及头部 -->
 				<home-header></home-header>
 				<!-- 小轮播图 -->
-				<view class="bg-white margin-top-xs" style="height: 140rpx; width: 100%;">
+				<view class="bg-white margin-top-xs wmax" style="height: 140rpx;">
 					<u-swiper height="160" mode="dot" :list="imgList" :border-radius="0"></u-swiper>
 				</view>
 				<!-- 关注公众号 -->
-				<view class="margin-top" style="height: 90rpx; width: 100%; position: relative;" v-if="officialButtonShow">
-					<view class="official flex" style="position: absolute; width: 100%; height: 100%;">
+				<view class="margin-top wmax" style="height: 90rpx; position: relative;" v-if="officialButtonShow">
+					<view class="official flex hwmax" style="position: absolute;">
 						<view class="flex-sub" @click="closeOfficial"></view>
 						<view class="flex-sub" @click="focusOfficial"></view>
 					</view>			
-					<image src="/static/Img/follow.png" style="width: 100%; height: 100%;"></image>
+					<image src="/static/Img/follow.png" class="hwmax"></image>
 				</view>
 				<!-- 功能列表 -->
 				<view class="margin-tb-xs bg-white" @click="enterFuncPage">
 					<view class="" v-for="(item, index) in funcList" style="position: relative;" :key="index">
-						<view class="" style="position: absolute; width: 100%; height: 100%; z-index: 9999; opacity: 0;"
+						<view class="hwmax" style="position: absolute; z-index: 9999; opacity: 0;"
 									v-if="item.title === '分享小程序'" @click="shareApp"
 						>
 						<u-button open-type="share">分享</u-button>
 						</view>
 						<view class="listIcon" style="" :data-page="item.page">
-							<image :src="item.path" mode="" style="width: 100%; height: 100%;"></image>
+							<image :src="item.path" mode="" class="hwmax"></image>
 						</view>
 						<u-cell-item :title="item.title" :data-page="item.page">
 							<u-icon slot="icon" size="80" name="search" color="transparent"></u-icon>
@@ -117,9 +117,7 @@
 			},
 			// 进入功能页面
 			enterFuncPage(e) {
-				uni.navigateTo({
-					url: e.target.dataset.page
-				})
+				this.$api.routerHandle.goto(e.target.dataset.page)
 			},
 			shareApp() {
 				
