@@ -11,9 +11,9 @@
 }
 .textarea {
   background-color: #F3F4F6;
-  padding: 20rpx;
-  margin: 0 25rpx;
-  border-radius: 15rpx;
+  margin: 0 10rpx;
+  padding: 15rpx;
+  border-radius: 10rpx;
 }
 .imgchoose {
   position: absolute;
@@ -35,9 +35,8 @@
           flex-shrink: 0;
 }
 .imgBox .imgBox-item .imgBox-img {
-  padding: 10rpx;
+  padding: 5rpx;
   width: 180rpx;
   height: 180rpx;
-  border-radius: 20%;
 }
 

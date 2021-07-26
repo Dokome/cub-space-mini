@@ -600,10 +600,10 @@
 	        flex-shrink: 0;
 }
 [class^="img_"] .show_img {
-	/* border-radius: 10rpx; */
+	border-radius: 5rpx;
 	position: absolute;
-	width: calc(100% - 10rpx);
-	height: calc(100% - 10rpx);
+	width: calc(100% - 5rpx);
+	height: calc(100% - 5rpx);
 	top: 0;
 	left: 0;
 }

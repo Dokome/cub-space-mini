@@ -57,20 +57,11 @@
 			return {
 				imgList: [
 					{
-						url: '/static/Img/bgc.jpg',
+						url: 'https://image.sapce.club/common/1623820732138714505.jpg',
 					},
 					{
 						url: '/static/Img/bgc.jpg',
-					},
-					{
-						url: '/static/Img/bgc.jpg',
-					},
-					{
-						url: '/static/Img/bgc.jpg',
-					},
-					{
-						url: '/static/Img/bgc.jpg',
-					},
+					}
 				],
 				singleImg: null
 			};

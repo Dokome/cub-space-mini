@@ -5,6 +5,7 @@
     "navbar": "/components/navbar/navbar",
     "card": "/components/card/card",
     "u-avatar": "/uview-ui/components/u-avatar/u-avatar",
+    "u-divider": "/uview-ui/components/u-divider/u-divider",
     "u-button": "/uview-ui/components/u-button/u-button"
   }
 }

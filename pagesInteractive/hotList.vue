@@ -14,7 +14,7 @@
 					<view class="flex-sub flex align-start">
 					<!-- 左侧 -->
 					<view class="flex-sub">
-						<text class="clamp3">{{item.content}}</text>
+						<text class="clamp3 text-black" style="font-weight: 500;">{{item.content}}</text>
 					</view>
 					<!-- 右侧 -->
 					<view class="margin-left-sm" style="width: 200rpx; height: 130rpx;" v-if="item.imgList && item.imgList.length">
@@ -22,6 +22,7 @@
 					</view>
 					</view>
 				</view>
+				<u-divider color="#909399" half-width="200" border-color="#6d6d6d">没有更多了</u-divider>
 			</view>
 		</scroll-view>
 	</view>

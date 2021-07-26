@@ -11,7 +11,7 @@
 					<text class="text-bold text-black text-lg">{{ 21 + '条评论'}}</text>
 				</view>
 				<!-- 列表 -->
-				<view class="padding flex bg-white margin-bottom-xs wmax"  v-for="item in 3">
+				<view class="padding flex bg-white wmax"  v-for="item in 2">
 					<!-- 头像 -->
 					<view class="" style="width: 65rpx;">
 						<u-avatar
@@ -20,15 +20,18 @@
 						></u-avatar>
 					</view>
 					<!-- 主体 -->
-					<view class="padding-left-sm flex-sub flex flex-direction">
+					<view class="padding-left-xs flex-sub flex flex-direction">
 						<!-- 名称、下标 -->
 						<view class="flex flex-direction" >
-							<text class="text-bold">mate</text>
-							<text class="margin-tb-xs u-tips-color">南昌</text>
+							<text class="text-black" style="font-weight: 600;">mate</text>
+							<text class="margin-tb-xs u-tips-color text-sm">江西财经大学</text>
 						</view>
 						<!-- 正文 -->
 						<view class="wmax">
-								<view class="clamp3">然而人生辽阔，眼里不应该只有爱情，是的，它真的发生了</view>
+								<view class="clamp3 text-black text-content">
+									然而人生辽阔，眼里不应该只有爱情，是的，它真的发生了。
+									然而人生辽阔，眼里不应该只有爱情，是的，它真的发生了。
+								</view>
 								<!-- 配图 -->
 								<view class="margin-tb-sm img_Con"  style="width: 600rpx;" v-if="imgList && imgList.length">
 									<view :class="imgStyle" v-for="(item, index) in imgList" :key="index">
@@ -37,7 +40,7 @@
 								</view> 
 						</view>
 						<!-- 回复框 -->
-						<view class="padding margin-top-sm" style="background-color: #F3F4F6;">
+						<view class="padding margin-top-xs" style="background-color: #F3F4F6; border-radius: 10rpx;">
 							<view class="wmax">
 									<view class="clamp1">
 										<text style="color: #666;">{{'孤岛'}}</text>:	
@@ -64,6 +67,7 @@
 						</view>
 					</view>
 				</view>
+				<u-divider color="#909399" half-width="200" border-color="#6d6d6d">没有更多了</u-divider>
 			</view>
 			<view class="" style="height: 120rpx;"></view>
 		</scroll-view>
@@ -84,7 +88,7 @@
 				<u-button type="primary" size="mini">发送</u-button>
 			</view>
 			<!-- 图片框 -->
-			<view class="imgchoose padding-sm" v-show="ifImgChoose" style="transition: .2s;">
+			<view class="imgchoose padding-xs" v-show="ifImgChoose" style="transition: .2s;">
 				<scroll-view :scroll-x="true" >
 					<view class="flex imgBox">
 						<view class="imgBox-item" v-for="item in imgList">
@@ -109,22 +113,22 @@
 				ifImgChoose: false,
 				imgList: [
 					{
-						url: '/static/Img/bgc.jpg',
+						url: 'https://image.sapce.club/common/1623820732138714505.jpg',
 					},
 					{
-						url: '/static/Img/bgc.jpg',
+						url: 'https://image.sapce.club/common/1623820567807803537.jpg',
 					},
 					{
-						url: '/static/Img/bgc.jpg',
+						url: 'https://image.sapce.club/common/1623817461535790285.jpg',
 					},
 					{
-						url: '/static/Img/bgc.jpg',
+						url: 'https://image.sapce.club/common/1623820798277584078.jpg',
 					},
 					{
-						url: '/static/Img/bgc.jpg',
+						url: 'https://image.sapce.club/common/1623820734980753560.jpg',
 					},
 					{
-						url: '/static/Img/bgc.jpg',
+						url: 'https://image.sapce.club/common/1623820687514623626.jpg',
 					},
 				],
 			};
@@ -163,9 +167,9 @@
 
 .textarea {
 	background-color: #F3F4F6;
-	padding: 20rpx;
-	margin: 0 25rpx;
-	border-radius: 15rpx;
+	margin: 0 10rpx;
+	padding: 15rpx;
+	border-radius: 10rpx;
 }
 
 .imgchoose {
@@ -183,10 +187,9 @@
 	.imgBox-item {
 		flex-shrink: 0;
 		.imgBox-img {
-			padding: 10rpx;
+			padding: 5rpx;
 			width: 180rpx;
 			height: 180rpx;
-			border-radius: 20%;
 		}
 	}
 }
