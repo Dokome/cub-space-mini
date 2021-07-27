@@ -41,7 +41,6 @@
 						</view>
 						<!-- 动态数据 -->
 						<card v-for="(item, index) in 30" :key="index" @click.native="enterDetail"></card>
-						<u-divider color="#909399" half-width="200" border-color="#6d6d6d">没有更多了</u-divider>
 					</view>
 				</scroll-view>
 				<!--  -->
