@@ -11,7 +11,7 @@
 					<text class="text-bold text-black text-lg">{{ 21 + '条评论'}}</text>
 				</view>
 				<!-- 列表 -->
-				<view class="padding flex bg-white wmax"  v-for="item in 2">
+				<view class="padding flex bg-white wmax u-border-top"  v-for="item in 2">
 					<!-- 头像 -->
 					<view class="" style="width: 65rpx;">
 						<u-avatar
@@ -20,14 +20,14 @@
 						></u-avatar>
 					</view>
 					<!-- 主体 -->
-					<view class="padding-left-xs flex-sub flex flex-direction">
+					<view class="padding-left-xs flex-sub flex flex-direction" style="margin-top: -10rpx;">
 						<!-- 名称、下标 -->
 						<view class="flex flex-direction" >
 							<text class="text-black" style="font-weight: 600;">mate</text>
-							<text class="margin-tb-xs u-tips-color text-sm">江西财经大学</text>
+							<text class="u-tips-color text-sm">江西财经大学</text>
 						</view>
 						<!-- 正文 -->
-						<view class="wmax">
+						<view class="wmax margin-top-sm">
 								<view class="clamp3 text-black text-content">
 									然而人生辽阔，眼里不应该只有爱情，是的，它真的发生了。
 									然而人生辽阔，眼里不应该只有爱情，是的，它真的发生了。
@@ -47,7 +47,7 @@
 										<text class="margin-left-xs" style="color: #666;">{{'然而人生辽阔，眼里不应该只有爱情，是的，它真的发生了'}}</text>
 									</view>
 							</view>
-							<view class="margin-top-sm">
+							<view class="margin-top-sm" @click="replyHandle">
 								<text class="text-blue">查看全部{{21}}条回复</text>
 							</view>
 						</view>
@@ -67,11 +67,13 @@
 						</view>
 					</view>
 				</view>
-				<u-divider color="#909399" half-width="200" border-color="#6d6d6d">没有更多了</u-divider>
+				<u-divider color="#909399" half-width="200" border-color="#6d6d6d"	>没有更多了</u-divider>
+				<view class="bg-white" style="height: 80rpx;"></view>
 			</view>
 			<view class="" style="height: 120rpx;"></view>
 		</scroll-view>
 		<!-- 回复 -->
+		<pop type="reply"></pop>
 		<view class="bg-white replyStyle flex align-center padding" :style="[{bottom:InputBottom+'px'}]">
 			<!-- 图片选择 -->
 			<view>
@@ -81,7 +83,7 @@
 			</view>
 			<!-- 输入框 -->
 			 <textarea value=""  @focus="InputFocus" @blur="InputBlur" :show-confirm-bar="false"
-								auto-height class="textarea" :adjust-position="false"
+								auto-height class="textarea" :adjust-position="false" placeholder="我来说几句..."
 								 maxlength="200" :fixed="true"/>
 			<!-- 发送 -->
 			<view>
@@ -148,6 +150,10 @@
 			},
 			ImgChooseHandle() {
 				this.ifImgChoose = !this.ifImgChoose;
+			},
+			// 回复评论
+			replyHandle() {
+				uni.$emit('popUpChange', '')
 			}
 		}
 	}
@@ -158,6 +164,7 @@
 	box-sizing: border-box;
 	width: 100%;
 	position: fixed;
+	z-index: 999999999;
 }
 
 .inputBox {
@@ -167,7 +174,7 @@
 
 .textarea {
 	background-color: #F3F4F6;
-	margin: 0 10rpx;
+	margin: 0 25rpx;
 	padding: 15rpx;
 	border-radius: 10rpx;
 }

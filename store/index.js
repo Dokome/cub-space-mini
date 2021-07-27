@@ -30,7 +30,7 @@ export default new Vuex.Store({
 				text: '发布',
 				midButton: true,
 				customIcon: false,
-				pagePath: "/pages/publish/publish"
+				// pagePath: "/pages/publish/publish"
 			},
 			{
 				iconPath: "/static/tabbar/index.png",

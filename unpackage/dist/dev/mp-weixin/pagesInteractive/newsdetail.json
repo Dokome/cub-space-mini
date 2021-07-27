@@ -6,6 +6,7 @@
     "card": "/components/card/card",
     "u-avatar": "/uview-ui/components/u-avatar/u-avatar",
     "u-divider": "/uview-ui/components/u-divider/u-divider",
+    "pop": "/components/pop/pop",
     "u-button": "/uview-ui/components/u-button/u-button"
   }
 }

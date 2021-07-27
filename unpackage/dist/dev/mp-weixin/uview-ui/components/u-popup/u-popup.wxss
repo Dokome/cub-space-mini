@@ -92,7 +92,7 @@
   z-index: 3;
 }
 .u-close--top-left.data-v-17becaea {
-  top: 30rpx;
+  top: 50rpx;
   left: 30rpx;
 }
 .u-close--top-right.data-v-17becaea {

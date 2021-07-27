@@ -22,7 +22,7 @@
 					</view>
 					</view>
 				</view>
-				<u-divider color="#909399" half-width="200" border-color="#6d6d6d">没有更多了</u-divider>
+				<!-- <u-divider color="#909399" half-width="200" border-color="#6d6d6d">没有更多了</u-divider> -->
 			</view>
 		</scroll-view>
 	</view>
@@ -36,44 +36,8 @@
 				hostList: [
 					{
 						content: '如何看待B站服务器突然崩溃，哈哈哈哈笑死了，哈哈哈哈哈哈哈哈哈啊哈哈......',
-						imgList: ['/static/Img/bgc.jpg']
-					},
-					{
-						content: '如何看待B站服务器突然崩溃，哈哈哈哈笑死了，哈哈哈哈哈哈哈哈哈啊哈哈......',
-						imgList: ['/static/Img/bgc.jpg']
-					},
-					{
-						content: '如何看待B站服务器突然崩溃，哈哈哈哈笑死了，哈哈哈哈哈哈哈哈哈啊哈哈......',
-						imgList: ['/static/Img/bgc.jpg']
-					},
-					{
-						content: '如何看待B站服务器突然崩溃，哈哈哈哈笑死了，哈哈哈哈哈哈哈哈哈啊哈哈......',
-						imgList: ['/static/Img/bgc.jpg']
-					},
-					{
-						content: '如何看待B站服务器突然崩溃，哈哈哈哈笑死了，哈哈哈哈哈哈哈哈哈啊哈哈......',
-						imgList: ['/static/Img/bgc.jpg']
-					},
-					{
-						content: '如何看待B站服务器突然崩溃，哈哈哈哈笑死了，哈哈哈哈哈哈哈哈哈啊哈哈......',
-						imgList: ['/static/Img/bgc.jpg']
-					},
-					{
-						content: '如何看待B站服务器突然崩溃，哈哈哈哈笑死了，哈哈哈哈哈哈哈哈哈啊哈哈......',
-						imgList: ['/static/Img/bgc.jpg']
-					},
-					{
-						content: '如何看待B站服务器突然崩溃，哈哈哈哈笑死了，哈哈哈哈哈哈哈哈哈啊哈哈......',
-						imgList: ['/static/Img/bgc.jpg']
-					},
-					{
-						content: '如何看待B站服务器突然崩溃，哈哈哈哈笑死了，哈哈哈哈哈哈哈哈哈啊哈哈......',
-						imgList: ['/static/Img/bgc.jpg']
-					},
-					{
-						content: '如何看待B站服务器突然崩溃，哈哈哈哈笑死了，哈哈哈哈哈哈哈哈哈啊哈哈......',
-						imgList: ['/static/Img/bgc.jpg']
-					},
+						imgList: ['https://image.sapce.club/common/1623820687514623626.jpg']
+					}
 				]
 			};
 		}

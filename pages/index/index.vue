@@ -13,7 +13,7 @@
 		
 		<!-- 滑动组件swiper -->
 		<swiper :current="swiperCurrent" @transition="transition" @animationfinish="animationfinish" class="viewPart"
-			:style="{ height: `calc(100vh - ${ViewPart}px - 70rpx)`}">
+			:style="{ height: `calc(100vh - ${ViewPart}px - 30px)`}">
 			<!-- 由于顶部是固定位置，底部是非绝对定位，所及此处计算固定高度 防止头部随页面滚动或出现滑动条 -->
 			<swiper-item v-for="item in navlist" :key="item">
 				<!-- 视图区域 -->
@@ -21,7 +21,8 @@
 					<view> 
 						<!-- 轮播图/热榜等 -->
 						<!-- 热榜 -->
-						<view class="margin-xs bg-white padding-sm" style="height: 280rpx;" v-show="current === 2" @click="enterHotList">
+						<view class="margin-xs bg-white padding-sm" style="height: 280rpx;" 
+									v-if="current === 2" @click="enterHotList">
 							<!-- 头部 -->
 							<view class="">
 								<text class="text-bold text-black text-lg">校园热榜</text>
@@ -46,7 +47,6 @@
 				<!--  -->
 			</swiper-item>
 		</swiper>
-		
 		<!-- 底部栏 -->
 		<u-tabbar
 		  :list="list"
@@ -55,7 +55,10 @@
 			:activeColor="activeColor"
 			:change="navChange"
 			:border-top="borderTop"
+			@change="isPublish"
 		></u-tabbar>
+		<!-- 弹出层 -->
+		<pop type="index"></pop>
 	</view>
 </template>
 
@@ -113,6 +116,12 @@
 			//进入动态详情
 			enterDetail() {
 				this.$api.routerHandle.goto('/pagesInteractive/newsdetail');
+			},
+			//动态发布
+			isPublish(index) {
+				if (index === 2) {
+					uni.$emit('popUpChange', '');
+				}
 			}
 		},
 		computed: {

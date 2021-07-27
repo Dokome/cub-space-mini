@@ -4,6 +4,7 @@
           box-sizing: border-box;
   width: 100%;
   position: fixed;
+  z-index: 999999999;
 }
 .inputBox {
   width: 520rpx;
@@ -11,7 +12,7 @@
 }
 .textarea {
   background-color: #F3F4F6;
-  margin: 0 10rpx;
+  margin: 0 25rpx;
   padding: 15rpx;
   border-radius: 10rpx;
 }

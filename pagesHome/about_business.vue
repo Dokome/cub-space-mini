@@ -15,7 +15,7 @@
 			return {
 				//页面
 				page: '',
-				img: '/static/Img/1.png',
+				img: 'https://image.sapce.club/common/1623820687514623626.jpg',
 				bussiness: '扫一扫上面的二维码，加我微信',
 				aboutus: '欢迎加入官方QQ群：810216790'
 			};

@@ -22,7 +22,8 @@
       "pages": [
         "usersIndex",
         "hotList",
-        "newsdetail"
+        "newsdetail",
+        "newsreply"
       ]
     }
   ],

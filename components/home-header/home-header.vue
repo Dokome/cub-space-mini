@@ -2,7 +2,7 @@
 	<view>
 		<!-- 背景图 -->
 		<view class="" style="height: 500rpx;">
-			<image src="/static/Img/bgc.jpg" mode="aspectFill" class="hwmax"></image>
+			<image src='https://image.sapce.club/common/1623820687514623626.jpg' mode="aspectFill" class="hwmax"></image>
 		</view>
 		<!-- 头像框/个人信息 -->
 		<view class="bg-white flex flex-direction wmax" style="height: 365rpx;">

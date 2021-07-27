@@ -1,0 +1,1 @@
+{"version":3,"sources":["uni-app:///main.js"],"names":["createPage","Page"],"mappings":";;;;;;;;;;kDAAA;AACA;AACA,wG;AACAA,UAAU,CAACC,cAAD,CAAV,C","file":"pagesInteractive/myPop/myPop.js","sourcesContent":["import 'uni-pages';\nimport Vue from 'vue'\nimport Page from './pagesInteractive/myPop/myPop.vue'\ncreatePage(Page)"],"sourceRoot":""}

@@ -435,7 +435,7 @@ export default {
 }
 
 .u-close--top-left {
-	top: 30rpx;
+	top: 50rpx;
 	left: 30rpx;
 }
 

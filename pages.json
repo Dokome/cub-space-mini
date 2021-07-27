@@ -92,25 +92,28 @@
 					"enablePullDownRefresh": false
 				}
 
-			}    ,{
-                    "path" : "hotList",
-                    "style" :                                                                                    
-                {
-                    "navigationBarTitleText": "",
-                    "enablePullDownRefresh": false
-                }
-                
-                }
-                ,{
-                    "path" : "newsdetail",
-                    "style" :                                                                                    
-                {
-                    "navigationBarTitleText": "",
-                    "enablePullDownRefresh": false
-                }
-                
-                }
-            ]
+			}, {
+				"path": "hotList",
+				"style": {
+					"navigationBarTitleText": "",
+					"enablePullDownRefresh": false
+				}
+
+			}, {
+				"path": "newsdetail",
+				"style": {
+					"navigationBarTitleText": "",
+					"enablePullDownRefresh": false
+				}
+
+			}, {
+				"path": "newsreply",
+				"style": {
+					"navigationBarTitleText": "",
+					"enablePullDownRefresh": false
+				}
+ 
+			}]
 		}
 	],
 	// 包预加载
@@ -120,7 +123,7 @@
 			"packages": ["pagesHome"]
 		},
 		"pages/index/index": {
-			"network":"all",
+			"network": "all",
 			"packages": ["pagesInteractive"]
 		}
 	},
