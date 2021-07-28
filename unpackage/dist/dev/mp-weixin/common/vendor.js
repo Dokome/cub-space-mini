@@ -9946,7 +9946,7 @@ timeFrom;exports.default = _default;
 
 /***/ }),
 
-/***/ 234:
+/***/ 236:
 /*!********************************************************************************!*\
   !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/uview-ui/libs/util/emitter.js ***!
   \********************************************************************************/
@@ -10745,7 +10745,7 @@ new _vuex.default.Store({
       pagePath: "/pages/home/home" }],
 
 
-    midButton: true,
+    midButton: false,
     inactiveColor: '#909399',
     activeColor: '#5098FF'
     //tabbar结束

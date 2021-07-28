@@ -78,10 +78,10 @@ var components
 try {
   components = {
     uAvatar: function() {
-      return __webpack_require__.e(/*! import() | uview-ui/components/u-avatar/u-avatar */ "uview-ui/components/u-avatar/u-avatar").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-avatar/u-avatar.vue */ 215))
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-avatar/u-avatar */ "uview-ui/components/u-avatar/u-avatar").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-avatar/u-avatar.vue */ 217))
     },
     uTag: function() {
-      return __webpack_require__.e(/*! import() | uview-ui/components/u-tag/u-tag */ "uview-ui/components/u-tag/u-tag").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-tag/u-tag.vue */ 244))
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-tag/u-tag */ "uview-ui/components/u-tag/u-tag").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-tag/u-tag.vue */ 246))
     }
   }
 } catch (e) {
@@ -138,7 +138,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
 //
 //
 //
@@ -190,7 +190,74 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 //
 //
 //
-var _default =
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var _default2 =
 {
   name: "card",
   data: function data() {
@@ -209,7 +276,33 @@ var _default =
   computed: {
     imgStyle: function imgStyle() {
       return this.$api.imgHandle.multiImgShow.call(this);
-    } } };exports.default = _default;
+    } },
+
+  methods: {
+    // 回复评论
+    replyHandle: function replyHandle() {
+      uni.$emit('popUpChange', '');
+    } },
+
+  props: {
+    clamp: {
+      type: Boolean,
+      default: function _default() {
+        return false;
+      } },
+
+    type: {
+      type: String,
+      default: function _default() {
+        return 'news';
+      } },
+
+    enterStateComment: {
+      type: Boolean,
+      default: function _default() {
+        return false;
+      } } } };exports.default = _default2;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ })
 

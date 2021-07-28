@@ -49,7 +49,7 @@ export default new Vuex.Store({
 				pagePath: "/pages/home/home"
 			},
 		],
-		midButton: true,
+		midButton: false,
 		inactiveColor: '#909399',
 		activeColor: '#5098FF',
 		//tabbar结束

@@ -261,8 +261,10 @@ var _vuex = __webpack_require__(/*! vuex */ 41);function ownKeys(object, enumera
       imgList: [
       'https://img2.baidu.com/it/u=2753426540,2942310730&fm=26&fmt=auto&gp=0.jpg',
       'https://img2.baidu.com/it/u=951689591,2206379019&fm=26&fmt=auto&gp=0.jpg',
-      'https://img1.baidu.com/it/u=193594492,843414129&fm=26&fmt=auto&gp=0.jpg'] };
+      'https://img1.baidu.com/it/u=193594492,843414129&fm=26&fmt=auto&gp=0.jpg'],
 
+      // 是否跳转到其他页面(控制pop)
+      ifPopShow: true };
 
   },
   methods: {
@@ -288,11 +290,13 @@ var _vuex = __webpack_require__(/*! vuex */ 41);function ownKeys(object, enumera
     },
     //进入动态详情
     enterDetail: function enterDetail() {
+      this.ifPopShow = false;
       this.$api.routerHandle.goto('/pagesInteractive/newsdetail');
     },
     //动态发布
     isPublish: function isPublish(index) {
       if (index === 2) {
+        this.ifPopShow = true;
         uni.$emit('popUpChange', '');
       }
     } },

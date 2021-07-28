@@ -29,7 +29,7 @@
 							</view>
 							<!-- 内容 -->
 							<view class="">
-								<view class="flex align-center margin-top-sm" v-for="(item, index) in 3" :key="index">
+								<view class="flex align-center margin-top-sm" v-for="(item, index) in 3" :key="item">
 									<image :src="`/static/Img/hotList${index + 1}.png`" mode="" style="width: 40rpx; height: 40rpx;flex-shrink: 0;"></image>
 									<text class="text-black text-cut margin-left-xs">新的事物再怎么陌生，都逃不开熟悉事物的影新的事物再怎么陌生，都逃不开熟悉事物的影</text>
 								</view>
@@ -40,12 +40,12 @@
 							<u-swiper height="320" mode="dot" :list="imgList" :border-radius="0"></u-swiper>
 						</view>
 						<!-- 动态数据 -->
-						<card v-for="(item, index) in 30" :key="index" @click.native="enterDetail"></card>
+						<card v-for="(item, index) in 30" :key="item" @click.native="enterDetail"></card>
 						<u-divider color="#909399" half-width="200" border-color="#6d6d6d">没有更多了</u-divider>
 					</view>
 				</scroll-view>
 				<!--  -->
-			</swiper-item>
+			</swiper-item> 
 		</swiper>
 		<!-- 底部栏 -->
 		<u-tabbar
@@ -58,7 +58,7 @@
 			@change="isPublish"
 		></u-tabbar>
 		<!-- 弹出层 -->
-		<pop type="index"></pop>
+		<pop type="publish" v-if="ifPopShow"></pop>
 	</view>
 </template>
 
@@ -89,7 +89,9 @@
 					'https://img2.baidu.com/it/u=2753426540,2942310730&fm=26&fmt=auto&gp=0.jpg',
 					'https://img2.baidu.com/it/u=951689591,2206379019&fm=26&fmt=auto&gp=0.jpg',
 					'https://img1.baidu.com/it/u=193594492,843414129&fm=26&fmt=auto&gp=0.jpg'
-				]
+				],
+				// 是否跳转到其他页面(控制pop)
+				ifPopShow: true
 			}
 		},
 		methods: {
@@ -115,11 +117,13 @@
 			},
 			//进入动态详情
 			enterDetail() {
+				this.ifPopShow = false;
 				this.$api.routerHandle.goto('/pagesInteractive/newsdetail');
 			},
 			//动态发布
 			isPublish(index) {
 				if (index === 2) {
+					this.ifPopShow = true;
 					uni.$emit('popUpChange', '');
 				}
 			}
