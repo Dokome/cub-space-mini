@@ -22,7 +22,6 @@
 					</view>
 					</view>
 				</view>
-				<!-- <u-divider color="#909399" half-width="200" border-color="#6d6d6d">没有更多了</u-divider> -->
 			</view>
 		</scroll-view>
 	</view>

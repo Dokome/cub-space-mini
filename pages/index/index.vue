@@ -40,8 +40,12 @@
 							<u-swiper height="320" mode="dot" :list="imgList" :border-radius="0"></u-swiper>
 						</view>
 						<!-- 动态数据 -->
+<<<<<<< HEAD
 						<card v-for="(item, index) in 30" :key="item" @click.native="enterDetail"></card>
 						<u-divider color="#909399" half-width="200" border-color="#6d6d6d">没有更多了</u-divider>
+=======
+						<card v-for="(item, index) in 30" :key="index" @click.native="enterDetail"></card>
+>>>>>>> 5eeb5cf8ec820501c07aba6932879bc3f9c0bacc
 					</view>
 				</scroll-view>
 				<!--  -->
