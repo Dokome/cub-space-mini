@@ -4,11 +4,7 @@
   "usingComponents": {
     "navbar": "/components/navbar/navbar",
     "card": "/components/card/card",
-<<<<<<< HEAD
     "u-divider": "/uview-ui/components/u-divider/u-divider",
-=======
-    "u-avatar": "/uview-ui/components/u-avatar/u-avatar",
->>>>>>> 5eeb5cf8ec820501c07aba6932879bc3f9c0bacc
     "pop": "/components/pop/pop",
     "u-button": "/uview-ui/components/u-button/u-button"
   }

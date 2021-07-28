@@ -86,14 +86,15 @@
 							</view> 
 					</view>
 					<!-- 回复框 -->
-					<view class="padding margin-top-xs" style="background-color: #F3F4F6; border-radius: 10rpx;" v-if="!enterStateComment">
+					<view class="padding margin-top-xs" style="background-color: #F3F4F6; border-radius: 10rpx;" 
+						v-if="!enterStateComment"  @click="replyHandle">
 						<view class="wmax">
 								<view class="clamp1">
 									<text style="color: #666;">{{ '孤岛' }}</text>:	
 									<text class="margin-left-xs" style="color: #666;">{{ '然而人生辽阔，眼里不应该只有爱情，是的，它真的发生了' }}</text>
 								</view>
 						</view>
-						<view class="margin-top-sm" @click="replyHandle">
+						<view class="margin-top-sm">
 							<text class="text-blue">查看全部{{ 21 }}条回复</text>
 						</view>
 					</view>
