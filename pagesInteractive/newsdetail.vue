@@ -16,11 +16,7 @@
 				<u-divider color="#909399" half-width="200" border-color="#6d6d6d">没有更多了</u-divider>
 				<view class="bg-white" style="height: 80rpx;"></view>
 			</view>
-<<<<<<< HEAD
 			<view class="" style="height: 100rpx;"></view>
-=======
-			<view class="bg-white" style="height: 120rpx;"></view>
->>>>>>> 935f2ed1e0f54af38948d991b01480f78e341de1
 		</scroll-view>
 		<!-- 回复 -->
 		<pop type="reply"></pop>
