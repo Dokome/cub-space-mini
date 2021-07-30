@@ -15,11 +15,11 @@
 				<u-divider color="#909399" half-width="200" border-color="#6d6d6d"	>没有更多了</u-divider>
 				<view class="bg-white" style="height: 80rpx;"></view>
 			</view>
-			<view class="" style="height: 120rpx;"></view>
+			<view class="" style="height: 100rpx;"></view>
 		</scroll-view>
 		<!-- 回复 -->
 		<pop type="reply"></pop>
-		<view class="bg-white replyStyle flex align-center padding" :style="[{ bottom : InputBottom + 'px'} ]">
+		<view class="bg-white replyStyle flex align-center padding shadow-top" :style="[{ bottom : InputBottom + 'px'} ]">
 			<!-- 图片选择 -->
 			<view>
 				<image src="/static/Img/imgchose.png" mode="" 
@@ -35,7 +35,7 @@
 				<u-button type="primary" size="mini">发送</u-button>
 			</view>
 			<!-- 图片框 -->
-			<view class="imgchoose padding-xs" v-show="ifImgChoose" style="transition: .2s;">
+			<view class="imgchoose padding-xs shadow-top" v-show="ifImgChoose" style="transition: .2s;">
 				<scroll-view :scroll-x="true" >
 					<view class="flex imgBox">
 						<view class="imgBox-item" v-for="item in imgList" v-if="item">

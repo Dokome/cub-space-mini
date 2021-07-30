@@ -4,7 +4,6 @@
   "usingComponents": {
     "navbar": "/components/navbar/navbar",
     "home-header": "/components/home-header/home-header",
-    "u-swiper": "/uview-ui/components/u-swiper/u-swiper",
     "u-button": "/uview-ui/components/u-button/u-button",
     "u-cell-item": "/uview-ui/components/u-cell-item/u-cell-item",
     "u-icon": "/uview-ui/components/u-icon/u-icon",

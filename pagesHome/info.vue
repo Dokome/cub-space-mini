@@ -1,7 +1,6 @@
 <template>
 	<view>
 		<navbar title="账号资料"></navbar>
-		<view class="margin-bottom-xs"></view>
 		<!-- 资料可修改部分 -->
 		<!-- 头像 -->
 		<view class="bg-white padding flex justify-between align-center u-border-bottom">

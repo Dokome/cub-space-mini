@@ -3,7 +3,6 @@
 		<!-- 表单 -->
 			<navbar title="学校认证"></navbar>
 			<view class="" v-if="!ifIdentify">
-			<view class="margin-bottom-xs"></view>
 			<!-- 表单组件 -->
 			<!-- 学校 -->
 			<view class="bg-white padding flex justify-between align-center u-border-bottom" @click="show = true">

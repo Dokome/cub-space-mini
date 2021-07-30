@@ -658,6 +658,11 @@
 	width: 100%;
 	height: 100%;
 }
+/* 上部阴影 带3d感 */
+.shadow-top {
+	-webkit-box-shadow: 0rpx -1rpx 6rpx #909399;
+	        box-shadow: 0rpx -1rpx 6rpx #909399;
+}
 .u-relative,
 .u-rela {
   position: relative;
