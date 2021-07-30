@@ -95,6 +95,15 @@ __webpack_require__.r(__webpack_exports__);
 var components
 try {
   components = {
+    navbar: function() {
+      return __webpack_require__.e(/*! import() | components/navbar/navbar */ "components/navbar/navbar").then(__webpack_require__.bind(null, /*! @/components/navbar/navbar.vue */ 140))
+    },
+    uTabsSwiper: function() {
+      return Promise.all(/*! import() | uview-ui/components/u-tabs-swiper/u-tabs-swiper */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-tabs-swiper/u-tabs-swiper")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-tabs-swiper/u-tabs-swiper.vue */ 147))
+    },
+    uAvatar: function() {
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-avatar/u-avatar */ "uview-ui/components/u-avatar/u-avatar").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-avatar/u-avatar.vue */ 213))
+    },
     uTabbar: function() {
       return Promise.all(/*! import() | uview-ui/components/u-tabbar/u-tabbar */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-tabbar/u-tabbar")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-tabbar/u-tabbar.vue */ 173))
     }
@@ -168,15 +177,133 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 var _vuex = __webpack_require__(/*! vuex */ 41);function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var _default =
 {
   data: function data() {
     return {
-      list: this.$store.state.list };
+      // 页面高度(通过App.vue获取而来)
+      PageHeight: this.windowHeight,
+      //底部栏
+      list: this.$store.state.list,
+      //头部总高度
+      ViewPart: this.ViewPart,
+      //当前页面(nav)
+      current: 0,
+      //当前页面(swiper)
+      swiperCurrent: 0,
+      //
+      navlist: [{
+        name: '私信' },
+      {
+        name: '通知' }] };
+
 
   },
-  methods: {},
-
+  methods: {
+    tabsChange: function tabsChange(index) {
+      this.swiperCurrent = index;
+    },
+    // swiper-item左右移动，通知tabs的滑块跟随移动
+    transition: function transition(e) {
+      var dx = e.detail.dx;
+      this.$refs.uTabs.setDx(dx);
+    },
+    // 由于swiper的内部机制问题，快速切换swiper不会触发dx的连续变化，需要在结束时重置状态
+    // swiper滑动结束，分别设置tabs和swiper的状态
+    animationfinish: function animationfinish(e) {
+      var current = e.detail.current;
+      this.$refs.uTabs.setFinishCurrent(current);
+      this.swiperCurrent = current;
+      this.current = current;
+    } },
 
   computed: _objectSpread({},
   (0, _vuex.mapState)(['midButton', 'inactiveColor', 'activeColor', 'borderTop'])) };exports.default = _default;

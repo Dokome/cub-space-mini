@@ -2,6 +2,9 @@
   "navigationBarTitleText": "消息",
   "enablePullDownRefresh": false,
   "usingComponents": {
+    "navbar": "/components/navbar/navbar",
+    "u-tabs-swiper": "/uview-ui/components/u-tabs-swiper/u-tabs-swiper",
+    "u-avatar": "/uview-ui/components/u-avatar/u-avatar",
     "u-tabbar": "/uview-ui/components/u-tabbar/u-tabbar"
   }
 }
