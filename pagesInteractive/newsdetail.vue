@@ -12,10 +12,11 @@
 				</view>
 				<!-- 列表 -->
 				<card type="comment" v-for="item in 2" :key="index"></card>
-				<u-divider color="#909399" half-width="200" border-color="#6d6d6d"	>没有更多了</u-divider>
+				<view class="bg-white" style="height: 80rpx;"></view>
+				<u-divider color="#909399" half-width="200" border-color="#6d6d6d">没有更多了</u-divider>
 				<view class="bg-white" style="height: 80rpx;"></view>
 			</view>
-			<view class="" style="height: 120rpx;"></view>
+			<view class="bg-white" style="height: 120rpx;"></view>
 		</scroll-view>
 		<!-- 回复 -->
 		<pop type="reply"></pop>

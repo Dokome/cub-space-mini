@@ -14,7 +14,7 @@
 			<!-- 中间部分头像等 -->
 			<view class="meet-main-center justify-center align-center flex">
 				<!-- 中间动画 -->
-				<view class="meet-main-center-bgAnimate" v-for="item in 20" 
+				<view class="meet-main-center-bgAnimate" v-for="item in 20" :key="item"
 					:style="{ animationDelay: `${item / 2}s`}"></view>
 				<view class="meet-main-center-text flex justify-center align-center"><text class="text-bold text-white">遇见</text></view>
 			</view>
