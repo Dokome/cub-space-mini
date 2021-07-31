@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "navbar": "/components/navbar/navbar",
+    "u-avatar": "/uview-ui/components/u-avatar/u-avatar",
+    "text-input": "/components/textInput/textInput"
+  }
+}

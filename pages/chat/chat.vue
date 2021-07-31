@@ -19,7 +19,7 @@
 					<view> 
 						<view class="chat-list margin-top-xs">
 							<view class="chat-list-item bg-white u-border-bottom padding flex" 
-										v-for="item in 20" :key="item"
+										v-for="item in 20" :key="item" @click="chatDetail"
 							>
 								<view class="chat-list-item-avatar margin-right-sm">
 									<u-avatar size="100" :src="'https://image.sapce.club/common/1623820798277584078.jpg'"></u-avatar>
@@ -140,6 +140,10 @@
 				this.swiperCurrent = current;
 				this.current = current;
 			},
+			// 进入聊天详情页
+			chatDetail() {
+				this.$api.routerHandle.goto('/pagesInteractive/chatDetail');
+			}
 		},
 		computed: {
 			...mapState(['midButton', 'inactiveColor', 'activeColor', 'borderTop']),

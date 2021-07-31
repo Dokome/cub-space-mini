@@ -107,12 +107,12 @@
 				}
 
 			}, {
-				"path": "newsreply",
+				"path": "chatDetail",
 				"style": {
 					"navigationBarTitleText": "",
 					"enablePullDownRefresh": false
 				}
- 
+
 			}]
 		}
 	],

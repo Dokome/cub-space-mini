@@ -189,6 +189,9 @@
 	text-align: right;
 }
 
+.text-justify {
+	text-align: justify;
+}
 /*  -- 内外边距 -- */
 
 .margin-0 {

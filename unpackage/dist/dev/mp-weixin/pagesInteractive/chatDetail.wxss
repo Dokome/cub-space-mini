@@ -1,0 +1,33 @@
+/* uni.scss */
+.isMessage.data-v-ebbd7a48 {
+  padding: 40rpx 20rpx;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  display: flex;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+          justify-content: flex-start;
+}
+.messageBlock.data-v-ebbd7a48 {
+  max-width: 450rpx;
+  padding: 20rpx;
+  min-width: 100rpx;
+  border-radius: 10rpx;
+}
+.isNotSelf .messageBlock.data-v-ebbd7a48 {
+  background-color: #0081FF;
+  color: #FFF;
+}
+.isSelf.data-v-ebbd7a48 {
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: reverse;
+  -webkit-flex-direction: row-reverse;
+          flex-direction: row-reverse;
+  justify-self: flex-start;
+}
+.isSelf .messageBlock.data-v-ebbd7a48 {
+  background-color: #D9E4FA;
+  color: #000;
+}
+
