@@ -9888,65 +9888,7 @@ timeFormat;exports.default = _default;
 
 /***/ }),
 
-/***/ 23:
-/*!*************************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/uview-ui/libs/function/timeFrom.js ***!
-  \*************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _timeFormat = _interopRequireDefault(__webpack_require__(/*! ../../libs/function/timeFormat.js */ 22));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
-
-/**
-                                                                                                                                                                                                                                                                                          * 时间戳转为多久之前
-                                                                                                                                                                                                                                                                                          * @param String timestamp 时间戳
-                                                                                                                                                                                                                                                                                          * @param String | Boolean format 如果为时间格式字符串，超出一定时间范围，返回固定的时间格式；
-                                                                                                                                                                                                                                                                                          * 如果为布尔值false，无论什么时间，都返回多久以前的格式
-                                                                                                                                                                                                                                                                                          */
-function timeFrom() {var dateTime = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;var format = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'yyyy-mm-dd';
-  // 如果为null,则格式化当前时间
-  if (!dateTime) dateTime = Number(new Date());
-  // 如果dateTime长度为10或者13，则为秒和毫秒的时间戳，如果超过13位，则为其他的时间格式
-  if (dateTime.toString().length == 10) dateTime *= 1000;
-  var timestamp = +new Date(Number(dateTime));
-
-  var timer = (Number(new Date()) - timestamp) / 1000;
-  // 如果小于5分钟,则返回"刚刚",其他以此类推
-  var tips = '';
-  switch (true) {
-    case timer < 300:
-      tips = '刚刚';
-      break;
-    case timer >= 300 && timer < 3600:
-      tips = parseInt(timer / 60) + '分钟前';
-      break;
-    case timer >= 3600 && timer < 86400:
-      tips = parseInt(timer / 3600) + '小时前';
-      break;
-    case timer >= 86400 && timer < 2592000:
-      tips = parseInt(timer / 86400) + '天前';
-      break;
-    default:
-      // 如果format为false，则无论什么时间戳，都显示xx之前
-      if (format === false) {
-        if (timer >= 2592000 && timer < 365 * 86400) {
-          tips = parseInt(timer / (86400 * 30)) + '个月前';
-        } else {
-          tips = parseInt(timer / (86400 * 365)) + '年前';
-        }
-      } else {
-        tips = (0, _timeFormat.default)(timestamp, format);
-      }}
-
-  return tips;
-}var _default =
-
-timeFrom;exports.default = _default;
-
-/***/ }),
-
-/***/ 232:
+/***/ 229:
 /*!********************************************************************************!*\
   !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/uview-ui/libs/util/emitter.js ***!
   \********************************************************************************/
@@ -10003,6 +9945,64 @@ function _broadcast(componentName, eventName, params) {
     broadcast: function broadcast(componentName, eventName, params) {
       _broadcast.call(this, componentName, eventName, params);
     } } };exports.default = _default;
+
+/***/ }),
+
+/***/ 23:
+/*!*************************************************************************************!*\
+  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/uview-ui/libs/function/timeFrom.js ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _timeFormat = _interopRequireDefault(__webpack_require__(/*! ../../libs/function/timeFormat.js */ 22));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+/**
+                                                                                                                                                                                                                                                                                          * 时间戳转为多久之前
+                                                                                                                                                                                                                                                                                          * @param String timestamp 时间戳
+                                                                                                                                                                                                                                                                                          * @param String | Boolean format 如果为时间格式字符串，超出一定时间范围，返回固定的时间格式；
+                                                                                                                                                                                                                                                                                          * 如果为布尔值false，无论什么时间，都返回多久以前的格式
+                                                                                                                                                                                                                                                                                          */
+function timeFrom() {var dateTime = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;var format = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'yyyy-mm-dd';
+  // 如果为null,则格式化当前时间
+  if (!dateTime) dateTime = Number(new Date());
+  // 如果dateTime长度为10或者13，则为秒和毫秒的时间戳，如果超过13位，则为其他的时间格式
+  if (dateTime.toString().length == 10) dateTime *= 1000;
+  var timestamp = +new Date(Number(dateTime));
+
+  var timer = (Number(new Date()) - timestamp) / 1000;
+  // 如果小于5分钟,则返回"刚刚",其他以此类推
+  var tips = '';
+  switch (true) {
+    case timer < 300:
+      tips = '刚刚';
+      break;
+    case timer >= 300 && timer < 3600:
+      tips = parseInt(timer / 60) + '分钟前';
+      break;
+    case timer >= 3600 && timer < 86400:
+      tips = parseInt(timer / 3600) + '小时前';
+      break;
+    case timer >= 86400 && timer < 2592000:
+      tips = parseInt(timer / 86400) + '天前';
+      break;
+    default:
+      // 如果format为false，则无论什么时间戳，都显示xx之前
+      if (format === false) {
+        if (timer >= 2592000 && timer < 365 * 86400) {
+          tips = parseInt(timer / (86400 * 30)) + '个月前';
+        } else {
+          tips = parseInt(timer / (86400 * 365)) + '年前';
+        }
+      } else {
+        tips = (0, _timeFormat.default)(timestamp, format);
+      }}
+
+  return tips;
+}var _default =
+
+timeFrom;exports.default = _default;
 
 /***/ }),
 
@@ -10695,7 +10695,8 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));
-var _vuex = _interopRequireDefault(__webpack_require__(/*! vuex */ 41));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+var _vuex = _interopRequireDefault(__webpack_require__(/*! vuex */ 41));
+var _cache = __webpack_require__(/*! ../utils/cache.js */ 44);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 _vue.default.use(_vuex.default);var _default =
 
 new _vuex.default.Store({
@@ -11887,12 +11888,12 @@ var ImgHandle = /*#__PURE__*/function () {
 
   }
   //多图模式
-  _createClass(ImgHandle, [{ key: "multiImgShow", value: function multiImgShow() {
+  _createClass(ImgHandle, [{ key: "multiImgShow", value: function multiImgShow() {var imgList = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
       var singleImg = '';
       //单图特殊格式
-      if (this.imgList.length === 1) {
+      if (imgList.length === 1) {
         //定义宽高
-        var _ref = [this.imgList[0].width, this.imgList[0].height],width = _ref[0],height = _ref[1];
+        var _ref = [imgList[0].width, imgList[0].height],width = _ref[0],height = _ref[1];
         //比例系数
         var scale = width / height;
         if (scale >= 1) {
@@ -11914,7 +11915,7 @@ var ImgHandle = /*#__PURE__*/function () {
         }
       }
       //返回对应css类
-      return singleImg || "img_".concat(this.imgList.length);
+      return singleImg || "img_".concat(imgList.length);
     } }]);return ImgHandle;}();var
 
 
@@ -11945,6 +11946,193 @@ var routerHandle = new RouterHandle();exports.routerHandle = routerHandle;
 /***/ }),
 
 /***/ 43:
+/*!*******************************************************************!*\
+  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/utils/request.js ***!
+  \*******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.http = void 0;var _cache = __webpack_require__(/*! ./cache.js */ 44);function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}function _createClass(Constructor, protoProps, staticProps) {if (protoProps) _defineProperties(Constructor.prototype, protoProps);if (staticProps) _defineProperties(Constructor, staticProps);return Constructor;}
+
+
+
+var BASE_URL = {
+  // 开发环境
+  _DEV: 'https://cub.api.emily.red/api',
+  // 生产环境
+  _PRO: 'https://api.sapce.club/api',
+  // 本地环境
+  _LOC: 'http://localhost:9091/api' };
+
+
+var CUR_BASE_URL = BASE_URL._DEV;
+
+// 请求相关
+var Http = /*#__PURE__*/function () {
+  function Http() {_classCallCheck(this, Http);
+
+  }
+  // 请求函数
+  _createClass(Http, [{ key: "request", value: function request(options) {
+      return new Promise(function (resolve, reject) {
+        var token = (0, _cache.get)('token');
+        // 请求在没有特殊声明或者未登录情况下直接跳转到可以登录的页面
+        if (!token && !options.noToken) {
+          return uni.reLaunch({
+            url: '/pages/home/home' });
+
+        }
+        uni.request({
+          url: CUR_BASE_URL + options.url,
+          method: options.method || 'POST',
+          data: options.data || {},
+          header: {
+            'content-type': 'application/json',
+            'token': token },
+
+          dataType: 'json',
+          success: function success(res) {
+            if (res.data.code !== 200 && !options.skip) {
+              return uni.showToast({
+                title: res.data.msg,
+                icon: "none" });
+
+            }
+            resolve(res);
+          },
+          fail: function fail(err) {
+            uni.showToast({
+              title: '请求接口失败',
+              icon: "none" });
+
+            reject(err);
+          } });
+
+      });
+    } }, { key: "upLoadFile", value: function upLoadFile(
+
+    filePath) {
+      return new Promise(function (resolve, reject) {
+        var token = (0, _cache.get)('token');
+        uni.uploadFile({
+          url: BASE_URL + '/tencent/oss/uploadFiles',
+          filePath: filePath,
+          name: 'file',
+          success: function success(res) {
+            var data = {
+              msg: '文件大小不能超过70M!' };
+
+            try {
+              data = JSON.parse(res.data);
+            } catch (e) {
+              console.log(e);
+            }
+            if (data.code !== 200) {
+              resolve(function () {
+                uni.showToast({
+                  title: data.msg,
+                  icon: "none",
+                  duration: 3000 });
+
+              });
+              return;
+            }
+            console.log(data.data[0]);
+            resolve(data.data[0]);
+          },
+          fail: function fail(err) {
+            console.log(err);
+            uni.showToast({
+              title: '请求接口失败' });
+
+            reject(err);
+          } });
+
+      });
+    } }]);return Http;}();
+
+
+var http = new Http();exports.http = http;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+
+/***/ 44:
+/*!*****************************************************************!*\
+  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/utils/cache.js ***!
+  \*****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(uni) {var dtime = '_deadtime';
+
+/**
+                          * @param {*} k: key; v: 缓存值; t: 过期时间
+                          * @return {*}
+                          */
+function set(k, v, t) {
+  uni.setStorageSync(k, v);
+  var seconds = parseInt(t);
+  if (seconds > 0) {
+    var timestamp = Date.parse(new Date()); // 获取时间戳的毫秒数
+    timestamp = timestamp / 1000 + seconds; // 时间戳 + 过期时间
+    uni.setStorageSync(k + dtime, timestamp + "");
+  } else {
+    uni.removeStorageSync(k + dtime);
+  }
+}
+
+
+/**
+   * @param {*} k: 缓存名; def: 自定义读取失败的默认值(可选)
+   * @return {*}
+   */
+function get(k, def) {
+  var deadtime = parseInt(uni.getStorageSync(k + dtime)); // 获取缓存的时间
+  if (deadtime) {
+    if (parseInt(deadtime) < Date.parse(new Date()) / 1000) {// 如果缓存时间小于 当前时间戳
+      if (def) {return def;} else {return;} // 返回一个过期的错误
+    }
+  }
+  var res = uni.getStorageSync(k); // 否则直接读取真正的缓存名, 并且返回出去
+  if (res) {
+    return res;
+  } else {
+    return def;
+  }
+}
+
+/**
+   * 清除指定名字缓存
+   * @param {*} k: 缓存名; 
+   * @return {*}
+   */
+function remove(k) {
+  uni.removeStorageSync(k);
+  uni.removeStorageSync(k + dtime);
+}
+
+/**
+   * 清除所有缓存(包括token)慎用!!!
+   * @param {*}
+   * @return {*}
+   */
+function clear() {
+  uni.clearStorageSync();
+}
+
+
+module.exports = {
+  set: set,
+  get: get,
+  remove: remove,
+  clear: clear };
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+
+/***/ 45:
 /*!*********************************************************************************!*\
   !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/uview-ui/libs/mixin/mpShare.js ***!
   \*********************************************************************************/
@@ -11967,6 +12155,108 @@ module.exports = {
   onShareTimeline: function onShareTimeline() {
     return this.$u.mpShare;
   } };
+
+/***/ }),
+
+/***/ 52:
+/*!***********************************************************************!*\
+  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/pages/index/index.js ***!
+  \***********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.__indexMethods = void 0;var __indexMethods = {
+  tabsChange: function tabsChange(index) {
+    this.swiperCurrent = index;
+  },
+  // swiper-item左右移动，通知tabs的滑块跟随移动
+  transition: function transition(e) {
+    var dx = e.detail.dx;
+    this.$refs.uTabs.setDx(dx);
+  },
+  // 由于swiper的内部机制问题，快速切换swiper不会触发dx的连续变化，需要在结束时重置状态
+  // swiper滑动结束，分别设置tabs和swiper的状态
+  animationfinish: function animationfinish(e) {
+    var current = e.detail.current;
+    this.$refs.uTabs.setFinishCurrent(current);
+    this.swiperCurrent = current;
+    this.current = current;
+  },
+  //进入热榜页面
+  enterHotList: function enterHotList() {
+    this.$api.routerHandle.goto('/pagesInteractive/hotList');
+  },
+  //进入动态详情
+  enterDetail: function enterDetail() {
+    this.ifPublishShow = false;
+
+    this.$api.routerHandle.goto('/pagesInteractive/newsdetail');
+  },
+  //动态发布
+  isPublish: function isPublish(index) {
+    if (index === 2) {
+      this.ifPublishShow = true;
+      uni.$emit('popUpChange', '');
+    }
+  } };exports.__indexMethods = __indexMethods;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+
+/***/ 53:
+/*!******************************************************************************!*\
+  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/pages/index/getIndexData.js ***!
+  \******************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.__getIndexData = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 19));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}function _unsupportedIterableToArray(o, minLen) {if (!o) return;if (typeof o === "string") return _arrayLikeToArray(o, minLen);var n = Object.prototype.toString.call(o).slice(8, -1);if (n === "Object" && o.constructor) n = o.constructor.name;if (n === "Map" || n === "Set") return Array.from(o);if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);}function _iterableToArray(iter) {if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) return _arrayLikeToArray(arr);}function _arrayLikeToArray(arr, len) {if (len == null || len > arr.length) len = arr.length;for (var i = 0, arr2 = new Array(len); i < len; i++) {arr2[i] = arr[i];}return arr2;}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};} // 加载数据
+var __listDataAddHandle = function __listDataAddHandle(list, map) {
+  list.forEach(function (item) {
+    // 判断数据是否存在
+    map.get(item.id) ? map.delete(item.id) : null;
+    map.set(item.id, item);
+  });
+};
+
+var __getIndexData = {
+  // 获取广场页数据
+  getNewsData: function getNewsData() {var _arguments = arguments,_this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var options, data, reuslt, list, pageNum, pageSize, totalPage, total;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:options = _arguments.length > 0 && _arguments[0] !== undefined ? _arguments[0] : {};
+              // 判断缓存中是否有该页面
+              if (!_this.newsDataList[_this.current]) {
+                _this.newsDataList[_this.current] = new Map();
+                _this.$forceUpdate();
+              }
+              // 获取数据
+              _context.next = 4;return _this.$http.request({
+                url: '/dynamicState/selectDynamicListByPage',
+                method: 'POST',
+                data: {
+                  "pageNum": 1,
+                  "pageSize": 10,
+                  "parmas": {
+                    "tab": options.tab } },
+
+
+                noToken: options.noToken });case 4:data = _context.sent;
+
+              reuslt = data.data.data;
+              list = reuslt.list, pageNum = reuslt.pageNum, pageSize = reuslt.pageSize, totalPage = reuslt.totalPage, total = reuslt.total;
+              console.log(reuslt);
+
+              // 添加数据
+              __listDataAddHandle(list, _this.newsDataList[_this.current]);
+              _this.$forceUpdate();case 10:case "end":return _context.stop();}}}, _callee);}))();
+  },
+
+  // 映射数据
+  getNewsMapData: function getNewsMapData(index) {
+    if (this.newsDataList[index]) {
+      return _toConsumableArray(this.newsDataList[index].values());
+    }
+  } };exports.__getIndexData = __getIndexData;
 
 /***/ })
 

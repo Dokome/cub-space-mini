@@ -7,6 +7,7 @@
     "u-button": "/uview-ui/components/u-button/u-button",
     "u-cell-item": "/uview-ui/components/u-cell-item/u-cell-item",
     "u-icon": "/uview-ui/components/u-icon/u-icon",
-    "u-tabbar": "/uview-ui/components/u-tabbar/u-tabbar"
+    "u-tabbar": "/uview-ui/components/u-tabbar/u-tabbar",
+    "login": "/components/login/login"
   }
 }

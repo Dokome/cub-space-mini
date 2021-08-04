@@ -6,7 +6,7 @@
 				<u-tabs-swiper ref="uTabs" :list="navlist" :current="current" :is-scroll="false" font-size="32"
 				 swiperWidth="750" bar-height="10" bar-width="50"  inactive-color="#858585" active-color="#333"
 				 :bar-style="{ background: '#0081FF' }" :active-item-style="{ fontSize: '42rpx', transition: '0.1s' }" gutter="30"
-				 @change="tabsChange"
+				 @change="tabsChange" d
 				 ></u-tabs-swiper>
 			</view>
 		</navbar>
@@ -15,14 +15,14 @@
 		<swiper :current="swiperCurrent" @transition="transition" @animationfinish="animationfinish" class="viewPart"
 			:style="{ height: `calc(100vh - ${ViewPart}px - 30px)`}">
 			<!-- 由于顶部是固定位置，底部是非绝对定位，所及此处计算固定高度 防止头部随页面滚动或出现滑动条 -->
-			<swiper-item v-for="item in navlist" :key="item">
+			<swiper-item v-for="(item, index) in navlist" :key="index">
 				<!-- 视图区域 -->
-				<scroll-view scroll-y="true" class="hmax">
+				<scroll-view scroll-y="true" class="hmax" v-if="newsDataList[index]">
 					<view> 
-						<!-- 轮播图/热榜等 -->
+					<!-- 轮播图/热榜等 -->
 						<!-- 热榜 -->
 						<view class="margin-xs bg-white padding-sm" style="height: 280rpx;" 
-									v-if="current === 2" @click="enterHotList">
+									v-if="index === 2 && login" @click="enterHotList">
 							<!-- 头部 -->
 							<view class="">
 								<text class="text-bold text-black text-lg">校园热榜</text>
@@ -36,12 +36,17 @@
 							</view> 
 						</view>
 						<!-- 轮播图 -->
-						<view class="margin-top-xs hmax" style="height: 320rpx;" v-show="current === 1 || current === 2">
+						<view class="margin-top-xs hmax" style="height: 320rpx;" v-if="imgList.length && (index === 1 || index === 2) && login">
 							<u-swiper height="320" mode="dot" :list="imgList" :border-radius="0"></u-swiper>
 						</view>
 						<!-- 动态数据 -->
-						<card v-for="(item, index) in 30" :key="item" @click.native="enterDetail"></card>
-						<u-divider color="#909399" half-width="200" border-color="#6d6d6d">没有更多了</u-divider>
+						<view v-if="newsDataList[index]">
+							<card v-for="item of getNewsMapData(index)" :key="item.id"
+										 @click.native="enterDetail" :newsdata="{...item}"
+							>
+							</card>
+						</view>
+						<!-- <u-divider color="#909399" half-width="200" border-color="#6d6d6d">没有更多了</u-divider> -->
 					</view>
 				</scroll-view>
 				<!--  -->
@@ -58,12 +63,15 @@
 			@change="isPublish"
 		></u-tabbar>
 		<!-- 弹出层 -->
-		<pop type="publish" v-if="ifPopShow"></pop>
+		<pop type="publish" v-if="ifPublishShow"></pop>
+		<pop type="login" v-if="ifLoginShow"></pop>
 	</view>
 </template>
 
 <script>
 	import { mapState } from 'vuex';
+	import { __indexMethods } from './index.js';
+	import { __getIndexData } from './getIndexData.js';
 	export default {
 		data() {
 			return {
@@ -77,7 +85,7 @@
 				current: 1,
 				//当前页面(swiper)
 				swiperCurrent: 1,
-				//
+				//nav栏
 				navlist: [{
 					name: '关注'
 				}, {
@@ -85,52 +93,36 @@
 				}, {
 					name: '校园'
 				}],
-				imgList: [
-					'https://img2.baidu.com/it/u=2753426540,2942310730&fm=26&fmt=auto&gp=0.jpg',
-					'https://img2.baidu.com/it/u=951689591,2206379019&fm=26&fmt=auto&gp=0.jpg',
-					'https://img1.baidu.com/it/u=193594492,843414129&fm=26&fmt=auto&gp=0.jpg'
-				],
-				// 是否跳转到其他页面(控制pop)
-				ifPopShow: true
+				//轮播图数据
+				imgList: [],
+				// 是否显示发布弹框
+				ifPublishShow: true,
+				// 是否显示登录弹框
+				ifLoginShow: false,
+				//主要渲染数据
+				newsDataList:[],
+				//储存每个页面对应的当前请求页数
+				pageNumList: [],
 			}
 		},
 		methods: {
-			tabsChange(index) {
-				this.swiperCurrent = index;
-			},
-			// swiper-item左右移动，通知tabs的滑块跟随移动
-			transition(e) {
-				let dx = e.detail.dx;
-				this.$refs.uTabs.setDx(dx);
-			},
-			// 由于swiper的内部机制问题，快速切换swiper不会触发dx的连续变化，需要在结束时重置状态
-			// swiper滑动结束，分别设置tabs和swiper的状态
-			animationfinish(e) {
-				let current = e.detail.current;
-				this.$refs.uTabs.setFinishCurrent(current);
-				this.swiperCurrent = current;
-				this.current = current;
-			},
-			//进入热榜页面
-			enterHotList() {
-				this.$api.routerHandle.goto('/pagesInteractive/hotList');
-			},
-			//进入动态详情
-			enterDetail() {
-				this.ifPopShow = false;
-				this.$api.routerHandle.goto('/pagesInteractive/newsdetail');
-			},
-			//动态发布
-			isPublish(index) {
-				if (index === 2) {
-					this.ifPopShow = true;
-					uni.$emit('popUpChange', '');
-				}
-			}
+			...__indexMethods,
+			...__getIndexData,
 		},
 		computed: {
 			...mapState(['midButton', 'inactiveColor', 'activeColor', 'borderTop']),
+			login() {
+				return !!this.$cache.get('token');
+			}
 		},
+		created() {
+			this.getNewsData({ noToken: true , tab: 1});
+		},
+		watch: {
+			current(val) {
+				this.getNewsData({ noToken: true , tab: val });
+			}
+		}
 	}
 </script>
 

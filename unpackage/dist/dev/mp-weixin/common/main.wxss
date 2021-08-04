@@ -3962,3 +3962,14 @@ page {
   color: transparent;
 }
 
+/* uni.scss */
+.loginPage {
+  width: 100vw;
+  height: 100vh;
+  background-color: white;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 99;
+}
+

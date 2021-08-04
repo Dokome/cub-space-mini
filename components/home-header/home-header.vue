@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<!-- 背景图 -->
-		<view class="" style="height: 500rpx;">
+		<view class="" style="height: 500rpx;" @click="clear">
 			<image src='https://image.sapce.club/common/1623820687514623626.jpg' mode="aspectFill" class="hwmax"></image>
 		</view>
 		<!-- 头像框/个人信息 -->
@@ -71,6 +71,9 @@
 			enterFuncPage(e) {
 				this.$api.routerHandle.goto(e.target.dataset.page);
 			},
+			clear() {
+				this.$cache.clear();
+			}
 		}
 	}
 </script>

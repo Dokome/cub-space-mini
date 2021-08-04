@@ -33,6 +33,7 @@
 			:change="navChange"
 			:border-top="borderTop"
 		></u-tabbar>
+		<login v-if="!login"></login>
 	</view>
 </template>
 
@@ -49,6 +50,9 @@
 		},
 		computed: {
 			...mapState(['midButton', 'inactiveColor', 'activeColor', 'borderTop']),
+			login() {
+				return !!this.$cache.get('token');
+			}
 		},
 	}
 </script>

@@ -12,6 +12,6 @@
   top: 50%;
   -webkit-transform: translateY(-50%) translateX(30rpx);
           transform: translateY(-50%) translateX(30rpx);
-  z-index: 9999;
+  z-index: 98;
 }
 

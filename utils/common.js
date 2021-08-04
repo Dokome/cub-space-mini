@@ -4,12 +4,12 @@ class ImgHandle {
 	    
 	}
 	//多图模式
-	multiImgShow() {
+	multiImgShow(imgList = []) {
 		let singleImg = '';
 		//单图特殊格式
-		if (this.imgList.length === 1) {
+		if (imgList.length === 1) {
 			//定义宽高
-			let [width, height] = [this.imgList[0].width, this.imgList[0].height];
+			let [width, height] = [imgList[0].width, imgList[0].height];
 			//比例系数
 			let scale = width / height;
 			if (scale >= 1) {
@@ -31,7 +31,7 @@ class ImgHandle {
 			}
 		}
 		//返回对应css类
-		return singleImg || `img_${ this.imgList.length }`;
+		return singleImg || `img_${ imgList.length }`;
 	}
 	
 }

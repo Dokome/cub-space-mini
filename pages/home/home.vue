@@ -44,6 +44,7 @@
 			:activeColor="activeColor"
 			:border-top="borderTop"
 		></u-tabbar>
+		<login v-if="!login"></login>
 	</view>
 </template>
 
@@ -125,6 +126,9 @@
 		},
 		computed: {
 			...mapState(['midButton', 'inactiveColor', 'activeColor', 'borderTop']),
+			login() {
+				return !!this.$cache.get('token');
+			}
 		},
 		onLoad() {
 			this.$u.mpShare = {
@@ -152,6 +156,6 @@
 		width: 50rpx;
 		top: 50%;
 		transform: translateY(-50%) translateX(30rpx);
-		z-index: 9999;
+		z-index: 98;
 	}
 </style>

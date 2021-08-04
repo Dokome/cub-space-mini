@@ -8,8 +8,11 @@
 						{ height: CustomBar + 'px' },
 					]"
 				>
-					{{ type === 'publish' ? '发布' : '回复' }}
+					{{ type === 'publish' ? '发布' : '回复'  }} <!-- publish 发布 reply 回复 login 登录 -->
 				</view>
+				<!--
+					发布功能
+				 -->
 				<scroll-view scroll-y="true" :style="{ height: `calc(100% - ${ CustomBar }px)`} " v-if="type === 'publish'">
 					<view class="padding-top-xs" style="background-color: #F5F5F5;"></view>
 						<!-- 文字信息 -->
@@ -44,6 +47,9 @@
 							<u-button size="medium" type="primary">发布</u-button>
 						</view>
 				</scroll-view>
+				<!--
+					回复功能
+				 -->
 				<scroll-view scroll-y="true" :style="{ height: `calc(100% - ${ CustomBar }px)`} " v-if="type === 'reply'">
 					<view class="">
 						<card type="comment" :enterStateComment="true"></card>
@@ -55,6 +61,18 @@
 						<view class="bg-white" style="height: 80rpx;"></view>
 					</view>
 				</scroll-view>
+				<!--
+					登录功能
+				 -->
+				 <scroll-view scroll-y="true" :style="{ height: `calc(100% - ${ CustomBar }px)`} " v-if="type === 'login'">
+				 	<view class="">
+				 		<card type="comment" :enterStateComment="true"></card>
+				 		<view class="bg-white margin-top-xs padding">
+				 			<text class="text-bold text-black text-lg">{{ 21 + '条回复'}}</text>
+				 		</view>
+				 		<view class="bg-white" style="height: 80rpx;"></view>
+				 	</view>
+				 </scroll-view>
 			</view>
 		</u-popup>
 	</view>
@@ -118,6 +136,16 @@ export default {
 		uni.$on('popUpChange', (status) => {
 			this.popUpChange();
 		});
+	},
+	computed: {
+		// 当前的状态
+		curType() {
+			if (this.type === 'publish') {
+				return '发布'
+			} else {
+				return this.type === 'login' ? '登录' : '回复';
+			}
+		}
 	}
 }
 </script>

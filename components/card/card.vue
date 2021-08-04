@@ -10,7 +10,7 @@
 				<view class="margin-top-xs">
 					<u-avatar 
 					size="60"
-					:src="'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Ftx-free-imgs.acfun.cn%2Fcontent%2F2019_7_21%2F1.5636994914764566E9.png%3Fimageslim&refer=http%3A%2F%2Ftx-free-imgs.acfun.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1629122958&t=ddad2dd6664dee4cc4dea6e21c807aa1'"
+					:src="newsdata.avatarUrl"
 					>
 					</u-avatar>
 				</view>
@@ -18,38 +18,35 @@
 				<view class="margin-left-xs padding-top-xs">
 					<!-- 名字/学校 -->
 					<view class="flex align-center">
-						<view class="text-sm text-black" style="text-bold">APEX</view>
+						<view class="text-sm text-black" style="text-bold">{{ newsdata.nickName }}</view>
 					</view>
 					<!-- 时间 -->
-					<view class="u-tips-color text-sm">2021/7/21 21:57</view>
+					<view class="u-tips-color text-sm">{{ newsdata.pushTime }}</view>
 				</view>
 			</view>
 			<!-- 文字栏 -->
-			<view class="margin-tb-xs text-black text-content" :class="{ clamp3 : clamp }">
-				但说实话，背包九讲对于小白来说确实不太友好，看起来还是有点费劲的，且都是伪代码理解起来也吃力。
-				但说实话，背包九讲对于小白来说确实不太友好，看起来还是有点费劲的，且都是伪代码理解起来也吃力。
-			</view>
+			<view class="margin-tb-xs text-black text-content" :class="{ clamp3 : clamp }">{{ newsdata.content }}</view>
 			<!-- 图片栏 -->
-			<view class="margin-tb-sm img_Con"  style="width: 600rpx;" v-if="imgList && imgList.length">
-				<view :class="imgStyle" v-for="(item, index) in imgList" :key="index">
+			<view class="margin-tb-sm img_Con"  style="width: 600rpx;" v-if="newsdata.images && newsdata.images.length">
+				<view :class="imgStyle" v-for="(item, index) in newsdata.images" :key="index">
 					<image :src="item.url" mode="aspectFill" class="show_img" :style="imgStyle" ></image>
 				</view>
 			</view> 
-			<u-tag :text="'江西师范大学'" shape="circle" color="#909399" bg-color="#F5F5F5" border-color="#F5F5F5"/>
+			<u-tag :text="newsdata.schoolName" shape="circle" color="#909399" bg-color="#F5F5F5" border-color="#F5F5F5"/>
 			<!-- 底部交互栏 -->
 			<view class="flex justify-between align-center margin-top-sm">
 				<!-- 左/转发 -->
 				<view class="flex align-center">
 					<image src="/static/Img/share.png" mode="aspectFill" style="width: 30rpx; height: 30rpx;"></image>
-					<text class="margin-left-xs text-sm">2</text>
+					<text class="margin-left-xs text-sm">{{ newsdata.forwardNum }}</text>
 				</view>
 				<!-- 右/点赞评论 -->
 				<view class="flex align-center">
 					<image src="/static/Img/chat.png" mode="aspectFill" style="width: 30rpx; height: 30rpx;"></image>
-					<text class="margin-left-xs text-sm">37</text>
+					<text class="margin-left-xs text-sm">{{ newsdata.commentNum }}</text>
 					<text class="margin-lr"></text>
 					<image src="/static/Img/thumb-B.png" mode="aspectFill" style="width: 30rpx; height: 30rpx;"></image>
-					<text class="margin-left-xs text-sm">100</text>
+					<text class="margin-left-xs text-sm">{{ newsdata.likeNum }}</text>
 				</view>
 			</view>
 		</view>
@@ -123,21 +120,16 @@
 		name:"card",
 		data() {
 			return {
-				imgList: [
-					{
-						url: 'https://image.sapce.club/common/1623820732138714505.jpg',
-					},
-					{
-						url: 'https://image.sapce.club/common/1623820687514623626.jpg',
-					}
-				],
 				singleImg: null
 			};
 		},
 		computed: {
 			imgStyle() {
-				return this.$api.imgHandle.multiImgShow.call(this);
+				return this.$api.imgHandle.multiImgShow(this.newsdata.images);
 			}
+		},
+		mounted() {
+			this.$forceUpdate();
 		},
 		methods: {
 			// 回复评论
@@ -146,6 +138,12 @@
 			}
 		},
 		props: {
+			newsdata: {
+				type: Object,
+				default() {
+					return {};
+				}
+			},
 			clamp: {
 				type: Boolean,
 				default() {

@@ -2,6 +2,7 @@
   "navigationBarTitleText": "遇见",
   "enablePullDownRefresh": false,
   "usingComponents": {
-    "u-tabbar": "/uview-ui/components/u-tabbar/u-tabbar"
+    "u-tabbar": "/uview-ui/components/u-tabbar/u-tabbar",
+    "login": "/components/login/login"
   }
 }
