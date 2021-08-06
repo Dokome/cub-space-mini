@@ -85,7 +85,7 @@
 	box-sizing: border-box;
 	width: 100%;
 	position: fixed;
-	z-index: 999999999;
+	z-index: 99999999;
 }
 
 .inputBox {

@@ -358,6 +358,7 @@ var _getIndexData = __webpack_require__(/*! ./getIndexData.js */ 62);function ow
   watch: {
     current: function current(val) {
       if (this.pageNumList[val] === 1) {
+        this.ifLoaddingShow = true;
         if (val === 1 || val === 2) {
           this.getHotList({ type: val });
         };

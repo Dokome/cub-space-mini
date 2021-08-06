@@ -282,7 +282,6 @@ var _default2 =
       _this.popUpChange();
     });
     uni.$on('repylChange', function (options) {
-      console.log(123);
       _this.commentInfo = options.data;
       _this.replyList = _this.commentInfo.childCommentList;
       _this.popUpChange();

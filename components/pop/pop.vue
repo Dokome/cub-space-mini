@@ -1,7 +1,7 @@
 <template>
 	<view class="">
 		<u-popup mode="bottom" v-model="show" :closeable="true" close-icon-pos="top-left"
-			:custom-style="{ zIndex: '999999' }">
+			:custom-style="{ zIndex: '88' }">
 			<view class="content" style="height: 100vh;">
 				<view class="flex justify-center align-center text-bold text-black"
 				:style="[
@@ -131,7 +131,6 @@ export default {
 			this.popUpChange();
 		});
 		uni.$on('repylChange', (options) => {
-			console.log(123);
 			this.commentInfo = options.data;
 			this.replyList = this.commentInfo.childCommentList;
 			this.popUpChange();

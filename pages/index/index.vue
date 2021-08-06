@@ -136,6 +136,7 @@
 		watch: {
 			current(val) {
 				if (this.pageNumList[val] === 1) {
+					this.ifLoaddingShow = true;
 					if (val === 1 || val === 2) {
 						this.getHotList({type: val});
 					};

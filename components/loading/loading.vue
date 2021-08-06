@@ -35,7 +35,7 @@
 		height: 100vh;
 		left: 0;
 		top: 0;
-		z-index: 55;
+		z-index: 100;
 	}
 	
 	.blockWrapper {
