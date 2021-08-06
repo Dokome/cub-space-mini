@@ -17,7 +17,7 @@
 			<!-- 由于顶部是固定位置，底部是非绝对定位，所及此处计算固定高度 防止头部随页面滚动或出现滑动条 -->
 			<swiper-item v-for="(item, index) in navlist" :key="index">
 				<!-- 视图区域 -->
-				<scroll-view scroll-y="true" class="hmax" v-if="newsDataList[index]">
+				<scroll-view scroll-y="true" class="hmax" v-if="newsDataList[index]" @scrolltolower="scrollToBottom(index)">
 					<view> 
 					<!-- 轮播图/热榜等 -->
 						<!-- 热榜 -->
@@ -42,11 +42,12 @@
 						<!-- 动态数据 -->
 						<view v-if="newsDataList[index]">
 							<card v-for="item of getNewsMapData(index)" :key="item.id"
-										 @click.native="enterDetail" :newsdata="{...item}"
+										 @click.native="enterDetail(item.id)" :newsdata="{...item}"
 							>
 							</card>
+							<u-loadmore :status="loadStatus[index]" marginTop="40" marginBottom="40" v-if="getNewsMapData(index).length"
+							:load-text="loadText" :bg-color="'#ffffff'"></u-loadmore>
 						</view>
-						<!-- <u-divider color="#909399" half-width="200" border-color="#6d6d6d">没有更多了</u-divider> -->
 					</view>
 				</scroll-view>
 				<!--  -->
@@ -64,7 +65,7 @@
 		></u-tabbar>
 		<!-- 弹出层 -->
 		<pop type="publish" v-if="ifPublishShow"></pop>
-		<pop type="login" v-if="ifLoginShow"></pop>
+		<loading v-if="ifLoaddingShow"></loading>
 	</view>
 </template>
 
@@ -75,6 +76,8 @@
 	export default {
 		data() {
 			return {
+				// 初始加载动画
+				ifLoaddingShow: true,
 				// 页面高度(通过App.vue获取而来)
 				PageHeight: this.windowHeight,
 				//底部栏
@@ -97,12 +100,23 @@
 				imgList: [],
 				// 是否显示发布弹框
 				ifPublishShow: true,
-				// 是否显示登录弹框
-				ifLoginShow: false,
 				//主要渲染数据
 				newsDataList:[],
 				//储存每个页面对应的当前请求页数
-				pageNumList: [],
+				pageNumList: new Array(3).fill(1),
+				// 每一页的最大值
+				pageTotalList: new Array(3).fill(1),
+				// 拉动开始
+				pullDownY0: undefined,
+				// 拉动结束
+				pullDownY1: undefined,
+				// loadmore 组件
+				loadStatus: new Array(3).fill('loadmore'),
+				loadText: {
+					loadmore: '上拉加载更多',
+					loading: '努力加载ing...',
+					nomore: '没有更多了~'
+				}
 			}
 		},
 		methods: {
@@ -116,12 +130,22 @@
 			}
 		},
 		created() {
-			this.getNewsData({ noToken: true , tab: 1});
+			this.getNewsData({ noToken: true , tab: 1 });
+			this.getHotList({ noToken: true , type: 1 });
 		},
 		watch: {
 			current(val) {
-				this.getNewsData({ noToken: true , tab: val });
+				if (this.pageNumList[val] === 1) {
+					if (val === 1 || val === 2) {
+						this.getHotList({type: val});
+					};
+					this.getNewsData({ noToken: true , tab: val });
+				}
 			}
+		},
+		// 下拉刷新
+		onPullDownRefresh() {
+			this.getNewsData({ noToken: true , tab: this.current, isGetNew: true })
 		}
 	}
 </script>
@@ -133,6 +157,7 @@
 	
 	.outWrapper {
 		overflow: hidden;
+		background-color: #fff;
 	}
 	
 	.viewPart {

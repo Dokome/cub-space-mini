@@ -4,29 +4,30 @@ class ImgHandle {
 	    
 	}
 	//多图模式
-	multiImgShow(imgList = []) {
+	multiImgShow(imgList = [], options = {}) {
 		let singleImg = '';
+		let BASE = options.isComment ? 240 : 360;
 		//单图特殊格式
 		if (imgList.length === 1) {
 			//定义宽高
-			let [width, height] = [imgList[0].width, imgList[0].height];
+			let [width, height] = [imgList[0].width || BASE, imgList[0].height || BASE];
 			//比例系数
 			let scale = width / height;
 			if (scale >= 1) {
 				// 宽图
 				if (scale >= 3) {
-					singleImg = `height: 120rpx; width: 360rpx `;
+					singleImg = `height: ${BASE / 3}rpx; width: ${BASE}rpx `;
 				} else {
 					// 正常范围
-					singleImg = `height: ${ 360 * scale }rpx; width: 360rpx `;
+					singleImg = `height: ${ BASE * scale }rpx; width: ${BASE}rpx `;
 				}
 			} else {
 				// 高图
 				if (scale <= 0.3) {
-					singleImg = `height: 360rpx; width: 120rpx `;
+					singleImg = `height: ${BASE}rpx; width: ${BASE / 3}rpx `;
 				} else {
 					// 正常范围
-					singleImg =  `height: 360rpx; width: ${ 360 * scale }rpx `;
+					singleImg =  `height: ${BASE}rpx; width: ${ BASE * scale }rpx `;
 				}
 			}
 		}

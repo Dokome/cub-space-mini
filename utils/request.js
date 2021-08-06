@@ -44,7 +44,9 @@ class Http {
 							icon: "none"
 						})
 					}
-					resolve(res)
+					setTimeout(() => {
+						resolve(res)
+					}, options.delay || 500)
 				},
 				fail: (err) => {
 					uni.showToast({

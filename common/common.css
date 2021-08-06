@@ -784,5 +784,5 @@
 
 /* 上部阴影 带3d感 */
 .shadow-top {
-	box-shadow: 0rpx -1rpx 6rpx #909399; 
+	box-shadow: 0rpx -1rpx 12rpx rgba(0,0,0,.05); 
 }

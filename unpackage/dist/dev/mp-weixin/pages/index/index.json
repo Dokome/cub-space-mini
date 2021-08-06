@@ -1,12 +1,15 @@
 {
   "navigationBarTitleText": "广场",
   "navigationBarTextStyle": "black",
+  "enablePullDownRefresh": true,
   "usingComponents": {
     "navbar": "/components/navbar/navbar",
     "u-tabs-swiper": "/uview-ui/components/u-tabs-swiper/u-tabs-swiper",
     "u-swiper": "/uview-ui/components/u-swiper/u-swiper",
     "card": "/components/card/card",
+    "u-loadmore": "/uview-ui/components/u-loadmore/u-loadmore",
     "u-tabbar": "/uview-ui/components/u-tabbar/u-tabbar",
-    "pop": "/components/pop/pop"
+    "pop": "/components/pop/pop",
+    "loading": "/components/loading/loading"
   }
 }

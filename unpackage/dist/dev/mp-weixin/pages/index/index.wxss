@@ -4,6 +4,7 @@
 }
 .outWrapper.data-v-57280228 {
   overflow: hidden;
+  background-color: #fff;
 }
 .viewPart.data-v-57280228 {
   height: 100vh;

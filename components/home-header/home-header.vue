@@ -70,9 +70,6 @@
 			// 进入功能页面
 			enterFuncPage(e) {
 				this.$api.routerHandle.goto(e.target.dataset.page);
-			},
-			clear() {
-				this.$cache.clear();
 			}
 		}
 	}

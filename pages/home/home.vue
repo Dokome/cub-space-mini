@@ -6,10 +6,6 @@
 			<view class="innerWrapper">
 				<!-- 背景图以及头部 -->
 				<home-header></home-header>
-				<!-- 小轮播图 -->
-				<!-- <view class="bg-white margin-top-xs wmax" style="height: 140rpx;">
-					<u-swiper height="160" mode="dot" :list="imgList" :border-radius="0"></u-swiper>
-				</view> -->
 				<!-- 关注公众号 -->
 				<view class="wmax" style="height: 90rpx; position: relative;" v-if="officialButtonShow">
 					<view class="official flex hwmax" style="position: absolute;">

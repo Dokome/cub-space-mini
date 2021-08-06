@@ -20,10 +20,9 @@ export const __indexMethods = {
 		this.$api.routerHandle.goto('/pagesInteractive/hotList');
 	},
 	//进入动态详情
-	enterDetail() {
+	enterDetail(id) {
 		this.ifPublishShow = false;
-
-		this.$api.routerHandle.goto('/pagesInteractive/newsdetail');
+		this.$api.routerHandle.goto(`/pagesInteractive/newsdetail?id=${id}`);
 	},
 	//动态发布
 	isPublish(index) {
@@ -31,5 +30,19 @@ export const __indexMethods = {
 			this.ifPublishShow = true;
 			uni.$emit('popUpChange', '');
 		}
+	},
+	// 拖动屏幕
+	startHandle(e) {
+		uni.startPullDownRefresh({
+			success: () => {
+				setTimeout(() => {
+					uni.stopPullDownRefresh();
+				}, 1000)
+			}
+		})
+	},
+	//滑到页面的最下部分
+	scrollToBottom(index) {
+		this.getNewsData({ noToken: true , tab: index });
 	}
 }

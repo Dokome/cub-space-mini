@@ -1,5 +1,10 @@
 // 加载数据
-const __listDataAddHandle = function(list, map) {
+const __listDataAddHandle = function(list, map, isGetNew = false) {
+	// 请求新数据时清空列表
+	if (isGetNew) {
+		map.clear();
+		this.pageNumList[this.current] = 1;
+	}
 	list.forEach(item => {
 		// 判断数据是否存在
 		map.get(item.id) ?  map.delete(item.id) : null;
@@ -10,6 +15,13 @@ const __listDataAddHandle = function(list, map) {
 export const __getIndexData = {
 	// 获取广场页数据
 	async getNewsData(options = {}) {
+		// 开始加载
+		this.$set(this.loadStatus, this.current, 'loading');
+		// 判断是否达到了最大页面值
+		if (this.pageTotalList[this.current] < this.pageNumList[this.current]) {
+			this.$set(this.loadStatus, this.current, 'nomore');
+			return;
+		}
 		// 判断缓存中是否有该页面
 		if (!this.newsDataList[this.current]) {
 			this.newsDataList[this.current] = new Map();
@@ -20,7 +32,7 @@ export const __getIndexData = {
 			url: '/dynamicState/selectDynamicListByPage',
 			method: 'POST',
 			data: {
-				"pageNum": 1,
+				"pageNum": options.isGetNew ? 1 : this.pageNumList[this.current],
 				"pageSize": 10,
 				"parmas": {
 					"tab": options.tab
@@ -28,19 +40,41 @@ export const __getIndexData = {
 			},
 			noToken: options.noToken
 		});
+		// 判断是否请求成功
+		if (data.data.code === 200) {
+			this.pageNumList[this.current]++;
+		}
+		
 		const reuslt = data.data.data;
 		const { list, pageNum, pageSize, totalPage, total } = reuslt;
-		console.log(reuslt);
 		
+		this.pageTotalList[this.current] = totalPage;
 		// 添加数据
-		__listDataAddHandle(list, this.newsDataList[this.current]);
+		__listDataAddHandle.call(this, list, this.newsDataList[this.current], options.isGetNew);
+		this.$set(this.loadStatus, this.current, 'loadmore');
 		this.$forceUpdate();
+		setTimeout(() => {
+			this.ifLoaddingShow = false;
+		}, 500)
 	},
 	
-	// 映射数据
+	// 映射动态数据
 	getNewsMapData(index) {
 		if (this.newsDataList[index]) {
 			return [...this.newsDataList[index].values()];
 		}
+	},
+	
+	// 热榜
+	async getHotList(options) {
+		const data = await this.$http.request({
+			url: '/dynamicState/selectHotRank',
+			method: 'POST',
+			data: {
+				"rankType": options.type
+			},
+			noToken: options.noToken
+		});
+		console.log(data);
 	}
 }

@@ -50,29 +50,16 @@
 				<!--
 					回复功能
 				 -->
-				<scroll-view scroll-y="true" :style="{ height: `calc(100% - ${ CustomBar }px)`} " v-if="type === 'reply'">
+				<scroll-view scroll-y="true" :style="{ height: `calc(100% - ${ CustomBar }px)`} " v-if="type === 'reply' && commentInfo">
 					<view class="">
-						<card type="comment" :enterStateComment="true"></card>
+						<card type="comment" :enterStateComment="true" :commentdata="commentInfo"></card>
 						<view class="bg-white margin-top-xs padding">
-							<text class="text-bold text-black text-lg">{{ 21 + '条回复'}}</text>
+							<text class="text-bold text-black text-lg">{{ replyList.length + '条回复'}}</text>
 						</view>
-						<card type="reply" :enterStateComment="true"></card>
-						<u-divider color="#909399" half-width="200" border-color="#6d6d6d"	>没有更多了</u-divider>
-						<view class="bg-white" style="height: 80rpx;"></view>
+						<card type="reply" :enterStateComment="true" v-for="item in replyList" :commentdata="item" :key="item.id"></card>
+						<view class="bg-white" style="height: 150rpx;"></view>
 					</view>
 				</scroll-view>
-				<!--
-					登录功能
-				 -->
-				 <scroll-view scroll-y="true" :style="{ height: `calc(100% - ${ CustomBar }px)`} " v-if="type === 'login'">
-				 	<view class="">
-				 		<card type="comment" :enterStateComment="true"></card>
-				 		<view class="bg-white margin-top-xs padding">
-				 			<text class="text-bold text-black text-lg">{{ 21 + '条回复'}}</text>
-				 		</view>
-				 		<view class="bg-white" style="height: 80rpx;"></view>
-				 	</view>
-				 </scroll-view>
 			</view>
 		</u-popup>
 	</view>
@@ -91,6 +78,10 @@ export default {
 	},
 	data() {
 		return {
+			//评论信息
+			commentInfo: null,
+			// 评论回复列表
+			replyList: null,
 			// 发布时的选择匿名按钮
 			checked: false,
 			// 弹框的显示
@@ -132,8 +123,17 @@ export default {
 		}
 	},
 	mounted() {
+		// 先把其他页面的时间全部注销
+		uni.$off('repylChange');
+		uni.$off('popUpChange');
 		//弹起下落(发布)
 		uni.$on('popUpChange', (status) => {
+			this.popUpChange();
+		});
+		uni.$on('repylChange', (options) => {
+			console.log(123);
+			this.commentInfo = options.data;
+			this.replyList = this.commentInfo.childCommentList;
 			this.popUpChange();
 		});
 	},

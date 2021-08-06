@@ -4,8 +4,8 @@
   "usingComponents": {
     "navbar": "/components/navbar/navbar",
     "card": "/components/card/card",
-    "u-divider": "/uview-ui/components/u-divider/u-divider",
     "pop": "/components/pop/pop",
-    "text-input": "/components/textInput/textInput"
+    "text-input": "/components/textInput/textInput",
+    "loading": "/components/loading/loading"
   }
 }

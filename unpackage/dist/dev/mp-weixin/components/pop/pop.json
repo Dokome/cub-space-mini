@@ -4,8 +4,7 @@
     "u-input": "/uview-ui/components/u-input/u-input",
     "u-switch": "/uview-ui/components/u-switch/u-switch",
     "u-button": "/uview-ui/components/u-button/u-button",
-    "card": "/components/card/card",
-    "u-divider": "/uview-ui/components/u-divider/u-divider"
+    "card": "/components/card/card"
   },
   "component": true
 }
