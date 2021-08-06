@@ -54,7 +54,7 @@
 					<view class="">
 						<card type="comment" :enterStateComment="true" :commentdata="commentInfo"></card>
 						<view class="bg-white margin-top-xs padding">
-							<text class="text-bold text-black text-lg">{{ replyList.length + '条回复'}}</text>
+							<text class="text-bold text-black text-df">{{ replyList.length + '条回复'}}</text>
 						</view>
 						<card type="reply" :enterStateComment="true" v-for="item in replyList" :commentdata="item" :key="item.id"></card>
 						<view class="bg-white" style="height: 150rpx;"></view>

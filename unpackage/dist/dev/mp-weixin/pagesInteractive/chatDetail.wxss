@@ -16,8 +16,8 @@
   border-radius: 10rpx;
 }
 .isNotSelf .messageBlock.data-v-ebbd7a48 {
-  background-color: #0081FF;
-  color: #FFF;
+  background-color: #0081ff;
+  color: #fff;
 }
 .isSelf.data-v-ebbd7a48 {
   -webkit-box-orient: horizontal;
@@ -27,7 +27,7 @@
   justify-self: flex-start;
 }
 .isSelf .messageBlock.data-v-ebbd7a48 {
-  background-color: #D9E4FA;
+  background-color: #d9e4fa;
   color: #000;
 }
 

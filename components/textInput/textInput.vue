@@ -8,7 +8,7 @@
 		</view>
 		<!-- 输入框 -->
 		 <textarea value=""  @focus="InputFocus" @blur="InputBlur" :show-confirm-bar="false"
-							auto-height class="textarea" :adjust-position="false" placeholder="我来说几句..."
+							auto-height class="textarea" :adjust-position="false" placeholder="爱国、友善、文明"
 							 maxlength="200" :fixed="true"/>
 		<!-- 发送 -->
 		<view>
