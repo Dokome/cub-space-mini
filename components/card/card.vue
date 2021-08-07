@@ -24,7 +24,9 @@
 			<!-- 图片栏 -->
 			<view class="margin-tb-sm img_Con" style="width: 600rpx;" v-if="newsdata.images && newsdata.images.length">
 				<view :class="imgNewStyle" v-for="(item, index) in newsdata.images" :key="index">
-					<image :src="item.url" mode="aspectFill" class="show_img" :style="imgNewStyle"></image>
+					<image :src="item.url" mode="aspectFill" @click.stop="imgPrview(item.url, newsdata.images)"
+						class="show_img" :style="imgNewStyle">
+					</image>
 				</view>
 			</view>
 			<u-tag :text="newsdata.schoolName" shape="circle" color="#909399" bg-color="#F5F5F5" border-color="#F5F5F5" />
@@ -71,7 +73,9 @@
 						<!-- 配图 -->
 						<view class="margin-tb-sm img_Con" style="width: 600rpx;" v-if="commentdata.images && commentdata.images.length">
 							<view :class="imgComStyle" v-for="(item, index) in commentdata.images" :key="index">
-								<image :src="item.url" mode="aspectFill" class="show_img" :style="imgComStyle"></image>
+								<image :src="item.url" mode="aspectFill" class="show_img" 
+											 :style="imgComStyle" @click.stop="imgPrview(item.url, commentdata.images)">
+								</image>
 							</view>
 						</view>
 					</view>
@@ -133,6 +137,10 @@ export default {
 		// 回复评论
 		replyHandle(commentData) {
 			uni.$emit('repylChange', { type: 'comment', data: commentData });
+		},
+		// 图片预览
+		imgPrview(url, imgList) {
+			this.$api.imgHandle.imgPreview(url, imgList && imgList.map(item => item.url));
 		}
 	},
 	props: {

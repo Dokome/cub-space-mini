@@ -64,6 +64,13 @@ class ImgHandle {
 	removeCurrentImg(index) {
 		this.imgList.splice(index, 1);
 	}
+	// 预览图片
+	imgPreview(url, urls) {
+		uni.previewImage({
+			current: url,
+				urls: urls
+		});
+	}
 }
 	
 class RouterHandle {

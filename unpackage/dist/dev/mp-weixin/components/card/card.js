@@ -81,7 +81,7 @@ try {
       return __webpack_require__.e(/*! import() | uview-ui/components/u-avatar/u-avatar */ "uview-ui/components/u-avatar/u-avatar").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-avatar/u-avatar.vue */ 153))
     },
     uTag: function() {
-      return __webpack_require__.e(/*! import() | uview-ui/components/u-tag/u-tag */ "uview-ui/components/u-tag/u-tag").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-tag/u-tag.vue */ 269))
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-tag/u-tag */ "uview-ui/components/u-tag/u-tag").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-tag/u-tag.vue */ 270))
     }
   }
 } catch (e) {
@@ -255,6 +255,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 var _default2 =
 {
   name: 'card',
@@ -278,6 +282,10 @@ var _default2 =
     // 回复评论
     replyHandle: function replyHandle(commentData) {
       uni.$emit('repylChange', { type: 'comment', data: commentData });
+    },
+    // 图片预览
+    imgPrview: function imgPrview(url, imgList) {
+      this.$api.imgHandle.imgPreview(url, imgList && imgList.map(function (item) {return item.url;}));
     } },
 
   props: {

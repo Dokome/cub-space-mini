@@ -9046,6 +9046,75 @@ module.exports = __webpack_require__(/*! regenerator-runtime */ 22);
 
 /***/ }),
 
+/***/ 212:
+/*!********************************************************************************!*\
+  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/components/pop/newsPublish.js ***!
+  \********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.__newsPublish = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 21));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _createForOfIteratorHelper(o, allowArrayLike) {var it;if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) {if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") {if (it) o = it;var i = 0;var F = function F() {};return { s: F, n: function n() {if (i >= o.length) return { done: true };return { done: false, value: o[i++] };}, e: function e(_e) {throw _e;}, f: F };}throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}var normalCompletion = true,didErr = false,err;return { s: function s() {it = o[Symbol.iterator]();}, n: function n() {var step = it.next();normalCompletion = step.done;return step;}, e: function e(_e2) {didErr = true;err = _e2;}, f: function f() {try {if (!normalCompletion && it.return != null) it.return();} finally {if (didErr) throw err;}} };}function _unsupportedIterableToArray(o, minLen) {if (!o) return;if (typeof o === "string") return _arrayLikeToArray(o, minLen);var n = Object.prototype.toString.call(o).slice(8, -1);if (n === "Object" && o.constructor) n = o.constructor.name;if (n === "Map" || n === "Set") return Array.from(o);if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);}function _arrayLikeToArray(arr, len) {if (len == null || len > arr.length) len = arr.length;for (var i = 0, arr2 = new Array(len); i < len; i++) {arr2[i] = arr[i];}return arr2;}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}var __newsPublish = {
+  imgSelector: function imgSelector() {
+    this.$api.imgHandle.imgSelector.call(this);
+  },
+
+  imgRemove: function imgRemove(index) {
+    this.$api.imgHandle.removeCurrentImg.call(this);
+  },
+
+  newsPublishHandle: function newsPublishHandle() {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var _iterator, _step, img, newImg, uploadData, data;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:if (!(
+
+              _this.newsTextContent.trim().length === 0)) {_context.next = 2;break;}return _context.abrupt("return",
+              uni.showToast({
+                title: '空空如也~',
+                icon: 'none' }));case 2:
+
+
+              uni.showLoading({
+                title: '正在发布中' });
+
+              // 上传图片
+              _iterator = _createForOfIteratorHelper(_this.imgList);_context.prev = 4;_iterator.s();case 6:if ((_step = _iterator.n()).done) {_context.next = 14;break;}img = _step.value;_context.next = 10;return (
+                _this.$http.upLoadFile(img.url));case 10:newImg = _context.sent;
+              _this.$set(img, 'url', newImg);case 12:_context.next = 6;break;case 14:_context.next = 19;break;case 16:_context.prev = 16;_context.t0 = _context["catch"](4);_iterator.e(_context.t0);case 19:_context.prev = 19;_iterator.f();return _context.finish(19);case 22:
+
+              // 定义data
+              uploadData = {
+                anonymousStatus: _this.newsAnonymous ? 1 : 0,
+                content: _this.newsTextContent,
+                images: _this.imgList };
+
+
+              // 发送请求
+              _context.next = 25;return _this.$http.request({
+                url: '/dynamicState/pushDynamic',
+                method: 'POST',
+                data: uploadData });case 25:data = _context.sent;
+
+
+              // 清空数据
+              _this.newsTextContent = '';
+              _this.imgList = [];
+              _this.newsAnonymous = false;
+
+              // 发布成功
+              uni.hideLoading();
+              if (data.data.code === 200) {
+                _this.show = false;
+                setTimeout(function () {
+                  uni.showToast({
+                    title: '发布成功',
+                    icon: 'none',
+                    duration: 1000 });
+
+                }, 200);
+              }case 31:case "end":return _context.stop();}}}, _callee, null, [[4, 16, 19, 22]]);}))();
+  } };exports.__newsPublish = __newsPublish;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+
 /***/ 22:
 /*!************************************************************!*\
   !*** ./node_modules/regenerator-runtime/runtime-module.js ***!
@@ -9946,7 +10015,7 @@ timeFrom;exports.default = _default;
 
 /***/ }),
 
-/***/ 252:
+/***/ 253:
 /*!********************************************************************************!*\
   !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/uview-ui/libs/util/emitter.js ***!
   \********************************************************************************/
@@ -10428,75 +10497,6 @@ trim;exports.default = _default;
 }var _default =
 
 toast;exports.default = _default;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
-
-/***/ }),
-
-/***/ 341:
-/*!********************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/components/pop/newsPublish.js ***!
-  \********************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.__newsPublish = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 21));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _createForOfIteratorHelper(o, allowArrayLike) {var it;if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) {if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") {if (it) o = it;var i = 0;var F = function F() {};return { s: F, n: function n() {if (i >= o.length) return { done: true };return { done: false, value: o[i++] };}, e: function e(_e) {throw _e;}, f: F };}throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}var normalCompletion = true,didErr = false,err;return { s: function s() {it = o[Symbol.iterator]();}, n: function n() {var step = it.next();normalCompletion = step.done;return step;}, e: function e(_e2) {didErr = true;err = _e2;}, f: function f() {try {if (!normalCompletion && it.return != null) it.return();} finally {if (didErr) throw err;}} };}function _unsupportedIterableToArray(o, minLen) {if (!o) return;if (typeof o === "string") return _arrayLikeToArray(o, minLen);var n = Object.prototype.toString.call(o).slice(8, -1);if (n === "Object" && o.constructor) n = o.constructor.name;if (n === "Map" || n === "Set") return Array.from(o);if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);}function _arrayLikeToArray(arr, len) {if (len == null || len > arr.length) len = arr.length;for (var i = 0, arr2 = new Array(len); i < len; i++) {arr2[i] = arr[i];}return arr2;}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}var __newsPublish = {
-  imgSelector: function imgSelector() {
-    this.$api.imgHandle.imgSelector.call(this);
-  },
-
-  imgRemove: function imgRemove(index) {
-    this.$api.imgHandle.removeCurrentImg.call(this);
-  },
-
-  newsPublishHandle: function newsPublishHandle() {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var _iterator, _step, img, newImg, uploadData, data;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:if (!(
-
-              _this.newsTextContent.trim().length === 0)) {_context.next = 2;break;}return _context.abrupt("return",
-              uni.showToast({
-                title: '空空如也~',
-                icon: 'none' }));case 2:
-
-
-              uni.showLoading({
-                title: '正在发布中' });
-
-              // 上传图片
-              _iterator = _createForOfIteratorHelper(_this.imgList);_context.prev = 4;_iterator.s();case 6:if ((_step = _iterator.n()).done) {_context.next = 14;break;}img = _step.value;_context.next = 10;return (
-                _this.$http.upLoadFile(img.url));case 10:newImg = _context.sent;
-              _this.$set(img, 'url', newImg);case 12:_context.next = 6;break;case 14:_context.next = 19;break;case 16:_context.prev = 16;_context.t0 = _context["catch"](4);_iterator.e(_context.t0);case 19:_context.prev = 19;_iterator.f();return _context.finish(19);case 22:
-
-              // 定义data
-              uploadData = {
-                anonymousStatus: _this.newsAnonymous ? 1 : 0,
-                content: _this.newsTextContent,
-                images: _this.imgList };
-
-
-              // 发送请求
-              _context.next = 25;return _this.$http.request({
-                url: '/dynamicState/pushDynamic',
-                method: 'POST',
-                data: uploadData });case 25:data = _context.sent;
-
-
-              // 清空数据
-              _this.newsTextContent = '';
-              _this.imgList = [];
-              _this.newsAnonymous = false;
-
-              // 发布成功
-              uni.hideLoading();
-              if (data.data.code === 200) {
-                _this.show = false;
-                setTimeout(function () {
-                  uni.showToast({
-                    title: '发布成功',
-                    icon: 'none',
-                    duration: 1000 });
-
-                }, 200);
-              }case 31:case "end":return _context.stop();}}}, _callee, null, [[4, 16, 19, 22]]);}))();
-  } };exports.__newsPublish = __newsPublish;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
@@ -12090,6 +12090,13 @@ var ImgHandle = /*#__PURE__*/function () {
     // 移除点击的图片
   }, { key: "removeCurrentImg", value: function removeCurrentImg(index) {
       this.imgList.splice(index, 1);
+    }
+    // 预览图片
+  }, { key: "imgPreview", value: function imgPreview(url, urls) {
+      uni.previewImage({
+        current: url,
+        urls: urls });
+
     } }]);return ImgHandle;}();var
 
 
