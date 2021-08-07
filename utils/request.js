@@ -63,7 +63,7 @@ class Http {
 		return new Promise((resolve, reject) => {
 			const token = get('token');
 			uni.uploadFile({
-				url: BASE_URL + '/tencent/oss/uploadFiles',
+				url: CUR_BASE_URL + '/tencent/oss/uploadFiles',
 				filePath: filePath,
 				name: 'file',
 				success: (res) => {
@@ -91,7 +91,8 @@ class Http {
 				fail: (err) => {
 					console.log(err);
 					uni.showToast({
-						title: '请求接口失败'
+						title: '请求接口失败',
+						icon: 'none'
 					})
 					reject(err);
 				}

@@ -12,7 +12,7 @@
 				</view>
 				<!-- 列表 -->
 				<card type="comment" v-for="item in newsCommentList" :key="item.id" :commentdata="item"></card>
-				<view class="bg-white" style="height: 80rpx;"></view>
+				<view class="bg-white" style="height: 100rpx;"></view>
 			</view>
 			<view class="" style="height: 100rpx;"></view>
 		</scroll-view>

@@ -18,7 +18,7 @@
 						<!-- 文字信息 -->
 						<view class="padding"> 
 							<u-input type="textarea" maxlength="140" height="500"
-								:custom-style="{ background: 'white' }" placeholder="很高兴认识你~">
+								:custom-style="{ background: 'white' }" placeholder="很高兴认识你~" v-model="newsTextContent">
 							</u-input>
 						</view>
 						<view class="padding-top-xs" style="background-color: #F5F5F5;"></view>
@@ -27,10 +27,13 @@
 							<scroll-view :scroll-x="true" >
 								<view class="flex imgBox">
 									<view class="imgBox-item" v-for="(item, index) in imgList" :key="index">
-										<image :src="item.url" mode="aspectFill" class="imgBox-img"></image>
+										<image :src="item.url" mode="aspectFill" class="imgBox-img" @click="imgRemove(index)"></image>
 									</view>
 									<view class="imgBox-item">
-										<image src="/static/Img/addImg.png" mode="aspectFill" class="imgBox-img"></image>
+										<!-- 添加图片 -->
+										<image src="/static/Img/addImg.png" mode="aspectFill" class="imgBox-img" 
+													@click="imgSelector" v-if="imgList.length < 9">
+										</image>
 									</view>
 								</view>
 							</scroll-view>
@@ -39,16 +42,16 @@
 						<!-- 匿名 -->
 						<view class="flex padding-tb-sm padding-lr align-center justify-between">
 							<text>面具</text>
-							<u-switch v-model="checked"></u-switch>
+							<u-switch v-model="newsAnonymous"></u-switch>
 						</view>
 						<view class="padding-top-xs" style="background-color: #F5F5F5;"></view>
 						<!-- 提交按钮 -->
 						<view class="flex justify-center padding-top-xl">
-							<u-button size="medium" type="primary">发布</u-button>
+							<u-button size="medium" type="primary" @click="newsPublishHandle">发布</u-button>
 						</view>
 				</scroll-view>
 				<!--
-					回复功能
+					回复部分
 				 -->
 				<scroll-view scroll-y="true" :style="{ height: `calc(100% - ${ CustomBar }px)`} " v-if="type === 'reply' && commentInfo">
 					<view class="">
@@ -66,6 +69,7 @@
 </template>
 
 <script>
+import { __newsPublish } from './newsPublish.js';
 export default {
 	name: 'pop',
 	props: {
@@ -78,45 +82,30 @@ export default {
 	},
 	data() {
 		return {
+			/* 
+					评论相关的数据
+			 */
 			//评论信息
 			commentInfo: null,
 			// 评论回复列表
 			replyList: null,
-			// 发布时的选择匿名按钮
-			checked: false,
 			// 弹框的显示
 			show: false,
 			StatusBar: this.StatusBar,
 			CustomBar: this.CustomBar,
-			props: {
-				type: {
-					type: String
-				}
-			},
-			// 发布时的图片选择
-			imgList: [
-				{
-					url: 'https://image.sapce.club/common/1623820732138714505.jpg',
-				},
-				{
-					url: 'https://image.sapce.club/common/1623820567807803537.jpg',
-				},
-				{
-					url: 'https://image.sapce.club/common/1623817461535790285.jpg',
-				},
-				{
-					url: 'https://image.sapce.club/common/1623820798277584078.jpg',
-				},
-				{
-					url: 'https://image.sapce.club/common/1623820734980753560.jpg',
-				},
-				{
-					url: 'https://image.sapce.club/common/1623820687514623626.jpg',
-				},
-			],
+			/* 
+					动态相关的数据
+			 */
+			// 发布时的选择匿名按钮
+			newsAnonymous: false,
+			// 文本信息
+			newsTextContent: '',
+			// 发布时的图片列表
+			imgList: [],
 		}
 	},
 	methods: {
+		...__newsPublish,
 		// 控制pop的显示
 		popUpChange() {
 			this.show = !this.show;

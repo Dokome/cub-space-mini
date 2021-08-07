@@ -6,7 +6,7 @@ class ImgHandle {
 	//多图模式
 	multiImgShow(imgList = [], options = {}) {
 		let singleImg = '';
-		let BASE = options.isComment ? 240 : 360;
+		let BASE = options.isComment ? 300 : 540;
 		//单图特殊格式
 		if (imgList.length === 1) {
 			//定义宽高
@@ -19,7 +19,7 @@ class ImgHandle {
 					singleImg = `height: ${BASE / 3}rpx; width: ${BASE}rpx `;
 				} else {
 					// 正常范围
-					singleImg = `height: ${ BASE * scale }rpx; width: ${BASE}rpx `;
+					singleImg = `height: ${ BASE / scale }rpx; width: ${BASE}rpx `;
 				}
 			} else {
 				// 高图
@@ -34,7 +34,36 @@ class ImgHandle {
 		//返回对应css类
 		return singleImg || `img_${ imgList.length }`;
 	}
-	
+	// 图片选择
+	imgSelector(options = {}) {
+		let count = 9 - this.imgList.length;
+		uni.chooseImage({
+			count: count,
+			sizeType: "compressed",
+			success: (res) => {
+				let tempImgList = res.tempFilePaths;
+				for (let i = 0; i < res.tempFilePaths.length; i++) {
+					uni.getImageInfo({
+						src: tempImgList[i],
+						success: (res) => {
+							tempImgList[i] = {
+								url: tempImgList[i],
+								width: res.width,
+								height: res.height
+							}
+						}
+					});
+				}
+				setTimeout(() => {
+					this.imgList = this.imgList.concat(tempImgList);
+				}, 500)
+			}
+		});
+	}
+	// 移除点击的图片
+	removeCurrentImg(index) {
+		this.imgList.splice(index, 1);
+	}
 }
 	
 class RouterHandle {
