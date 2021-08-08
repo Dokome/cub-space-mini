@@ -7,22 +7,22 @@
 			</image>
 		</view>
 		<!-- 输入框 -->
-		 <textarea value=""  @focus="InputFocus" @blur="InputBlur" :show-confirm-bar="false"
-							auto-height class="textarea" :adjust-position="false" placeholder="爱国、友善、文明"
+		 <textarea v-model="inputContent"  @focus="InputFocus" @blur="InputBlur" :show-confirm-bar="false"
+							auto-height class="textarea" :adjust-position="false" :placeholder="inputPlaceHolder"
 							 maxlength="200" :fixed="true"/>
 		<!-- 发送 -->
 		<view>
-			<u-button type="primary" size="mini">发送</u-button>
+			<u-button type="primary" size="mini" @click="publishHandle">发送</u-button>
 		</view>
 		<!-- 图片框 -->
 		<view class="imgchoose padding-xs shadow-top" v-show="ifImgChoose" style="transition: .2s;">
 			<scroll-view :scroll-x="true" >
 				<view class="flex imgBox">
-					<view class="imgBox-item" v-for="item in imgList" v-if="item">
-						<image :src="item.url" mode="aspectFill" class="imgBox-img"></image>
+					<view class="imgBox-item" v-for="(item, index) in imgList" v-if="item" :key="index">
+						<image :src="item.url" mode="aspectFill" class="imgBox-img" @click="imgRemove(index)"></image>
 					</view>
-					<view class="imgBox-item">
-						<image src="/static/Img/addImg.png" mode="aspectFill" class="imgBox-img"></image>
+					<view class="imgBox-item" v-if="imgList && imgList.length < 9">
+						<image src="/static/Img/addImg.png" mode="aspectFill" class="imgBox-img" @click="imgSelector"></image>
 					</view>
 				</view>
 			</scroll-view>
@@ -31,51 +31,57 @@
 </template>
 
 <script>
+	import { __textInput } from './textInput.js';
 	export default {
 		name:"textInput",
+		props: {
+			type: {
+				type: String, 
+				default() {
+					return 'news';
+				}
+			},
+			target: {
+				type: Object,
+				default() {
+					return {};
+				}
+			}
+		},
 		data() {
 			return {
 				ViewPart: this.ViewPart,
 				InputBottom: 0,
+				// 输入内容
+				inputContent: '', 
+				// 是否处于输入状态
 				ifImgChoose: false,
-				imgList: [
-					{
-						url: 'https://image.sapce.club/common/1623820732138714505.jpg',
-					},
-					{
-						url: 'https://image.sapce.club/common/1623820567807803537.jpg',
-					},
-					{
-						url: 'https://image.sapce.club/common/1623817461535790285.jpg',
-					},
-					{
-						url: 'https://image.sapce.club/common/1623820798277584078.jpg',
-					},
-					{
-						url: 'https://image.sapce.club/common/1623820734980753560.jpg',
-					},
-					{
-						url: 'https://image.sapce.club/common/1623820687514623626.jpg',
-					},
-				],
+				// 输入图片
+				imgList: [] 
 			};
 		},
 		computed: {
 			imgStyle() {
 				return this.$api.imgHandle.multiImgShow.call(this);
+			},
+			inputPlaceHolder() {
+				if (this.type === 'comment' || this.type === 'news') {
+					return "爱国、友善、文明";
+				} else if (this.type === 'reply') {
+					return "回复 " + this.target.nickName + ':';
+				}
+			}
+		},
+		watch: {
+			type(val) {
+				this.clearCurrentInfo();
 			}
 		},
 		methods: {
-			InputFocus(e) {
-				this.InputBottom = e.detail.height;
-				this.ifImgChoose = false;
-			},
-			InputBlur(e) {
-				this.InputBottom = 0;
-			},
-			ImgChooseHandle() {
-				this.ifImgChoose = !this.ifImgChoose;
-			}
+			...__textInput,
+		},
+		onLoad() {
+
 		}
 	}
 </script>

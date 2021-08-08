@@ -1,5 +1,5 @@
 <template>
-	<view class="u-load-more-wrap" :style="{
+	<view class="u-load-more-wrap padding-tb-lg" :style="{
 		backgroundColor: bgColor,
 		marginBottom: marginBottom + 'rpx',
 		marginTop: marginTop + 'rpx',

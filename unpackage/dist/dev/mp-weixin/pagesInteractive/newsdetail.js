@@ -97,16 +97,19 @@ try {
       return __webpack_require__.e(/*! import() | components/navbar/navbar */ "components/navbar/navbar").then(__webpack_require__.bind(null, /*! @/components/navbar/navbar.vue */ 167))
     },
     card: function() {
-      return __webpack_require__.e(/*! import() | components/card/card */ "components/card/card").then(__webpack_require__.bind(null, /*! @/components/card/card.vue */ 188))
+      return Promise.all(/*! import() | components/card/card */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/card/card")]).then(__webpack_require__.bind(null, /*! @/components/card/card.vue */ 188))
+    },
+    uLoadmore: function() {
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-loadmore/u-loadmore */ "uview-ui/components/u-loadmore/u-loadmore").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-loadmore/u-loadmore.vue */ 196))
     },
     pop: function() {
-      return Promise.all(/*! import() | components/pop/pop */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/pop/pop")]).then(__webpack_require__.bind(null, /*! @/components/pop/pop.vue */ 207))
+      return Promise.all(/*! import() | components/pop/pop */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/pop/pop")]).then(__webpack_require__.bind(null, /*! @/components/pop/pop.vue */ 210))
     },
     textInput: function() {
-      return __webpack_require__.e(/*! import() | components/textInput/textInput */ "components/textInput/textInput").then(__webpack_require__.bind(null, /*! @/components/textInput/textInput.vue */ 256))
+      return Promise.all(/*! import() | components/textInput/textInput */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/textInput/textInput")]).then(__webpack_require__.bind(null, /*! @/components/textInput/textInput.vue */ 259))
     },
     loading: function() {
-      return __webpack_require__.e(/*! import() | components/loading/loading */ "components/loading/loading").then(__webpack_require__.bind(null, /*! @/components/loading/loading.vue */ 215))
+      return __webpack_require__.e(/*! import() | components/loading/loading */ "components/loading/loading").then(__webpack_require__.bind(null, /*! @/components/loading/loading.vue */ 218))
     }
   }
 } catch (e) {
@@ -163,7 +166,12 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 21));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};} //
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 21));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};} //
+//
+//
+//
+//
+//
 //
 //
 //
@@ -198,25 +206,17 @@ var _default =
       newsDetail: null,
       // 回复列表
       newsCommentList: null,
-      imgList: [
-      {
-        url: 'https://image.sapce.club/common/1623820732138714505.jpg' },
-
-      {
-        url: 'https://image.sapce.club/common/1623820567807803537.jpg' },
-
-      {
-        url: 'https://image.sapce.club/common/1623817461535790285.jpg' },
-
-      {
-        url: 'https://image.sapce.club/common/1623820798277584078.jpg' },
-
-      {
-        url: 'https://image.sapce.club/common/1623820734980753560.jpg' },
-
-      {
-        url: 'https://image.sapce.club/common/1623820687514623626.jpg' }] };
-
+      // 输入框的状态
+      inputType: 'news',
+      // 当前回复的对象 news/comment/reply
+      currentTarget: {},
+      // loadmore 组件
+      loadStatus: new Array(3).fill('loadmore'),
+      // 举报文字
+      loadText: {
+        loadmore: '上拉加载更多',
+        loading: '努力加载ing...',
+        nomore: '没有更多了~' } };
 
 
   },
@@ -238,10 +238,11 @@ var _default =
 
                 result = data.data.data;
                 _this.newsDetail = result;
+                _this.currentTarget = result;
                 _this.$forceUpdate();
                 setTimeout(function () {
                   _this.ifLoaddingShow = false;
-                }, 500);case 7:case "end":return _context.stop();}}}, _callee);}))();
+                }, 800);case 8:case "end":return _context.stop();}}}, _callee);}))();
     },
     // 查询动态评论
     getNewComment: function getNewComment(options) {var _this2 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee2() {var data, result;return _regenerator.default.wrap(function _callee2$(_context2) {while (1) {switch (_context2.prev = _context2.next) {case 0:_context2.next = 2;return (
@@ -250,7 +251,7 @@ var _default =
                     method: 'POST',
                     data: {
                       pageNum: 1,
-                      pageSize: 100,
+                      pageSize: 8,
                       parmas: {
                         dynamicId: options.id } },
 
@@ -258,14 +259,36 @@ var _default =
                     noToken: options.noToken }));case 2:data = _context2.sent;
 
                 result = data.data.data;
-                _this2.newsCommentList = result.list;
-                _this2.$forceUpdate();case 6:case "end":return _context2.stop();}}}, _callee2);}))();
+                _this2.newsCommentList = result.list;case 5:case "end":return _context2.stop();}}}, _callee2);}))();
     } },
 
-  onLoad: function onLoad(options) {
+  onLoad: function onLoad(options) {var _this3 = this;
     this.getNewsInfo({ id: options.id, noToken: true });
     this.getNewComment({ id: options.id, noToken: true });
+    // 注销之前的监听器
+    uni.$off('inputStatusChange');
+    uni.$off('changeStateBackNew');
+    uni.$off('updateCurrentInfo');
+    // 回复对象转化
+    uni.$on('inputStatusChange', function (options) {
+      _this3.inputType = options.type;
+      _this3.currentTarget = options.data;
+      uni.$emit('clearInputData', '');
+    });
+    // 重新变为回复动态
+    uni.$on('changeStateBackNew', function () {
+      _this3.inputType = 'news';
+      _this3.currentTarget = _this3.newsDetail;
+      uni.$emit('clearInputData', '');
+    });
+    // 更新互动后的信息
+    uni.$on('updateCurrentInfo', function () {
+      _this3.inputType = 'news';
+      _this3.currentTarget = _this3.newsDetail;
+      _this3.getNewComment({ id: options.id, noToken: true, delay: 100 });
+    });
   } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ })
 

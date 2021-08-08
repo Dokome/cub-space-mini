@@ -12,6 +12,15 @@ const __listDataAddHandle = function(list, map, isGetNew = false) {
 	}) 
 }	
 	
+const __listDataDeleteHandle = function(id) {
+	for (let i = 0; i < this.newsDataList.length; i++) {
+		if (!this.newsDataList[i]) continue;
+		this.newsDataList[i].delete(id);
+		this.$forceUpdate();
+	}
+}	
+	
+	
 export const __getIndexData = {
 	// 获取广场页数据
 	async getNewsData(options = {}) {
@@ -75,6 +84,10 @@ export const __getIndexData = {
 			},
 			noToken: options.noToken
 		});
-		console.log(data);
+	},
+	
+	// 删除数据
+	deleteData(id) {
+		__listDataDeleteHandle.call(this, id);
 	}
 }

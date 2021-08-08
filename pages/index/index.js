@@ -44,5 +44,17 @@ export const __indexMethods = {
 	//滑到页面的最下部分
 	scrollToBottom(index) {
 		this.getNewsData({ noToken: true , tab: index });
+	},
+	// 获取举报列表
+	async getReportList(options) {
+		const data = await this.$http.request({
+			url: '/sysCode/getDictByKey',
+			method: 'POST',
+			data: {
+				key: 'report'
+			},
+			noToken: options.noToken
+		});
+		this.reportInfoList = data.data.data;
 	}
 }

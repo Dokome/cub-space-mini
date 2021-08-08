@@ -1,12 +1,16 @@
 <template>
 	<!-- :class="{ 'margin-top-xs': type === 'news' }" -->
-	<view class="bg-white padding u-border-top" style="width: 100%;">
+	<view class="bg-white padding u-border-top" style="width: 100%;" >
 		<!--
 			动态
 		 -->
 		<view class="" v-if="type === 'news'">
 			<!-- 动态、作者信息 -->
-			<view class="flex">
+			<view class="flex" style="position: relative;">
+				<!-- 操作框(三个点) -->
+				<view class="text-lg moreOptions" @click.stop="moreOptions">
+					. . .
+				</view>
 				<!-- 头像 -->
 				<view class="margin-top-xs"><u-avatar size="60" :src="newsdata.avatarUrl"></u-avatar></view>
 				<!-- 文字信息 -->
@@ -46,11 +50,28 @@
 					<text class="margin-left-xs text-sm">{{ newsdata.likeNum }}</text>
 				</view>
 			</view>
+			<!-- 模态框 -->
+				<!-- 更多 -->
+			<u-modal v-model="modalShow" :show-confirm-button="false" :mask-close-able="true" :show-title="false">
+						<view class="flex flex-direction" @click="moreOptionsClick(newsdata, $event)">
+							<view class="padding" data-type="delete" v-if="!newsdata.btnStatus">删除</view>
+							<view class="padding u-border-top" data-type="report">举报</view>
+						</view>
+			</u-modal>
+				<!-- 举报 -->
+			<u-modal v-model="reportModalShow" :show-confirm-button="false" :mask-close-able="true" :show-title="false">
+						<view class="flex flex-direction">
+							<view class="padding" v-for="item in reportInfoList" 
+								:key="item.id" @click="dataReport(item.value)">{{ item.value }}
+							</view>
+						</view>
+			</u-modal>
 		</view>
 		<!-- 
 			回复类型
 		 -->
-		<view class="" v-if="type === 'reply' || type === 'comment'" @click="type === 'comment' && replyHandle(commentdata)">
+		<view class="" v-if="type === 'reply' || type === 'comment'" 
+			@click="replyHandle(commentdata)">
 			<view class="flex bg-white wmax">
 				<!-- 头像 -->
 				<view class="" style="width: 65rpx;"><u-avatar size="60" :src="commentdata.avatarUrl"></u-avatar></view>
@@ -58,7 +79,10 @@
 				<view class="padding-left-xs flex-sub flex flex-direction" style="margin-top: -10rpx;">
 					<!-- 名称、下标 -->
 					<view class="flex flex-direction">
-						<text class="text-sm text-black text-bold">{{ commentdata.nickName }}</text>
+						<text class="text-sm text-black text-bold">
+							{{ commentdata.nickName }}
+							<text class="text-blue text-bold" v-if="commentdata.isAuthor">{{ '[作者]' }}</text>
+						</text>
 						<text class="u-tips-color text-sm">{{ commentdata.schoolName }}</text>
 					</view>
 					<!-- 正文 -->
@@ -66,7 +90,10 @@
 						<view class="clamp3 text-black text-content">
 							<text v-if="type === 'reply' && commentdata.commentType == 2">
 								<text>回复</text>
-								<text class="margin-lr-xs text-blue">{{ commentdata.parentCommentUserNickName }}:</text>
+								<text class="margin-lr-xs text-blue">
+									<text>{{ commentdata.parentCommentUserNickName }}</text>
+									<!-- <text class="text-blue text-bold">{{ '[作者]' }}</text>:	 -->
+									</text>
 							</text>
 							<text>{{ commentdata.content }}</text>
 						</view>
@@ -87,7 +114,10 @@
 					>
 						<view class="wmax">
 							<view class="clamp1">
-								<text style="color: #666;">{{ commentdata.childCommentList[0].nickName }}</text>
+								<text style="color: #666;">
+									{{ commentdata.childCommentList[0].nickName }}
+									<!-- <text class="text-blue text-bold" v-if="commentdata.isAuthor">{{ '[作者]' }}</text> -->
+								</text>
 								:
 								<text class="margin-left-xs" style="color: #666;">{{ commentdata.childCommentList[0].content }}</text>
 							</view>
@@ -115,11 +145,16 @@
 </template>
 
 <script>
+import { __moreOptionsHandle } from './moreOptions.js';
 export default {
 	name: 'card',
 	data() {
 		return {
-			singleImg: null
+			singleImg: null,
+			// 模态框的显示
+			modalShow: false,
+			// 举报框的显示
+			reportModalShow: false
 		};
 	},
 	computed: {
@@ -131,17 +166,25 @@ export default {
 		}
 	},
 	mounted() {
+		// this.getReportList();
 		this.$forceUpdate();
 	},
 	methods: {
-		// 回复评论
+		...__moreOptionsHandle,
+		// 回复评论打开
 		replyHandle(commentData) {
-			uni.$emit('repylChange', { type: 'comment', data: commentData });
+			// 
+			if (this.enterStateComment) {
+				uni.$emit('inputStatusChange', { type: this.type, data: commentData });
+			} else if (this.type === 'comment' && !this.enterStateComment) {
+				uni.$emit('repylChange', { type: 'comment', data: commentData });
+				uni.$emit('inputStatusChange', { type: this.type, data: commentData });
+			}
 		},
 		// 图片预览
 		imgPrview(url, imgList) {
 			this.$api.imgHandle.imgPreview(url, imgList && imgList.map(item => item.url));
-		}
+		},
 	},
 	props: {
 		newsdata: {
@@ -173,9 +216,25 @@ export default {
 			default() {
 				return false;
 			}
+		},
+		reportInfoList: {
+			type: Array,
+			default() {
+				return [];
+			}
 		}
+	},
+	onLoad() {
+
 	}
 };
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+	.moreOptions {
+		position: absolute;
+		right: 0;
+		top: 0;
+		z-index: 999;
+	}
+</style>

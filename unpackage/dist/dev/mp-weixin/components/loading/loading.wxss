@@ -3,10 +3,9 @@
   background-color: #fff;
   position: absolute;
   width: 100vw;
-  height: 100vh;
   left: 0;
-  top: 0;
-  z-index: 100;
+  bottom: 0;
+  z-index: 9999999999999;
 }
 .blockWrapper.data-v-e4cdeb04 {
   position: relative;

@@ -1,5 +1,5 @@
 <template>
-	<view class="outWrapper flex align-center justify-center">
+	<view class="outWrapper flex align-center justify-center" :style="{ height: height }">
 		<view class="blockWrapper flex flex-direction">
 			<!--   ⚪ -->
 			<view class="flex-sub flex justify-center align-end" style="width: 120%;">
@@ -19,6 +19,14 @@
 <script>
 	export default {
 		name:"loading",
+		props: {
+			height: {
+				type: String,
+				default() {
+					return '100vh';
+				}
+			}
+		},
 		data() {
 			return {
 				ifNeedLoadIng: false
@@ -32,10 +40,9 @@
 		background-color: #fff;
 		position: absolute;
 		width: 100vw;
-		height: 100vh;
 		left: 0;
-		top: 0;
-		z-index: 100;
+		bottom: 0;
+		z-index: 9999999999999;
 	}
 	
 	.blockWrapper {

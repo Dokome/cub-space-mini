@@ -12,13 +12,18 @@
 				</view>
 				<!-- 列表 -->
 				<card type="comment" v-for="item in newsCommentList" :key="item.id" :commentdata="item"></card>
+				<u-loadmore
+					:status="loadStatus"
+					:load-text="loadText"
+					:bg-color="'#ffffff'"
+				></u-loadmore>
 				<view class="bg-white" style="height: 100rpx;"></view>
 			</view>
 			<view class="" style="height: 100rpx;"></view>
 		</scroll-view>
 		<!-- 回复 -->
 		<pop type="reply"></pop>
-		<textInput></textInput>
+		<textInput :type="inputType" :target="currentTarget"></textInput>
 		<loading v-if="ifLoaddingShow"></loading>
 	</view>
 </template>
@@ -33,26 +38,18 @@ export default {
 			newsDetail: null,
 			// 回复列表
 			newsCommentList: null,
-			imgList: [
-				{
-					url: 'https://image.sapce.club/common/1623820732138714505.jpg'
-				},
-				{
-					url: 'https://image.sapce.club/common/1623820567807803537.jpg'
-				},
-				{
-					url: 'https://image.sapce.club/common/1623817461535790285.jpg'
-				},
-				{
-					url: 'https://image.sapce.club/common/1623820798277584078.jpg'
-				},
-				{
-					url: 'https://image.sapce.club/common/1623820734980753560.jpg'
-				},
-				{
-					url: 'https://image.sapce.club/common/1623820687514623626.jpg'
-				}
-			]
+			// 输入框的状态
+			inputType: 'news',
+			// 当前回复的对象 news/comment/reply
+			currentTarget: {},
+			// loadmore 组件
+			loadStatus: new Array(3).fill('loadmore'),
+			// 举报文字
+			loadText: {
+				loadmore: '上拉加载更多',
+				loading: '努力加载ing...',
+				nomore: '没有更多了~'
+			},
 		};
 	},
 	computed: {
@@ -73,10 +70,11 @@ export default {
 			});
 			const result = data.data.data;
 			this.newsDetail = result;
+			this.currentTarget = result;
 			this.$forceUpdate();
 			setTimeout(() => {
 				this.ifLoaddingShow = false;
-			}, 500);
+			}, 800);
 		},
 		// 查询动态评论
 		async getNewComment(options) {
@@ -85,7 +83,7 @@ export default {
 				method: 'POST',
 				data: {
 					pageNum: 1,
-					pageSize: 100,
+					pageSize: 8,
 					parmas: {
 						dynamicId: options.id
 					}
@@ -94,12 +92,33 @@ export default {
 			});
 			const result = data.data.data;
 			this.newsCommentList = result.list;
-			this.$forceUpdate();
 		}
 	},
 	onLoad(options) {
 		this.getNewsInfo({ id: options.id, noToken: true });
 		this.getNewComment({ id: options.id, noToken: true });
+		// 注销之前的监听器
+		uni.$off('inputStatusChange');
+		uni.$off('changeStateBackNew');
+		uni.$off('updateCurrentInfo');
+		// 回复对象转化
+		uni.$on('inputStatusChange', (options) => {
+			this.inputType = options.type;
+			this.currentTarget = options.data;
+			uni.$emit('clearInputData', '');
+		});
+		// 重新变为回复动态
+		uni.$on('changeStateBackNew', () => {
+			this.inputType = 'news';
+			this.currentTarget = this.newsDetail;
+			uni.$emit('clearInputData', '');
+		});
+		// 更新互动后的信息
+		uni.$on('updateCurrentInfo', () => {
+			this.inputType = 'news';
+			this.currentTarget = this.newsDetail;
+			this.getNewComment({ id: options.id, noToken: true, delay: 100});
+		});
 	}
 };
 </script>

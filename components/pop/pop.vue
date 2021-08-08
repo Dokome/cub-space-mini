@@ -1,8 +1,8 @@
 <template>
 	<view class="">
 		<u-popup mode="bottom" v-model="show" :closeable="true" close-icon-pos="top-left"
-			:custom-style="{ zIndex: '88' }">
-			<view class="content" style="height: 100vh;">
+			:custom-style="{ zIndex: '88' }" border-radius="15">
+			<view class="content" :style="{ height: type === 'publish' ? '100vh' : '85vh'}">
 				<view class="flex justify-center align-center text-bold text-black"
 				:style="[
 						{ height: CustomBar + 'px' },
@@ -54,6 +54,7 @@
 					回复部分
 				 -->
 				<scroll-view scroll-y="true" :style="{ height: `calc(100% - ${ CustomBar }px)`} " v-if="type === 'reply' && commentInfo">
+					<loading v-if="ifLoadingShow" :height="`calc(100% - 0px)`"></loading>
 					<view class="">
 						<card type="comment" :enterStateComment="true" :commentdata="commentInfo"></card>
 						<view class="bg-white margin-top-xs padding">
@@ -82,6 +83,8 @@ export default {
 	},
 	data() {
 		return {
+			// 
+			ifLoadingShow: false,
 			/* 
 					评论相关的数据
 			 */
@@ -109,20 +112,40 @@ export default {
 		// 控制pop的显示
 		popUpChange() {
 			this.show = !this.show;
+		},
+		// 更新列表内的消息
+		async updateReplyList(id) {
+			const data = await this.$http.request({
+				url: '/dynamicComment/selectRootComment',
+				method: 'POST',
+				data: {
+					rootCommentId: id
+				},
+				delay: 300
+			});
+			this.replyList = data.data.data.childCommentList;
+			this.$forceUpdate();
+			setTimeout(() => {
+				this.ifLoadingShow = false;
+			}, 200)
 		}
 	},
 	mounted() {
 		// 先把其他页面的时间全部注销
 		uni.$off('repylChange');
 		uni.$off('popUpChange');
+		uni.$off('updatePopCurrentInfo');
 		//弹起下落(发布)
 		uni.$on('popUpChange', (status) => {
 			this.popUpChange();
 		});
 		uni.$on('repylChange', (options) => {
+			if (!options.popDontChange) {
+				this.ifLoadingShow = true;
+				this.popUpChange();
+			}
 			this.commentInfo = options.data;
-			this.replyList = this.commentInfo.childCommentList;
-			this.popUpChange();
+			this.updateReplyList(options.data.id);
 		});
 	},
 	computed: {
@@ -132,6 +155,14 @@ export default {
 				return '发布'
 			} else {
 				return this.type === 'login' ? '登录' : '回复';
+			}
+		}
+	},
+	watch: {
+		show(state) {
+			if (!state && this.type === 'reply') {
+				// 回复状态转化为回复动态
+				uni.$emit('changeStateBackNew')
 			}
 		}
 	}

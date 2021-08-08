@@ -105,19 +105,19 @@ try {
       return __webpack_require__.e(/*! import() | uview-ui/components/u-swiper/u-swiper */ "uview-ui/components/u-swiper/u-swiper").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-swiper/u-swiper.vue */ 181))
     },
     card: function() {
-      return __webpack_require__.e(/*! import() | components/card/card */ "components/card/card").then(__webpack_require__.bind(null, /*! @/components/card/card.vue */ 188))
+      return Promise.all(/*! import() | components/card/card */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/card/card")]).then(__webpack_require__.bind(null, /*! @/components/card/card.vue */ 188))
     },
     uLoadmore: function() {
-      return __webpack_require__.e(/*! import() | uview-ui/components/u-loadmore/u-loadmore */ "uview-ui/components/u-loadmore/u-loadmore").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-loadmore/u-loadmore.vue */ 193))
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-loadmore/u-loadmore */ "uview-ui/components/u-loadmore/u-loadmore").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-loadmore/u-loadmore.vue */ 196))
     },
     uTabbar: function() {
-      return Promise.all(/*! import() | uview-ui/components/u-tabbar/u-tabbar */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-tabbar/u-tabbar")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-tabbar/u-tabbar.vue */ 200))
+      return Promise.all(/*! import() | uview-ui/components/u-tabbar/u-tabbar */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-tabbar/u-tabbar")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-tabbar/u-tabbar.vue */ 203))
     },
     pop: function() {
-      return Promise.all(/*! import() | components/pop/pop */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/pop/pop")]).then(__webpack_require__.bind(null, /*! @/components/pop/pop.vue */ 207))
+      return Promise.all(/*! import() | components/pop/pop */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/pop/pop")]).then(__webpack_require__.bind(null, /*! @/components/pop/pop.vue */ 210))
     },
     loading: function() {
-      return __webpack_require__.e(/*! import() | components/loading/loading */ "components/loading/loading").then(__webpack_require__.bind(null, /*! @/components/loading/loading.vue */ 215))
+      return __webpack_require__.e(/*! import() | components/loading/loading */ "components/loading/loading").then(__webpack_require__.bind(null, /*! @/components/loading/loading.vue */ 218))
     }
   }
 } catch (e) {
@@ -220,7 +220,8 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+
 
 
 
@@ -349,11 +350,14 @@ var _getIndexData = __webpack_require__(/*! ./getIndexData.js */ 62);function ow
       pullDownY1: undefined,
       // loadmore 组件
       loadStatus: new Array(3).fill('loadmore'),
+      // 举报文字
       loadText: {
         loadmore: '上拉加载更多',
         loading: '努力加载ing...',
-        nomore: '没有更多了~' } };
+        nomore: '没有更多了~' },
 
+      // 举报信息列表
+      reportInfoList: [] };
 
   },
   methods: _objectSpread(_objectSpread({},
@@ -369,6 +373,7 @@ var _getIndexData = __webpack_require__(/*! ./getIndexData.js */ 62);function ow
   created: function created() {
     this.getNewsData({ noToken: true, tab: 1 });
     this.getHotList({ noToken: true, type: 1 });
+    this.getReportList({ noToken: true });
   },
   watch: {
     current: function current(val) {
@@ -384,7 +389,13 @@ var _getIndexData = __webpack_require__(/*! ./getIndexData.js */ 62);function ow
   // 下拉刷新
   onPullDownRefresh: function onPullDownRefresh() {
     this.getNewsData({ noToken: true, tab: this.current, isGetNew: true });
+  },
+  onLoad: function onLoad() {var _this = this;
+    uni.$on('deleteData', function (id) {
+      _this.deleteData(id);
+    });
   } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 

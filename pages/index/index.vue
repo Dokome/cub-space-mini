@@ -49,7 +49,8 @@
 						</view>
 						<!-- 动态数据 -->
 						<view v-if="newsDataList[index]">
-							<card v-for="item of getNewsMapData(index)" :key="item.id" @click.native="enterDetail(item.id)" :newsdata="{ ...item }"></card>
+							<card v-for="item of getNewsMapData(index)" :key="item.id" :reportInfoList="reportInfoList"
+							@click.native="enterDetail(item.id)" :newsdata="{ ...item }"></card>
 							<u-loadmore
 								:status="loadStatus[index]"
 								marginTop="40"
@@ -127,11 +128,14 @@ export default {
 			pullDownY1: undefined,
 			// loadmore 组件
 			loadStatus: new Array(3).fill('loadmore'),
+			// 举报文字
 			loadText: {
 				loadmore: '上拉加载更多',
 				loading: '努力加载ing...',
 				nomore: '没有更多了~'
-			}
+			},
+			// 举报信息列表
+			reportInfoList: []
 		};
 	},
 	methods: {
@@ -147,6 +151,7 @@ export default {
 	created() {
 		this.getNewsData({ noToken: true, tab: 1 });
 		this.getHotList({ noToken: true, type: 1 });
+		this.getReportList({ noToken: true });
 	},
 	watch: {
 		current(val) {
@@ -162,6 +167,11 @@ export default {
 	// 下拉刷新
 	onPullDownRefresh() {
 		this.getNewsData({ noToken: true, tab: this.current, isGetNew: true });
+	},
+	onLoad() {
+		uni.$on('deleteData', (id) => {
+			this.deleteData(id);
+		})
 	}
 };
 </script>

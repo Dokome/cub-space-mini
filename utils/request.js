@@ -39,6 +39,7 @@ class Http {
 				dataType: 'json',
 				success: (res) => {
 					if (res.data.code !== 200 && !options.skip) {
+						console.log(res);
 						return uni.showToast({
 							title: res.data.msg,
 							icon: "none"
@@ -52,7 +53,7 @@ class Http {
 					uni.showToast({
 						title: '请求接口失败',
 						icon: "none"
-					})
+					});
 					reject(err)
 				}
 			})

@@ -872,7 +872,7 @@ function initData(vueOptions, context) {
     try {
       data = data.call(context); // 支持 Vue.prototype 上挂的数据
     } catch (e) {
-      if (Object({"NODE_ENV":"development","VUE_APP_NAME":"cub-space-mini","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"VUE_APP_NAME":"cub-space-mini","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.warn('根据 Vue 的 data 函数初始化小程序 data 失败，请尽量确保 data 函数中不访问 vm 对象，否则可能影响首次数据渲染速度。', data);
       }
     }
@@ -2849,6 +2849,79 @@ function queryParams() {var data = arguments.length > 0 && arguments[0] !== unde
 }var _default =
 
 queryParams;exports.default = _default;
+
+/***/ }),
+
+/***/ 193:
+/*!*********************************************************************************!*\
+  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/components/card/moreOptions.js ***!
+  \*********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.__moreOptionsHandle = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 21));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}var __moreOptionsHandle = {
+  // 更多
+  moreOptions: function moreOptions() {
+    this.modalShow = true;
+  },
+  // 处理更多选项
+  moreOptionsClick: function moreOptionsClick(data, e) {
+    var type = e.target.dataset.type;
+    this.modalShow = false;
+    if (type === 'delete') {
+      this.dataDelete(data.id);
+    } else if (type === 'report') {
+      this.reportModalShow = true;
+    }
+  },
+  // 删除数据
+  dataDelete: function dataDelete(id) {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var data;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
+              uni.showLoading({
+                title: '删除中' });
+
+              // 删除请求
+              _context.next = 3;return _this.$http.request({
+                url: '/dynamicState/deleteDynamic',
+                method: 'POST',
+                data: {
+                  dynamicId: id } });case 3:data = _context.sent;
+
+
+              uni.hideLoading();
+              if (data.data.code === 200) {
+                uni.showToast({
+                  title: '删除成功~',
+                  icon: 'none' });
+
+                uni.$emit('deleteData', id);
+              } else {
+                uni.showToast({
+                  title: '删除失败',
+                  icon: 'none' });
+
+              }case 6:case "end":return _context.stop();}}}, _callee);}))();
+  },
+  // 举报文章
+  dataReport: function dataReport(reportValue) {var _this2 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee2() {var data;return _regenerator.default.wrap(function _callee2$(_context2) {while (1) {switch (_context2.prev = _context2.next) {case 0:
+              _this2.reportModalShow = false;
+              // 举报
+              _context2.next = 3;return _this2.$http.request({
+                url: '/sysReport/report',
+                method: 'POST',
+                data: {
+                  type: 1,
+                  bizId: _this2.newsdata.id,
+                  content: reportValue } });case 3:data = _context2.sent;
+
+
+              console.log(_this2.newsdata.id);
+              uni.showToast({
+                title: '举报成功!',
+                icon: 'none' });case 6:case "end":return _context2.stop();}}}, _callee2);}))();
+
+  } };exports.__moreOptionsHandle = __moreOptionsHandle;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 
@@ -8379,7 +8452,7 @@ function type(obj) {
 
 function flushCallbacks$1(vm) {
     if (vm.__next_tick_callbacks && vm.__next_tick_callbacks.length) {
-        if (Object({"NODE_ENV":"development","VUE_APP_NAME":"cub-space-mini","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
+        if (Object({"VUE_APP_NAME":"cub-space-mini","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:flushCallbacks[' + vm.__next_tick_callbacks.length + ']');
@@ -8400,14 +8473,14 @@ function nextTick$1(vm, cb) {
     //1.nextTick 之前 已 setData 且 setData 还未回调完成
     //2.nextTick 之前存在 render watcher
     if (!vm.__next_tick_pending && !hasRenderWatcher(vm)) {
-        if(Object({"NODE_ENV":"development","VUE_APP_NAME":"cub-space-mini","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"VUE_APP_NAME":"cub-space-mini","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:nextVueTick');
         }
         return nextTick(cb, vm)
     }else{
-        if(Object({"NODE_ENV":"development","VUE_APP_NAME":"cub-space-mini","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"VUE_APP_NAME":"cub-space-mini","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance$1 = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance$1.is || mpInstance$1.route) + '][' + vm._uid +
                 ']:nextMPTick');
@@ -8493,7 +8566,7 @@ var patch = function(oldVnode, vnode) {
     });
     var diffData = this.$shouldDiffData === false ? data : diff(data, mpData);
     if (Object.keys(diffData).length) {
-      if (Object({"NODE_ENV":"development","VUE_APP_NAME":"cub-space-mini","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"VUE_APP_NAME":"cub-space-mini","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + this._uid +
           ']差量更新',
           JSON.stringify(diffData));
@@ -9046,7 +9119,7 @@ module.exports = __webpack_require__(/*! regenerator-runtime */ 22);
 
 /***/ }),
 
-/***/ 212:
+/***/ 215:
 /*!********************************************************************************!*\
   !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/components/pop/newsPublish.js ***!
   \********************************************************************************/
@@ -10015,7 +10088,7 @@ timeFrom;exports.default = _default;
 
 /***/ }),
 
-/***/ 253:
+/***/ 256:
 /*!********************************************************************************!*\
   !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/uview-ui/libs/util/emitter.js ***!
   \********************************************************************************/
@@ -10216,6 +10289,82 @@ function colorToRgba(color) {var alpha = arguments.length > 1 && arguments[1] !=
   hexToRgb: hexToRgb,
   rgbToHex: rgbToHex,
   colorToRgba: colorToRgba };exports.default = _default;
+
+/***/ }),
+
+/***/ 264:
+/*!************************************************************************************!*\
+  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/components/textInput/textInput.js ***!
+  \************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.__textInput = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 21));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}var __textInput = {
+  InputFocus: function InputFocus(e) {
+    this.InputBottom = e.detail.height;
+    this.ifImgChoose = false;
+  },
+  InputBlur: function InputBlur(e) {
+    this.InputBottom = 0;
+  },
+  ImgChooseHandle: function ImgChooseHandle() {
+    this.ifImgChoose = !this.ifImgChoose;
+  },
+  imgSelector: function imgSelector() {
+    this.$api.imgHandle.imgSelector.call(this);
+  },
+  imgRemove: function imgRemove(index) {
+    this.$api.imgHandle.removeCurrentImg.call(this);
+  },
+  publishHandle: function publishHandle() {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var data, result;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
+              data = {
+                url: '',
+                method: 'POST',
+                data: {
+                  content: _this.inputContent,
+                  images: _this.imgList } };
+
+
+              // 具体配置
+              if (_this.type === 'news' || _this.type === 'comment') {
+                data.url = '/dynamicComment/pushComment';
+                if (_this.type === 'news') {
+                  data.data.dynamicId = _this.target.id;
+                } else {
+                  data.data.rootCommentId = _this.target.id;
+                }
+              } else {
+                data.data = _objectSpread(_objectSpread({},
+
+                data.data), {}, {
+                  parentCommentId: _this.target.id,
+                  parentCommentUserId: _this.target.userId,
+                  rootCommentId: _this.target.rootCommentId });
+
+                data.url = '/dynamicComment/replyComment';
+              }
+              // 发送请求
+              _context.next = 4;return _this.$http.request(data);case 4:result = _context.sent;
+              // 更新pop内的内容
+              uni.$emit('updateCurrentInfo', '');
+              uni.$emit('repylChange', { type: 'comment', data: _this.target, popDontChange: true });
+              _this.clearCurrentInfo();
+              if (result.data.code === 200) {
+                uni.showToast({
+                  title: '评论成功~',
+                  icon: 'none' });
+
+              }
+              // 清除当前输入
+            case 9:case "end":return _context.stop();}}}, _callee);}))();},
+  clearCurrentInfo: function clearCurrentInfo() {
+    this.inputContent = '';
+    this.ifImgChoose = false;
+    this.imgList = [];
+    this.$forceUpdate();
+  } };exports.__textInput = __textInput;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 
@@ -12174,6 +12323,7 @@ var Http = /*#__PURE__*/function () {
           dataType: 'json',
           success: function success(res) {
             if (res.data.code !== 200 && !options.skip) {
+              console.log(res);
               return uni.showToast({
                 title: res.data.msg,
                 icon: "none" });
@@ -12275,7 +12425,7 @@ module.exports = {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.__indexMethods = void 0;var __indexMethods = {
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.__indexMethods = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 21));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}var __indexMethods = {
   tabsChange: function tabsChange(index) {
     this.swiperCurrent = index;
   },
@@ -12321,6 +12471,18 @@ module.exports = {
   //滑到页面的最下部分
   scrollToBottom: function scrollToBottom(index) {
     this.getNewsData({ noToken: true, tab: index });
+  },
+  // 获取举报列表
+  getReportList: function getReportList(options) {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var data;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:_context.next = 2;return (
+                _this.$http.request({
+                  url: '/sysCode/getDictByKey',
+                  method: 'POST',
+                  data: {
+                    key: 'report' },
+
+                  noToken: options.noToken }));case 2:data = _context.sent;
+
+              _this.reportInfoList = data.data.data;case 4:case "end":return _context.stop();}}}, _callee);}))();
   } };exports.__indexMethods = __indexMethods;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
@@ -12347,6 +12509,15 @@ var __listDataAddHandle = function __listDataAddHandle(list, map) {var isGetNew 
     map.set(item.id, item);
   });
 };
+
+var __listDataDeleteHandle = function __listDataDeleteHandle(id) {
+  for (var i = 0; i < this.newsDataList.length; i++) {
+    if (!this.newsDataList[i]) continue;
+    this.newsDataList[i].delete(id);
+    this.$forceUpdate();
+  }
+};
+
 
 var __getIndexData = {
   // 获取广场页数据
@@ -12409,9 +12580,13 @@ var __getIndexData = {
                   data: {
                     "rankType": options.type },
 
-                  noToken: options.noToken }));case 2:data = _context2.sent;
+                  noToken: options.noToken }));case 2:data = _context2.sent;case 3:case "end":return _context2.stop();}}}, _callee2);}))();
 
-              console.log(data);case 4:case "end":return _context2.stop();}}}, _callee2);}))();
+  },
+
+  // 删除数据
+  deleteData: function deleteData(id) {
+    __listDataDeleteHandle.call(this, id);
   } };exports.__getIndexData = __getIndexData;
 
 /***/ })

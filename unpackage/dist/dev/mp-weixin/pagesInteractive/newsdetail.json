@@ -4,6 +4,7 @@
   "usingComponents": {
     "navbar": "/components/navbar/navbar",
     "card": "/components/card/card",
+    "u-loadmore": "/uview-ui/components/u-loadmore/u-loadmore",
     "pop": "/components/pop/pop",
     "text-input": "/components/textInput/textInput",
     "loading": "/components/loading/loading"
