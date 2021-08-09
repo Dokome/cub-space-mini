@@ -46,8 +46,10 @@
 					<image src="/static/Img/chat.png" mode="aspectFill" style="width: 30rpx; height: 30rpx;"></image>
 					<text class="margin-left-xs text-sm">{{ newsdata.commentNum }}</text>
 					<text class="margin-lr"></text>
-					<image :src="`/static/Img/thumb${newsdata.likeStatus ? '-B' : ''}.png`" mode="aspectFill" style="width: 30rpx; height: 30rpx;"></image>
-					<text class="margin-left-xs text-sm">{{ newsdata.likeNum }}</text>
+					<view class="" @click.stop="likeHandle(newsdata, 1)">
+						<image :src="`/static/Img/thumb${likeStatus ? '-B' : ''}.png`" mode="aspectFill" style="width: 30rpx; height: 30rpx;"></image>
+						<text class="margin-left-xs text-sm">{{ likeNum }}</text>
+					</view>
 				</view>
 			</view>
 			<!-- 模态框 -->
@@ -56,6 +58,9 @@
 						<view class="flex flex-direction" @click="moreOptionsClick(newsdata, $event)">
 							<view class="padding" data-type="delete" v-if="!newsdata.btnStatus">删除</view>
 							<view class="padding u-border-top" data-type="report">举报</view>
+<!-- 							<view class="padding u-border-top" data-type="share">
+								<u-button open-type="share">转发</u-button>
+							</view> -->
 						</view>
 			</u-modal>
 				<!-- 举报 -->
@@ -134,8 +139,10 @@
 						<view class="flex align-center">
 							<image src="/static/Img/chat.png" mode="aspectFill" style="width: 30rpx; height: 30rpx;"></image>
 							<text class="margin-lr"></text>
-							<image :src="`/static/Img/thumb${newsdata.likeStatus ? '-B' : ''}.png`" mode="aspectFill" style="width: 30rpx; height: 30rpx;"></image>
-							<text class="margin-left-xs text-sm">{{ commentdata.likeNum }}</text>
+							<view class="" @click.stop="likeHandle(commentdata, 2)">
+								<image :src="`/static/Img/thumb${likeStatus ? '-B' : ''}.png`" mode="aspectFill" style="width: 30rpx; height: 30rpx;"></image>
+								<text class="margin-left-xs text-sm">{{ likeNum }}</text>
+							</view>
 						</view>
 					</view>
 				</view>
@@ -154,7 +161,10 @@ export default {
 			// 模态框的显示
 			modalShow: false,
 			// 举报框的显示
-			reportModalShow: false
+			reportModalShow: false,
+			// 点赞的即时累加
+			likeStatusCount: 0,
+			likeNumCount: 0
 		};
 	},
 	computed: {
@@ -163,10 +173,23 @@ export default {
 		},
 		imgComStyle() {
 			return this.$api.imgHandle.multiImgShow(this.commentdata.images, { isComment: true });
+		},
+		likeStatus() {
+			const data = this.commentdata.nickName ? this.commentdata : this.newsdata;
+			return this.likeStatusCount ^ data.likeStatus; 
+		},
+		likeNum() {
+			const data = this.commentdata.nickName ? this.commentdata : this.newsdata;
+			return data.likeNum + this.likeNumCount;
 		}
 	},
 	mounted() {
 		// this.getReportList();
+		this.$u.mpShare = {
+			title: this.newsdata.content && this.newsdata.content.slice(0, 8) + '...', 
+			path: '', 
+			imageUrl: '' 
+		}
 		this.$forceUpdate();
 	},
 	methods: {
@@ -185,6 +208,19 @@ export default {
 		imgPrview(url, imgList) {
 			this.$api.imgHandle.imgPreview(url, imgList && imgList.map(item => item.url));
 		},
+		async likeHandle(data, type) {
+			this.likeNumCount = this.likeNumCount + (this.likeStatus ? -1 : 1);
+			this.likeStatusCount = this.likeStatusCount ? 0 : 1;
+			const result = await this.$http.request({
+				url: '/dynamicLikeForward/addLikeOrForward',
+				method: 'POST',
+				data: {
+				  bizType: type,
+				  bizId: data.id,
+				  type: 1
+				}
+			});
+		}
 	},
 	props: {
 		newsdata: {
@@ -223,9 +259,6 @@ export default {
 				return [];
 			}
 		}
-	},
-	onLoad() {
-
 	}
 };
 </script>

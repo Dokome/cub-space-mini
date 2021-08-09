@@ -11,6 +11,13 @@ export const __moreOptionsHandle = {
 			this.dataDelete(data.id);
 		} else if (type === 'report') {
 			this.reportModalShow = true;
+		} else {
+			console.log(data);
+			this.$u.mpShare = {
+				title: data.content.slice(0, 8) + '...', 
+				path: '', 
+				imageUrl: '' 
+			}
 		}
 	},
 	// 删除数据
