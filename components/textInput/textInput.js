@@ -16,6 +16,7 @@ export const __textInput = {
 		this.$api.imgHandle.removeCurrentImg.call(this);
 	},
 	async publishHandle() {
+		let finalId = undefined;
 		let data = {
 			url: '',
 			method: 'POST',
@@ -32,6 +33,7 @@ export const __textInput = {
 			} else {
 				data.data.rootCommentId = this.target.id;
 			}
+			finalId = this.target.id;
 		} else {
 			data.data = 
 				{
@@ -41,12 +43,15 @@ export const __textInput = {
 					rootCommentId: this.target.rootCommentId
 				}
 			data.url = '/dynamicComment/replyComment';
+			finalId = this.target.rootCommentId;
 		}
 		// 发送请求
 		const result = await this.$http.request(data);
 		// 更新pop内的内容
 		uni.$emit('updateCurrentInfo', '');
-		uni.$emit('repylChange', { type: 'comment', data: this.target, popDontChange: true });
+		if (this.type !== 'news') {
+			uni.$emit('repylChange', { type: this.type, data: this.target, popDontChange: true, id: finalId });
+		}
 		this.clearCurrentInfo();
 		if (result.data.code === 200) {
 			uni.showToast({

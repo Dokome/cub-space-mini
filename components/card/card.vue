@@ -115,20 +115,20 @@
 					<view
 						class="padding margin-top-xs"
 						style="background-color: #F3F4F6; border-radius: 10rpx;"
-						v-if="!enterStateComment && commentdata.childCommentList && commentdata.childCommentList.length"
+						v-if="!enterStateComment && commentdata.childCommentLength"
 					>
 						<view class="wmax">
 							<view class="clamp1">
-								<text style="color: #666;">
-									{{ commentdata.childCommentList[0].nickName }}
+<!-- 								<text style="color: #666;">
+									{{ commentdata.childCommentList[0].nickName }} -->
 									<!-- <text class="text-blue text-bold" v-if="commentdata.isAuthor">{{ '[作者]' }}</text> -->
-								</text>
+<!-- 								</text>
 								:
-								<text class="margin-left-xs" style="color: #666;">{{ commentdata.childCommentList[0].content }}</text>
+								<text class="margin-left-xs" style="color: #666;">{{ commentdata.childCommentList[0].content }}</text> -->
 							</view>
 						</view>
-						<view class="margin-top-sm">
-							<text class="text-blue">查看全部{{ commentdata.childCommentList.length }}条回复</text>
+						<view class="">
+							<text class="text-blue">查看全部{{ commentdata.childCommentLength }}条回复</text>
 						</view>
 					</view>
 					<!-- 互动 -->
@@ -198,9 +198,11 @@ export default {
 		replyHandle(commentData) {
 			// 
 			if (this.enterStateComment) {
-				uni.$emit('inputStatusChange', { type: this.type, data: commentData });
+				console.log(123);
+				uni.$emit('inputStatusChange', { type: this.type, data: commentData});
 			} else if (this.type === 'comment' && !this.enterStateComment) {
-				uni.$emit('repylChange', { type: 'comment', data: commentData });
+				console.log(456);
+				uni.$emit('repylChange', { type: this.type, data: commentData });
 				uni.$emit('inputStatusChange', { type: this.type, data: commentData });
 			}
 		},

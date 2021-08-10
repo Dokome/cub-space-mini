@@ -1,4 +1,4 @@
-(global["webpackJsonp"] = global["webpackJsonp"] || []).push([["pagesInteractive/newsdetail"],{
+require('common/vendor.js');(global["webpackJsonp"] = global["webpackJsonp"] || []).push([["pagesInteractive/newsdetail"],{
 
 /***/ 139:
 /*!***************************************************************************************************!*\
@@ -133,6 +133,15 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
+  var l0 = _vm.newsDetail && _vm.newsCommentList ? _vm.getNewsMapData() : null
+  _vm.$mp.data = Object.assign(
+    {},
+    {
+      $root: {
+        l0: l0
+      }
+    }
+  )
 }
 var recyclableRender = false
 var staticRenderFns = []
@@ -166,37 +175,39 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 21));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};} //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var _dataUpdate = __webpack_require__(/*! ./dataUpdate.js */ 355);function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var _default =
 {
   data: function data() {
     return {
@@ -205,13 +216,19 @@ var _default =
       // 评论信息
       newsDetail: null,
       // 回复列表
-      newsCommentList: null,
+      newsCommentList: new Map(),
+      // 回复的总页数
+      totalPage: 1,
+      // 回复的当前页数
+      currentPageNum: 1,
+      // 回复总条数
+      dataTotalNum: 0,
       // 输入框的状态
       inputType: 'news',
       // 当前回复的对象 news/comment/reply
       currentTarget: {},
       // loadmore 组件
-      loadStatus: new Array(3).fill('loadmore'),
+      loadStatus: 'nomore',
       // 举报文字
       loadText: {
         loadmore: '上拉加载更多',
@@ -225,44 +242,10 @@ var _default =
       return this.$api.imgHandle.multiImgShow.call(this);
     } },
 
-  methods: {
-    // 查询动态信息
-    getNewsInfo: function getNewsInfo(options) {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var data, result;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:_context.next = 2;return (
-                  _this.$http.request({
-                    url: '/dynamicState/selectDynamicDetail',
-                    method: 'POST',
-                    data: {
-                      dynamicId: options.id },
+  methods: _objectSpread({},
+  _dataUpdate.__dataUpdate),
 
-                    noToken: options.noToken }));case 2:data = _context.sent;
-
-                result = data.data.data;
-                _this.newsDetail = result;
-                _this.currentTarget = result;
-                _this.$forceUpdate();
-                setTimeout(function () {
-                  _this.ifLoaddingShow = false;
-                }, 800);case 8:case "end":return _context.stop();}}}, _callee);}))();
-    },
-    // 查询动态评论
-    getNewComment: function getNewComment(options) {var _this2 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee2() {var data, result;return _regenerator.default.wrap(function _callee2$(_context2) {while (1) {switch (_context2.prev = _context2.next) {case 0:_context2.next = 2;return (
-                  _this2.$http.request({
-                    url: '/dynamicComment/selectCommentByDyIdAndPage',
-                    method: 'POST',
-                    data: {
-                      pageNum: 1,
-                      pageSize: 8,
-                      parmas: {
-                        dynamicId: options.id } },
-
-
-                    noToken: options.noToken }));case 2:data = _context2.sent;
-
-                result = data.data.data;
-                _this2.newsCommentList = result.list;case 5:case "end":return _context2.stop();}}}, _callee2);}))();
-    } },
-
-  onLoad: function onLoad(options) {var _this3 = this;
+  onLoad: function onLoad(options) {var _this = this;
     this.getNewsInfo({ id: options.id, noToken: true });
     this.getNewComment({ id: options.id, noToken: true });
     // 注销之前的监听器
@@ -271,26 +254,26 @@ var _default =
     uni.$off('updateCurrentInfo');
     // 回复对象转化
     uni.$on('inputStatusChange', function (options) {
-      _this3.inputType = options.type;
-      _this3.currentTarget = options.data;
+      _this.inputType = options.type;
+      _this.currentTarget = options.data;
       uni.$emit('clearInputData', '');
     });
     // 重新变为回复动态
     uni.$on('changeStateBackNew', function () {
-      _this3.inputType = 'news';
-      _this3.currentTarget = _this3.newsDetail;
+      _this.inputType = 'news';
+      _this.currentTarget = _this.newsDetail;
       uni.$emit('clearInputData', '');
     });
     // 更新互动后的信息
     uni.$on('updateCurrentInfo', function () {
-      _this3.inputType = 'news';
-      _this3.currentTarget = _this3.newsDetail;
-      _this3.getNewComment({ id: options.id, noToken: true, delay: 100 });
+      // this.inputType = 'news';
+      // this.currentTarget = this.newsDetail;
+      _this.getNewComment({ id: options.id, noToken: true, delay: 100, getNew: true });
     });
   } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ })
 
-},[[139,"common/runtime","common/vendor"]]]);
+},[[139,"common/runtime","common/vendor","pagesInteractive/common/vendor"]]]);
 //# sourceMappingURL=../../.sourcemap/mp-weixin/pagesInteractive/newsdetail.js.map

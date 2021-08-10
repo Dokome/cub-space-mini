@@ -872,7 +872,7 @@ function initData(vueOptions, context) {
     try {
       data = data.call(context); // 支持 Vue.prototype 上挂的数据
     } catch (e) {
-      if (Object({"NODE_ENV":"development","VUE_APP_NAME":"cub-space-mini","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"VUE_APP_NAME":"cub-space-mini","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.warn('根据 Vue 的 data 函数初始化小程序 data 失败，请尽量确保 data 函数中不访问 vm 对象，否则可能影响首次数据渲染速度。', data);
       }
     }
@@ -8459,7 +8459,7 @@ function type(obj) {
 
 function flushCallbacks$1(vm) {
     if (vm.__next_tick_callbacks && vm.__next_tick_callbacks.length) {
-        if (Object({"NODE_ENV":"development","VUE_APP_NAME":"cub-space-mini","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
+        if (Object({"VUE_APP_NAME":"cub-space-mini","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:flushCallbacks[' + vm.__next_tick_callbacks.length + ']');
@@ -8480,14 +8480,14 @@ function nextTick$1(vm, cb) {
     //1.nextTick 之前 已 setData 且 setData 还未回调完成
     //2.nextTick 之前存在 render watcher
     if (!vm.__next_tick_pending && !hasRenderWatcher(vm)) {
-        if(Object({"NODE_ENV":"development","VUE_APP_NAME":"cub-space-mini","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"VUE_APP_NAME":"cub-space-mini","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:nextVueTick');
         }
         return nextTick(cb, vm)
     }else{
-        if(Object({"NODE_ENV":"development","VUE_APP_NAME":"cub-space-mini","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"VUE_APP_NAME":"cub-space-mini","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance$1 = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance$1.is || mpInstance$1.route) + '][' + vm._uid +
                 ']:nextMPTick');
@@ -8573,7 +8573,7 @@ var patch = function(oldVnode, vnode) {
     });
     var diffData = this.$shouldDiffData === false ? data : diff(data, mpData);
     if (Object.keys(diffData).length) {
-      if (Object({"NODE_ENV":"development","VUE_APP_NAME":"cub-space-mini","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"VUE_APP_NAME":"cub-space-mini","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + this._uid +
           ']差量更新',
           JSON.stringify(diffData));
@@ -10324,7 +10324,8 @@ function colorToRgba(color) {var alpha = arguments.length > 1 && arguments[1] !=
   imgRemove: function imgRemove(index) {
     this.$api.imgHandle.removeCurrentImg.call(this);
   },
-  publishHandle: function publishHandle() {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var data, result;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
+  publishHandle: function publishHandle() {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var finalId, data, result;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
+              finalId = undefined;
               data = {
                 url: '',
                 method: 'POST',
@@ -10341,6 +10342,7 @@ function colorToRgba(color) {var alpha = arguments.length > 1 && arguments[1] !=
                 } else {
                   data.data.rootCommentId = _this.target.id;
                 }
+                finalId = _this.target.id;
               } else {
                 data.data = _objectSpread(_objectSpread({},
 
@@ -10350,12 +10352,15 @@ function colorToRgba(color) {var alpha = arguments.length > 1 && arguments[1] !=
                   rootCommentId: _this.target.rootCommentId });
 
                 data.url = '/dynamicComment/replyComment';
+                finalId = _this.target.rootCommentId;
               }
               // 发送请求
-              _context.next = 4;return _this.$http.request(data);case 4:result = _context.sent;
+              _context.next = 5;return _this.$http.request(data);case 5:result = _context.sent;
               // 更新pop内的内容
               uni.$emit('updateCurrentInfo', '');
-              uni.$emit('repylChange', { type: 'comment', data: _this.target, popDontChange: true });
+              if (_this.type !== 'news') {
+                uni.$emit('repylChange', { type: _this.type, data: _this.target, popDontChange: true, id: finalId });
+              }
               _this.clearCurrentInfo();
               if (result.data.code === 200) {
                 uni.showToast({
@@ -10364,7 +10369,7 @@ function colorToRgba(color) {var alpha = arguments.length > 1 && arguments[1] !=
 
               }
               // 清除当前输入
-            case 9:case "end":return _context.stop();}}}, _callee);}))();},
+            case 10:case "end":return _context.stop();}}}, _callee);}))();},
   clearCurrentInfo: function clearCurrentInfo() {
     this.inputContent = '';
     this.ifImgChoose = false;
@@ -10712,6 +10717,92 @@ function getParent(name, keys) {
 
   return {};
 }
+
+/***/ }),
+
+/***/ 356:
+/*!*******************************************************************************!*\
+  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/components/pop/dataUpdate.js ***!
+  \*******************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.__dataUpdate = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 21));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}function _unsupportedIterableToArray(o, minLen) {if (!o) return;if (typeof o === "string") return _arrayLikeToArray(o, minLen);var n = Object.prototype.toString.call(o).slice(8, -1);if (n === "Object" && o.constructor) n = o.constructor.name;if (n === "Map" || n === "Set") return Array.from(o);if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);}function _iterableToArray(iter) {if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) return _arrayLikeToArray(arr);}function _arrayLikeToArray(arr, len) {if (len == null || len > arr.length) len = arr.length;for (var i = 0, arr2 = new Array(len); i < len; i++) {arr2[i] = arr[i];}return arr2;}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};} // 加载数据
+var __listDataAddHandle = function __listDataAddHandle(list, map) {
+  // 请求新数据时清空列表
+  list.forEach(function (item) {
+    // 判断数据是否存在
+    map.get(item.id) ? map.delete(item.id) : null;
+    map.set(item.id, item);
+  });
+};
+
+var __dataUpdate = {
+  // 更新列表内的消息
+  updateReplyList: function updateReplyList(id) {var _arguments = arguments,_this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var options, data, result;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:options = _arguments.length > 1 && _arguments[1] !== undefined ? _arguments[1] : {};
+              _this.loadStatus = 'loading';
+              if (options.getNew) {
+                _this.currentPageNum = _this.totalPage ? _this.totalPage : 1;
+              }if (!(
+              _this.currentPageNum > _this.totalPage && !options.getNew)) {_context.next = 6;break;}
+              _this.loadStatus = 'nomore';return _context.abrupt("return");case 6:_context.next = 8;return (
+
+
+
+                _this.$http.request({
+                  url: '/dynamicComment/selectRootComment',
+                  method: 'POST',
+                  data: {
+                    pageNum: _this.currentPageNum,
+                    pageSize: 10,
+                    parmas: {
+                      rootCommentId: id } },
+
+
+                  delay: 300,
+                  noToken: true }));case 8:data = _context.sent;
+
+              // 页面参数赋值
+              result = data.data.data;
+              if (data.data.code === 200) {
+                _this.currentPageNum++;
+                _this.totalPage = result.totalPage;
+                _this.dataTotalNum = result.total;
+              }
+              // 
+              _this.loadStatus = 'loadmore';
+
+              if (_this.totalPage === 0 || options.getNew || _this.dataTotalNum < 10) {
+                _this.loadStatus = 'nomore';
+              }
+              // 
+              __listDataAddHandle.call(_this, result.list, _this.replyList);
+
+              // 更新页面状态
+              _this.$forceUpdate();
+              setTimeout(function () {
+                _this.ifLoadingShow = false;
+              }, 200);case 16:case "end":return _context.stop();}}}, _callee);}))();
+  },
+  // 映射动态数据
+  getNewsMapData: function getNewsMapData() {
+    if (this.replyList) {
+      return _toConsumableArray(this.replyList.values());
+    }
+  },
+  // 请求更新数据
+  scrollToBottom: function scrollToBottom() {
+    this.updateReplyList(this.commentInfo.id, { noToken: true, delay: 100 });
+  },
+  // 数据重置
+  clearData: function clearData() {
+    this.commentInfo = null;
+    this.replyList = new Map();
+    this.totalPage = 1;
+    this.currentPageNum = 1;
+    this.dataTotalNum = 0;
+  } };exports.__dataUpdate = __dataUpdate;
 
 /***/ }),
 

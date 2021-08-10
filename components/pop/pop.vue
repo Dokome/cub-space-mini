@@ -53,14 +53,20 @@
 				<!--
 					回复部分
 				 -->
-				<scroll-view scroll-y="true" :style="{ height: `calc(100% - ${ CustomBar }px)`} " v-if="type === 'reply' && commentInfo">
+				<scroll-view scroll-y="true" :style="{ height: `calc(100% - ${ CustomBar }px)`} " v-if="type === 'reply' && commentInfo"
+					@scrolltolower="scrollToBottom">
 					<loading v-if="ifLoadingShow" :height="`calc(100% - 0px)`"></loading>
 					<view class="">
 						<card type="comment" :enterStateComment="true" :commentdata="commentInfo"></card>
 						<view class="bg-white margin-top-xs padding">
-							<text class="text-bold text-black text-df">{{ replyList.length + '条回复'}}</text>
+							<text class="text-bold text-black text-df">{{ dataTotalNum + '条回复'}}</text>
 						</view>
-						<card type="reply" :enterStateComment="true" v-for="item in replyList" :commentdata="item" :key="item.id"></card>
+						<card type="reply" :enterStateComment="true" v-for="item in getNewsMapData()" :commentdata="item" :key="item.id"></card>
+						<u-loadmore
+							:status="loadStatus"
+							:load-text="loadText"
+							:bg-color="'#ffffff'"
+						></u-loadmore>
 						<view class="bg-white" style="height: 150rpx;"></view>
 					</view>
 				</scroll-view>
@@ -71,6 +77,7 @@
 
 <script>
 import { __newsPublish } from './newsPublish.js';
+import { __dataUpdate } from './dataUpdate.js'
 export default {
 	name: 'pop',
 	props: {
@@ -91,7 +98,21 @@ export default {
 			//评论信息
 			commentInfo: null,
 			// 评论回复列表
-			replyList: null,
+			replyList: new Map(),
+			// 回复总页数
+			totalPage: 1,
+			//回复的当前页数 
+			currentPageNum: 1,
+			// 回复的总条数
+			dataTotalNum: 0,
+			// loadmore的加载状态
+			loadStatus: 'nomore',
+			// 举报文字
+			loadText: {
+				loadmore: '上拉加载更多',
+				loading: '努力加载ing...',
+				nomore: '没有更多了~'
+			},
 			// 弹框的显示
 			show: false,
 			StatusBar: this.StatusBar,
@@ -109,26 +130,11 @@ export default {
 	},
 	methods: {
 		...__newsPublish,
+		...__dataUpdate,
 		// 控制pop的显示
 		popUpChange() {
 			this.show = !this.show;
 		},
-		// 更新列表内的消息
-		async updateReplyList(id) {
-			const data = await this.$http.request({
-				url: '/dynamicComment/selectRootComment',
-				method: 'POST',
-				data: {
-					rootCommentId: id
-				},
-				delay: 300
-			});
-			this.replyList = data.data.data.childCommentList;
-			this.$forceUpdate();
-			setTimeout(() => {
-				this.ifLoadingShow = false;
-			}, 200)
-		}
 	},
 	mounted() {
 		// 先把其他页面的时间全部注销
@@ -144,8 +150,16 @@ export default {
 				this.ifLoadingShow = true;
 				this.popUpChange();
 			}
-			this.commentInfo = options.data;
-			this.updateReplyList(options.data.id);
+			if (!this.commentInfo) {
+				this.commentInfo = options.data;
+			}
+			let id = undefined;
+			if (options.type === 'comment') {
+				id = options.data.id;
+			} else if (options.type === 'reply') {
+				id = options.id;
+			}
+			this.updateReplyList(id, { noToken: true, delay: 100, getNew: true});
 		});
 	},
 	computed: {
@@ -162,7 +176,8 @@ export default {
 		show(state) {
 			if (!state && this.type === 'reply') {
 				// 回复状态转化为回复动态
-				uni.$emit('changeStateBackNew')
+				uni.$emit('changeStateBackNew');
+				this.clearData();
 			}
 		}
 	}

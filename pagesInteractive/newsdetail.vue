@@ -1,17 +1,18 @@
 <template>
 	<view>
 		<navbar title="次方空间"></navbar>
-		<scroll-view scroll-y="true" :style="{ height: `calc(100vh - ${ViewPart - 20}px)` }" v-if="newsDetail">
+		<scroll-view scroll-y="true" :style="{ height: `calc(100vh - ${ViewPart - 20}px)` }" v-if="newsDetail"
+			@scrolltolower="scrollToBottom">
 			<!-- 头部 -->
 			<card :clamp="false" :newsdata="newsDetail"></card>
 			<!-- 评论 -->
 			<view class="" v-if="newsCommentList">
 				<!-- 评论头 -->
 				<view class="bg-white margin-top-xs padding">
-					<text class="text-bold text-black text-df">{{ newsCommentList && newsCommentList.length + '条评论' }}</text>
+					<text class="text-bold text-black text-df">{{ dataTotalNum + '条评论' }}</text>
 				</view>
 				<!-- 列表 -->
-				<card type="comment" v-for="item in newsCommentList" :key="item.id" :commentdata="item"></card>
+				<card type="comment" v-for="item in getNewsMapData()" :key="item.id" :commentdata="item"></card>
 				<u-loadmore
 					:status="loadStatus"
 					:load-text="loadText"
@@ -29,6 +30,7 @@
 </template>
 
 <script>
+import { __dataUpdate } from './dataUpdate.js'
 export default {
 	data() {
 		return {
@@ -37,13 +39,19 @@ export default {
 			// 评论信息
 			newsDetail: null,
 			// 回复列表
-			newsCommentList: null,
+			newsCommentList: new Map(),
+			// 回复的总页数
+			totalPage: 1,
+			// 回复的当前页数
+			currentPageNum: 1,
+			// 回复总条数
+			dataTotalNum: 0,
 			// 输入框的状态
 			inputType: 'news',
 			// 当前回复的对象 news/comment/reply
 			currentTarget: {},
 			// loadmore 组件
-			loadStatus: new Array(3).fill('loadmore'),
+			loadStatus: 'nomore',
 			// 举报文字
 			loadText: {
 				loadmore: '上拉加载更多',
@@ -58,41 +66,7 @@ export default {
 		}
 	},
 	methods: {
-		// 查询动态信息
-		async getNewsInfo(options) {
-			const data = await this.$http.request({
-				url: '/dynamicState/selectDynamicDetail',
-				method: 'POST',
-				data: {
-					dynamicId: options.id
-				},
-				noToken: options.noToken
-			});
-			const result = data.data.data;
-			this.newsDetail = result;
-			this.currentTarget = result;
-			this.$forceUpdate();
-			setTimeout(() => {
-				this.ifLoaddingShow = false;
-			}, 800);
-		},
-		// 查询动态评论
-		async getNewComment(options) {
-			const data = await this.$http.request({
-				url: '/dynamicComment/selectCommentByDyIdAndPage',
-				method: 'POST',
-				data: {
-					pageNum: 1,
-					pageSize: 8,
-					parmas: {
-						dynamicId: options.id
-					}
-				},
-				noToken: options.noToken
-			});
-			const result = data.data.data;
-			this.newsCommentList = result.list;
-		}
+		...__dataUpdate,
 	},
 	onLoad(options) {
 		this.getNewsInfo({ id: options.id, noToken: true });
@@ -115,9 +89,9 @@ export default {
 		});
 		// 更新互动后的信息
 		uni.$on('updateCurrentInfo', () => {
-			this.inputType = 'news';
-			this.currentTarget = this.newsDetail;
-			this.getNewComment({ id: options.id, noToken: true, delay: 100});
+			// this.inputType = 'news';
+			// this.currentTarget = this.newsDetail;
+			this.getNewComment({ id: options.id, noToken: true, delay: 100, getNew: true});
 		});
 	}
 };

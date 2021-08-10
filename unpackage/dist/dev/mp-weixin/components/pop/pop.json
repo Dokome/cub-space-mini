@@ -5,7 +5,8 @@
     "u-switch": "/uview-ui/components/u-switch/u-switch",
     "u-button": "/uview-ui/components/u-button/u-button",
     "loading": "/components/loading/loading",
-    "card": "/components/card/card"
+    "card": "/components/card/card",
+    "u-loadmore": "/uview-ui/components/u-loadmore/u-loadmore"
   },
   "component": true
 }

@@ -1,4 +1,4 @@
-(global["webpackJsonp"] = global["webpackJsonp"] || []).push([["pagesInteractive/usersIndex"],{
+require('common/vendor.js');(global["webpackJsonp"] = global["webpackJsonp"] || []).push([["pagesInteractive/usersIndex"],{
 
 /***/ 127:
 /*!***************************************************************************************************!*\

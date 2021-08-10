@@ -96,6 +96,9 @@ try {
     },
     card: function() {
       return Promise.all(/*! import() | components/card/card */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/card/card")]).then(__webpack_require__.bind(null, /*! @/components/card/card.vue */ 188))
+    },
+    uLoadmore: function() {
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-loadmore/u-loadmore */ "uview-ui/components/u-loadmore/u-loadmore").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-loadmore/u-loadmore.vue */ 196))
     }
   }
 } catch (e) {
@@ -119,6 +122,15 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
+  var l0 = _vm.type === "reply" && _vm.commentInfo ? _vm.getNewsMapData() : null
+  _vm.$mp.data = Object.assign(
+    {},
+    {
+      $root: {
+        l0: l0
+      }
+    }
+  )
 }
 var recyclableRender = false
 var staticRenderFns = []
@@ -152,7 +164,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 21));
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
 
 
 
@@ -224,7 +236,14 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _newsPublish = __webpack_require__(/*! ./newsPublish.js */ 215);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var _default2 =
+
+
+
+
+
+
+var _newsPublish = __webpack_require__(/*! ./newsPublish.js */ 215);
+var _dataUpdate = __webpack_require__(/*! ./dataUpdate.js */ 356);function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var _default2 =
 {
   name: 'pop',
   props: {
@@ -245,7 +264,21 @@ var _newsPublish = __webpack_require__(/*! ./newsPublish.js */ 215);function _in
       //评论信息
       commentInfo: null,
       // 评论回复列表
-      replyList: null,
+      replyList: new Map(),
+      // 回复总页数
+      totalPage: 1,
+      //回复的当前页数 
+      currentPageNum: 1,
+      // 回复的总条数
+      dataTotalNum: 0,
+      // loadmore的加载状态
+      loadStatus: 'nomore',
+      // 举报文字
+      loadText: {
+        loadmore: '上拉加载更多',
+        loading: '努力加载ing...',
+        nomore: '没有更多了~' },
+
       // 弹框的显示
       show: false,
       StatusBar: this.StatusBar,
@@ -261,45 +294,38 @@ var _newsPublish = __webpack_require__(/*! ./newsPublish.js */ 215);function _in
       imgList: [] };
 
   },
-  methods: _objectSpread(_objectSpread({},
-  _newsPublish.__newsPublish), {}, {
+  methods: _objectSpread(_objectSpread(_objectSpread({},
+  _newsPublish.__newsPublish),
+  _dataUpdate.__dataUpdate), {}, {
     // 控制pop的显示
     popUpChange: function popUpChange() {
       this.show = !this.show;
-    },
-    // 更新列表内的消息
-    updateReplyList: function updateReplyList(id) {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var data;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:_context.next = 2;return (
-                  _this.$http.request({
-                    url: '/dynamicComment/selectRootComment',
-                    method: 'POST',
-                    data: {
-                      rootCommentId: id },
-
-                    delay: 300 }));case 2:data = _context.sent;
-
-                _this.replyList = data.data.data.childCommentList;
-                _this.$forceUpdate();
-                setTimeout(function () {
-                  _this.ifLoadingShow = false;
-                }, 200);case 6:case "end":return _context.stop();}}}, _callee);}))();
     } }),
 
-  mounted: function mounted() {var _this2 = this;
+  mounted: function mounted() {var _this = this;
     // 先把其他页面的时间全部注销
     uni.$off('repylChange');
     uni.$off('popUpChange');
     uni.$off('updatePopCurrentInfo');
     //弹起下落(发布)
     uni.$on('popUpChange', function (status) {
-      _this2.popUpChange();
+      _this.popUpChange();
     });
     uni.$on('repylChange', function (options) {
       if (!options.popDontChange) {
-        _this2.ifLoadingShow = true;
-        _this2.popUpChange();
+        _this.ifLoadingShow = true;
+        _this.popUpChange();
       }
-      _this2.commentInfo = options.data;
-      _this2.updateReplyList(options.data.id);
+      if (!_this.commentInfo) {
+        _this.commentInfo = options.data;
+      }
+      var id = undefined;
+      if (options.type === 'comment') {
+        id = options.data.id;
+      } else if (options.type === 'reply') {
+        id = options.id;
+      }
+      _this.updateReplyList(id, { noToken: true, delay: 100, getNew: true });
     });
   },
   computed: {
@@ -317,6 +343,7 @@ var _newsPublish = __webpack_require__(/*! ./newsPublish.js */ 215);function _in
       if (!state && this.type === 'reply') {
         // 回复状态转化为回复动态
         uni.$emit('changeStateBackNew');
+        this.clearData();
       }
     } } };exports.default = _default2;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))

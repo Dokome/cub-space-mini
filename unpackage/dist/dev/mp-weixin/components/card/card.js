@@ -343,9 +343,11 @@ var _moreOptions = __webpack_require__(/*! ./moreOptions.js */ 193);function _in
     replyHandle: function replyHandle(commentData) {
       // 
       if (this.enterStateComment) {
+        console.log(123);
         uni.$emit('inputStatusChange', { type: this.type, data: commentData });
       } else if (this.type === 'comment' && !this.enterStateComment) {
-        uni.$emit('repylChange', { type: 'comment', data: commentData });
+        console.log(456);
+        uni.$emit('repylChange', { type: this.type, data: commentData });
         uni.$emit('inputStatusChange', { type: this.type, data: commentData });
       }
     },
