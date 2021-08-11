@@ -32,20 +32,18 @@
 					<view>
 						<!-- 轮播图/热榜等 -->
 						<!-- 热榜 -->
-						<view class="margin-xs bg-white padding-sm" style="height: 280rpx;" v-if="(index === 2 || index === 1) && login && hotList && hotList.length" @click="enterHotList">
-							<!-- 头部 -->
+						<!-- <view class="margin-xs bg-white padding-sm" style="height: 280rpx;" v-if="(index === 2 || index === 1) && login && hotList && hotList.length" @click="enterHotList">
 							<view class=""><text class="text-bold text-black text-lg">校园热榜</text></view>
-							<!-- 内容 -->
 							<view class="">
 								<view class="flex align-center margin-top-sm" v-for="(item, h_index) in 3" :key="h_index">
 									<image :src="`/static/Img/hotList${h_index + 1}.png`" mode="" style="width: 40rpx; height: 40rpx;flex-shrink: 0;"></image>
 									<text class="text-black text-cut margin-left-xs">{{ getHotListDataContent(h_index) }}</text>
 								</view>
 							</view>
-						</view>
+						</view> -->
 						<!-- 轮播图 -->
-						<view class="margin-top-xs hmax" style="height: 320rpx;" v-if="bannerList && bannerList.length && (index === 1 || index === 2)">
-							<u-swiper height="320" mode="dot" :list="bannerListMap" :border-radius="0"></u-swiper>
+						<view class="margin-top-xs hmax" style="height: 236rpx;" v-if="bannerList && bannerList.length && (index === 1 || index === 2)">
+							<u-swiper height="236" mode="dot" border-radius="8" :list="bannerListMap" :effect3d="true"></u-swiper>
 						</view>
 						<!-- 动态数据 -->
 						<view v-if="newsDataList[index]">
