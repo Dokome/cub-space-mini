@@ -74,6 +74,9 @@ export const __getIndexData = {
 		}
 	},
 	
+	getHotListDataContent(index) {
+		return JSON.parse(this.hotList)[index].content;
+	},
 	// 热榜
 	async getHotList(options) {
 		const data = await this.$http.request({
@@ -84,6 +87,35 @@ export const __getIndexData = {
 			},
 			noToken: options.noToken
 		});
+		const result = JSON.stringify(data.data.data);
+		this.hotList = result;
+	},
+	
+	// 获取举报列表
+	async getReportList(options) {
+		const data = await this.$http.request({
+			url: '/sysCode/getDictByKey',
+			method: 'POST',
+			data: {
+				key: 'report'
+			},
+			noToken: options.noToken
+		});
+		this.reportInfoList = data.data.data;
+	},
+	// 获取轮播图
+	async getBanner(options) {
+		const data = await this.$http.request({
+			url: '/sysElement/getElementByCode',
+			method: 'POST',
+			data: {
+				parentCode: "recommend_banner"
+			},
+			noToken: options.noToken
+		});
+		
+		const result = data.data.data;
+		this.bannerList = result;
 	},
 	
 	// 删除数据

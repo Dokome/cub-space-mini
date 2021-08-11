@@ -78,9 +78,13 @@ class RouterHandle {
 	    
 	}
 	// 跳转到页面
-	goto(url) {
+	goto(url, data) {
 		uni.navigateTo({
 			url,
+			success: function(res) {
+			  // 通过eventChannel向被打开页面传送数据
+			  res.eventChannel.emit('acceptDataFromOpenerPage', {data: data})
+			}
 		})
 	}
 	// 返回页面

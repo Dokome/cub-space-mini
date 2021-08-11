@@ -94,7 +94,7 @@ var components
 try {
   components = {
     navbar: function() {
-      return __webpack_require__.e(/*! import() | components/navbar/navbar */ "components/navbar/navbar").then(__webpack_require__.bind(null, /*! @/components/navbar/navbar.vue */ 167))
+      return __webpack_require__.e(/*! import() | components/navbar/navbar */ "components/navbar/navbar").then(__webpack_require__.bind(null, /*! @/components/navbar/navbar.vue */ 168))
     }
   }
 } catch (e) {
@@ -118,6 +118,24 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
+  var l0 = _vm.__map(_vm.hotList, function(item, index) {
+    var $orig = _vm.__get_orig(item)
+
+    var m0 = _vm.getImage(index)
+    return {
+      $orig: $orig,
+      m0: m0
+    }
+  })
+
+  _vm.$mp.data = Object.assign(
+    {},
+    {
+      $root: {
+        l0: l0
+      }
+    }
+  )
 }
 var recyclableRender = false
 var staticRenderFns = []
@@ -185,13 +203,30 @@ var _default =
   data: function data() {
     return {
       ViewPart: this.ViewPart,
-      hostList: [
+      hotList: [
       {
         content: '如何看待B站服务器突然崩溃，哈哈哈哈笑死了，哈哈哈哈哈哈哈哈哈啊哈哈......',
-        imgList: ['https://image.sapce.club/common/1623820687514623626.jpg'] }] };
+        images: [] }],
 
 
+      defaultImg: 'https://image.sapce.club/common/1623820687514623626.jpg' };
 
+  },
+  methods: {
+    getImage: function getImage(index) {
+      if (this.hotList && this.hotList[index] && this.hotList[index].images) {
+        var temp = this.hotList[index].images[0];
+        return temp ? temp.url : this.defaultImg;
+      }
+    } },
+
+  onLoad: function onLoad(option) {var _this = this;
+    var eventChannel = this.getOpenerEventChannel();
+    // 监听acceptDataFromOpenerPage事件，获取上一页面通过eventChannel传送到当前页面的数据
+    eventChannel.on('acceptDataFromOpenerPage', function (data) {
+      _this.hotList = data.data;
+      console.log(_this.hotList);
+    });
   } };exports.default = _default;
 
 /***/ })

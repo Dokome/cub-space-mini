@@ -94,22 +94,22 @@ var components
 try {
   components = {
     navbar: function() {
-      return __webpack_require__.e(/*! import() | components/navbar/navbar */ "components/navbar/navbar").then(__webpack_require__.bind(null, /*! @/components/navbar/navbar.vue */ 167))
+      return __webpack_require__.e(/*! import() | components/navbar/navbar */ "components/navbar/navbar").then(__webpack_require__.bind(null, /*! @/components/navbar/navbar.vue */ 168))
     },
     card: function() {
-      return Promise.all(/*! import() | components/card/card */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/card/card")]).then(__webpack_require__.bind(null, /*! @/components/card/card.vue */ 188))
+      return Promise.all(/*! import() | components/card/card */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/card/card")]).then(__webpack_require__.bind(null, /*! @/components/card/card.vue */ 189))
     },
     uLoadmore: function() {
-      return __webpack_require__.e(/*! import() | uview-ui/components/u-loadmore/u-loadmore */ "uview-ui/components/u-loadmore/u-loadmore").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-loadmore/u-loadmore.vue */ 196))
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-loadmore/u-loadmore */ "uview-ui/components/u-loadmore/u-loadmore").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-loadmore/u-loadmore.vue */ 197))
     },
     pop: function() {
-      return Promise.all(/*! import() | components/pop/pop */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/pop/pop")]).then(__webpack_require__.bind(null, /*! @/components/pop/pop.vue */ 210))
+      return Promise.all(/*! import() | components/pop/pop */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/pop/pop")]).then(__webpack_require__.bind(null, /*! @/components/pop/pop.vue */ 211))
     },
     textInput: function() {
-      return Promise.all(/*! import() | components/textInput/textInput */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/textInput/textInput")]).then(__webpack_require__.bind(null, /*! @/components/textInput/textInput.vue */ 259))
+      return Promise.all(/*! import() | components/textInput/textInput */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/textInput/textInput")]).then(__webpack_require__.bind(null, /*! @/components/textInput/textInput.vue */ 261))
     },
     loading: function() {
-      return __webpack_require__.e(/*! import() | components/loading/loading */ "components/loading/loading").then(__webpack_require__.bind(null, /*! @/components/loading/loading.vue */ 218))
+      return __webpack_require__.e(/*! import() | components/loading/loading */ "components/loading/loading").then(__webpack_require__.bind(null, /*! @/components/loading/loading.vue */ 220))
     }
   }
 } catch (e) {
@@ -207,7 +207,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _dataUpdate = __webpack_require__(/*! ./dataUpdate.js */ 355);function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var _default =
+var _dataUpdate = __webpack_require__(/*! ./dataUpdate.js */ 145);function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var _default =
 {
   data: function data() {
     return {

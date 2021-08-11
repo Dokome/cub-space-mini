@@ -2852,7 +2852,7 @@ queryParams;exports.default = _default;
 
 /***/ }),
 
-/***/ 193:
+/***/ 194:
 /*!*********************************************************************************!*\
   !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/components/card/moreOptions.js ***!
   \*********************************************************************************/
@@ -9126,7 +9126,7 @@ module.exports = __webpack_require__(/*! regenerator-runtime */ 22);
 
 /***/ }),
 
-/***/ 215:
+/***/ 216:
 /*!********************************************************************************!*\
   !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/components/pop/newsPublish.js ***!
   \********************************************************************************/
@@ -9192,6 +9192,92 @@ module.exports = __webpack_require__(/*! regenerator-runtime */ 22);
               }case 31:case "end":return _context.stop();}}}, _callee, null, [[4, 16, 19, 22]]);}))();
   } };exports.__newsPublish = __newsPublish;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+
+/***/ 217:
+/*!*******************************************************************************!*\
+  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/components/pop/dataUpdate.js ***!
+  \*******************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.__dataUpdate = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 21));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}function _unsupportedIterableToArray(o, minLen) {if (!o) return;if (typeof o === "string") return _arrayLikeToArray(o, minLen);var n = Object.prototype.toString.call(o).slice(8, -1);if (n === "Object" && o.constructor) n = o.constructor.name;if (n === "Map" || n === "Set") return Array.from(o);if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);}function _iterableToArray(iter) {if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) return _arrayLikeToArray(arr);}function _arrayLikeToArray(arr, len) {if (len == null || len > arr.length) len = arr.length;for (var i = 0, arr2 = new Array(len); i < len; i++) {arr2[i] = arr[i];}return arr2;}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};} // 加载数据
+var __listDataAddHandle = function __listDataAddHandle(list, map) {
+  // 请求新数据时清空列表
+  list.forEach(function (item) {
+    // 判断数据是否存在
+    map.get(item.id) ? map.delete(item.id) : null;
+    map.set(item.id, item);
+  });
+};
+
+var __dataUpdate = {
+  // 更新列表内的消息
+  updateReplyList: function updateReplyList(id) {var _arguments = arguments,_this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var options, data, result;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:options = _arguments.length > 1 && _arguments[1] !== undefined ? _arguments[1] : {};
+              _this.loadStatus = 'loading';
+              if (options.getNew) {
+                _this.currentPageNum = _this.totalPage ? _this.totalPage : 1;
+              }if (!(
+              _this.currentPageNum > _this.totalPage && !options.getNew)) {_context.next = 6;break;}
+              _this.loadStatus = 'nomore';return _context.abrupt("return");case 6:_context.next = 8;return (
+
+
+
+                _this.$http.request({
+                  url: '/dynamicComment/selectRootComment',
+                  method: 'POST',
+                  data: {
+                    pageNum: _this.currentPageNum,
+                    pageSize: 10,
+                    parmas: {
+                      rootCommentId: id } },
+
+
+                  delay: 300,
+                  noToken: true }));case 8:data = _context.sent;
+
+              // 页面参数赋值
+              result = data.data.data;
+              if (data.data.code === 200) {
+                _this.currentPageNum++;
+                _this.totalPage = result.totalPage;
+                _this.dataTotalNum = result.total;
+              }
+              // 
+              _this.loadStatus = 'loadmore';
+
+              if (_this.totalPage === 0 || options.getNew || _this.dataTotalNum < 10) {
+                _this.loadStatus = 'nomore';
+              }
+              // 
+              __listDataAddHandle.call(_this, result.list, _this.replyList);
+
+              // 更新页面状态
+              _this.$forceUpdate();
+              setTimeout(function () {
+                _this.ifLoadingShow = false;
+              }, 200);case 16:case "end":return _context.stop();}}}, _callee);}))();
+  },
+  // 映射动态数据
+  getNewsMapData: function getNewsMapData() {
+    if (this.replyList) {
+      return _toConsumableArray(this.replyList.values());
+    }
+  },
+  // 请求更新数据
+  scrollToBottom: function scrollToBottom() {
+    this.updateReplyList(this.commentInfo.id, { noToken: true, delay: 100 });
+  },
+  // 数据重置
+  clearData: function clearData() {
+    this.commentInfo = null;
+    this.replyList = new Map();
+    this.totalPage = 1;
+    this.currentPageNum = 1;
+    this.dataTotalNum = 0;
+  } };exports.__dataUpdate = __dataUpdate;
 
 /***/ }),
 
@@ -10095,7 +10181,7 @@ timeFrom;exports.default = _default;
 
 /***/ }),
 
-/***/ 256:
+/***/ 258:
 /*!********************************************************************************!*\
   !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/uview-ui/libs/util/emitter.js ***!
   \********************************************************************************/
@@ -10299,7 +10385,7 @@ function colorToRgba(color) {var alpha = arguments.length > 1 && arguments[1] !=
 
 /***/ }),
 
-/***/ 264:
+/***/ 266:
 /*!************************************************************************************!*\
   !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/components/textInput/textInput.js ***!
   \************************************************************************************/
@@ -10720,17 +10806,80 @@ function getParent(name, keys) {
 
 /***/ }),
 
-/***/ 356:
-/*!*******************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/components/pop/dataUpdate.js ***!
-  \*******************************************************************************/
+/***/ 355:
+/*!***********************************************************************!*\
+  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/pages/index/index.js ***!
+  \***********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.__dataUpdate = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 21));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}function _unsupportedIterableToArray(o, minLen) {if (!o) return;if (typeof o === "string") return _arrayLikeToArray(o, minLen);var n = Object.prototype.toString.call(o).slice(8, -1);if (n === "Object" && o.constructor) n = o.constructor.name;if (n === "Map" || n === "Set") return Array.from(o);if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);}function _iterableToArray(iter) {if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) return _arrayLikeToArray(arr);}function _arrayLikeToArray(arr, len) {if (len == null || len > arr.length) len = arr.length;for (var i = 0, arr2 = new Array(len); i < len; i++) {arr2[i] = arr[i];}return arr2;}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};} // 加载数据
-var __listDataAddHandle = function __listDataAddHandle(list, map) {
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.__indexMethods = void 0;var __indexMethods = {
+  tabsChange: function tabsChange(index) {
+    this.swiperCurrent = index;
+  },
+  // swiper-item左右移动，通知tabs的滑块跟随移动
+  transition: function transition(e) {
+    var dx = e.detail.dx;
+    this.$refs.uTabs.setDx(dx);
+  },
+  // 由于swiper的内部机制问题，快速切换swiper不会触发dx的连续变化，需要在结束时重置状态
+  // swiper滑动结束，分别设置tabs和swiper的状态
+  animationfinish: function animationfinish(e) {
+    var current = e.detail.current;
+    this.$refs.uTabs.setFinishCurrent(current);
+    this.swiperCurrent = current;
+    this.current = current;
+  },
+  //进入热榜页面
+  enterHotList: function enterHotList() {
+    this.$api.routerHandle.goto('/pagesInteractive/hotList', JSON.parse(this.hotList));
+  },
+  //进入动态详情
+  enterDetail: function enterDetail(id) {
+    this.ifPublishShow = false;
+    this.$api.routerHandle.goto("/pagesInteractive/newsdetail?id=".concat(id));
+  },
+  //动态发布
+  isPublish: function isPublish(index) {
+    if (index === 2) {
+      this.ifPublishShow = true;
+      uni.$emit('popUpChange', '');
+    }
+  },
+  // 拖动屏幕
+  startHandle: function startHandle(e) {
+    uni.startPullDownRefresh({
+      success: function success() {
+        setTimeout(function () {
+          uni.stopPullDownRefresh();
+        }, 1000);
+      } });
+
+  },
+  //滑到页面的最下部分
+  scrollToBottom: function scrollToBottom(index) {
+    this.getNewsData({ noToken: true, tab: index });
+  } };exports.__indexMethods = __indexMethods;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+
+/***/ 356:
+/*!******************************************************************************!*\
+  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/pages/index/getIndexData.js ***!
+  \******************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.__getIndexData = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 21));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}function _unsupportedIterableToArray(o, minLen) {if (!o) return;if (typeof o === "string") return _arrayLikeToArray(o, minLen);var n = Object.prototype.toString.call(o).slice(8, -1);if (n === "Object" && o.constructor) n = o.constructor.name;if (n === "Map" || n === "Set") return Array.from(o);if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);}function _iterableToArray(iter) {if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) return _arrayLikeToArray(arr);}function _arrayLikeToArray(arr, len) {if (len == null || len > arr.length) len = arr.length;for (var i = 0, arr2 = new Array(len); i < len; i++) {arr2[i] = arr[i];}return arr2;}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};} // 加载数据
+var __listDataAddHandle = function __listDataAddHandle(list, map) {var isGetNew = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
   // 请求新数据时清空列表
+  if (isGetNew) {
+    map.clear();
+    this.pageNumList[this.current] = 1;
+  }
   list.forEach(function (item) {
     // 判断数据是否存在
     map.get(item.id) ? map.delete(item.id) : null;
@@ -10738,71 +10887,116 @@ var __listDataAddHandle = function __listDataAddHandle(list, map) {
   });
 };
 
-var __dataUpdate = {
-  // 更新列表内的消息
-  updateReplyList: function updateReplyList(id) {var _arguments = arguments,_this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var options, data, result;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:options = _arguments.length > 1 && _arguments[1] !== undefined ? _arguments[1] : {};
-              _this.loadStatus = 'loading';
-              if (options.getNew) {
-                _this.currentPageNum = _this.totalPage ? _this.totalPage : 1;
-              }if (!(
-              _this.currentPageNum > _this.totalPage && !options.getNew)) {_context.next = 6;break;}
-              _this.loadStatus = 'nomore';return _context.abrupt("return");case 6:_context.next = 8;return (
+var __listDataDeleteHandle = function __listDataDeleteHandle(id) {
+  for (var i = 0; i < this.newsDataList.length; i++) {
+    if (!this.newsDataList[i]) continue;
+    this.newsDataList[i].delete(id);
+    this.$forceUpdate();
+  }
+};
 
 
+var __getIndexData = {
+  // 获取广场页数据
+  getNewsData: function getNewsData() {var _arguments = arguments,_this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var options, data, reuslt, list, pageNum, pageSize, totalPage, total;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:options = _arguments.length > 0 && _arguments[0] !== undefined ? _arguments[0] : {};
+              // 开始加载
+              _this.$set(_this.loadStatus, _this.current, 'loading');
+              // 判断是否达到了最大页面值
+              if (!(_this.pageTotalList[_this.current] < _this.pageNumList[_this.current])) {_context.next = 5;break;}
+              _this.$set(_this.loadStatus, _this.current, 'nomore');return _context.abrupt("return");case 5:
 
-                _this.$http.request({
-                  url: '/dynamicComment/selectRootComment',
-                  method: 'POST',
-                  data: {
-                    pageNum: _this.currentPageNum,
-                    pageSize: 10,
-                    parmas: {
-                      rootCommentId: id } },
+
+              // 判断缓存中是否有该页面
+              if (!_this.newsDataList[_this.current]) {
+                _this.newsDataList[_this.current] = new Map();
+                _this.$forceUpdate();
+              }
+              // 获取数据
+              _context.next = 8;return _this.$http.request({
+                url: '/dynamicState/selectDynamicListByPage',
+                method: 'POST',
+                data: {
+                  "pageNum": options.isGetNew ? 1 : _this.pageNumList[_this.current],
+                  "pageSize": 10,
+                  "parmas": {
+                    "tab": options.tab } },
 
 
-                  delay: 300,
-                  noToken: true }));case 8:data = _context.sent;
+                noToken: options.noToken });case 8:data = _context.sent;
 
-              // 页面参数赋值
-              result = data.data.data;
+              // 判断是否请求成功
               if (data.data.code === 200) {
-                _this.currentPageNum++;
-                _this.totalPage = result.totalPage;
-                _this.dataTotalNum = result.total;
+                _this.pageNumList[_this.current]++;
               }
-              // 
-              _this.loadStatus = 'loadmore';
 
-              if (_this.totalPage === 0 || options.getNew || _this.dataTotalNum < 10) {
-                _this.loadStatus = 'nomore';
-              }
-              // 
-              __listDataAddHandle.call(_this, result.list, _this.replyList);
+              reuslt = data.data.data;
+              list = reuslt.list, pageNum = reuslt.pageNum, pageSize = reuslt.pageSize, totalPage = reuslt.totalPage, total = reuslt.total;
 
-              // 更新页面状态
+              _this.pageTotalList[_this.current] = totalPage;
+              // 添加数据
+              __listDataAddHandle.call(_this, list, _this.newsDataList[_this.current], options.isGetNew);
+              _this.$set(_this.loadStatus, _this.current, 'loadmore');
               _this.$forceUpdate();
               setTimeout(function () {
-                _this.ifLoadingShow = false;
-              }, 200);case 16:case "end":return _context.stop();}}}, _callee);}))();
+                _this.ifLoaddingShow = false;
+              }, 500);case 17:case "end":return _context.stop();}}}, _callee);}))();
   },
+
   // 映射动态数据
-  getNewsMapData: function getNewsMapData() {
-    if (this.replyList) {
-      return _toConsumableArray(this.replyList.values());
+  getNewsMapData: function getNewsMapData(index) {
+    if (this.newsDataList[index]) {
+      return _toConsumableArray(this.newsDataList[index].values());
     }
   },
-  // 请求更新数据
-  scrollToBottom: function scrollToBottom() {
-    this.updateReplyList(this.commentInfo.id, { noToken: true, delay: 100 });
+
+  getHotListDataContent: function getHotListDataContent(index) {
+    return JSON.parse(this.hotList)[index].content;
   },
-  // 数据重置
-  clearData: function clearData() {
-    this.commentInfo = null;
-    this.replyList = new Map();
-    this.totalPage = 1;
-    this.currentPageNum = 1;
-    this.dataTotalNum = 0;
-  } };exports.__dataUpdate = __dataUpdate;
+  // 热榜
+  getHotList: function getHotList(options) {var _this2 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee2() {var data, result;return _regenerator.default.wrap(function _callee2$(_context2) {while (1) {switch (_context2.prev = _context2.next) {case 0:_context2.next = 2;return (
+                _this2.$http.request({
+                  url: '/dynamicState/selectHotRank',
+                  method: 'POST',
+                  data: {
+                    "rankType": options.type },
+
+                  noToken: options.noToken }));case 2:data = _context2.sent;
+
+              result = JSON.stringify(data.data.data);
+              _this2.hotList = result;case 5:case "end":return _context2.stop();}}}, _callee2);}))();
+  },
+
+  // 获取举报列表
+  getReportList: function getReportList(options) {var _this3 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee3() {var data;return _regenerator.default.wrap(function _callee3$(_context3) {while (1) {switch (_context3.prev = _context3.next) {case 0:_context3.next = 2;return (
+                _this3.$http.request({
+                  url: '/sysCode/getDictByKey',
+                  method: 'POST',
+                  data: {
+                    key: 'report' },
+
+                  noToken: options.noToken }));case 2:data = _context3.sent;
+
+              _this3.reportInfoList = data.data.data;case 4:case "end":return _context3.stop();}}}, _callee3);}))();
+  },
+  // 获取轮播图
+  getBanner: function getBanner(options) {var _this4 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee4() {var data, result;return _regenerator.default.wrap(function _callee4$(_context4) {while (1) {switch (_context4.prev = _context4.next) {case 0:_context4.next = 2;return (
+                _this4.$http.request({
+                  url: '/sysElement/getElementByCode',
+                  method: 'POST',
+                  data: {
+                    parentCode: "recommend_banner" },
+
+                  noToken: options.noToken }));case 2:data = _context4.sent;
+
+
+              result = data.data.data;
+              _this4.bannerList = result;case 5:case "end":return _context4.stop();}}}, _callee4);}))();
+  },
+
+  // 删除数据
+  deleteData: function deleteData(id) {
+    __listDataDeleteHandle.call(this, id);
+  } };exports.__getIndexData = __getIndexData;
 
 /***/ }),
 
@@ -12352,9 +12546,13 @@ RouterHandle = /*#__PURE__*/function () {
 
   }
   // 跳转到页面
-  _createClass(RouterHandle, [{ key: "goto", value: function goto(url) {
+  _createClass(RouterHandle, [{ key: "goto", value: function goto(url, data) {
       uni.navigateTo({
-        url: url });
+        url: url,
+        success: function success(res) {
+          // 通过eventChannel向被打开页面传送数据
+          res.eventChannel.emit('acceptDataFromOpenerPage', { data: data });
+        } });
 
     }
     // 返回页面
@@ -12512,180 +12710,6 @@ module.exports = {
   onShareTimeline: function onShareTimeline() {
     return this.$u.mpShare;
   } };
-
-/***/ }),
-
-/***/ 61:
-/*!***********************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/pages/index/index.js ***!
-  \***********************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.__indexMethods = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 21));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}var __indexMethods = {
-  tabsChange: function tabsChange(index) {
-    this.swiperCurrent = index;
-  },
-  // swiper-item左右移动，通知tabs的滑块跟随移动
-  transition: function transition(e) {
-    var dx = e.detail.dx;
-    this.$refs.uTabs.setDx(dx);
-  },
-  // 由于swiper的内部机制问题，快速切换swiper不会触发dx的连续变化，需要在结束时重置状态
-  // swiper滑动结束，分别设置tabs和swiper的状态
-  animationfinish: function animationfinish(e) {
-    var current = e.detail.current;
-    this.$refs.uTabs.setFinishCurrent(current);
-    this.swiperCurrent = current;
-    this.current = current;
-  },
-  //进入热榜页面
-  enterHotList: function enterHotList() {
-    this.$api.routerHandle.goto('/pagesInteractive/hotList');
-  },
-  //进入动态详情
-  enterDetail: function enterDetail(id) {
-    this.ifPublishShow = false;
-    this.$api.routerHandle.goto("/pagesInteractive/newsdetail?id=".concat(id));
-  },
-  //动态发布
-  isPublish: function isPublish(index) {
-    if (index === 2) {
-      this.ifPublishShow = true;
-      uni.$emit('popUpChange', '');
-    }
-  },
-  // 拖动屏幕
-  startHandle: function startHandle(e) {
-    uni.startPullDownRefresh({
-      success: function success() {
-        setTimeout(function () {
-          uni.stopPullDownRefresh();
-        }, 1000);
-      } });
-
-  },
-  //滑到页面的最下部分
-  scrollToBottom: function scrollToBottom(index) {
-    this.getNewsData({ noToken: true, tab: index });
-  },
-  // 获取举报列表
-  getReportList: function getReportList(options) {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var data;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:_context.next = 2;return (
-                _this.$http.request({
-                  url: '/sysCode/getDictByKey',
-                  method: 'POST',
-                  data: {
-                    key: 'report' },
-
-                  noToken: options.noToken }));case 2:data = _context.sent;
-
-              _this.reportInfoList = data.data.data;case 4:case "end":return _context.stop();}}}, _callee);}))();
-  } };exports.__indexMethods = __indexMethods;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
-
-/***/ }),
-
-/***/ 62:
-/*!******************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/pages/index/getIndexData.js ***!
-  \******************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.__getIndexData = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 21));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}function _unsupportedIterableToArray(o, minLen) {if (!o) return;if (typeof o === "string") return _arrayLikeToArray(o, minLen);var n = Object.prototype.toString.call(o).slice(8, -1);if (n === "Object" && o.constructor) n = o.constructor.name;if (n === "Map" || n === "Set") return Array.from(o);if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);}function _iterableToArray(iter) {if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) return _arrayLikeToArray(arr);}function _arrayLikeToArray(arr, len) {if (len == null || len > arr.length) len = arr.length;for (var i = 0, arr2 = new Array(len); i < len; i++) {arr2[i] = arr[i];}return arr2;}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};} // 加载数据
-var __listDataAddHandle = function __listDataAddHandle(list, map) {var isGetNew = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-  // 请求新数据时清空列表
-  if (isGetNew) {
-    map.clear();
-    this.pageNumList[this.current] = 1;
-  }
-  list.forEach(function (item) {
-    // 判断数据是否存在
-    map.get(item.id) ? map.delete(item.id) : null;
-    map.set(item.id, item);
-  });
-};
-
-var __listDataDeleteHandle = function __listDataDeleteHandle(id) {
-  for (var i = 0; i < this.newsDataList.length; i++) {
-    if (!this.newsDataList[i]) continue;
-    this.newsDataList[i].delete(id);
-    this.$forceUpdate();
-  }
-};
-
-
-var __getIndexData = {
-  // 获取广场页数据
-  getNewsData: function getNewsData() {var _arguments = arguments,_this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var options, data, reuslt, list, pageNum, pageSize, totalPage, total;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:options = _arguments.length > 0 && _arguments[0] !== undefined ? _arguments[0] : {};
-              // 开始加载
-              _this.$set(_this.loadStatus, _this.current, 'loading');
-              // 判断是否达到了最大页面值
-              if (!(_this.pageTotalList[_this.current] < _this.pageNumList[_this.current])) {_context.next = 5;break;}
-              _this.$set(_this.loadStatus, _this.current, 'nomore');return _context.abrupt("return");case 5:
-
-
-              // 判断缓存中是否有该页面
-              if (!_this.newsDataList[_this.current]) {
-                _this.newsDataList[_this.current] = new Map();
-                _this.$forceUpdate();
-              }
-              // 获取数据
-              _context.next = 8;return _this.$http.request({
-                url: '/dynamicState/selectDynamicListByPage',
-                method: 'POST',
-                data: {
-                  "pageNum": options.isGetNew ? 1 : _this.pageNumList[_this.current],
-                  "pageSize": 10,
-                  "parmas": {
-                    "tab": options.tab } },
-
-
-                noToken: options.noToken });case 8:data = _context.sent;
-
-              // 判断是否请求成功
-              if (data.data.code === 200) {
-                _this.pageNumList[_this.current]++;
-              }
-
-              reuslt = data.data.data;
-              list = reuslt.list, pageNum = reuslt.pageNum, pageSize = reuslt.pageSize, totalPage = reuslt.totalPage, total = reuslt.total;
-
-              _this.pageTotalList[_this.current] = totalPage;
-              // 添加数据
-              __listDataAddHandle.call(_this, list, _this.newsDataList[_this.current], options.isGetNew);
-              _this.$set(_this.loadStatus, _this.current, 'loadmore');
-              _this.$forceUpdate();
-              setTimeout(function () {
-                _this.ifLoaddingShow = false;
-              }, 500);case 17:case "end":return _context.stop();}}}, _callee);}))();
-  },
-
-  // 映射动态数据
-  getNewsMapData: function getNewsMapData(index) {
-    if (this.newsDataList[index]) {
-      return _toConsumableArray(this.newsDataList[index].values());
-    }
-  },
-
-  // 热榜
-  getHotList: function getHotList(options) {var _this2 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee2() {var data;return _regenerator.default.wrap(function _callee2$(_context2) {while (1) {switch (_context2.prev = _context2.next) {case 0:_context2.next = 2;return (
-                _this2.$http.request({
-                  url: '/dynamicState/selectHotRank',
-                  method: 'POST',
-                  data: {
-                    "rankType": options.type },
-
-                  noToken: options.noToken }));case 2:data = _context2.sent;case 3:case "end":return _context2.stop();}}}, _callee2);}))();
-
-  },
-
-  // 删除数据
-  deleteData: function deleteData(id) {
-    __listDataDeleteHandle.call(this, id);
-  } };exports.__getIndexData = __getIndexData;
 
 /***/ })
 
