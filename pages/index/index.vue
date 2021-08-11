@@ -32,7 +32,7 @@
 					<view>
 						<!-- 轮播图/热榜等 -->
 						<!-- 热榜 -->
-						<view class="margin-xs bg-white padding-sm" style="height: 280rpx;" v-if="(index === 2 || index === 1) && login && hotList && hotList.length" @click="enterHotList">
+						<view class="margin-xs bg-white padding-sm" style="height: 280rpx;" v-if="(index === 2 || index === 1) && login && hotList && hotList.length > 4" @click="enterHotList">
 							<!-- 头部 -->
 							<view class=""><text class="text-bold text-black text-lg">校园热榜</text></view>
 							<!-- 内容 -->

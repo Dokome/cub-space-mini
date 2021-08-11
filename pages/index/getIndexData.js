@@ -75,7 +75,12 @@ export const __getIndexData = {
 	},
 	
 	getHotListDataContent(index) {
-		return JSON.parse(this.hotList)[index].content;
+		if (this.hotList.length > 4) {
+			let temp = JSON.parse(this.hotList);
+			if (temp[index]) {
+				return temp[index].content;
+			}
+		}
 	},
 	// 热榜
 	async getHotList(options) {
