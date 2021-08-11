@@ -1,6 +1,6 @@
 <template>
 	<!-- :class="{ 'margin-top-xs': type === 'news' }" -->
-	<view class="bg-white padding u-border-top" style="width: 100%;" >
+	<view class="bg-white padding u-border-top" style="width: 100%;">
 		<!--
 			动态
 		 -->
@@ -8,9 +8,7 @@
 			<!-- 动态、作者信息 -->
 			<view class="flex" style="position: relative;">
 				<!-- 操作框(三个点) -->
-				<view class="text-lg moreOptions" @click.stop="moreOptions">
-					. . .
-				</view>
+				<view class="text-lg moreOptions" @click.stop="moreOptions">. . .</view>
 				<!-- 头像 -->
 				<view class="margin-top-xs"><u-avatar size="60" :src="newsdata.avatarUrl"></u-avatar></view>
 				<!-- 文字信息 -->
@@ -28,9 +26,7 @@
 			<!-- 图片栏 -->
 			<view class="margin-tb-sm img_Con" style="width: 600rpx;" v-if="newsdata.images && newsdata.images.length">
 				<view :class="imgNewStyle" v-for="(item, index) in newsdata.images" :key="index">
-					<image :src="item.url" mode="aspectFill" @click.stop="imgPrview(item.url, newsdata.images)"
-						class="show_img" :style="imgNewStyle">
-					</image>
+					<image :src="item.url" mode="aspectFill" @click.stop="imgPrview(item.url, newsdata.images)" class="show_img" :style="imgNewStyle"></image>
 				</view>
 			</view>
 			<u-tag :text="newsdata.schoolName" shape="circle" color="#909399" bg-color="#F5F5F5" border-color="#F5F5F5" />
@@ -53,30 +49,27 @@
 				</view>
 			</view>
 			<!-- 模态框 -->
-				<!-- 更多 -->
+			<!-- 更多 -->
 			<u-modal v-model="modalShow" :show-confirm-button="false" :mask-close-able="true" :show-title="false">
-						<view class="flex flex-direction" @click="moreOptionsClick(newsdata, $event)">
-							<view class="padding" data-type="delete" v-if="!newsdata.btnStatus">删除</view>
-							<view class="padding u-border-top" data-type="report">举报</view>
-<!-- 							<view class="padding u-border-top" data-type="share">
+				<view class="flex flex-direction" @click="moreOptionsClick(newsdata, $event)">
+					<view class="padding" data-type="delete" v-if="!newsdata.btnStatus">删除</view>
+					<view class="padding u-border-top" data-type="report">举报</view>
+					<!-- 							<view class="padding u-border-top" data-type="share">
 								<u-button open-type="share">转发</u-button>
 							</view> -->
-						</view>
+				</view>
 			</u-modal>
-				<!-- 举报 -->
+			<!-- 举报 -->
 			<u-modal v-model="reportModalShow" :show-confirm-button="false" :mask-close-able="true" :show-title="false">
-						<view class="flex flex-direction">
-							<view class="padding" v-for="item in reportInfoList" 
-								:key="item.id" @click="dataReport(item.value)">{{ item.value }}
-							</view>
-						</view>
+				<view class="flex flex-direction">
+					<view class="padding" v-for="item in reportInfoList" :key="item.id" @click="dataReport(item.value)">{{ item.value }}</view>
+				</view>
 			</u-modal>
 		</view>
 		<!-- 
 			回复类型
 		 -->
-		<view class="" v-if="type === 'reply' || type === 'comment'" 
-			@click="replyHandle(commentdata)">
+		<view class="" v-if="type === 'reply' || type === 'comment'" @click="replyHandle(commentdata)">
 			<view class="flex bg-white wmax">
 				<!-- 头像 -->
 				<view class="" style="width: 65rpx;"><u-avatar size="60" :src="commentdata.avatarUrl"></u-avatar></view>
@@ -98,31 +91,25 @@
 								<text class="margin-lr-xs text-blue">
 									<text>{{ commentdata.parentCommentUserNickName }}</text>
 									<!-- <text class="text-blue text-bold">{{ '[作者]' }}</text>:	 -->
-									</text>
+								</text>
 							</text>
 							<text>{{ commentdata.content }}</text>
 						</view>
 						<!-- 配图 -->
 						<view class="margin-tb-sm img_Con" style="width: 600rpx;" v-if="commentdata.images && commentdata.images.length">
 							<view :class="imgComStyle" v-for="(item, index) in commentdata.images" :key="index">
-								<image :src="item.url" mode="aspectFill" class="show_img" 
-											 :style="imgComStyle" @click.stop="imgPrview(item.url, commentdata.images)">
-								</image>
+								<image :src="item.url" mode="aspectFill" class="show_img" :style="imgComStyle" @click.stop="imgPrview(item.url, commentdata.images)"></image>
 							</view>
 						</view>
 					</view>
 					<!-- 回复框 -->
-					<view
-						class="padding margin-top-xs"
-						style="background-color: #F3F4F6; border-radius: 10rpx;"
-						v-if="!enterStateComment && commentdata.childCommentLength"
-					>
+					<view class="padding margin-top-xs" style="background-color: #F3F4F6; border-radius: 10rpx;" v-if="!enterStateComment && commentdata.childCommentLength">
 						<view class="wmax">
 							<view class="clamp1">
-<!-- 								<text style="color: #666;">
+								<!-- 								<text style="color: #666;">
 									{{ commentdata.childCommentList[0].nickName }} -->
-									<!-- <text class="text-blue text-bold" v-if="commentdata.isAuthor">{{ '[作者]' }}</text> -->
-<!-- 								</text>
+								<!-- <text class="text-blue text-bold" v-if="commentdata.isAuthor">{{ '[作者]' }}</text> -->
+								<!-- 								</text>
 								:
 								<text class="margin-left-xs" style="color: #666;">{{ commentdata.childCommentList[0].content }}</text> -->
 							</view>
@@ -176,7 +163,7 @@ export default {
 		},
 		likeStatus() {
 			const data = this.commentdata.nickName ? this.commentdata : this.newsdata;
-			return this.likeStatusCount ^ data.likeStatus; 
+			return this.likeStatusCount ^ data.likeStatus;
 		},
 		likeNum() {
 			const data = this.commentdata.nickName ? this.commentdata : this.newsdata;
@@ -186,20 +173,20 @@ export default {
 	mounted() {
 		// this.getReportList();
 		this.$u.mpShare = {
-			title: this.newsdata.content && this.newsdata.content.slice(0, 8) + '...', 
-			path: '', 
-			imageUrl: '' 
-		}
+			title: this.newsdata.content && this.newsdata.content.slice(0, 8) + '...',
+			path: '',
+			imageUrl: ''
+		};
 		this.$forceUpdate();
 	},
 	methods: {
 		...__moreOptionsHandle,
 		// 回复评论打开
 		replyHandle(commentData) {
-			// 
+			//
 			if (this.enterStateComment) {
 				console.log(123);
-				uni.$emit('inputStatusChange', { type: this.type, data: commentData});
+				uni.$emit('inputStatusChange', { type: this.type, data: commentData });
 			} else if (this.type === 'comment' && !this.enterStateComment) {
 				console.log(456);
 				uni.$emit('repylChange', { type: this.type, data: commentData });
@@ -217,9 +204,9 @@ export default {
 				url: '/dynamicLikeForward/addLikeOrForward',
 				method: 'POST',
 				data: {
-				  bizType: type,
-				  bizId: data.id,
-				  type: 1
+					bizType: type,
+					bizId: data.id,
+					type: 1
 				}
 			});
 		}
@@ -266,10 +253,10 @@ export default {
 </script>
 
 <style lang="scss">
-	.moreOptions {
-		position: absolute;
-		right: 0;
-		top: 0;
-		z-index: 999;
-	}
+.moreOptions {
+	position: absolute;
+	right: 0;
+	top: 0;
+	z-index: 999;
+}
 </style>
