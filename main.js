@@ -2,7 +2,7 @@ import Vue from 'vue'
 import App from './App'
 import uView from 'uview-ui';
 import store from './store'
-import { imgHandle, routerHandle } from './utils/common.js';
+import { imgHandle, routerHandle, interactive } from './utils/common.js';
 import { http } from './utils/request.js';
 import { set,get,remove,clear } from './utils/cache.js';
 import login from './components/login/login.vue'
@@ -16,7 +16,7 @@ let mpShare = require('uview-ui/libs/mixin/mpShare.js');
 Vue.mixin(mpShare);
 
 //自定义工具
-Vue.prototype.$api = { imgHandle, routerHandle };
+Vue.prototype.$api = { imgHandle, routerHandle, interactive };
 Vue.prototype.$http = http;
 Vue.prototype.$cache = {set, get, remove, clear};
 

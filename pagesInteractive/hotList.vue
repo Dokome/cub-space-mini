@@ -11,10 +11,11 @@
 							style="width: 40rpx; height: 40rpx;position: absolute; left: -10rpx; top: 5rpx;"></image>
 						<text>{{index + 1}}</text>
 					</view>
-					<view class="flex-sub flex align-start">
+					<view class="flex-sub flex align-start"  style="position: relative;" @click="enterNewsDetail(item.id)">
 					<!-- 左侧 -->
 					<view class="flex-sub">
-						<text class="clamp3 text-black" style="font-weight: 500;">{{item.content}}</text>
+						<text class="clamp2 text-black text-bold">{{item.content}}</text>
+						<view class="hotValue"><text class="u-tips-color text-sm">{{item.hotValue}}热度</text></view>
 					</view>
 					<!-- 右侧 -->
 					<view class="margin-left-sm" style="width: 200rpx; height: 130rpx;">
@@ -47,6 +48,9 @@
 					let temp = this.hotList[index].images[0];
 					return temp ? temp.url : this.defaultImg;
 				}
+			},
+			enterNewsDetail(id) {
+				this.$api.routerHandle.goto(`/pagesInteractive/newsdetail?id=${id}`);
 			}
 		},
 		onLoad: function(option) {
@@ -61,5 +65,9 @@
 </script>
 
 <style lang="scss" scoped>
-
+.hotValue {
+	position: absolute;
+	left: 0;
+	bottom: 0;
+}
 </style>

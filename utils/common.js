@@ -95,10 +95,60 @@ class RouterHandle {
 	}
 }
 
+class Interactive {
+	constructor(arg) {
+	    
+	}
+	// 页面分享
+	async newsShareHandle(id) {
+		const data = await this.$http.request({
+			url: '/dynamicLikeForward/addLikeOrForward',
+			method: 'POST',
+			data: {
+				bizId: id,
+				bizType: 1,
+				type: 2
+			}
+		});
+	}
+	// 页面分享监听
+	onShareFunc(res) {
+		let info = {};
+		if (res.from === 'button') {// 来自页面内分享按钮
+			info = res.target.dataset.info;
+			return {
+				title: info.content && info.content.slice(0, 8) + '...',
+				path: `/pagesInteractive/newsdetail?id=${info.id}`,
+				imageUrl: info.images[0] || 'https://cub.image.emily.red/operation/logo.png'
+			}
+		} 
+		return {
+			title: '遇见有趣的',
+			imageUrl: 'https://cub.image.emily.red/operation/logo.png'
+		}
+	}
+	// 点赞
+	async likeHandle(data, type) {
+		this.likeNumCount = this.likeNumCount + (this.likeStatus ? -1 : 1);
+		this.likeStatusCount = this.likeStatusCount ? 0 : 1;
+		const result = await this.$http.request({
+			url: '/dynamicLikeForward/addLikeOrForward',
+			method: 'POST',
+			data: {
+				bizType: type,
+				bizId: data.id,
+				type: 1
+			}
+		});
+	}
+	
+}
+
 // 生成实例
 let imgHandle = new ImgHandle();
 let routerHandle = new RouterHandle();
+let interactive = new Interactive();
 
 export {
-	imgHandle, routerHandle
+	imgHandle, routerHandle, interactive
 }

@@ -872,7 +872,7 @@ function initData(vueOptions, context) {
     try {
       data = data.call(context); // 支持 Vue.prototype 上挂的数据
     } catch (e) {
-      if (Object({"NODE_ENV":"development","VUE_APP_NAME":"cub-space-mini","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"VUE_APP_NAME":"cub-space-mini","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.warn('根据 Vue 的 data 函数初始化小程序 data 失败，请尽量确保 data 函数中不访问 vm 对象，否则可能影响首次数据渲染速度。', data);
       }
     }
@@ -2852,7 +2852,7 @@ queryParams;exports.default = _default;
 
 /***/ }),
 
-/***/ 194:
+/***/ 196:
 /*!*********************************************************************************!*\
   !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/components/card/moreOptions.js ***!
   \*********************************************************************************/
@@ -2874,12 +2874,8 @@ queryParams;exports.default = _default;
     } else if (type === 'report') {
       this.reportModalShow = true;
     } else {
-      console.log(data);
-      this.$u.mpShare = {
-        title: data.content.slice(0, 8) + '...',
-        path: '',
-        imageUrl: '' };
-
+      // 转发动态
+      this.shareNews(data.id);
     }
   },
   // 删除数据
@@ -2922,11 +2918,14 @@ queryParams;exports.default = _default;
                   content: reportValue } });case 3:data = _context2.sent;
 
 
-              console.log(_this2.newsdata.id);
               uni.showToast({
                 title: '举报成功!',
-                icon: 'none' });case 6:case "end":return _context2.stop();}}}, _callee2);}))();
+                icon: 'none' });case 5:case "end":return _context2.stop();}}}, _callee2);}))();
 
+  },
+  // 分享
+  shareNews: function shareNews(id) {var _this3 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee3() {return _regenerator.default.wrap(function _callee3$(_context3) {while (1) {switch (_context3.prev = _context3.next) {case 0:
+              _this3.$api.interactive.newsShareHandle.call(_this3, id);case 1:case "end":return _context3.stop();}}}, _callee3);}))();
   } };exports.__moreOptionsHandle = __moreOptionsHandle;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
@@ -8459,7 +8458,7 @@ function type(obj) {
 
 function flushCallbacks$1(vm) {
     if (vm.__next_tick_callbacks && vm.__next_tick_callbacks.length) {
-        if (Object({"NODE_ENV":"development","VUE_APP_NAME":"cub-space-mini","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
+        if (Object({"VUE_APP_NAME":"cub-space-mini","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:flushCallbacks[' + vm.__next_tick_callbacks.length + ']');
@@ -8480,14 +8479,14 @@ function nextTick$1(vm, cb) {
     //1.nextTick 之前 已 setData 且 setData 还未回调完成
     //2.nextTick 之前存在 render watcher
     if (!vm.__next_tick_pending && !hasRenderWatcher(vm)) {
-        if(Object({"NODE_ENV":"development","VUE_APP_NAME":"cub-space-mini","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"VUE_APP_NAME":"cub-space-mini","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:nextVueTick');
         }
         return nextTick(cb, vm)
     }else{
-        if(Object({"NODE_ENV":"development","VUE_APP_NAME":"cub-space-mini","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"VUE_APP_NAME":"cub-space-mini","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance$1 = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance$1.is || mpInstance$1.route) + '][' + vm._uid +
                 ']:nextMPTick');
@@ -8573,7 +8572,7 @@ var patch = function(oldVnode, vnode) {
     });
     var diffData = this.$shouldDiffData === false ? data : diff(data, mpData);
     if (Object.keys(diffData).length) {
-      if (Object({"NODE_ENV":"development","VUE_APP_NAME":"cub-space-mini","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"VUE_APP_NAME":"cub-space-mini","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + this._uid +
           ']差量更新',
           JSON.stringify(diffData));
@@ -9126,7 +9125,7 @@ module.exports = __webpack_require__(/*! regenerator-runtime */ 22);
 
 /***/ }),
 
-/***/ 216:
+/***/ 218:
 /*!********************************************************************************!*\
   !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/components/pop/newsPublish.js ***!
   \********************************************************************************/
@@ -9182,6 +9181,7 @@ module.exports = __webpack_require__(/*! regenerator-runtime */ 22);
               uni.hideLoading();
               if (data.data.code === 200) {
                 _this.show = false;
+                uni.$emit('updateData', '');
                 setTimeout(function () {
                   uni.showToast({
                     title: '发布成功',
@@ -9195,7 +9195,7 @@ module.exports = __webpack_require__(/*! regenerator-runtime */ 22);
 
 /***/ }),
 
-/***/ 217:
+/***/ 219:
 /*!*******************************************************************************!*\
   !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/components/pop/dataUpdate.js ***!
   \*******************************************************************************/
@@ -10181,66 +10181,6 @@ timeFrom;exports.default = _default;
 
 /***/ }),
 
-/***/ 258:
-/*!********************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/uview-ui/libs/util/emitter.js ***!
-  \********************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /**
-                                                                                                      * 递归使用 call 方式this指向
-                                                                                                      * @param componentName // 需要找的组件的名称
-                                                                                                      * @param eventName // 事件名称
-                                                                                                      * @param params // 需要传递的参数
-                                                                                                      */
-function _broadcast(componentName, eventName, params) {
-  // 循环子节点找到名称一样的子节点 否则 递归 当前子节点
-  this.$children.map(function (child) {
-    if (componentName === child.$options.name) {
-      child.$emit.apply(child, [eventName].concat(params));
-    } else {
-      _broadcast.apply(child, [componentName, eventName].concat(params));
-    }
-  });
-}var _default =
-{
-  methods: {
-    /**
-              * 派发 (向上查找) (一个)
-              * @param componentName // 需要找的组件的名称
-              * @param eventName // 事件名称
-              * @param params // 需要传递的参数
-              */
-    dispatch: function dispatch(componentName, eventName, params) {
-      var parent = this.$parent || this.$root; //$parent 找到最近的父节点 $root 根节点
-      var name = parent.$options.name; // 获取当前组件实例的name
-      // 如果当前有节点 && 当前没名称 且 当前名称等于需要传进来的名称的时候就去查找当前的节点
-      // 循环出当前名称的一样的组件实例
-      while (parent && (!name || name !== componentName)) {
-        parent = parent.$parent;
-        if (parent) {
-          name = parent.$options.name;
-        }
-      }
-      // 有节点表示当前找到了name一样的实例
-      if (parent) {
-        parent.$emit.apply(parent, [eventName].concat(params));
-      }
-    },
-    /**
-        * 广播 (向下查找) (广播多个)
-        * @param componentName // 需要找的组件的名称
-        * @param eventName // 事件名称
-        * @param params // 需要传递的参数
-        */
-    broadcast: function broadcast(componentName, eventName, params) {
-      _broadcast.call(this, componentName, eventName, params);
-    } } };exports.default = _default;
-
-/***/ }),
-
 /***/ 26:
 /*!******************************************************************************************!*\
   !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/uview-ui/libs/function/colorGradient.js ***!
@@ -10385,7 +10325,67 @@ function colorToRgba(color) {var alpha = arguments.length > 1 && arguments[1] !=
 
 /***/ }),
 
-/***/ 266:
+/***/ 260:
+/*!********************************************************************************!*\
+  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/uview-ui/libs/util/emitter.js ***!
+  \********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /**
+                                                                                                      * 递归使用 call 方式this指向
+                                                                                                      * @param componentName // 需要找的组件的名称
+                                                                                                      * @param eventName // 事件名称
+                                                                                                      * @param params // 需要传递的参数
+                                                                                                      */
+function _broadcast(componentName, eventName, params) {
+  // 循环子节点找到名称一样的子节点 否则 递归 当前子节点
+  this.$children.map(function (child) {
+    if (componentName === child.$options.name) {
+      child.$emit.apply(child, [eventName].concat(params));
+    } else {
+      _broadcast.apply(child, [componentName, eventName].concat(params));
+    }
+  });
+}var _default =
+{
+  methods: {
+    /**
+              * 派发 (向上查找) (一个)
+              * @param componentName // 需要找的组件的名称
+              * @param eventName // 事件名称
+              * @param params // 需要传递的参数
+              */
+    dispatch: function dispatch(componentName, eventName, params) {
+      var parent = this.$parent || this.$root; //$parent 找到最近的父节点 $root 根节点
+      var name = parent.$options.name; // 获取当前组件实例的name
+      // 如果当前有节点 && 当前没名称 且 当前名称等于需要传进来的名称的时候就去查找当前的节点
+      // 循环出当前名称的一样的组件实例
+      while (parent && (!name || name !== componentName)) {
+        parent = parent.$parent;
+        if (parent) {
+          name = parent.$options.name;
+        }
+      }
+      // 有节点表示当前找到了name一样的实例
+      if (parent) {
+        parent.$emit.apply(parent, [eventName].concat(params));
+      }
+    },
+    /**
+        * 广播 (向下查找) (广播多个)
+        * @param componentName // 需要找的组件的名称
+        * @param eventName // 事件名称
+        * @param params // 需要传递的参数
+        */
+    broadcast: function broadcast(componentName, eventName, params) {
+      _broadcast.call(this, componentName, eventName, params);
+    } } };exports.default = _default;
+
+/***/ }),
+
+/***/ 268:
 /*!************************************************************************************!*\
   !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/components/textInput/textInput.js ***!
   \************************************************************************************/
@@ -12272,7 +12272,7 @@ module.exports = {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.routerHandle = exports.imgHandle = void 0;function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}function _createClass(Constructor, protoProps, staticProps) {if (protoProps) _defineProperties(Constructor.prototype, protoProps);if (staticProps) _defineProperties(Constructor, staticProps);return Constructor;} // 图片类
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.interactive = exports.routerHandle = exports.imgHandle = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 21));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}function _createClass(Constructor, protoProps, staticProps) {if (protoProps) _defineProperties(Constructor.prototype, protoProps);if (staticProps) _defineProperties(Constructor, staticProps);return Constructor;} // 图片类
 var ImgHandle = /*#__PURE__*/function () {
   function ImgHandle(arg) {_classCallCheck(this, ImgHandle);
 
@@ -12366,12 +12366,62 @@ RouterHandle = /*#__PURE__*/function () {
       uni.navigateBack({
         delta: 1 });
 
-    } }]);return RouterHandle;}();
+    } }]);return RouterHandle;}();var
+
+
+Interactive = /*#__PURE__*/function () {
+  function Interactive(arg) {_classCallCheck(this, Interactive);
+
+  }
+  // 页面分享
+  _createClass(Interactive, [{ key: "newsShareHandle", value: function () {var _newsShareHandle = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee(id) {var data;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:_context.next = 2;return (
+                  this.$http.request({
+                    url: '/dynamicLikeForward/addLikeOrForward',
+                    method: 'POST',
+                    data: {
+                      bizId: id,
+                      bizType: 1,
+                      type: 2 } }));case 2:data = _context.sent;case 3:case "end":return _context.stop();}}}, _callee, this);}));function newsShareHandle(_x) {return _newsShareHandle.apply(this, arguments);}return newsShareHandle;}()
+
+
+
+    // 页面分享监听
+  }, { key: "onShareFunc", value: function onShareFunc(res) {
+      var info = {};
+      if (res.from === 'button') {// 来自页面内分享按钮
+        info = res.target.dataset.info;
+        return {
+          title: info.content && info.content.slice(0, 8) + '...',
+          path: "/pagesInteractive/newsdetail?id=".concat(info.id),
+          imageUrl: info.images[0] || 'https://cub.image.emily.red/operation/logo.png' };
+
+      }
+      return {
+        title: '遇见有趣的',
+        imageUrl: 'https://cub.image.emily.red/operation/logo.png' };
+
+    }
+    // 点赞
+  }, { key: "likeHandle", value: function () {var _likeHandle = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee2(data, type) {var result;return _regenerator.default.wrap(function _callee2$(_context2) {while (1) {switch (_context2.prev = _context2.next) {case 0:
+                this.likeNumCount = this.likeNumCount + (this.likeStatus ? -1 : 1);
+                this.likeStatusCount = this.likeStatusCount ? 0 : 1;_context2.next = 4;return (
+                  this.$http.request({
+                    url: '/dynamicLikeForward/addLikeOrForward',
+                    method: 'POST',
+                    data: {
+                      bizType: type,
+                      bizId: data.id,
+                      type: 1 } }));case 4:result = _context2.sent;case 5:case "end":return _context2.stop();}}}, _callee2, this);}));function likeHandle(_x2, _x3) {return _likeHandle.apply(this, arguments);}return likeHandle;}() }]);return Interactive;}();
+
+
+
+
 
 
 // 生成实例
 var imgHandle = new ImgHandle();exports.imgHandle = imgHandle;
 var routerHandle = new RouterHandle();exports.routerHandle = routerHandle;
+var interactive = new Interactive();exports.interactive = interactive;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),

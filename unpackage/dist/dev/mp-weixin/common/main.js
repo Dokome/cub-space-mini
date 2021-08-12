@@ -26,7 +26,7 @@ var mpShare = __webpack_require__(/*! uview-ui/libs/mixin/mpShare.js */ 54);
 _vue.default.mixin(mpShare);
 
 //自定义工具
-_vue.default.prototype.$api = { imgHandle: _common.imgHandle, routerHandle: _common.routerHandle };
+_vue.default.prototype.$api = { imgHandle: _common.imgHandle, routerHandle: _common.routerHandle, interactive: _common.interactive };
 _vue.default.prototype.$http = _request.http;
 _vue.default.prototype.$cache = { set: _cache.set, get: _cache.get, remove: _cache.remove, clear: _cache.clear };
 
@@ -149,10 +149,10 @@ var components
 try {
   components = {
     uAvatar: function() {
-      return __webpack_require__.e(/*! import() | uview-ui/components/u-avatar/u-avatar */ "uview-ui/components/u-avatar/u-avatar").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-avatar/u-avatar.vue */ 154))
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-avatar/u-avatar */ "uview-ui/components/u-avatar/u-avatar").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-avatar/u-avatar.vue */ 156))
     },
     uButton: function() {
-      return __webpack_require__.e(/*! import() | uview-ui/components/u-button/u-button */ "uview-ui/components/u-button/u-button").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-button/u-button.vue */ 161))
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-button/u-button */ "uview-ui/components/u-button/u-button").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-button/u-button.vue */ 163))
     }
   }
 } catch (e) {

@@ -46,6 +46,7 @@ export const __newsPublish = {
 		uni.hideLoading();
 		if (data.data.code === 200) {
 			this.show = false;
+			uni.$emit('updateData', '');
 			setTimeout(() => {
 				uni.showToast({
 					title: '发布成功',

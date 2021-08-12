@@ -12,12 +12,8 @@ export const __moreOptionsHandle = {
 		} else if (type === 'report') {
 			this.reportModalShow = true;
 		} else {
-			console.log(data);
-			this.$u.mpShare = {
-				title: data.content.slice(0, 8) + '...', 
-				path: '', 
-				imageUrl: '' 
-			}
+			// 转发动态
+			this.shareNews(data.id);
 		}
 	},
 	// 删除数据
@@ -60,10 +56,13 @@ export const __moreOptionsHandle = {
 				content: reportValue
 			}
 		});
-		console.log(this.newsdata.id);
 		uni.showToast({
 			title: '举报成功!',
 			icon: 'none'
 		})
 	},
+	// 分享
+	async shareNews(id) {
+		this.$api.interactive.newsShareHandle.call(this, id);
+	}
 }

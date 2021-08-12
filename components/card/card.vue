@@ -10,19 +10,19 @@
 				<!-- 操作框(三个点) -->
 				<view class="text-lg moreOptions" @click.stop="moreOptions">. . .</view>
 				<!-- 头像 -->
-				<view class="margin-top-xs"><u-avatar size="60" :src="newsdata.avatarUrl"></u-avatar></view>
+				<view class="margin-top-xs"><u-avatar size="80" :src="newsdata.avatarUrl"></u-avatar></view>
 				<!-- 文字信息 -->
-				<view class="margin-left-xs padding-top-xs">
+				<view class="margin-left-sm padding-top-xs">
 					<!-- 名字/学校 -->
 					<view class="flex align-center">
-						<view class="text-sm text-black text-bold">{{ newsdata.nickName }}</view>
+						<view class="text-black" >{{ newsdata.nickName }}</view>
 					</view>
 					<!-- 时间 -->
-					<view class="u-tips-color text-sm">{{ newsdata.pushTime }}</view>
+					<view class="u-tips-color text-sm margin-top-xs">{{ newsdata.pushTime }}</view>
 				</view>
 			</view>
 			<!-- 文字栏 -->
-			<view class="margin-tb-xs text-black text-content" :class="{ clamp3: clamp }">{{ newsdata.content }}</view>
+			<view class="margin-tb-xs text-black text-content"  :class="{ clamp3: clamp }">{{ newsdata.content }}</view>
 			<!-- 图片栏 -->
 			<view class="margin-tb-sm img_Con" style="width: 600rpx;" v-if="newsdata.images && newsdata.images.length">
 				<view :class="imgNewStyle" v-for="(item, index) in newsdata.images" :key="index">
@@ -54,9 +54,9 @@
 				<view class="flex flex-direction" @click="moreOptionsClick(newsdata, $event)">
 					<view class="padding" data-type="delete" v-if="!newsdata.btnStatus">删除</view>
 					<view class="padding u-border-top" data-type="report">举报</view>
-					<!-- 							<view class="padding u-border-top" data-type="share">
-								<u-button open-type="share">转发</u-button>
-							</view> -->
+					<view class="padding u-border-top" data-type="share" >
+						<button open-type="share" :data-info="newsdata">转发</button>
+					</view>
 				</view>
 			</u-modal>
 			<!-- 举报 -->
@@ -90,7 +90,6 @@
 								<text>回复</text>
 								<text class="margin-lr-xs text-blue">
 									<text>{{ commentdata.parentCommentUserNickName }}</text>
-									<!-- <text class="text-blue text-bold">{{ '[作者]' }}</text>:	 -->
 								</text>
 							</text>
 							<text>{{ commentdata.content }}</text>
@@ -106,12 +105,6 @@
 					<view class="padding margin-top-xs" style="background-color: #F3F4F6; border-radius: 10rpx;" v-if="!enterStateComment && commentdata.childCommentLength">
 						<view class="wmax">
 							<view class="clamp1">
-								<!-- 								<text style="color: #666;">
-									{{ commentdata.childCommentList[0].nickName }} -->
-								<!-- <text class="text-blue text-bold" v-if="commentdata.isAuthor">{{ '[作者]' }}</text> -->
-								<!-- 								</text>
-								:
-								<text class="margin-left-xs" style="color: #666;">{{ commentdata.childCommentList[0].content }}</text> -->
 							</view>
 						</view>
 						<view class="">
@@ -171,13 +164,7 @@ export default {
 		}
 	},
 	mounted() {
-		// this.getReportList();
-		this.$u.mpShare = {
-			title: this.newsdata.content && this.newsdata.content.slice(0, 8) + '...',
-			path: '',
-			imageUrl: ''
-		};
-		this.$forceUpdate();
+
 	},
 	methods: {
 		...__moreOptionsHandle,
@@ -198,17 +185,7 @@ export default {
 			this.$api.imgHandle.imgPreview(url, imgList && imgList.map(item => item.url));
 		},
 		async likeHandle(data, type) {
-			this.likeNumCount = this.likeNumCount + (this.likeStatus ? -1 : 1);
-			this.likeStatusCount = this.likeStatusCount ? 0 : 1;
-			const result = await this.$http.request({
-				url: '/dynamicLikeForward/addLikeOrForward',
-				method: 'POST',
-				data: {
-					bizType: type,
-					bizId: data.id,
-					type: 1
-				}
-			});
+			this.$api.interactive.likeHandle.call(this, data, type);
 		}
 	},
 	props: {

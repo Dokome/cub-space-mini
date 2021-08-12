@@ -148,7 +148,10 @@ export default {
 			return !!this.$cache.get('token');
 		},
 		bannerListMap() {
-			return this.bannerList.map(item => item.image);
+			if (this.bannerList && this.bannerList.length) {
+							console.log(this.bannerList);
+				return this.bannerList.map(item => item.image);
+			}
 		}
 	},
 	created() {
@@ -166,9 +169,6 @@ export default {
 				}
 				this.getNewsData({ noToken: true, tab: val });
 			}
-		},
-		hotList(val) {
-			
 		}
 	},
 	// 下拉刷新
@@ -178,8 +178,15 @@ export default {
 	onLoad() {
 		uni.$on('deleteData', (id) => {
 			this.deleteData(id);
+		});
+		uni.$on('updateData', () => {
+			this.getNewsData({ noToken: true, tab: 1, isGetNew: true });
 		})
-	}
+	},
+	// 页面分享
+	onShareAppMessage(res) {
+		return this.$api.interactive.onShareFunc(res);
+	},
 };
 </script>
 

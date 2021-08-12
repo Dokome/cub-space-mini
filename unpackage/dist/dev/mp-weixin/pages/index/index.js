@@ -96,28 +96,28 @@ var components
 try {
   components = {
     navbar: function() {
-      return __webpack_require__.e(/*! import() | components/navbar/navbar */ "components/navbar/navbar").then(__webpack_require__.bind(null, /*! @/components/navbar/navbar.vue */ 168))
+      return __webpack_require__.e(/*! import() | components/navbar/navbar */ "components/navbar/navbar").then(__webpack_require__.bind(null, /*! @/components/navbar/navbar.vue */ 170))
     },
     uTabsSwiper: function() {
-      return Promise.all(/*! import() | uview-ui/components/u-tabs-swiper/u-tabs-swiper */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-tabs-swiper/u-tabs-swiper")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-tabs-swiper/u-tabs-swiper.vue */ 175))
+      return Promise.all(/*! import() | uview-ui/components/u-tabs-swiper/u-tabs-swiper */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-tabs-swiper/u-tabs-swiper")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-tabs-swiper/u-tabs-swiper.vue */ 177))
     },
     uSwiper: function() {
-      return __webpack_require__.e(/*! import() | uview-ui/components/u-swiper/u-swiper */ "uview-ui/components/u-swiper/u-swiper").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-swiper/u-swiper.vue */ 182))
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-swiper/u-swiper */ "uview-ui/components/u-swiper/u-swiper").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-swiper/u-swiper.vue */ 184))
     },
     card: function() {
-      return Promise.all(/*! import() | components/card/card */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/card/card")]).then(__webpack_require__.bind(null, /*! @/components/card/card.vue */ 189))
+      return Promise.all(/*! import() | components/card/card */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/card/card")]).then(__webpack_require__.bind(null, /*! @/components/card/card.vue */ 191))
     },
     uLoadmore: function() {
-      return __webpack_require__.e(/*! import() | uview-ui/components/u-loadmore/u-loadmore */ "uview-ui/components/u-loadmore/u-loadmore").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-loadmore/u-loadmore.vue */ 197))
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-loadmore/u-loadmore */ "uview-ui/components/u-loadmore/u-loadmore").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-loadmore/u-loadmore.vue */ 199))
     },
     uTabbar: function() {
-      return Promise.all(/*! import() | uview-ui/components/u-tabbar/u-tabbar */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-tabbar/u-tabbar")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-tabbar/u-tabbar.vue */ 204))
+      return Promise.all(/*! import() | uview-ui/components/u-tabbar/u-tabbar */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-tabbar/u-tabbar")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-tabbar/u-tabbar.vue */ 206))
     },
     pop: function() {
-      return Promise.all(/*! import() | components/pop/pop */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/pop/pop")]).then(__webpack_require__.bind(null, /*! @/components/pop/pop.vue */ 211))
+      return Promise.all(/*! import() | components/pop/pop */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/pop/pop")]).then(__webpack_require__.bind(null, /*! @/components/pop/pop.vue */ 213))
     },
     loading: function() {
-      return __webpack_require__.e(/*! import() | components/loading/loading */ "components/loading/loading").then(__webpack_require__.bind(null, /*! @/components/loading/loading.vue */ 220))
+      return __webpack_require__.e(/*! import() | components/loading/loading */ "components/loading/loading").then(__webpack_require__.bind(null, /*! @/components/loading/loading.vue */ 222))
     }
   }
 } catch (e) {
@@ -387,7 +387,10 @@ var _getIndexData = __webpack_require__(/*! ./getIndexData.js */ 62);function ow
       return !!this.$cache.get('token');
     },
     bannerListMap: function bannerListMap() {
-      return this.bannerList.map(function (item) {return item.image;});
+      if (this.bannerList && this.bannerList.length) {
+        console.log(this.bannerList);
+        return this.bannerList.map(function (item) {return item.image;});
+      }
     } }),
 
   created: function created() {
@@ -405,9 +408,6 @@ var _getIndexData = __webpack_require__(/*! ./getIndexData.js */ 62);function ow
         }
         this.getNewsData({ noToken: true, tab: val });
       }
-    },
-    hotList: function hotList(val) {
-
     } },
 
   // 下拉刷新
@@ -418,6 +418,13 @@ var _getIndexData = __webpack_require__(/*! ./getIndexData.js */ 62);function ow
     uni.$on('deleteData', function (id) {
       _this.deleteData(id);
     });
+    uni.$on('updateData', function () {
+      _this.getNewsData({ noToken: true, tab: 1, isGetNew: true });
+    });
+  },
+  // 页面分享
+  onShareAppMessage: function onShareAppMessage(res) {
+    return this.$api.interactive.onShareFunc(res);
   } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

@@ -89,11 +89,13 @@ export default {
 		});
 		// 更新互动后的信息
 		uni.$on('updateCurrentInfo', () => {
-			// this.inputType = 'news';
-			// this.currentTarget = this.newsDetail;
 			this.getNewComment({ id: options.id, noToken: true, delay: 100, getNew: true});
 		});
-	}
+	},
+	// 页面分享
+	onShareAppMessage(res) {
+		return this.$api.interactive.onShareFunc(res);
+	},
 };
 </script>
 

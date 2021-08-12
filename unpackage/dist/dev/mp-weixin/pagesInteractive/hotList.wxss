@@ -1,1 +1,7 @@
-/* pagesInteractive/hotList.wxss */
+/* uni.scss */
+.hotValue.data-v-d6519af0 {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+
