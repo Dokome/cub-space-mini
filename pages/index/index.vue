@@ -149,7 +149,6 @@ export default {
 		},
 		bannerListMap() {
 			if (this.bannerList && this.bannerList.length) {
-							console.log(this.bannerList);
 				return this.bannerList.map(item => item.image);
 			}
 		}

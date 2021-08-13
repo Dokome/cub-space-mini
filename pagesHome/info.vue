@@ -3,24 +3,26 @@
 		<navbar title="账号资料"></navbar>
 		<!-- 资料可修改部分 -->
 		<!-- 头像 -->
-		<view class="bg-white padding flex justify-between align-center u-border-bottom">
+		<view class="bg-white padding flex justify-between align-center u-border-bottom"  @click="disabled && changeAvatar()">
 			<label for="nickName">头像</label>
 			<image :src="avatar" mode="aspectFill" style="width: 60rpx; height: 60rpx; border-radius: 50%;"></image>
 		</view>
 		<!-- 昵称 -->
 		<view class="bg-white padding flex justify-between align-center u-border-bottom">
 			<label for="nickName">昵称</label>
-			<input type="text" value="" v-model="nickName" class="text-black text-right" name="nickName" style="width: 85%;" maxlength="8"/>
+			<input type="text" value="" v-model="nickName" :disabled="!disabled"
+			class="text-black text-right" name="nickName" style="width: 85%;" maxlength="8"/>
 		</view>
 		<!-- 签名 -->
 		<view class="bg-white padding flex justify-between align-center u-border-bottom">
 			<label for="sign">签名</label>
-			<input type="text" value="" v-model="sign" class="text-black text-right" name="nickName" style="width: 85%;" maxlength="20"/>
+			<input type="text" value="" v-model="sign" :disabled="!disabled"
+			class="text-black text-right" name="nickName" style="width: 85%;" maxlength="20"/>
 		</view>
 		<!-- 性别 -->
 		<view class="bg-white padding flex justify-between align-center u-border-bottom">
 			<label for="gender">性别</label>
-			<input type="text" value="" v-model="gender" class="text-black text-right" name="gender" style="width: 85%;" maxlength="20"/>
+			<u-switch v-model="gender" active-color="red" inactive-color="blue" :active-value="1" :inactive-value="0" :disabled="!disabled"></u-switch>
 		</view>
 		<view class="margin-bottom-xs"></view>
 		<!-- 资料不可修改部分 -->
@@ -34,7 +36,11 @@
 			<image src="/static/Img/info.png" style="width: 100%; height: 100%;"></image>
 		</view>
 		<view class="margin-bottom-xs"></view>
-		<view class="flex justify-center padding-top"><u-button size="default" type="primary" ripple="true" shape="circle">修改</u-button></view>
+		<view class="flex justify-center padding-top">
+			<u-button size="default" :type="disabled ? 'primary' : 'error'" @click="buttonClickHandle"
+			ripple="true" :custom-style="{ width: '300rpx' }">{{ !disabled ? '编辑' : '保存' }}</u-button>
+		</view>
+	<loading v-if="ifLoaddingShow"></loading>
 	</view>
 </template>
 
@@ -42,13 +48,69 @@
 	export default {
 		data() {
 			return {
-				nickName: 'mate川丶',
-				sign: '总有些惊奇的际遇，比方说当我遇见你',
-				gender: '男',
-				avatar: 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Ftx-free-imgs.acfun.cn%2Fcontent%2F2019_7_21%2F1.5636994914764566E9.png%3Fimageslim&refer=http%3A%2F%2Ftx-free-imgs.acfun.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1629122958&t=ddad2dd6664dee4cc4dea6e21c807aa1',
-				forbiddenInfo: ['20193857927495725', '13000000001', '三体科幻学院', '罗南', '213873647211'],
-				forbideenInfoTagName: ['UUID', '手机号', '学校', '姓名', '学号']
+				ifLoaddingShow: true,
+				nickName: '',
+				sign: '',
+				gender: '',
+				avatar: '',
+				avatarIsChange: false,
+				forbiddenInfo: [],
+				forbideenInfoTagName: ['UUID', '手机号', '学校', '姓名', '学号'],
+				disabled: false
 			};
+		},
+		methods: {
+			// 获取用户信息
+			async getUserInfo() {
+				const data = await this.$http.request({
+					url: '/umsAccount/getUserInfo',
+					method: 'GET'
+				});
+				let result = data.data.data;
+				({ gender: this.gender, avatarUrl: this.avatar, sign: this.sign, nickName: this.nickName } = result);
+				this.forbiddenInfo = [result.uuid, result.phone, result.schoolName, result.realName, result.studentCode];
+				setTimeout(() => {
+					this.ifLoaddingShow = false
+				}, 300);
+			},
+			// 按钮点击事件
+			buttonClickHandle() {
+				if (this.disabled === true) {
+					this.updateUserInfo();
+				}
+				this.disabled = !this.disabled;
+			},
+			// 更新用户信息
+			async updateUserInfo() {
+				if (this.avatarIsChange) {
+					this.avatar = await this.$http.upLoadFile(this.avatar);
+				}
+				const data = await this.$http.request({
+					url: '/umsAccount/updateUserInfo',
+					data: {
+						nickName: this.nickName,
+						avatarUrl: this.avatar,
+						sign: this.sign,
+						gender: this.gender ? 1 : 0,
+					}
+				});
+				if (data.data.code === 200) {
+					uni.$emit('updateHome', '');
+				}
+			},
+			// 更改头像
+			changeAvatar() {
+				uni.chooseImage({
+					count: 1,
+					success: (res) => {
+						this.avatar = res.tempFilePaths[0];
+						this.avatarIsChange = true;
+					}
+				})
+			}
+		},
+		onLoad() {
+			this.getUserInfo();
 		}
 	}
 </script>

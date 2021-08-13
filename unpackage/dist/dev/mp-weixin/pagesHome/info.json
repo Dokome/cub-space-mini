@@ -4,6 +4,8 @@
   "navigationBarTextStyle": "black",
   "usingComponents": {
     "navbar": "/components/navbar/navbar",
-    "u-button": "/uview-ui/components/u-button/u-button"
+    "u-switch": "/uview-ui/components/u-switch/u-switch",
+    "u-button": "/uview-ui/components/u-button/u-button",
+    "loading": "/components/loading/loading"
   }
 }

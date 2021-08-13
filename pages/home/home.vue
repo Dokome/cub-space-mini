@@ -5,7 +5,7 @@
 		<scroll-view class="scroll-wrapper" :style="{ height: PageHeight + 'px' }" :scroll-y="true">
 			<view class="innerWrapper">
 				<!-- 背景图以及头部 -->
-				<home-header></home-header>
+				<home-header :userinfo="{...userinfo}"></home-header>
 				<!-- 关注公众号 -->
 				<view class="wmax" style="height: 90rpx; position: relative;" v-if="officialButtonShow">
 					<view class="official flex hwmax" style="position: absolute;">
@@ -29,14 +29,19 @@
 		<!-- 底部栏nav -->
 		<u-tabbar :list="list" :mid-button="midButton" :inactive-color="inactiveColor" :activeColor="activeColor" :border-top="borderTop"></u-tabbar>
 		<login v-if="!login"></login>
+		<loading v-if="ifLoaddingShow && login"></loading>
 	</view>
 </template>
 
 <script>
 import { mapState } from 'vuex';
+import { _home } from './home.js';
 export default {
 	data() {
 		return {
+			// 加载动画
+			ifLoaddingShow: true,
+			userinfo: {},
 			//是否显示关注/关闭公众号部分
 			officialButtonShow: true,
 			// tabbar参数
@@ -92,19 +97,7 @@ export default {
 		};
 	},
 	methods: {
-		//关闭公众号
-		closeOfficial() {
-			this.officialButtonShow = false;
-		},
-		// 关注公众号
-		focusOfficial() {
-			console.log('关注成功');
-		},
-		// 进入功能页面
-		enterFuncPage(e) {
-			this.$api.routerHandle.goto(e.target.dataset.page);
-		},
-		shareApp() {}
+		..._home,
 	},
 	computed: {
 		...mapState(['midButton', 'inactiveColor', 'activeColor', 'borderTop']),
@@ -113,14 +106,19 @@ export default {
 		}
 	},
 	onLoad() {
-		this.$u.mpShare = {
-			title: '遇见有趣的~', // 默认为小程序名称，可自定义
-			path: '', // 默认为当前页面路径，一般无需修改，QQ小程序不支持
-			// 分享图标，路径可以是本地文件路径、代码包文件路径或者网络图片路径。
-			// 支持PNG及JPG，默认为当前页面的截图
-			imageUrl: 'https://cub.image.emily.red/operation/logo.png'
-		};
-	}
+		uni.$on('updateHome', () => {
+			this.getUserInfo();
+		})
+		if (this.login) {
+			this.getFuncList();
+			this.getUserInfo();
+		}
+	},
+	// 页面分享
+	onShareAppMessage(res) {
+		return this.$api.interactive.onShareFunc(res);
+	},
+	
 };
 </script>
 
