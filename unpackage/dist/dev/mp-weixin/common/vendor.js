@@ -872,7 +872,7 @@ function initData(vueOptions, context) {
     try {
       data = data.call(context); // 支持 Vue.prototype 上挂的数据
     } catch (e) {
-      if (Object({"VUE_APP_NAME":"cub-space-mini","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"NODE_ENV":"development","VUE_APP_NAME":"cub-space-mini","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.warn('根据 Vue 的 data 函数初始化小程序 data 失败，请尽量确保 data 函数中不访问 vm 对象，否则可能影响首次数据渲染速度。', data);
       }
     }
@@ -2060,9 +2060,9 @@ function normalizeComponent (
 /***/ }),
 
 /***/ 13:
-/*!********************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/uview-ui/index.js ***!
-  \********************************************************************/
+/*!*********************************************************************!*\
+  !*** C:/Users/ysk/Desktop/次方空间/cub-space-miniapp/uview-ui/index.js ***!
+  \*********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2212,9 +2212,9 @@ var install = function install(Vue) {
 /***/ }),
 
 /***/ 14:
-/*!*******************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/uview-ui/libs/mixin/mixin.js ***!
-  \*******************************************************************************/
+/*!********************************************************************************!*\
+  !*** C:/Users/ysk/Desktop/次方空间/cub-space-miniapp/uview-ui/libs/mixin/mixin.js ***!
+  \********************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2286,9 +2286,9 @@ var install = function install(Vue) {
 /***/ }),
 
 /***/ 15:
-/*!*********************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/uview-ui/libs/request/index.js ***!
-  \*********************************************************************************/
+/*!**********************************************************************************!*\
+  !*** C:/Users/ysk/Desktop/次方空间/cub-space-miniapp/uview-ui/libs/request/index.js ***!
+  \**********************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2467,9 +2467,9 @@ new Request();exports.default = _default;
 /***/ }),
 
 /***/ 16:
-/*!**************************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/uview-ui/libs/function/deepMerge.js ***!
-  \**************************************************************************************/
+/*!***************************************************************************************!*\
+  !*** C:/Users/ysk/Desktop/次方空间/cub-space-miniapp/uview-ui/libs/function/deepMerge.js ***!
+  \***************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2508,9 +2508,9 @@ deepMerge;exports.default = _default;
 /***/ }),
 
 /***/ 17:
-/*!**************************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/uview-ui/libs/function/deepClone.js ***!
-  \**************************************************************************************/
+/*!***************************************************************************************!*\
+  !*** C:/Users/ysk/Desktop/次方空间/cub-space-miniapp/uview-ui/libs/function/deepClone.js ***!
+  \***************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2542,9 +2542,9 @@ deepClone;exports.default = _default;
 /***/ }),
 
 /***/ 18:
-/*!*********************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/uview-ui/libs/function/test.js ***!
-  \*********************************************************************************/
+/*!**********************************************************************************!*\
+  !*** C:/Users/ysk/Desktop/次方空间/cub-space-miniapp/uview-ui/libs/function/test.js ***!
+  \**********************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2784,9 +2784,9 @@ function code(value) {var len = arguments.length > 1 && arguments[1] !== undefin
 /***/ }),
 
 /***/ 19:
-/*!****************************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/uview-ui/libs/function/queryParams.js ***!
-  \****************************************************************************************/
+/*!*****************************************************************************************!*\
+  !*** C:/Users/ysk/Desktop/次方空间/cub-space-miniapp/uview-ui/libs/function/queryParams.js ***!
+  \*****************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2849,85 +2849,6 @@ function queryParams() {var data = arguments.length > 0 && arguments[0] !== unde
 }var _default =
 
 queryParams;exports.default = _default;
-
-/***/ }),
-
-/***/ 197:
-/*!*********************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/components/card/moreOptions.js ***!
-  \*********************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.__moreOptionsHandle = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 21));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}var __moreOptionsHandle = {
-  // 更多
-  moreOptions: function moreOptions() {
-    this.modalShow = true;
-  },
-  // 处理更多选项
-  moreOptionsClick: function moreOptionsClick(data, e) {
-    var type = e.target.dataset.type;
-    this.modalShow = false;
-    if (type === 'delete') {
-      this.dataDelete(data.id);
-    } else if (type === 'report') {
-      this.reportModalShow = true;
-    } else {
-      // 转发动态
-      this.shareNews(data.id);
-    }
-  },
-  // 删除数据
-  dataDelete: function dataDelete(id) {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var data;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
-              uni.showLoading({
-                title: '删除中' });
-
-              // 删除请求
-              _context.next = 3;return _this.$http.request({
-                url: '/dynamicState/deleteDynamic',
-                method: 'POST',
-                data: {
-                  dynamicId: id } });case 3:data = _context.sent;
-
-
-              uni.hideLoading();
-              if (data.data.code === 200) {
-                uni.showToast({
-                  title: '删除成功~',
-                  icon: 'none' });
-
-                uni.$emit('deleteData', id);
-              } else {
-                uni.showToast({
-                  title: '删除失败',
-                  icon: 'none' });
-
-              }case 6:case "end":return _context.stop();}}}, _callee);}))();
-  },
-  // 举报文章
-  dataReport: function dataReport(reportValue) {var _this2 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee2() {var data;return _regenerator.default.wrap(function _callee2$(_context2) {while (1) {switch (_context2.prev = _context2.next) {case 0:
-              _this2.reportModalShow = false;
-              // 举报
-              _context2.next = 3;return _this2.$http.request({
-                url: '/sysReport/report',
-                method: 'POST',
-                data: {
-                  type: 1,
-                  bizId: _this2.newsdata.id,
-                  content: reportValue } });case 3:data = _context2.sent;
-
-
-              uni.showToast({
-                title: '举报成功!',
-                icon: 'none' });case 5:case "end":return _context2.stop();}}}, _callee2);}))();
-
-  },
-  // 分享
-  shareNews: function shareNews(id) {var _this3 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee3() {return _regenerator.default.wrap(function _callee3$(_context3) {while (1) {switch (_context3.prev = _context3.next) {case 0:
-              _this3.$api.interactive.newsShareHandle.call(_this3, id);case 1:case "end":return _context3.stop();}}}, _callee3);}))();
-  } };exports.__moreOptionsHandle = __moreOptionsHandle;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 
@@ -8458,7 +8379,7 @@ function type(obj) {
 
 function flushCallbacks$1(vm) {
     if (vm.__next_tick_callbacks && vm.__next_tick_callbacks.length) {
-        if (Object({"VUE_APP_NAME":"cub-space-mini","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+        if (Object({"NODE_ENV":"development","VUE_APP_NAME":"cub-space-mini","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:flushCallbacks[' + vm.__next_tick_callbacks.length + ']');
@@ -8479,14 +8400,14 @@ function nextTick$1(vm, cb) {
     //1.nextTick 之前 已 setData 且 setData 还未回调完成
     //2.nextTick 之前存在 render watcher
     if (!vm.__next_tick_pending && !hasRenderWatcher(vm)) {
-        if(Object({"VUE_APP_NAME":"cub-space-mini","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"NODE_ENV":"development","VUE_APP_NAME":"cub-space-mini","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:nextVueTick');
         }
         return nextTick(cb, vm)
     }else{
-        if(Object({"VUE_APP_NAME":"cub-space-mini","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"NODE_ENV":"development","VUE_APP_NAME":"cub-space-mini","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance$1 = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance$1.is || mpInstance$1.route) + '][' + vm._uid +
                 ']:nextMPTick');
@@ -8572,7 +8493,7 @@ var patch = function(oldVnode, vnode) {
     });
     var diffData = this.$shouldDiffData === false ? data : diff(data, mpData);
     if (Object.keys(diffData).length) {
-      if (Object({"VUE_APP_NAME":"cub-space-mini","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"NODE_ENV":"development","VUE_APP_NAME":"cub-space-mini","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + this._uid +
           ']差量更新',
           JSON.stringify(diffData));
@@ -8981,17 +8902,17 @@ internalMixin(Vue);
 /***/ }),
 
 /***/ 20:
-/*!**********************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/uview-ui/libs/function/route.js ***!
-  \**********************************************************************************/
+/*!***********************************************************************************!*\
+  !*** C:/Users/ysk/Desktop/次方空间/cub-space-miniapp/uview-ui/libs/function/route.js ***!
+  \***********************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 21));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}function _createClass(Constructor, protoProps, staticProps) {if (protoProps) _defineProperties(Constructor.prototype, protoProps);if (staticProps) _defineProperties(Constructor, staticProps);return Constructor;} /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          * 路由跳转方法，该方法相对于直接使用uni.xxx的好处是使用更加简单快捷
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          * 并且带有路由拦截功能
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          */var
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         * 路由跳转方法，该方法相对于直接使用uni.xxx的好处是使用更加简单快捷
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         * 并且带有路由拦截功能
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         */var
 
 Router = /*#__PURE__*/function () {
   function Router() {_classCallCheck(this, Router);
@@ -9114,6 +9035,85 @@ new Router().route;exports.default = _default;
 
 /***/ }),
 
+/***/ 200:
+/*!**********************************************************************************!*\
+  !*** C:/Users/ysk/Desktop/次方空间/cub-space-miniapp/components/card/moreOptions.js ***!
+  \**********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.__moreOptionsHandle = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 21));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}var __moreOptionsHandle = {
+  // 更多
+  moreOptions: function moreOptions() {
+    this.modalShow = true;
+  },
+  // 处理更多选项
+  moreOptionsClick: function moreOptionsClick(data, e) {
+    var type = e.target.dataset.type;
+    this.modalShow = false;
+    if (type === 'delete') {
+      this.dataDelete(data.id);
+    } else if (type === 'report') {
+      this.reportModalShow = true;
+    } else {
+      // 转发动态
+      this.shareNews(data.id);
+    }
+  },
+  // 删除数据
+  dataDelete: function dataDelete(id) {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var data;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
+              uni.showLoading({
+                title: '删除中' });
+
+              // 删除请求
+              _context.next = 3;return _this.$http.request({
+                url: '/dynamicState/deleteDynamic',
+                method: 'POST',
+                data: {
+                  dynamicId: id } });case 3:data = _context.sent;
+
+
+              uni.hideLoading();
+              if (data.data.code === 200) {
+                uni.showToast({
+                  title: '删除成功~',
+                  icon: 'none' });
+
+                uni.$emit('deleteData', id);
+              } else {
+                uni.showToast({
+                  title: '删除失败',
+                  icon: 'none' });
+
+              }case 6:case "end":return _context.stop();}}}, _callee);}))();
+  },
+  // 举报文章
+  dataReport: function dataReport(reportValue) {var _this2 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee2() {var data;return _regenerator.default.wrap(function _callee2$(_context2) {while (1) {switch (_context2.prev = _context2.next) {case 0:
+              _this2.reportModalShow = false;
+              // 举报
+              _context2.next = 3;return _this2.$http.request({
+                url: '/sysReport/report',
+                method: 'POST',
+                data: {
+                  type: 1,
+                  bizId: _this2.newsdata.id,
+                  content: reportValue } });case 3:data = _context2.sent;
+
+
+              uni.showToast({
+                title: '举报成功!',
+                icon: 'none' });case 5:case "end":return _context2.stop();}}}, _callee2);}))();
+
+  },
+  // 分享
+  shareNews: function shareNews(id) {var _this3 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee3() {return _regenerator.default.wrap(function _callee3$(_context3) {while (1) {switch (_context3.prev = _context3.next) {case 0:
+              _this3.$api.interactive.newsShareHandle.call(_this3, id);case 1:case "end":return _context3.stop();}}}, _callee3);}))();
+  } };exports.__moreOptionsHandle = __moreOptionsHandle;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+
 /***/ 21:
 /*!**********************************************************!*\
   !*** ./node_modules/@babel/runtime/regenerator/index.js ***!
@@ -9125,10 +9125,58 @@ module.exports = __webpack_require__(/*! regenerator-runtime */ 22);
 
 /***/ }),
 
-/***/ 219:
-/*!********************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/components/pop/newsPublish.js ***!
-  \********************************************************************************/
+/***/ 22:
+/*!************************************************************!*\
+  !*** ./node_modules/regenerator-runtime/runtime-module.js ***!
+  \************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * Copyright (c) 2014-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+// This method of obtaining a reference to the global object needs to be
+// kept identical to the way it is obtained in runtime.js
+var g = (function() {
+  return this || (typeof self === "object" && self);
+})() || Function("return this")();
+
+// Use `getOwnPropertyNames` because not all browsers support calling
+// `hasOwnProperty` on the global `self` object in a worker. See #183.
+var hadRuntime = g.regeneratorRuntime &&
+  Object.getOwnPropertyNames(g).indexOf("regeneratorRuntime") >= 0;
+
+// Save the old regeneratorRuntime in case it needs to be restored later.
+var oldRuntime = hadRuntime && g.regeneratorRuntime;
+
+// Force reevalutation of runtime.js.
+g.regeneratorRuntime = undefined;
+
+module.exports = __webpack_require__(/*! ./runtime */ 23);
+
+if (hadRuntime) {
+  // Restore the original runtime.
+  g.regeneratorRuntime = oldRuntime;
+} else {
+  // Remove the global property added by runtime.js.
+  try {
+    delete g.regeneratorRuntime;
+  } catch(e) {
+    g.regeneratorRuntime = undefined;
+  }
+}
+
+
+/***/ }),
+
+/***/ 222:
+/*!*********************************************************************************!*\
+  !*** C:/Users/ysk/Desktop/次方空间/cub-space-miniapp/components/pop/newsPublish.js ***!
+  \*********************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9195,58 +9243,10 @@ module.exports = __webpack_require__(/*! regenerator-runtime */ 22);
 
 /***/ }),
 
-/***/ 22:
-/*!************************************************************!*\
-  !*** ./node_modules/regenerator-runtime/runtime-module.js ***!
-  \************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-/**
- * Copyright (c) 2014-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
-// This method of obtaining a reference to the global object needs to be
-// kept identical to the way it is obtained in runtime.js
-var g = (function() {
-  return this || (typeof self === "object" && self);
-})() || Function("return this")();
-
-// Use `getOwnPropertyNames` because not all browsers support calling
-// `hasOwnProperty` on the global `self` object in a worker. See #183.
-var hadRuntime = g.regeneratorRuntime &&
-  Object.getOwnPropertyNames(g).indexOf("regeneratorRuntime") >= 0;
-
-// Save the old regeneratorRuntime in case it needs to be restored later.
-var oldRuntime = hadRuntime && g.regeneratorRuntime;
-
-// Force reevalutation of runtime.js.
-g.regeneratorRuntime = undefined;
-
-module.exports = __webpack_require__(/*! ./runtime */ 23);
-
-if (hadRuntime) {
-  // Restore the original runtime.
-  g.regeneratorRuntime = oldRuntime;
-} else {
-  // Remove the global property added by runtime.js.
-  try {
-    delete g.regeneratorRuntime;
-  } catch(e) {
-    g.regeneratorRuntime = undefined;
-  }
-}
-
-
-/***/ }),
-
-/***/ 220:
-/*!*******************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/components/pop/dataUpdate.js ***!
-  \*******************************************************************************/
+/***/ 223:
+/*!********************************************************************************!*\
+  !*** C:/Users/ysk/Desktop/次方空间/cub-space-miniapp/components/pop/dataUpdate.js ***!
+  \********************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10062,9 +10062,9 @@ var __dataUpdate = {
 /***/ }),
 
 /***/ 24:
-/*!***************************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/uview-ui/libs/function/timeFormat.js ***!
-  \***************************************************************************************/
+/*!****************************************************************************************!*\
+  !*** C:/Users/ysk/Desktop/次方空间/cub-space-miniapp/uview-ui/libs/function/timeFormat.js ***!
+  \****************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10124,9 +10124,9 @@ timeFormat;exports.default = _default;
 /***/ }),
 
 /***/ 25:
-/*!*************************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/uview-ui/libs/function/timeFrom.js ***!
-  \*************************************************************************************/
+/*!**************************************************************************************!*\
+  !*** C:/Users/ysk/Desktop/次方空间/cub-space-miniapp/uview-ui/libs/function/timeFrom.js ***!
+  \**************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10182,9 +10182,9 @@ timeFrom;exports.default = _default;
 /***/ }),
 
 /***/ 26:
-/*!******************************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/uview-ui/libs/function/colorGradient.js ***!
-  \******************************************************************************************/
+/*!*******************************************************************************************!*\
+  !*** C:/Users/ysk/Desktop/次方空间/cub-space-miniapp/uview-ui/libs/function/colorGradient.js ***!
+  \*******************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10325,10 +10325,62 @@ function colorToRgba(color) {var alpha = arguments.length > 1 && arguments[1] !=
 
 /***/ }),
 
-/***/ 268:
-/*!********************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/uview-ui/libs/util/emitter.js ***!
-  \********************************************************************************/
+/***/ 27:
+/*!**********************************************************************************!*\
+  !*** C:/Users/ysk/Desktop/次方空间/cub-space-miniapp/uview-ui/libs/function/guid.js ***!
+  \**********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /**
+                                                                                                      * 本算法来源于简书开源代码，详见：https://www.jianshu.com/p/fdbf293d0a85
+                                                                                                      * 全局唯一标识符（uuid，Globally Unique Identifier）,也称作 uuid(Universally Unique IDentifier) 
+                                                                                                      * 一般用于多个组件之间,给它一个唯一的标识符,或者v-for循环的时候,如果使用数组的index可能会导致更新列表出现问题
+                                                                                                      * 最可能的情况是左滑删除item或者对某条信息流"不喜欢"并去掉它的时候,会导致组件内的数据可能出现错乱
+                                                                                                      * v-for的时候,推荐使用后端返回的id而不是循环的index
+                                                                                                      * @param {Number} len uuid的长度
+                                                                                                      * @param {Boolean} firstU 将返回的首字母置为"u"
+                                                                                                      * @param {Nubmer} radix 生成uuid的基数(意味着返回的字符串都是这个基数),2-二进制,8-八进制,10-十进制,16-十六进制
+                                                                                                      */
+function guid() {var len = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 32;var firstU = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;var radix = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+  var chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.split('');
+  var uuid = [];
+  radix = radix || chars.length;
+
+  if (len) {
+    // 如果指定uuid长度,只是取随机的字符,0|x为位运算,能去掉x的小数位,返回整数位
+    for (var i = 0; i < len; i++) {uuid[i] = chars[0 | Math.random() * radix];}
+  } else {
+    var r;
+    // rfc4122标准要求返回的uuid中,某些位为固定的字符
+    uuid[8] = uuid[13] = uuid[18] = uuid[23] = '-';
+    uuid[14] = '4';
+
+    for (var _i = 0; _i < 36; _i++) {
+      if (!uuid[_i]) {
+        r = 0 | Math.random() * 16;
+        uuid[_i] = chars[_i == 19 ? r & 0x3 | 0x8 : r];
+      }
+    }
+  }
+  // 移除第一个字符,并用u替代,因为第一个字符为数值时,该guuid不能用作id或者class
+  if (firstU) {
+    uuid.shift();
+    return 'u' + uuid.join('');
+  } else {
+    return uuid.join('');
+  }
+}var _default =
+
+guid;exports.default = _default;
+
+/***/ }),
+
+/***/ 271:
+/*!*********************************************************************************!*\
+  !*** C:/Users/ysk/Desktop/次方空间/cub-space-miniapp/uview-ui/libs/util/emitter.js ***!
+  \*********************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10385,62 +10437,10 @@ function _broadcast(componentName, eventName, params) {
 
 /***/ }),
 
-/***/ 27:
-/*!*********************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/uview-ui/libs/function/guid.js ***!
-  \*********************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; /**
-                                                                                                      * 本算法来源于简书开源代码，详见：https://www.jianshu.com/p/fdbf293d0a85
-                                                                                                      * 全局唯一标识符（uuid，Globally Unique Identifier）,也称作 uuid(Universally Unique IDentifier) 
-                                                                                                      * 一般用于多个组件之间,给它一个唯一的标识符,或者v-for循环的时候,如果使用数组的index可能会导致更新列表出现问题
-                                                                                                      * 最可能的情况是左滑删除item或者对某条信息流"不喜欢"并去掉它的时候,会导致组件内的数据可能出现错乱
-                                                                                                      * v-for的时候,推荐使用后端返回的id而不是循环的index
-                                                                                                      * @param {Number} len uuid的长度
-                                                                                                      * @param {Boolean} firstU 将返回的首字母置为"u"
-                                                                                                      * @param {Nubmer} radix 生成uuid的基数(意味着返回的字符串都是这个基数),2-二进制,8-八进制,10-十进制,16-十六进制
-                                                                                                      */
-function guid() {var len = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 32;var firstU = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;var radix = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
-  var chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.split('');
-  var uuid = [];
-  radix = radix || chars.length;
-
-  if (len) {
-    // 如果指定uuid长度,只是取随机的字符,0|x为位运算,能去掉x的小数位,返回整数位
-    for (var i = 0; i < len; i++) {uuid[i] = chars[0 | Math.random() * radix];}
-  } else {
-    var r;
-    // rfc4122标准要求返回的uuid中,某些位为固定的字符
-    uuid[8] = uuid[13] = uuid[18] = uuid[23] = '-';
-    uuid[14] = '4';
-
-    for (var _i = 0; _i < 36; _i++) {
-      if (!uuid[_i]) {
-        r = 0 | Math.random() * 16;
-        uuid[_i] = chars[_i == 19 ? r & 0x3 | 0x8 : r];
-      }
-    }
-  }
-  // 移除第一个字符,并用u替代,因为第一个字符为数值时,该guuid不能用作id或者class
-  if (firstU) {
-    uuid.shift();
-    return 'u' + uuid.join('');
-  } else {
-    return uuid.join('');
-  }
-}var _default =
-
-guid;exports.default = _default;
-
-/***/ }),
-
-/***/ 276:
-/*!************************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/components/textInput/textInput.js ***!
-  \************************************************************************************/
+/***/ 279:
+/*!*************************************************************************************!*\
+  !*** C:/Users/ysk/Desktop/次方空间/cub-space-miniapp/components/textInput/textInput.js ***!
+  \*************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10525,9 +10525,9 @@ guid;exports.default = _default;
 /***/ }),
 
 /***/ 28:
-/*!**********************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/uview-ui/libs/function/color.js ***!
-  \**********************************************************************************/
+/*!***********************************************************************************!*\
+  !*** C:/Users/ysk/Desktop/次方空间/cub-space-miniapp/uview-ui/libs/function/color.js ***!
+  \***********************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10573,9 +10573,9 @@ color;exports.default = _default;
 /***/ }),
 
 /***/ 29:
-/*!**************************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/uview-ui/libs/function/type2icon.js ***!
-  \**************************************************************************************/
+/*!***************************************************************************************!*\
+  !*** C:/Users/ysk/Desktop/次方空间/cub-space-miniapp/uview-ui/libs/function/type2icon.js ***!
+  \***************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10650,9 +10650,9 @@ module.exports = g;
 /***/ }),
 
 /***/ 30:
-/*!****************************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/uview-ui/libs/function/randomArray.js ***!
-  \****************************************************************************************/
+/*!*****************************************************************************************!*\
+  !*** C:/Users/ysk/Desktop/次方空间/cub-space-miniapp/uview-ui/libs/function/randomArray.js ***!
+  \*****************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10668,9 +10668,9 @@ randomArray;exports.default = _default;
 /***/ }),
 
 /***/ 31:
-/*!************************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/uview-ui/libs/function/addUnit.js ***!
-  \************************************************************************************/
+/*!*************************************************************************************!*\
+  !*** C:/Users/ysk/Desktop/次方空间/cub-space-miniapp/uview-ui/libs/function/addUnit.js ***!
+  \*************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10687,9 +10687,9 @@ function addUnit() {var value = arguments.length > 0 && arguments[0] !== undefin
 /***/ }),
 
 /***/ 32:
-/*!***********************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/uview-ui/libs/function/random.js ***!
-  \***********************************************************************************/
+/*!************************************************************************************!*\
+  !*** C:/Users/ysk/Desktop/次方空间/cub-space-miniapp/uview-ui/libs/function/random.js ***!
+  \************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10708,9 +10708,9 @@ random;exports.default = _default;
 /***/ }),
 
 /***/ 33:
-/*!*********************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/uview-ui/libs/function/trim.js ***!
-  \*********************************************************************************/
+/*!**********************************************************************************!*\
+  !*** C:/Users/ysk/Desktop/次方空间/cub-space-miniapp/uview-ui/libs/function/trim.js ***!
+  \**********************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10734,9 +10734,9 @@ trim;exports.default = _default;
 /***/ }),
 
 /***/ 34:
-/*!**********************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/uview-ui/libs/function/toast.js ***!
-  \**********************************************************************************/
+/*!***********************************************************************************!*\
+  !*** C:/Users/ysk/Desktop/次方空间/cub-space-miniapp/uview-ui/libs/function/toast.js ***!
+  \***********************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10755,9 +10755,9 @@ toast;exports.default = _default;
 /***/ }),
 
 /***/ 35:
-/*!**************************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/uview-ui/libs/function/getParent.js ***!
-  \**************************************************************************************/
+/*!***************************************************************************************!*\
+  !*** C:/Users/ysk/Desktop/次方空间/cub-space-miniapp/uview-ui/libs/function/getParent.js ***!
+  \***************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10813,9 +10813,9 @@ function getParent(name, keys) {
 /***/ }),
 
 /***/ 36:
-/*!************************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/uview-ui/libs/function/$parent.js ***!
-  \************************************************************************************/
+/*!*************************************************************************************!*\
+  !*** C:/Users/ysk/Desktop/次方空间/cub-space-miniapp/uview-ui/libs/function/$parent.js ***!
+  \*************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10842,9 +10842,9 @@ function $parent() {var name = arguments.length > 0 && arguments[0] !== undefine
 /***/ }),
 
 /***/ 37:
-/*!********************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/uview-ui/libs/function/sys.js ***!
-  \********************************************************************************/
+/*!*********************************************************************************!*\
+  !*** C:/Users/ysk/Desktop/次方空间/cub-space-miniapp/uview-ui/libs/function/sys.js ***!
+  \*********************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10861,9 +10861,9 @@ function sys() {
 /***/ }),
 
 /***/ 38:
-/*!*************************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/uview-ui/libs/function/debounce.js ***!
-  \*************************************************************************************/
+/*!**************************************************************************************!*\
+  !*** C:/Users/ysk/Desktop/次方空间/cub-space-miniapp/uview-ui/libs/function/debounce.js ***!
+  \**************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10901,9 +10901,9 @@ debounce;exports.default = _default;
 /***/ }),
 
 /***/ 39:
-/*!*************************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/uview-ui/libs/function/throttle.js ***!
-  \*************************************************************************************/
+/*!**************************************************************************************!*\
+  !*** C:/Users/ysk/Desktop/次方空间/cub-space-miniapp/uview-ui/libs/function/throttle.js ***!
+  \**************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10944,9 +10944,9 @@ throttle;exports.default = _default;
 /***/ }),
 
 /***/ 4:
-/*!*************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/pages.json ***!
-  \*************************************************************/
+/*!**************************************************************!*\
+  !*** C:/Users/ysk/Desktop/次方空间/cub-space-miniapp/pages.json ***!
+  \**************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -10955,9 +10955,9 @@ throttle;exports.default = _default;
 /***/ }),
 
 /***/ 40:
-/*!*********************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/uview-ui/libs/config/config.js ***!
-  \*********************************************************************************/
+/*!**********************************************************************************!*\
+  !*** C:/Users/ysk/Desktop/次方空间/cub-space-miniapp/uview-ui/libs/config/config.js ***!
+  \**********************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10979,9 +10979,9 @@ var version = '1.8.4';var _default =
 /***/ }),
 
 /***/ 41:
-/*!*********************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/uview-ui/libs/config/zIndex.js ***!
-  \*********************************************************************************/
+/*!**********************************************************************************!*\
+  !*** C:/Users/ysk/Desktop/次方空间/cub-space-miniapp/uview-ui/libs/config/zIndex.js ***!
+  \**********************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11009,9 +11009,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 
 /***/ 42:
-/*!*****************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/store/index.js ***!
-  \*****************************************************************/
+/*!******************************************************************!*\
+  !*** C:/Users/ysk/Desktop/次方空间/cub-space-miniapp/store/index.js ***!
+  \******************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -12197,9 +12197,9 @@ var index = {
 /***/ }),
 
 /***/ 44:
-/*!*****************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/utils/cache.js ***!
-  \*****************************************************************/
+/*!******************************************************************!*\
+  !*** C:/Users/ysk/Desktop/次方空间/cub-space-miniapp/utils/cache.js ***!
+  \******************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -12271,9 +12271,9 @@ module.exports = {
 /***/ }),
 
 /***/ 45:
-/*!******************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/utils/common.js ***!
-  \******************************************************************/
+/*!*******************************************************************!*\
+  !*** C:/Users/ysk/Desktop/次方空间/cub-space-miniapp/utils/common.js ***!
+  \*******************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -12433,9 +12433,9 @@ var interactive = new Interactive();exports.interactive = interactive;
 /***/ }),
 
 /***/ 46:
-/*!*******************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/utils/request.js ***!
-  \*******************************************************************/
+/*!********************************************************************!*\
+  !*** C:/Users/ysk/Desktop/次方空间/cub-space-miniapp/utils/request.js ***!
+  \********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -12550,9 +12550,9 @@ var http = new Http();exports.http = http;
 /***/ }),
 
 /***/ 54:
-/*!*********************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/uview-ui/libs/mixin/mpShare.js ***!
-  \*********************************************************************************/
+/*!**********************************************************************************!*\
+  !*** C:/Users/ysk/Desktop/次方空间/cub-space-miniapp/uview-ui/libs/mixin/mpShare.js ***!
+  \**********************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -12576,9 +12576,9 @@ module.exports = {
 /***/ }),
 
 /***/ 61:
-/*!***********************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/pages/index/index.js ***!
-  \***********************************************************************/
+/*!************************************************************************!*\
+  !*** C:/Users/ysk/Desktop/次方空间/cub-space-miniapp/pages/index/index.js ***!
+  \************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -12635,9 +12635,9 @@ module.exports = {
 /***/ }),
 
 /***/ 62:
-/*!******************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/pages/index/getIndexData.js ***!
-  \******************************************************************************/
+/*!*******************************************************************************!*\
+  !*** C:/Users/ysk/Desktop/次方空间/cub-space-miniapp/pages/index/getIndexData.js ***!
+  \*******************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -12780,9 +12780,9 @@ var __getIndexData = {
 /***/ }),
 
 /***/ 71:
-/*!*********************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/pages/home/home.js ***!
-  \*********************************************************************/
+/*!**********************************************************************!*\
+  !*** C:/Users/ysk/Desktop/次方空间/cub-space-miniapp/pages/home/home.js ***!
+  \**********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 

@@ -11,7 +11,7 @@
   border-radius: 10rpx;
 }
 .textarea {
-  background-color: #F3F4F6;
+  background-color: #f3f4f6;
   margin: 0 25rpx;
   padding: 15rpx;
   border-radius: 10rpx;

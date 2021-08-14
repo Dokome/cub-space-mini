@@ -1,72 +1,61 @@
 <template>
 	<view class="">
-		<u-popup mode="bottom" v-model="show" :closeable="true" close-icon-pos="top-left"
-			:custom-style="{ zIndex: '88' }" border-radius="15">
-			<view class="content" :style="{ height: type === 'publish' ? '100vh' : '85vh'}">
-				<view class="flex justify-center align-center text-bold text-black"
-				:style="[
-						{ height: CustomBar + 'px' },
-					]"
-				>
-					{{ type === 'publish' ? '发布' : '回复'  }} <!-- publish 发布 reply 回复 login 登录 -->
+		<u-popup mode="bottom" v-model="show" :closeable="true" close-icon-pos="top-left" :custom-style="{ zIndex: '88' }" border-radius="15">
+			<view class="content" :style="{ height: type === 'publish' ? '100vh' : '85vh' }">
+				<view class="flex justify-center align-center text-bold text-black u-border-bottom" :style="[{ height: CustomBar + 'px' }]">
+					{{ type === 'publish' ? '发布' : '回复' }}
+					<!-- publish 发布 reply 回复 login 登录 -->
 				</view>
-				<!--
-					发布功能
-				 -->
-				<scroll-view scroll-y="true" :style="{ height: `calc(100% - ${ CustomBar }px)`} " v-if="type === 'publish'">
+				<!-- 发布功能 -->
+				<scroll-view scroll-y="true" :style="{ height: `calc(100% - ${CustomBar}px)` }" v-if="type === 'publish'">
+					<!-- 文字信息 -->
+					<view class="padding">
+						<u-input
+							type="textarea"
+							:clearable="false"
+							maxlength="140"
+							height="700"
+							:custom-style="{ 'background': 'white' }"
+							placeholder="分享生活 留住美好"
+							v-model="newsTextContent"
+						></u-input>
+					</view>
 					<view class="padding-top-xs" style="background-color: #F5F5F5;"></view>
-						<!-- 文字信息 -->
-						<view class="padding"> 
-							<u-input type="textarea" maxlength="140" height="500"
-								:custom-style="{ background: 'white' }" placeholder="很高兴认识你~" v-model="newsTextContent">
-							</u-input>
-						</view>
-						<view class="padding-top-xs" style="background-color: #F5F5F5;"></view>
-						<!-- 图片选择框 -->
-						<view class="imgchoose padding-xs">
-							<scroll-view :scroll-x="true" >
-								<view class="flex imgBox">
-									<view class="imgBox-item" v-for="(item, index) in imgList" :key="index">
-										<image :src="item.url" mode="aspectFill" class="imgBox-img" @click="imgRemove(index)"></image>
-									</view>
-									<view class="imgBox-item">
-										<!-- 添加图片 -->
-										<image src="/static/Img/addImg.png" mode="aspectFill" class="imgBox-img" 
-													@click="imgSelector" v-if="imgList.length < 9">
-										</image>
-									</view>
+					<!-- 图片选择框 -->
+					<view class="imgchoose padding-xs">
+						<scroll-view :scroll-x="true">
+							<view class="flex imgBox">
+								<view class="imgBox-item" v-for="(item, index) in imgList" :key="index">
+									<image :src="item.url" mode="aspectFill" class="imgBox-img" @click="imgRemove(index)"></image>
 								</view>
-							</scroll-view>
-						</view>
-						<view class="padding-top-xs" style="background-color: #F5F5F5;"></view>
-						<!-- 匿名 -->
-						<view class="flex padding-tb-sm padding-lr align-center justify-between">
-							<text>面具</text>
-							<u-switch v-model="newsAnonymous"></u-switch>
-						</view>
-						<view class="padding-top-xs" style="background-color: #F5F5F5;"></view>
-						<!-- 提交按钮 -->
-						<view class="flex justify-center padding-top-xl">
-							<u-button size="medium" type="primary" @click="newsPublishHandle">发布</u-button>
-						</view>
+								<view class="imgBox-item">
+									<!-- 添加图片 -->
+									<image src="/static/Img/addImg.png" mode="aspectFill" class="imgBox-img" @click="imgSelector" v-if="imgList.length < 9"></image>
+								</view>
+							</view>
+						</scroll-view>
+					</view>
+					<!-- 匿名 -->
+					<view class="flex padding-tb-sm padding-lr align-center justify-between">
+						<text >面具</text>
+						<u-switch v-model="newsAnonymous"></u-switch>
+					</view>
+					<!-- 提交按钮 -->
+					<view class="flex justify-center padding-top-xl margin-bottom-xl">
+						<u-button type="primary" shape="circle" :custom-style="{'height':'120rpx','width':'400rpx'}" @click="newsPublishHandle">发布</u-button>
+					</view>
 				</scroll-view>
-				<!--
-					回复部分
-				 -->
-				<scroll-view scroll-y="true" :style="{ height: `calc(100% - ${ CustomBar }px)`} " v-if="type === 'reply' && commentInfo"
-					@scrolltolower="scrollToBottom">
+
+				<!-- 回复部分 -->
+				<scroll-view scroll-y="true" :style="{ height: `calc(100% - ${CustomBar}px)` }" v-if="type === 'reply' && commentInfo" @scrolltolower="scrollToBottom">
 					<loading v-if="ifLoadingShow" :height="`calc(100% - 0px)`"></loading>
 					<view class="">
 						<card type="comment" :enterStateComment="true" :commentdata="commentInfo"></card>
 						<view class="bg-white margin-top-xs padding">
-							<text class="text-bold text-black text-df">{{ dataTotalNum + '条回复'}}</text>
+							<text class="text-bold text-black text-df">{{ dataTotalNum + '条回复' }}</text>
 						</view>
 						<card type="reply" :enterStateComment="true" v-for="item in getNewsMapData()" :commentdata="item" :key="item.id"></card>
-						<u-loadmore
-							:status="loadStatus"
-							:load-text="loadText"
-							:bg-color="'#ffffff'"
-						></u-loadmore>
+						<u-loadmore :status="loadStatus" :load-text="loadText" :bg-color="'#ffffff'"></u-loadmore>
 						<view class="bg-white" style="height: 150rpx;"></view>
 					</view>
 				</scroll-view>
@@ -77,20 +66,20 @@
 
 <script>
 import { __newsPublish } from './newsPublish.js';
-import { __dataUpdate } from './dataUpdate.js'
+import { __dataUpdate } from './dataUpdate.js';
 export default {
 	name: 'pop',
 	props: {
 		type: {
 			type: String,
 			default() {
-				return ''
+				return '';
 			}
 		}
 	},
 	data() {
 		return {
-			// 
+			//
 			ifLoadingShow: false,
 			/* 
 					评论相关的数据
@@ -101,7 +90,7 @@ export default {
 			replyList: new Map(),
 			// 回复总页数
 			totalPage: 1,
-			//回复的当前页数 
+			//回复的当前页数
 			currentPageNum: 1,
 			// 回复的总条数
 			dataTotalNum: 0,
@@ -125,8 +114,8 @@ export default {
 			// 文本信息
 			newsTextContent: '',
 			// 发布时的图片列表
-			imgList: [],
-		}
+			imgList: []
+		};
 	},
 	methods: {
 		...__newsPublish,
@@ -134,7 +123,7 @@ export default {
 		// 控制pop的显示
 		popUpChange() {
 			this.show = !this.show;
-		},
+		}
 	},
 	mounted() {
 		// 先把其他页面的时间全部注销
@@ -142,10 +131,10 @@ export default {
 		uni.$off('popUpChange');
 		uni.$off('updatePopCurrentInfo');
 		//弹起下落(发布)
-		uni.$on('popUpChange', (status) => {
+		uni.$on('popUpChange', status => {
 			this.popUpChange();
 		});
-		uni.$on('repylChange', (options) => {
+		uni.$on('repylChange', options => {
 			if (!options.popDontChange) {
 				this.ifLoadingShow = true;
 				this.popUpChange();
@@ -159,14 +148,14 @@ export default {
 			} else if (options.type === 'reply') {
 				id = options.id;
 			}
-			this.updateReplyList(id, { noToken: true, delay: 100, getNew: true});
+			this.updateReplyList(id, { noToken: true, delay: 100, getNew: true });
 		});
 	},
 	computed: {
 		// 当前的状态
 		curType() {
 			if (this.type === 'publish') {
-				return '发布'
+				return '发布';
 			} else {
 				return this.type === 'login' ? '登录' : '回复';
 			}
@@ -181,7 +170,7 @@ export default {
 			}
 		}
 	}
-}
+};
 </script>
 
 <style lang="scss">
@@ -204,5 +193,4 @@ export default {
 	background-color: #fff;
 	left: 0;
 }
-
 </style>
