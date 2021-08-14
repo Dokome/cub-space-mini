@@ -1,4 +1,4 @@
-(global["webpackJsonp"] = global["webpackJsonp"] || []).push([["pagesHome/identify"],{
+require('common/vendor.js');(global["webpackJsonp"] = global["webpackJsonp"] || []).push([["pagesHome/identify"],{
 
 /***/ 110:
 /*!******************************************************************************************!*\
@@ -101,6 +101,9 @@ try {
     },
     uButton: function() {
       return __webpack_require__.e(/*! import() | uview-ui/components/u-button/u-button */ "uview-ui/components/u-button/u-button").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-button/u-button.vue */ 164))
+    },
+    loading: function() {
+      return __webpack_require__.e(/*! import() | components/loading/loading */ "components/loading/loading").then(__webpack_require__.bind(null, /*! @/components/loading/loading.vue */ 223))
     }
   }
 } catch (e) {
@@ -162,98 +165,110 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-var _default =
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var _identify = __webpack_require__(/*! ./identify.js */ 363);function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var _default =
 {
   data: function data() {
     return {
-      ifIdentify: false,
+      // 验证码间隔定时器
+      vaildTimmer: null,
+      vaildTimeCount: 120,
+      // loading显示控制
+      ifLoaddingShow: true,
+      // 认证砖头盖
+      confirmStatus: false,
+      // 基本信息
       realName: '',
       phone: '',
       vailid: '',
       SID: '',
+      // 学校ID和学校名称
+      schoolId: '',
       school: '请选择您的学校',
       show: false,
       schoolList: [
       {
         value: '1',
-        label: '江西师范大学' },
-
-      {
-        value: '2',
-        label: '江西财经大学' }] };
+        label: '江西师范大学' }] };
 
 
 
   },
-  methods: {
-    confirm: function confirm(e) {
-      this.school = e[0].label;
-      console.log(e[0].label);
-    } } };exports.default = _default;
+  methods: _objectSpread({},
+  _identify.__identify),
+
+  onLoad: function onLoad() {
+    this.getConfirmStatus();
+    this.getAllSchool();
+  } };exports.default = _default;
 
 /***/ })
 
-},[[110,"common/runtime","common/vendor"]]]);
+},[[110,"common/runtime","common/vendor","pagesHome/common/vendor"]]]);
 //# sourceMappingURL=../../.sourcemap/mp-weixin/pagesHome/identify.js.map

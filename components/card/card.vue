@@ -54,8 +54,9 @@
 				<view class="flex flex-direction" @click="moreOptionsClick(newsdata, $event)">
 					<view class="padding" data-type="delete" v-if="!newsdata.btnStatus">删除</view>
 					<view class="padding u-border-top" data-type="report">举报</view>
-					<view class="padding u-border-top" data-type="share" >
-						<button open-type="share" :data-info="newsdata">转发</button>
+					<view class="padding u-border-top" data-type="share" style="position: relative;">
+						转发
+						<button open-type="share" :data-info="newsdata" class="shareButton"></button>
 					</view>
 				</view>
 			</u-modal>
@@ -235,5 +236,16 @@ export default {
 	right: 0;
 	top: 0;
 	z-index: 999;
+}
+.shareButton {
+	width: 100%;
+	height: 100%;	
+	padding: 0;
+	text-align: left;
+	background-color: transparent;
+	border: transparent;
+	position: absolute;
+	left: 0;
+	top: 0;
 }
 </style>

@@ -1,4 +1,4 @@
-(global["webpackJsonp"] = global["webpackJsonp"] || []).push([["pagesHome/fans_focus"],{
+require('common/vendor.js');(global["webpackJsonp"] = global["webpackJsonp"] || []).push([["pagesHome/fans_focus"],{
 
 /***/ 100:
 /*!*************************************************************************************************************************************!*\

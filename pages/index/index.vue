@@ -47,7 +47,7 @@
 							<u-swiper height="236" mode="dot" border-radius="8" :list="bannerListMap" :effect3d="true"></u-swiper>
 						</view>
 						<!-- 动态数据 -->
-						<view v-if="newsDataList[index]">
+						<view v-if="newsDataList[index] && getNewsMapData(index).length">
 							<card v-for="item of getNewsMapData(index)" :key="item.id" :reportInfoList="reportInfoList"
 							@click.native="enterDetail(item.id)" :newsdata="{ ...item }"></card>
 							<u-loadmore
@@ -58,6 +58,9 @@
 								:load-text="loadText"
 								:bg-color="'#ffffff'"
 							></u-loadmore>
+						</view>
+						<view class="padding flex align-center justify-center u-tips-color" v-else>
+							相关内容认证后显示~
 						</view>
 					</view>
 				</scroll-view>

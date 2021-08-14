@@ -27,8 +27,8 @@
 		<view class="margin-bottom-xs"></view>
 		<!-- 资料不可修改部分 -->
 		<view class="bg-white padding flex justify-between align-center u-border-bottom" v-for="(item, index) in forbiddenInfo" :key="index">
-			<label>{{forbideenInfoTagName[index]}}</label>
-			<view class="">{{item}}</view>
+			<label>{{ forbideenInfoTagName[index] }}</label>
+			<view class="">{{ item || '未认证'}}</view>
 		</view>
 		<!-- 提醒 -->
 		<view class="margin-bottom-xs"></view>

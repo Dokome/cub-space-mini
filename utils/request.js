@@ -38,8 +38,8 @@ class Http {
 				},
 				dataType: 'json',
 				success: (res) => {
+					resolve(res);
 					if (res.data.code !== 200 && !options.skip) {
-						console.log(res);
 						return uni.showToast({
 							title: res.data.msg,
 							icon: "none"

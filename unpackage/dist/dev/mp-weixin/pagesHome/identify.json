@@ -5,6 +5,7 @@
   "usingComponents": {
     "navbar": "/components/navbar/navbar",
     "u-select": "/uview-ui/components/u-select/u-select",
-    "u-button": "/uview-ui/components/u-button/u-button"
+    "u-button": "/uview-ui/components/u-button/u-button",
+    "loading": "/components/loading/loading"
   }
 }

@@ -10325,7 +10325,7 @@ function colorToRgba(color) {var alpha = arguments.length > 1 && arguments[1] !=
 
 /***/ }),
 
-/***/ 261:
+/***/ 268:
 /*!********************************************************************************!*\
   !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/uview-ui/libs/util/emitter.js ***!
   \********************************************************************************/
@@ -10385,87 +10385,6 @@ function _broadcast(componentName, eventName, params) {
 
 /***/ }),
 
-/***/ 269:
-/*!************************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/components/textInput/textInput.js ***!
-  \************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.__textInput = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 21));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}var __textInput = {
-  InputFocus: function InputFocus(e) {
-    this.InputBottom = e.detail.height;
-    this.ifImgChoose = false;
-  },
-  InputBlur: function InputBlur(e) {
-    this.InputBottom = 0;
-  },
-  ImgChooseHandle: function ImgChooseHandle() {
-    this.ifImgChoose = !this.ifImgChoose;
-  },
-  imgSelector: function imgSelector() {
-    this.$api.imgHandle.imgSelector.call(this);
-  },
-  imgRemove: function imgRemove(index) {
-    this.$api.imgHandle.removeCurrentImg.call(this);
-  },
-  publishHandle: function publishHandle() {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var finalId, data, result;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
-              finalId = undefined;
-              data = {
-                url: '',
-                method: 'POST',
-                data: {
-                  content: _this.inputContent,
-                  images: _this.imgList } };
-
-
-              // 具体配置
-              if (_this.type === 'news' || _this.type === 'comment') {
-                data.url = '/dynamicComment/pushComment';
-                if (_this.type === 'news') {
-                  data.data.dynamicId = _this.target.id;
-                } else {
-                  data.data.rootCommentId = _this.target.id;
-                }
-                finalId = _this.target.id;
-              } else {
-                data.data = _objectSpread(_objectSpread({},
-
-                data.data), {}, {
-                  parentCommentId: _this.target.id,
-                  parentCommentUserId: _this.target.userId,
-                  rootCommentId: _this.target.rootCommentId });
-
-                data.url = '/dynamicComment/replyComment';
-                finalId = _this.target.rootCommentId;
-              }
-              // 发送请求
-              _context.next = 5;return _this.$http.request(data);case 5:result = _context.sent;
-              // 更新pop内的内容
-              uni.$emit('updateCurrentInfo', '');
-              if (_this.type !== 'news') {
-                uni.$emit('repylChange', { type: _this.type, data: _this.target, popDontChange: true, id: finalId });
-              }
-              _this.clearCurrentInfo();
-              if (result.data.code === 200) {
-                uni.showToast({
-                  title: '评论成功~',
-                  icon: 'none' });
-
-              }
-              // 清除当前输入
-            case 10:case "end":return _context.stop();}}}, _callee);}))();},
-  clearCurrentInfo: function clearCurrentInfo() {
-    this.inputContent = '';
-    this.ifImgChoose = false;
-    this.imgList = [];
-    this.$forceUpdate();
-  } };exports.__textInput = __textInput;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
-
-/***/ }),
-
 /***/ 27:
 /*!*********************************************************************************!*\
   !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/uview-ui/libs/function/guid.js ***!
@@ -10515,6 +10434,93 @@ function guid() {var len = arguments.length > 0 && arguments[0] !== undefined ? 
 }var _default =
 
 guid;exports.default = _default;
+
+/***/ }),
+
+/***/ 276:
+/*!************************************************************************************!*\
+  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/components/textInput/textInput.js ***!
+  \************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.__textInput = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 21));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}var __textInput = {
+  InputFocus: function InputFocus(e) {
+    this.InputBottom = e.detail.height;
+    this.ifImgChoose = false;
+  },
+  InputBlur: function InputBlur(e) {
+    this.InputBottom = 0;
+  },
+  ImgChooseHandle: function ImgChooseHandle() {
+    this.ifImgChoose = !this.ifImgChoose;
+  },
+  imgSelector: function imgSelector() {
+    this.$api.imgHandle.imgSelector.call(this);
+  },
+  imgRemove: function imgRemove(index) {
+    this.$api.imgHandle.removeCurrentImg.call(this);
+  },
+  publishHandle: function publishHandle() {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var finalId, data, result;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:if (!(
+              _this.inputContent.trim().length === 0)) {_context.next = 2;break;}return _context.abrupt("return",
+              uni.showToast({
+                title: "空空如也~",
+                icon: "none" }));case 2:
+
+
+              finalId = undefined;
+              data = {
+                url: '',
+                method: 'POST',
+                data: {
+                  content: _this.inputContent,
+                  images: _this.imgList } };
+
+
+              // 具体配置
+              if (_this.type === 'news' || _this.type === 'comment') {
+                data.url = '/dynamicComment/pushComment';
+                if (_this.type === 'news') {
+                  data.data.dynamicId = _this.target.id;
+                } else {
+                  data.data.rootCommentId = _this.target.id;
+                }
+                finalId = _this.target.id;
+              } else {
+                data.data = _objectSpread(_objectSpread({},
+
+                data.data), {}, {
+                  parentCommentId: _this.target.id,
+                  parentCommentUserId: _this.target.userId,
+                  rootCommentId: _this.target.rootCommentId });
+
+                data.url = '/dynamicComment/replyComment';
+                finalId = _this.target.rootCommentId;
+              }
+              // 发送请求
+              _context.next = 7;return _this.$http.request(data);case 7:result = _context.sent;
+              // 更新pop内的内容
+              uni.$emit('updateCurrentInfo', '');
+              if (_this.type !== 'news') {
+                uni.$emit('repylChange', { type: _this.type, data: _this.target, popDontChange: true, id: finalId });
+              }
+              _this.clearCurrentInfo();
+              if (result.data.code === 200) {
+                uni.showToast({
+                  title: '评论成功~',
+                  icon: 'none' });
+
+              }
+              // 清除当前输入
+            case 12:case "end":return _context.stop();}}}, _callee);}))();},
+  clearCurrentInfo: function clearCurrentInfo() {
+    this.inputContent = '';
+    this.ifImgChoose = false;
+    this.imgList = [];
+    this.$forceUpdate();
+  } };exports.__textInput = __textInput;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 
@@ -12387,13 +12393,13 @@ Interactive = /*#__PURE__*/function () {
 
     // 页面分享监听
   }, { key: "onShareFunc", value: function onShareFunc(res) {
-      var info = {};
       if (res.from === 'button') {// 来自页面内分享按钮
-        info = res.target.dataset.info;
+        var info = res.target.dataset.info || {};
+        console.log(info);
         return {
-          title: info.content && info.content.slice(0, 8) + '...',
-          path: "/pagesInteractive/newsdetail?id=".concat(info.id),
-          imageUrl: info.images[0] || 'https://cub.image.emily.red/operation/logo.png' };
+          title: info && info.content && info.content.slice(0, 8) + '...' || '遇见有趣的',
+          path: info && info.id && "/pagesInteractive/newsdetail?id=".concat(info.id) || '',
+          imageUrl: info && info.images && info.images[0].url || 'https://cub.image.emily.red/operation/logo.png' };
 
       }
       return {
@@ -12474,8 +12480,8 @@ var Http = /*#__PURE__*/function () {
 
           dataType: 'json',
           success: function success(res) {
+            resolve(res);
             if (res.data.code !== 200 && !options.skip) {
-              console.log(res);
               return uni.showToast({
                 title: res.data.msg,
                 icon: "none" });
@@ -12685,24 +12691,28 @@ var __getIndexData = {
                     "tab": options.tab } },
 
 
+                skip: true,
                 noToken: options.noToken });case 8:data = _context.sent;
 
               // 判断是否请求成功
               if (data.data.code === 200) {
                 _this.pageNumList[_this.current]++;
-              }
+                reuslt = data.data.data;
+                list = reuslt.list, pageNum = reuslt.pageNum, pageSize = reuslt.pageSize, totalPage = reuslt.totalPage, total = reuslt.total;
 
-              reuslt = data.data.data;
-              list = reuslt.list, pageNum = reuslt.pageNum, pageSize = reuslt.pageSize, totalPage = reuslt.totalPage, total = reuslt.total;
+                _this.pageTotalList[_this.current] = totalPage;
+                // 添加数据
+                __listDataAddHandle.call(_this, list, _this.newsDataList[_this.current], options.isGetNew);
+                _this.$set(_this.loadStatus, _this.current, 'loadmore');
+                _this.$forceUpdate();
+              } else {
 
-              _this.pageTotalList[_this.current] = totalPage;
-              // 添加数据
-              __listDataAddHandle.call(_this, list, _this.newsDataList[_this.current], options.isGetNew);
-              _this.$set(_this.loadStatus, _this.current, 'loadmore');
-              _this.$forceUpdate();
-              setTimeout(function () {
-                _this.ifLoaddingShow = false;
-              }, 500);case 17:case "end":return _context.stop();}}}, _callee);}))();
+
+              } // 未认证，未登录
+              // console.log(data);
+              // 取消遮罩
+              setTimeout(function () {_this.ifLoaddingShow = false;
+              }, 500);case 11:case "end":return _context.stop();}}}, _callee);}))();
   },
 
   // 映射动态数据
@@ -12728,6 +12738,7 @@ var __getIndexData = {
                   data: {
                     "rankType": options.type },
 
+                  skip: true,
                   noToken: options.noToken }));case 2:data = _context2.sent;
 
               result = JSON.stringify(data.data.data);

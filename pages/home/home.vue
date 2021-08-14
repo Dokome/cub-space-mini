@@ -115,8 +115,8 @@ export default {
 		}
 	},
 	// 页面分享
-	onShareAppMessage(res) {
-		return this.$api.interactive.onShareFunc(res);
+	onShareAppMessage() {
+		return this.$api.interactive.onShareFunc();
 	},
 	
 };

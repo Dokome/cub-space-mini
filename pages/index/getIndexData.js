@@ -45,23 +45,27 @@ export const __getIndexData = {
 				"pageSize": 10,
 				"parmas": {
 					"tab": options.tab
-				}
+				},
 			},
+			skip: true,
 			noToken: options.noToken
 		});
 		// 判断是否请求成功
 		if (data.data.code === 200) {
 			this.pageNumList[this.current]++;
+			const reuslt = data.data.data;
+			const { list, pageNum, pageSize, totalPage, total } = reuslt;
+			
+			this.pageTotalList[this.current] = totalPage;
+			// 添加数据
+			__listDataAddHandle.call(this, list, this.newsDataList[this.current], options.isGetNew);
+			this.$set(this.loadStatus, this.current, 'loadmore');
+			this.$forceUpdate();
+		} else {
+			// 未认证，未登录
+			// console.log(data);
 		}
-		
-		const reuslt = data.data.data;
-		const { list, pageNum, pageSize, totalPage, total } = reuslt;
-		
-		this.pageTotalList[this.current] = totalPage;
-		// 添加数据
-		__listDataAddHandle.call(this, list, this.newsDataList[this.current], options.isGetNew);
-		this.$set(this.loadStatus, this.current, 'loadmore');
-		this.$forceUpdate();
+		// 取消遮罩
 		setTimeout(() => {
 			this.ifLoaddingShow = false;
 		}, 500)
@@ -90,6 +94,7 @@ export const __getIndexData = {
 			data: {
 				"rankType": options.type
 			},
+			skip: true,
 			noToken: options.noToken
 		});
 		const result = JSON.stringify(data.data.data);

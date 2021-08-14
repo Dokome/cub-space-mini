@@ -3,6 +3,7 @@
   "enablePullDownRefresh": false,
   "navigationBarTextStyle": "black",
   "usingComponents": {
-    "navbar": "/components/navbar/navbar"
+    "navbar": "/components/navbar/navbar",
+    "loading": "/components/loading/loading"
   }
 }

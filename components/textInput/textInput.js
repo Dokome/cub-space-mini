@@ -16,6 +16,12 @@ export const __textInput = {
 		this.$api.imgHandle.removeCurrentImg.call(this);
 	},
 	async publishHandle() {
+		if (this.inputContent.trim().length === 0) {
+			return uni.showToast({
+				title: "空空如也~",
+				icon: "none"
+			});
+		}
 		let finalId = undefined;
 		let data = {
 			url: '',

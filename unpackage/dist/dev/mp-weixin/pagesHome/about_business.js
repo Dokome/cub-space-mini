@@ -1,4 +1,4 @@
-(global["webpackJsonp"] = global["webpackJsonp"] || []).push([["pagesHome/about_business"],{
+require('common/vendor.js');(global["webpackJsonp"] = global["webpackJsonp"] || []).push([["pagesHome/about_business"],{
 
 /***/ 102:
 /*!************************************************************************************************!*\
@@ -97,6 +97,9 @@ try {
   components = {
     navbar: function() {
       return __webpack_require__.e(/*! import() | components/navbar/navbar */ "components/navbar/navbar").then(__webpack_require__.bind(null, /*! @/components/navbar/navbar.vue */ 171))
+    },
+    loading: function() {
+      return __webpack_require__.e(/*! import() | components/loading/loading */ "components/loading/loading").then(__webpack_require__.bind(null, /*! @/components/loading/loading.vue */ 223))
     }
   }
 } catch (e) {
@@ -153,7 +156,8 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 21));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};} //
+//
 //
 //
 //
@@ -168,6 +172,7 @@ var _default =
 {
   data: function data() {
     return {
+      ifLoaddingShow: true,
       //页面
       page: '',
       img: 'https://image.sapce.club/common/1623820687514623626.jpg',
@@ -175,8 +180,33 @@ var _default =
       aboutus: '欢迎加入官方QQ群：810216790' };
 
   },
+  methods: {
+    getBusinessInfo: function getBusinessInfo() {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var data, result;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:_context.next = 2;return (
+                  _this.$http.request({
+                    url: '/sysCode/businessCooperation',
+                    method: 'GET' }));case 2:data = _context.sent;
+
+                result = data.data.data;
+                _this.img = result.image;
+                _this.bussiness = result.text;
+                setTimeout(function () {
+                  _this.ifLoaddingShow = false;
+                }, 500);case 7:case "end":return _context.stop();}}}, _callee);}))();
+    },
+    getAboutInfo: function getAboutInfo() {var _this2 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee2() {return _regenerator.default.wrap(function _callee2$(_context2) {while (1) {switch (_context2.prev = _context2.next) {case 0:
+                _this2.img = 'https://cub.image.emily.red/operation/logo.png';
+                setTimeout(function () {
+                  _this2.ifLoaddingShow = false;
+                }, 1000);case 2:case "end":return _context2.stop();}}}, _callee2);}))();
+    } },
+
   onLoad: function onLoad(options) {
     this.page = options.page === 'business' ? '商务合作' : '关于我们';
+    if (options.page === 'business') {
+      this.getBusinessInfo();
+    } else if (options.page === 'about') {
+      this.getAboutInfo();
+    }
   } };exports.default = _default;
 
 /***/ }),

@@ -300,8 +300,8 @@ var _home2 = __webpack_require__(/*! ./home.js */ 71);function ownKeys(object, e
     }
   },
   // 页面分享
-  onShareAppMessage: function onShareAppMessage(res) {
-    return this.$api.interactive.onShareFunc(res);
+  onShareAppMessage: function onShareAppMessage() {
+    return this.$api.interactive.onShareFunc();
   } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
