@@ -22,7 +22,8 @@
 				</view>
 			</view>
 			<!-- 文字栏 -->
-			<view class="margin-tb-xs text-black text-content"  :class="{ clamp3: clamp }">{{ newsdata.content }}</view>
+			<!-- <view class="margin-tb-xs text-black text-content"  :class="{ clamp3: clamp }">{{ newsdata.content }}</view> -->
+			<view class="margin-tb-xs text-black text-content" >{{ newsdata.content }}</view>
 			<!-- 图片栏 -->
 			<view class="margin-tb-sm img_Con" style="width: 600rpx;" v-if="newsdata.images && newsdata.images.length">
 				<view :class="imgNewStyle" v-for="(item, index) in newsdata.images" :key="index">
@@ -86,7 +87,7 @@
 					</view>
 					<!-- 正文 -->
 					<view class="wmax margin-top-sm">
-						<view class="clamp3 text-black text-content">
+						<view class="text-black text-content">
 							<text v-if="type === 'reply' && commentdata.commentType == 2">
 								<text>回复</text>
 								<text class="margin-lr-xs text-blue">
