@@ -4,7 +4,7 @@
 		{ display: ifNavDisplay }
 	]" class="bg-white">
 		<view 
-			class="flex align-center" 
+			class="flex align-center u-border-bottom" 
 			:class="{ 'justify-center': !!title }"
 			:style="[
 				{ height: CustomBar - StatusBar + 'px', width: '100%' }, 

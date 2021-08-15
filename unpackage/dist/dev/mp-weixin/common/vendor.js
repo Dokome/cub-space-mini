@@ -9035,7 +9035,7 @@ new Router().route;exports.default = _default;
 
 /***/ }),
 
-/***/ 200:
+/***/ 207:
 /*!*********************************************************************************!*\
   !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/components/card/moreOptions.js ***!
   \*********************************************************************************/
@@ -9173,7 +9173,7 @@ if (hadRuntime) {
 
 /***/ }),
 
-/***/ 222:
+/***/ 229:
 /*!********************************************************************************!*\
   !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/components/pop/newsPublish.js ***!
   \********************************************************************************/
@@ -9240,92 +9240,6 @@ if (hadRuntime) {
               }case 31:case "end":return _context.stop();}}}, _callee, null, [[4, 16, 19, 22]]);}))();
   } };exports.__newsPublish = __newsPublish;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
-
-/***/ }),
-
-/***/ 223:
-/*!*******************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/components/pop/dataUpdate.js ***!
-  \*******************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.__dataUpdate = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 21));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}function _unsupportedIterableToArray(o, minLen) {if (!o) return;if (typeof o === "string") return _arrayLikeToArray(o, minLen);var n = Object.prototype.toString.call(o).slice(8, -1);if (n === "Object" && o.constructor) n = o.constructor.name;if (n === "Map" || n === "Set") return Array.from(o);if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);}function _iterableToArray(iter) {if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) return _arrayLikeToArray(arr);}function _arrayLikeToArray(arr, len) {if (len == null || len > arr.length) len = arr.length;for (var i = 0, arr2 = new Array(len); i < len; i++) {arr2[i] = arr[i];}return arr2;}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};} // 加载数据
-var __listDataAddHandle = function __listDataAddHandle(list, map) {
-  // 请求新数据时清空列表
-  list.forEach(function (item) {
-    // 判断数据是否存在
-    map.get(item.id) ? map.delete(item.id) : null;
-    map.set(item.id, item);
-  });
-};
-
-var __dataUpdate = {
-  // 更新列表内的消息
-  updateReplyList: function updateReplyList(id) {var _arguments = arguments,_this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var options, data, result;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:options = _arguments.length > 1 && _arguments[1] !== undefined ? _arguments[1] : {};
-              _this.loadStatus = 'loading';
-              if (options.getNew) {
-                _this.currentPageNum = _this.totalPage ? _this.totalPage : 1;
-              }if (!(
-              _this.currentPageNum > _this.totalPage && !options.getNew)) {_context.next = 6;break;}
-              _this.loadStatus = 'nomore';return _context.abrupt("return");case 6:_context.next = 8;return (
-
-
-
-                _this.$http.request({
-                  url: '/dynamicComment/selectRootComment',
-                  method: 'POST',
-                  data: {
-                    pageNum: _this.currentPageNum,
-                    pageSize: 10,
-                    parmas: {
-                      rootCommentId: id } },
-
-
-                  delay: 300,
-                  noToken: true }));case 8:data = _context.sent;
-
-              // 页面参数赋值
-              result = data.data.data;
-              if (data.data.code === 200) {
-                _this.currentPageNum++;
-                _this.totalPage = result.totalPage;
-                _this.dataTotalNum = result.total;
-              }
-              // 
-              _this.loadStatus = 'loadmore';
-
-              if (_this.totalPage === 0 || options.getNew || _this.dataTotalNum < 10) {
-                _this.loadStatus = 'nomore';
-              }
-              // 
-              __listDataAddHandle.call(_this, result.list, _this.replyList);
-
-              // 更新页面状态
-              _this.$forceUpdate();
-              setTimeout(function () {
-                _this.ifLoadingShow = false;
-              }, 200);case 16:case "end":return _context.stop();}}}, _callee);}))();
-  },
-  // 映射动态数据
-  getNewsMapData: function getNewsMapData() {
-    if (this.replyList) {
-      return _toConsumableArray(this.replyList.values());
-    }
-  },
-  // 请求更新数据
-  scrollToBottom: function scrollToBottom() {
-    this.updateReplyList(this.commentInfo.id, { noToken: true, delay: 100 });
-  },
-  // 数据重置
-  clearData: function clearData() {
-    this.commentInfo = null;
-    this.replyList = new Map();
-    this.totalPage = 1;
-    this.currentPageNum = 1;
-    this.dataTotalNum = 0;
-  } };exports.__dataUpdate = __dataUpdate;
 
 /***/ }),
 
@@ -10061,6 +9975,92 @@ var __dataUpdate = {
 
 /***/ }),
 
+/***/ 230:
+/*!*******************************************************************************!*\
+  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/components/pop/dataUpdate.js ***!
+  \*******************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.__dataUpdate = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 21));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}function _unsupportedIterableToArray(o, minLen) {if (!o) return;if (typeof o === "string") return _arrayLikeToArray(o, minLen);var n = Object.prototype.toString.call(o).slice(8, -1);if (n === "Object" && o.constructor) n = o.constructor.name;if (n === "Map" || n === "Set") return Array.from(o);if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);}function _iterableToArray(iter) {if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) return _arrayLikeToArray(arr);}function _arrayLikeToArray(arr, len) {if (len == null || len > arr.length) len = arr.length;for (var i = 0, arr2 = new Array(len); i < len; i++) {arr2[i] = arr[i];}return arr2;}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};} // 加载数据
+var __listDataAddHandle = function __listDataAddHandle(list, map) {
+  // 请求新数据时清空列表
+  list.forEach(function (item) {
+    // 判断数据是否存在
+    map.get(item.id) ? map.delete(item.id) : null;
+    map.set(item.id, item);
+  });
+};
+
+var __dataUpdate = {
+  // 更新列表内的消息
+  updateReplyList: function updateReplyList(id) {var _arguments = arguments,_this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var options, data, result;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:options = _arguments.length > 1 && _arguments[1] !== undefined ? _arguments[1] : {};
+              _this.loadStatus = 'loading';
+              if (options.getNew) {
+                _this.currentPageNum = _this.totalPage ? _this.totalPage : 1;
+              }if (!(
+              _this.currentPageNum > _this.totalPage && !options.getNew)) {_context.next = 6;break;}
+              _this.loadStatus = 'nomore';return _context.abrupt("return");case 6:_context.next = 8;return (
+
+
+
+                _this.$http.request({
+                  url: '/dynamicComment/selectRootComment',
+                  method: 'POST',
+                  data: {
+                    pageNum: _this.currentPageNum,
+                    pageSize: 10,
+                    parmas: {
+                      rootCommentId: id } },
+
+
+                  delay: 300,
+                  noToken: true }));case 8:data = _context.sent;
+
+              // 页面参数赋值
+              result = data.data.data;
+              if (data.data.code === 200) {
+                _this.currentPageNum++;
+                _this.totalPage = result.totalPage;
+                _this.dataTotalNum = result.total;
+              }
+              // 
+              _this.loadStatus = 'loadmore';
+
+              if (_this.totalPage === 0 || options.getNew || _this.dataTotalNum < 10) {
+                _this.loadStatus = 'nomore';
+              }
+              // 
+              __listDataAddHandle.call(_this, result.list, _this.replyList);
+
+              // 更新页面状态
+              _this.$forceUpdate();
+              setTimeout(function () {
+                _this.ifLoadingShow = false;
+              }, 200);case 16:case "end":return _context.stop();}}}, _callee);}))();
+  },
+  // 映射动态数据
+  getNewsMapData: function getNewsMapData() {
+    if (this.replyList) {
+      return _toConsumableArray(this.replyList.values());
+    }
+  },
+  // 请求更新数据
+  scrollToBottom: function scrollToBottom() {
+    this.updateReplyList(this.commentInfo.id, { noToken: true, delay: 100 });
+  },
+  // 数据重置
+  clearData: function clearData() {
+    this.commentInfo = null;
+    this.replyList = new Map();
+    this.totalPage = 1;
+    this.currentPageNum = 1;
+    this.dataTotalNum = 0;
+  } };exports.__dataUpdate = __dataUpdate;
+
+/***/ }),
+
 /***/ 24:
 /*!***************************************************************************************!*\
   !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/uview-ui/libs/function/timeFormat.js ***!
@@ -10377,7 +10377,7 @@ guid;exports.default = _default;
 
 /***/ }),
 
-/***/ 271:
+/***/ 278:
 /*!********************************************************************************!*\
   !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/uview-ui/libs/util/emitter.js ***!
   \********************************************************************************/
@@ -10437,7 +10437,55 @@ function _broadcast(componentName, eventName, params) {
 
 /***/ }),
 
-/***/ 279:
+/***/ 28:
+/*!**********************************************************************************!*\
+  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/uview-ui/libs/function/color.js ***!
+  \**********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; // 为了让用户能够自定义主题，会逐步弃用此文件，各颜色通过css提供
+// 为了给某些特殊场景使用和向后兼容，无需删除此文件(2020-06-20)
+var color = {
+  primary: "#2979ff",
+  primaryDark: "#2b85e4",
+  primaryDisabled: "#a0cfff",
+  primaryLight: "#ecf5ff",
+  bgColor: "#f3f4f6",
+
+  info: "#909399",
+  infoDark: "#82848a",
+  infoDisabled: "#c8c9cc",
+  infoLight: "#f4f4f5",
+
+  warning: "#ff9900",
+  warningDark: "#f29100",
+  warningDisabled: "#fcbd71",
+  warningLight: "#fdf6ec",
+
+  error: "#fa3534",
+  errorDark: "#dd6161",
+  errorDisabled: "#fab6b6",
+  errorLight: "#fef0f0",
+
+  success: "#19be6b",
+  successDark: "#18b566",
+  successDisabled: "#71d5a1",
+  successLight: "#dbf1e1",
+
+  mainColor: "#303133",
+  contentColor: "#606266",
+  tipsColor: "#909399",
+  lightColor: "#c0c4cc",
+  borderColor: "#e4e7ed" };var _default =
+
+
+color;exports.default = _default;
+
+/***/ }),
+
+/***/ 286:
 /*!************************************************************************************!*\
   !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/components/textInput/textInput.js ***!
   \************************************************************************************/
@@ -10521,54 +10569,6 @@ function _broadcast(componentName, eventName, params) {
     this.$forceUpdate();
   } };exports.__textInput = __textInput;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
-
-/***/ }),
-
-/***/ 28:
-/*!**********************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/uview-ui/libs/function/color.js ***!
-  \**********************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; // 为了让用户能够自定义主题，会逐步弃用此文件，各颜色通过css提供
-// 为了给某些特殊场景使用和向后兼容，无需删除此文件(2020-06-20)
-var color = {
-  primary: "#2979ff",
-  primaryDark: "#2b85e4",
-  primaryDisabled: "#a0cfff",
-  primaryLight: "#ecf5ff",
-  bgColor: "#f3f4f6",
-
-  info: "#909399",
-  infoDark: "#82848a",
-  infoDisabled: "#c8c9cc",
-  infoLight: "#f4f4f5",
-
-  warning: "#ff9900",
-  warningDark: "#f29100",
-  warningDisabled: "#fcbd71",
-  warningLight: "#fdf6ec",
-
-  error: "#fa3534",
-  errorDark: "#dd6161",
-  errorDisabled: "#fab6b6",
-  errorLight: "#fef0f0",
-
-  success: "#19be6b",
-  successDark: "#18b566",
-  successDisabled: "#71d5a1",
-  successLight: "#dbf1e1",
-
-  mainColor: "#303133",
-  contentColor: "#606266",
-  tipsColor: "#909399",
-  lightColor: "#c0c4cc",
-  borderColor: "#e4e7ed" };var _default =
-
-
-color;exports.default = _default;
 
 /***/ }),
 
