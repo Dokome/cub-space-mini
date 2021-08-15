@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<scroll-view scroll-y="true" :style="{ height: `100vh` }" @scrolltolower="scrollToBottom">
-		<navbar :title=" isSelf ? '我的动态' : 'Ta的主页' "></navbar>
+		<navbar :title=" isSelf ? '我的动态' : ' ' " :isFixed="true"></navbar>
 			<view>
 				<home-header v-if="!isSelf" :userinfo="userinfo" :isSelf="isSelf"></home-header>
 				<card type="news" v-for="item in getNewsMapData()" :key="item.id" 

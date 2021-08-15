@@ -138,7 +138,8 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 //
 //
 //
-var _default =
+//
+var _default2 =
 {
   name: "navbar",
   props: {
@@ -148,7 +149,19 @@ var _default =
 
     title: {
       type: String,
-      default: '' } },
+      default: '' },
+
+    navBarColor: {
+      type: String,
+      default: function _default() {
+        return '#fff';
+      } },
+
+    isFixed: {
+      type: Boolean,
+      dafault: function dafault() {
+        return false;
+      } } },
 
 
   data: function data() {
@@ -161,7 +174,7 @@ var _default =
     //返回上一页
     back: function back() {
       this.$api.routerHandle.goback();
-    } } };exports.default = _default;
+    } } };exports.default = _default2;
 
 /***/ }),
 

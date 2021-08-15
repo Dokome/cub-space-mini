@@ -5,7 +5,7 @@
 			<u-input
 				type="textarea"
 				maxlength="140"
-				height="1000"
+				height="700"
 				v-model="content"
 				:clearable="false"
 				:custom-style="{ background: 'white', padding: '10rpx' }"
@@ -13,7 +13,7 @@
 			></u-input>
 		</view>
 		<view class="flex justify-center padding-top-xl margin-bottom-xl">
-			<u-button shape="circle" :custom-style="{ height: '120rpx', width: '400rpx' }" type="primary" @click="submit">提交</u-button>
+			<u-button  :custom-style="{'height':'80rpx','width':'300rpx'}" type="primary" @click="submit">提交</u-button>
 		</view>
 	</view>
 </template>

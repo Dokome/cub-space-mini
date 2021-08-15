@@ -17,7 +17,7 @@ export const __indexMethods = {
 	},
 	//进入热榜页面
 	enterHotList() {
-		this.$api.routerHandle.goto('/pagesInteractive/hotList', JSON.parse(this.hotList));
+		this.$api.routerHandle.goto('/pagesInteractive/hotList', JSON.parse(this.current));
 	},
 	//进入动态详情
 	enterDetail(id) {
@@ -45,4 +45,29 @@ export const __indexMethods = {
 	scrollToBottom(index) {
 		this.getNewsData({ noToken: true , tab: index });
 	},
+	// 返回顶部
+	goBackToTop(e) {
+		this.scrollTop = this.old.scrollTop;
+		this.$nextTick(function() {
+		    this.scrollTop = 0;
+		});
+		if(this.gotopTimmer) {
+			return;
+		}
+		//限制请求1s/次
+		this.gotopTimmer = setTimeout(() => {
+			this.getNewsData({ noToken: true, tab: this.current, isGetNew: true });
+			this.timmer = null;
+		}, 1000)
+	},
+	scroll(e) {
+		if(this.scrollTimmer) {
+			return;
+		}
+		//限制请求.5s/次
+		this.scrollTimmer = setTimeout(() => {
+			this.old.scrollTop = Math.floor(e.detail.scrollTop);
+			this.scrollTimmer = null;
+		}, 2000)
+	}
 }

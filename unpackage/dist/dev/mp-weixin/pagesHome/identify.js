@@ -129,8 +129,8 @@ var render = function() {
   var _c = _vm._self._c || _h
   var a0 = !_vm.confirmStatus
     ? {
-        height: "120rpx",
-        width: "400rpx"
+        height: "100rpx",
+        width: "300rpx"
       }
     : null
 

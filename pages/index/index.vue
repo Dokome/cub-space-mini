@@ -28,17 +28,19 @@
 			<!-- 由于顶部是固定位置，底部是非绝对定位，所及此处计算固定高度 防止头部随页面滚动或出现滑动条 -->
 			<swiper-item v-for="(item, index) in navlist" :key="index">
 				<!-- 视图区域 -->
-				<scroll-view scroll-y="true" class="hmax" v-if="newsDataList[index]" @scrolltolower="scrollToBottom(index)">
+				<scroll-view scroll-y="true" class="hmax" v-if="newsDataList[index]" @scroll="scroll" 
+					@scrolltolower="scrollToBottom(index)" :scroll-top="scrollTop">
 					<view>
 						<!-- 轮播图/热榜等 -->
 						<!-- 热榜 -->
-						<view class="margin-xs bg-white padding-sm" style="height: 280rpx;" v-if="(index === 2 || index === 1) && login && hotList && hotList.length > 4" @click="enterHotList">
+						<view class="margin-sm bg-gray padding-sm flex flex-direction" style="border-radius: 10rpx;" 
+							v-if="(index === 2 || index === 1) && login && hotList && hotList.length > 4" @click="enterHotList">
 							<!-- 头部 -->
-							<view class=""><text class="text-bold text-black text-lg">校园热榜</text></view>
-							<view class="">
-								<view class="flex align-center margin-top-sm" v-for="(item, h_index) in 3" :key="h_index">
-									<image :src="`/static/Img/hotList${h_index + 1}.png`" mode="" style="width: 40rpx; height: 40rpx;flex-shrink: 0;"></image>
-									<text class="text-black text-cut margin-left-xs">{{ getHotListDataContent(h_index) }}</text>
+							<view class=""><text class="text-bold text-black text-sm">校园热门</text></view>
+							<view class="gridContent flex-sub margin-top-xs">
+								<view class="mycut" v-for="(item, h_index) in 8" :key="h_index">
+									<!-- <image :src="`/static/Img/hotList${h_index + 1}.png`" mode="" style="width: 40rpx; height: 40rpx;flex-shrink: 0;"></image> -->
+									<text class="text-black">{{ getHotListDataContent(h_index) }}</text>
 								</view>
 							</view>
 						</view>
@@ -80,6 +82,10 @@
 		<!-- 弹出层 -->
 		<pop type="publish" v-if="ifPublishShow"></pop>
 		<loading v-if="ifLoaddingShow"></loading>
+		<!-- 回到顶部 -->
+		<view class="gotop flex align-center justify-center" @click="goBackToTop">
+			<image src="/static/Img/gotop.png"  class="hwmax"></image>
+		</view>
 	</view>
 </template>
 
@@ -90,6 +96,16 @@ import { __getIndexData } from './getIndexData.js';
 export default {
 	data() {
 		return {
+			//滚动timmer
+			scrollTimmer: null,
+			//回顶部timmer
+			gotopTimmer: null,
+			//滚动条高度
+			scrollTop: 0,
+			//滚动前的高度
+			old: {
+			  scrollTop: 0
+			},
 			// 初始加载动画
 			ifLoaddingShow: true,
 			// 页面高度(通过App.vue获取而来)
@@ -143,7 +159,7 @@ export default {
 	},
 	methods: {
 		...__indexMethods,
-		...__getIndexData
+		...__getIndexData,
 	},
 	computed: {
 		...mapState(['midButton', 'inactiveColor', 'activeColor', 'borderTop']),
@@ -176,6 +192,9 @@ export default {
 	// 下拉刷新
 	onPullDownRefresh() {
 		this.getNewsData({ noToken: true, tab: this.current, isGetNew: true });
+		setTimeout(() => {
+			uni.stopPullDownRefresh();
+		}, 1000)
 	},
 	onLoad() {
 		uni.$on('deleteData', (id) => {
@@ -204,5 +223,29 @@ export default {
 
 .viewPart {
 	height: 100vh;
+}
+
+.gridContent {
+	// width: 100%;
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	// grid-template-rows: repeat(4, 1fr);
+	grid-gap: 10rpx;
+}
+
+.mycut {
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.gotop {
+	width: 90rpx;
+	height: 90rpx;
+	position: absolute;
+	z-index: 9999;
+	right: 40rpx;
+	bottom: 120rpx;
+	border-radius: 50%;
 }
 </style>

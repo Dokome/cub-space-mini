@@ -150,7 +150,7 @@ var render = function() {
       _vm.login &&
       _vm.hotList &&
       _vm.hotList.length > 4
-        ? _vm.__map(3, function(item, h_index) {
+        ? _vm.__map(8, function(item, h_index) {
             var $orig = _vm.__get_orig(item)
 
             var m0 = _vm.getHotListDataContent(h_index)
@@ -324,12 +324,28 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
+
 var _vuex = __webpack_require__(/*! vuex */ 43);
 var _index = __webpack_require__(/*! ./index.js */ 61);
 var _getIndexData = __webpack_require__(/*! ./getIndexData.js */ 62);function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var _default =
 {
   data: function data() {
     return {
+      //滚动timmer
+      scrollTimmer: null,
+      //回顶部timmer
+      gotopTimmer: null,
+      //滚动条高度
+      scrollTop: 0,
+      //滚动前的高度
+      old: {
+        scrollTop: 0 },
+
       // 初始加载动画
       ifLoaddingShow: true,
       // 页面高度(通过App.vue获取而来)
@@ -416,6 +432,9 @@ var _getIndexData = __webpack_require__(/*! ./getIndexData.js */ 62);function ow
   // 下拉刷新
   onPullDownRefresh: function onPullDownRefresh() {
     this.getNewsData({ noToken: true, tab: this.current, isGetNew: true });
+    setTimeout(function () {
+      uni.stopPullDownRefresh();
+    }, 1000);
   },
   onLoad: function onLoad() {var _this = this;
     uni.$on('deleteData', function (id) {

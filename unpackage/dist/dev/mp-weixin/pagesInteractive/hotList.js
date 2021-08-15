@@ -171,7 +171,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 21));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};} //
 //
 //
 //
@@ -212,7 +212,8 @@ var _default =
         images: [] }],
 
 
-      defaultImg: 'https://image.sapce.club/common/1623820687514623626.jpg' };
+      defaultImg: 'https://image.sapce.club/common/1623820687514623626.jpg',
+      type: 1 };
 
   },
   methods: {
@@ -224,15 +225,28 @@ var _default =
     },
     enterNewsDetail: function enterNewsDetail(id) {
       this.$api.routerHandle.goto("/pagesInteractive/newsdetail?id=".concat(id));
+    },
+    getHotList: function getHotList() {var _arguments = arguments,_this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var options, data, result;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:options = _arguments.length > 0 && _arguments[0] !== undefined ? _arguments[0] : {};_context.next = 3;return (
+                  _this.$http.request({
+                    url: '/dynamicState/selectHotRank',
+                    method: 'POST',
+                    data: {
+                      "rankType": options.type },
+
+                    skip: true,
+                    noToken: options.noToken }));case 3:data = _context.sent;
+
+                result = data.data.data;
+                _this.hotList = result;case 6:case "end":return _context.stop();}}}, _callee);}))();
     } },
 
-  onLoad: function onLoad(option) {var _this = this;
+  onLoad: function onLoad(option) {var _this2 = this;
     var eventChannel = this.getOpenerEventChannel();
     // 监听acceptDataFromOpenerPage事件，获取上一页面通过eventChannel传送到当前页面的数据
     eventChannel.on('acceptDataFromOpenerPage', function (data) {
-      _this.hotList = data.data;
-      console.log(_this.hotList);
+      _this2.type = data.data;
     });
+    this.getHotList({ type: this.type });
   } };exports.default = _default;
 
 /***/ }),

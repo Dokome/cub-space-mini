@@ -9,4 +9,23 @@
 .viewPart.data-v-57280228 {
   height: 100vh;
 }
+.gridContent.data-v-57280228 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 10rpx;
+}
+.mycut.data-v-57280228 {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.gotop.data-v-57280228 {
+  width: 90rpx;
+  height: 90rpx;
+  position: absolute;
+  z-index: 9999;
+  right: 40rpx;
+  bottom: 120rpx;
+  border-radius: 50%;
+}
 

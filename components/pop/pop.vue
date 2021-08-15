@@ -14,9 +14,9 @@
 							type="textarea"
 							:clearable="false"
 							maxlength="140"
-							height="700"
+							height="600"
 							:custom-style="{ 'background': 'white' }"
-							placeholder="分享生活 留住美好"
+							:placeholder="'分享生活 留住美好'"
 							v-model="newsTextContent"
 						></u-input>
 					</view>
@@ -42,7 +42,7 @@
 					</view>
 					<!-- 提交按钮 -->
 					<view class="flex justify-center padding-top-xl margin-bottom-xl">
-						<u-button type="primary" shape="circle" :custom-style="{'height':'120rpx','width':'400rpx'}" @click="newsPublishHandle">发布</u-button>
+						<u-button type="primary" :custom-style="{'height':'80rpx','width':'250rpx'}" @click="newsPublishHandle">发布</u-button>
 					</view>
 				</scroll-view>
 

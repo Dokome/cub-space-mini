@@ -131,8 +131,8 @@ var render = function() {
   var a1 =
     _vm.type === "publish"
       ? {
-          height: "120rpx",
-          width: "400rpx"
+          height: "80rpx",
+          width: "250rpx"
         }
       : null
   var l0 = _vm.type === "reply" && _vm.commentInfo ? _vm.getNewsMapData() : null

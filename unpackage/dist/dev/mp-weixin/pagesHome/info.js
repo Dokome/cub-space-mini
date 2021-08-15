@@ -128,8 +128,8 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   var a0 = {
-    height: "120rpx",
-    width: "400rpx"
+    height: "75rpx",
+    width: "250rpx"
   }
 
   if (!_vm._isMounted) {

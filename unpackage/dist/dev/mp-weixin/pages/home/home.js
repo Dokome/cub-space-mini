@@ -116,6 +116,9 @@ try {
     login: function() {
       return Promise.all(/*! import() | components/login/login */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/login/login")]).then(__webpack_require__.bind(null, /*! @/components/login/login.vue */ 47))
     },
+    pop: function() {
+      return Promise.all(/*! import() | components/pop/pop */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/pop/pop")]).then(__webpack_require__.bind(null, /*! @/components/pop/pop.vue */ 224))
+    },
     loading: function() {
       return __webpack_require__.e(/*! import() | components/loading/loading */ "components/loading/loading").then(__webpack_require__.bind(null, /*! @/components/loading/loading.vue */ 233))
     }
@@ -219,11 +222,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 var _vuex = __webpack_require__(/*! vuex */ 43);
 var _home2 = __webpack_require__(/*! ./home.js */ 71);function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var _default =
 {
   data: function data() {
     return {
+      ifPublishShow: false,
       // 加载动画
       ifLoaddingShow: true,
       userinfo: {},
@@ -282,8 +287,15 @@ var _home2 = __webpack_require__(/*! ./home.js */ 71);function ownKeys(object, e
 
 
   },
-  methods: _objectSpread({},
-  _home2._home),
+  methods: _objectSpread(_objectSpread({},
+  _home2._home), {}, {
+    //动态发布
+    isPublish: function isPublish(index) {
+      if (index === 2) {
+        this.ifPublishShow = true;
+        uni.$emit('popUpChange', '');
+      }
+    } }),
 
   computed: _objectSpread(_objectSpread({},
   (0, _vuex.mapState)(['midButton', 'inactiveColor', 'activeColor', 'borderTop'])), {}, {

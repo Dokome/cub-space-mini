@@ -33,7 +33,7 @@
 		<view class="" style="height: 90rpx; width: 100%;"><image src="/static/Img/info.png" style="width: 100%; height: 100%;"></image></view>
 		<view class="margin-bottom-xs"></view>
 		<view class="flex justify-center padding-top margin-bottom-xl">
-			<u-button :type="disabled ? 'primary' : 'error'" @click="buttonClickHandle" ripple="true" shape="circle" :custom-style="{'height':'120rpx','width':'400rpx'}">
+			<u-button :type="disabled ? 'primary' : 'error'" @click="buttonClickHandle" ripple="true"  :custom-style="{'height':'75rpx','width':'250rpx'}">
 				{{ !disabled ? '编辑' : '保存' }}
 			</u-button>
 		</view>

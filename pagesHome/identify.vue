@@ -46,7 +46,7 @@
 			<view class="" style="height: 110rpx; width: 100%;"><image src="/static/Img/identify.png" style="width: 100%; height: 100%;"></image></view>
 			<view class="margin-bottom-xs"></view>
 			<!-- 认证 -->
-			<view class="flex justify-center padding-top-xl margin-bottom-xl"><u-button shape="circle" :custom-style="{'height':'120rpx','width':'400rpx'}" type="primary" @click="submit">认证</u-button></view>
+			<view class="flex justify-center padding-top-xl margin-bottom-xl"><u-button  :custom-style="{'height':'100rpx','width':'300rpx'}" type="primary" @click="submit">认证</u-button></view>
 		</view>
 		<!-- 已验证 -->
 		<view class="" style="width: 100%; height: 1100rpx;" v-else><image src="/static/Img/identifyC.png" mode="" style="width: 100%; height: 100%;"></image></view>

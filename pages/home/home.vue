@@ -27,8 +27,9 @@
 			</view>
 		</scroll-view>
 		<!-- 底部栏nav -->
-		<u-tabbar :list="list" :mid-button="midButton" :inactive-color="inactiveColor" :activeColor="activeColor" :border-top="borderTop"></u-tabbar>
+		<u-tabbar :list="list" :mid-button="midButton" :inactive-color="inactiveColor" :activeColor="activeColor" :border-top="borderTop" @change="isPublish"></u-tabbar>
 		<login v-if="!login"></login>
+		<pop type="publish" v-if="ifPublishShow"></pop>
 		<loading v-if="ifLoaddingShow && login"></loading>
 	</view>
 </template>
@@ -39,6 +40,7 @@ import { _home } from './home.js';
 export default {
 	data() {
 		return {
+			ifPublishShow: false,
 			// 加载动画
 			ifLoaddingShow: true,
 			userinfo: {},
@@ -99,6 +101,13 @@ export default {
 	},
 	methods: {
 		..._home,
+		//动态发布
+		isPublish(index) {
+			if (index === 2) {
+				this.ifPublishShow = true;
+				uni.$emit('popUpChange', '');
+			}
+		},
 	},
 	computed: {
 		...mapState(['midButton', 'inactiveColor', 'activeColor', 'borderTop']),

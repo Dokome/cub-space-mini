@@ -1,8 +1,9 @@
 <template>
 	<view :style="[
 		{ height: CustomBar + 'px' },
-		{ display: ifNavDisplay }
-	]" class="bg-white">
+		{ display: ifNavDisplay },
+		{ backgroundColor: navBarColor }
+	]" :class="{ 'fixed' : isFixed }">
 		<view 
 			class="flex align-center u-border-bottom" 
 			:class="{ 'justify-center': !!title }"
@@ -33,6 +34,18 @@
 			title: {
 				type: String,
 				default: ''
+			},
+			navBarColor: {
+				type: String, 
+				default() {
+					return '#fff'
+				}
+			},
+			isFixed: {
+				type: Boolean,
+				dafault() {
+					return false;
+				}
 			}
 		},
 		data() {
@@ -60,5 +73,11 @@
 		left: 0;
 		transform: translateY(-50%) translateX(40rpx);
 		z-index: 9999;
+	}
+	
+	.fixed {
+		position: fixed;
+		top: 0;
+		z-index: 99999;
 	}
 </style>
