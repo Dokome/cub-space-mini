@@ -1,9 +1,9 @@
 (global["webpackJsonp"] = global["webpackJsonp"] || []).push([["pagesHome/common/vendor"],{
 
 /***/ 118:
-/*!************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/pagesHome/identify.js ***!
-  \************************************************************************/
+/*!*************************************************************************!*\
+  !*** C:/Users/ysk/Desktop/次方空间/cub-space-miniapp/pagesHome/identify.js ***!
+  \*************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -105,9 +105,9 @@
 /***/ }),
 
 /***/ 137:
-/*!**********************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/pagesHome/mynews.js ***!
-  \**********************************************************************/
+/*!***********************************************************************!*\
+  !*** C:/Users/ysk/Desktop/次方空间/cub-space-miniapp/pagesHome/mynews.js ***!
+  \***********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
