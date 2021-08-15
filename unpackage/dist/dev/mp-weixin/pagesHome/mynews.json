@@ -1,0 +1,11 @@
+{
+  "navigationBarTitleText": "",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "navbar": "/components/navbar/navbar",
+    "home-header": "/components/home-header/home-header",
+    "card": "/components/card/card",
+    "u-loadmore": "/uview-ui/components/u-loadmore/u-loadmore",
+    "loading": "/components/loading/loading"
+  }
+}

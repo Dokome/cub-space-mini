@@ -1,8 +1,8 @@
 <template>
 	<view>
 		<!-- 背景图 -->
-		<view class="" style="height: 500rpx;" @click="clear">
-			<image src='https://image.sapce.club/common/1623820687514623626.jpg' mode="aspectFill" class="hwmax"></image>
+		<view class="" style="height: 530rpx;" @click="changeBackGround">
+			<image :src="userinfo.bgImage" mode="aspectFill" class="hwmax"></image>
 		</view>
 		<!-- 头像框/个人信息 -->
 		<view class="bg-white flex flex-direction wmax" style="height: 385rpx;" v-if="userinfo">
@@ -33,7 +33,7 @@
 					{{ userinfo.sign }}
 				</view>
 				<!-- 个人数据 -->
-				<view class="flex align-end flex-sub padding-bottom-xs" style="width: 70%;" @click="enterFuncPage">
+				<view class="flex align-end flex-sub padding-bottom-xs" style="width: 70%;" @click="false && enterFuncPage">
 					<view class="" v-for="(item, index) in userData" :key="index">
 						<text class="text-black text-xl margin-right-xs" :data-page="item.page">{{ userinfo[item.count] }}</text>
 						<text class="margin-right u-tips-color" :data-page="item.page">{{item.title}}</text>
@@ -52,6 +52,12 @@
 				type: Object,
 				default() {
 					return {};
+				}
+			},
+			isSelf: {
+				type: Boolean,
+				default() {
+					return true;
 				}
 			}
 		},
@@ -81,6 +87,45 @@
 			// 进入功能页面
 			enterFuncPage(e) {
 				this.$api.routerHandle.goto(e.target.dataset.page);
+			},
+			// 更换背景图片
+			async changeBackGround() {
+				if (!this.isSelf) {
+					return;
+				} 
+				// 选择图片
+				uni.chooseImage({
+					count: 1,
+					extension: ['.gif'],
+					success: async (res) => {
+						// 上传服务
+						const temp = res.tempFilePaths[0];
+						// 格式筛选
+						if (/\.gif$/.test(temp)) {
+							return uni.showToast({
+								title: '暂不支持gif格式图片~',
+								icon: 'none'
+							})
+						}
+						const url = await this.$http.upLoadFile(temp);
+						// 发布更新请求
+						const data = await this.$http.request({
+							url: '/umsAccount/updateUserInfo',
+							method: 'POST',
+							data: {
+								bgImage: url
+							}
+						});
+						if (data.data.code === 200) {
+							uni.showToast({
+								title: '更换成功',
+								icon: 'none'
+							});
+							uni.$emit('updateHome', '');
+						}
+						// 
+					}
+				});
 			}
 		}
 	}

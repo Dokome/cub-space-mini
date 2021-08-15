@@ -58,7 +58,8 @@ export default {
 			funcList: [
 				{
 					title: '我的动态',
-					path: '/static/home/mynews.png'
+					path: '/static/home/mynews.png',
+					page: '/pagesHome/mynews'
 				},
 				{
 					title: '账号资料',

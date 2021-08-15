@@ -6,11 +6,11 @@
 		 -->
 		<view class="" v-if="type === 'news'">
 			<!-- 动态、作者信息 -->
-			<view class="flex" style="position: relative;">
+			<view class="flex" style="position: relative;" v-if="!isHome">
 				<!-- 操作框(三个点) -->
 				<view class="text-lg moreOptions" @click.stop="moreOptions">. . .</view>
 				<!-- 头像 -->
-				<view class="margin-top-xs"><u-avatar size="80" :src="newsdata.avatarUrl"></u-avatar></view>
+				<view class="margin-top-xs"><u-avatar size="80" :src="newsdata.avatarUrl"  @click.stop="enterUserHome(newsdata.userId)"></u-avatar></view>
 				<!-- 文字信息 -->
 				<view class="margin-left-sm padding-top-xs">
 					<!-- 名字/学校 -->
@@ -21,6 +21,10 @@
 					<view class="u-tips-color text-sm margin-top-xs">{{ newsdata.pushTime }}</view>
 				</view>
 			</view>
+			<!-- 个人主页的头部 -->
+			<view class="padding-tb text-bold text-lg text-black" v-else>
+				{{ newsdata.pushTime }}
+			</view>
 			<!-- 文字栏 -->
 			<view class="margin-tb-xs text-black text-content"  :class="{ clamp3: clamp }">{{ newsdata.content }}</view>
 			<!-- 图片栏 -->
@@ -29,7 +33,7 @@
 					<image :src="item.url" mode="aspectFill" @click.stop="imgPrview(item.url, newsdata.images)" class="show_img" :style="imgNewStyle"></image>
 				</view>
 			</view>
-			<u-tag :text="newsdata.schoolName" shape="circle" color="#909399" bg-color="#F5F5F5" border-color="#F5F5F5" />
+			<u-tag :text="newsdata.schoolName" shape="circle" color="#909399" bg-color="#F5F5F5" border-color="#F5F5F5"  v-if="!isHome"/>
 			<!-- 底部交互栏 -->
 			<view class="flex justify-between align-center margin-top-sm">
 				<!-- 左/转发 -->
@@ -73,7 +77,9 @@
 		<view class="" v-if="type === 'reply' || type === 'comment'" @click="replyHandle(commentdata)">
 			<view class="flex bg-white wmax">
 				<!-- 头像 -->
-				<view class="" style="width: 65rpx;"><u-avatar size="60" :src="commentdata.avatarUrl"></u-avatar></view>
+				<view class="" style="width: 65rpx;"  @click.stop="enterUserHome(commentdata.userId)">
+					<u-avatar size="60" :src="commentdata.avatarUrl"></u-avatar>
+				</view>
 				<!-- 主体 -->
 				<view class="padding-left-xs flex-sub flex flex-direction" style="margin-top: -10rpx;">
 					<!-- 名称、下标 -->
@@ -187,6 +193,10 @@ export default {
 		},
 		async likeHandle(data, type) {
 			this.$api.interactive.likeHandle.call(this, data, type);
+		},
+		// 进入用户主页
+		enterUserHome(id) {
+			this.$api.routerHandle.goto(`/pagesHome/mynews?id=${id}`);
 		}
 	},
 	props: {
@@ -224,6 +234,12 @@ export default {
 			type: Array,
 			default() {
 				return [];
+			}
+		},
+		isHome: {
+			type: Boolean,
+			default() {
+				return false
 			}
 		}
 	}

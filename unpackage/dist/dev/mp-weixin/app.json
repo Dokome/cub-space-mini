@@ -14,7 +14,8 @@
         "about_business",
         "identify",
         "info",
-        "feedback"
+        "feedback",
+        "mynews"
       ]
     },
     {
@@ -72,6 +73,5 @@
       ]
     }
   },
-  "usingComponents": {},
-  "sitemapLocation": "sitemap.json"
+  "usingComponents": {}
 }
