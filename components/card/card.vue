@@ -10,7 +10,8 @@
 				<!-- 操作框(三个点) -->
 				<view class="text-lg moreOptions" @click.stop="moreOptions">. . .</view>
 				<!-- 头像 -->
-				<view class="margin-top-xs"><u-avatar size="80" :src="newsdata.avatarUrl"  @click.stop="enterUserHome(newsdata.userId)"></u-avatar></view>
+				<view class="margin-top-xs"><u-avatar size="80" :src="newsdata.avatarUrl" 
+				 @click.stop="enterUserHome(newsdata.userId, newsdata.anonymousStatus)"></u-avatar></view>
 				<!-- 文字信息 -->
 				<view class="margin-left-sm padding-top-xs">
 					<!-- 名字/学校 -->
@@ -196,7 +197,10 @@ export default {
 			this.$api.interactive.likeHandle.call(this, data, type);
 		},
 		// 进入用户主页
-		enterUserHome(id) {
+		enterUserHome(id, anonymousStatus) {
+			if (anonymousStatus) {
+				return;
+			}
 			this.$api.routerHandle.goto(`/pagesHome/mynews?id=${id}`);
 		}
 	},

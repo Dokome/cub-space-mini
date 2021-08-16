@@ -102,7 +102,7 @@ try {
       return __webpack_require__.e(/*! import() | uview-ui/components/u-avatar/u-avatar */ "uview-ui/components/u-avatar/u-avatar").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-avatar/u-avatar.vue */ 167))
     },
     textInput: function() {
-      return Promise.all(/*! import() | components/textInput/textInput */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/textInput/textInput")]).then(__webpack_require__.bind(null, /*! @/components/textInput/textInput.vue */ 281))
+      return Promise.all(/*! import() | components/textInput/textInput */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/textInput/textInput")]).then(__webpack_require__.bind(null, /*! @/components/textInput/textInput.vue */ 274))
     }
   }
 } catch (e) {

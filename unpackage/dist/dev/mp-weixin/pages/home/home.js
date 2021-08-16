@@ -107,9 +107,6 @@ try {
     uCellItem: function() {
       return __webpack_require__.e(/*! import() | uview-ui/components/u-cell-item/u-cell-item */ "uview-ui/components/u-cell-item/u-cell-item").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-cell-item/u-cell-item.vue */ 245))
     },
-    uIcon: function() {
-      return __webpack_require__.e(/*! import() | uview-ui/components/u-icon/u-icon */ "uview-ui/components/u-icon/u-icon").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-icon/u-icon.vue */ 252))
-    },
     uTabbar: function() {
       return Promise.all(/*! import() | uview-ui/components/u-tabbar/u-tabbar */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-tabbar/u-tabbar")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-tabbar/u-tabbar.vue */ 217))
     },
@@ -225,6 +222,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var _vuex = __webpack_require__(/*! vuex */ 43);
 var _home2 = __webpack_require__(/*! ./home.js */ 71);function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var _default =
+
 {
   data: function data() {
     return {
@@ -248,41 +246,41 @@ var _home2 = __webpack_require__(/*! ./home.js */ 71);function ownKeys(object, e
       funcList: [
       {
         title: '我的动态',
-        path: '/static/home/mynews.png',
+        icon: '.t-icon-aixin',
         page: '/pagesHome/mynews' },
 
       {
         title: '账号资料',
-        path: '/static/home/info.png',
+        icon: '.t-icon-gerenziliao',
         page: '/pagesHome/info' },
 
       {
         title: '学校认证',
-        path: '/static/home/identify.png',
+        icon: '.t-icon-jihua',
         page: '/pagesHome/identify' },
 
       {
         title: '意见反馈',
-        path: '/static/home/feedback.png',
+        icon: '.t-icon-baogao',
         page: '/pagesHome/feedback' },
 
       {
         title: '商务合作',
-        path: '/static/home/business.png',
+        icon: 't-icon-shangjiaruzhu',
         page: '/pagesHome/about_business?page=business' },
 
       {
         title: '关于我们',
-        path: '/static/home/aboutus.png',
+        icon: '.t-icon-women',
         page: '/pagesHome/about_business?page=about' },
 
       {
         title: '设置',
-        path: '/static/home/setting.png' },
+        icon: '.t-icon-shezhi' },
 
       {
         title: '分享小程序',
-        path: '/static/home/share.png' }] };
+        icon: 't-icon-fenxiang' }] };
 
 
 

@@ -113,13 +113,12 @@ class Interactive {
 	}
 	// 页面分享监听
 	onShareFunc(res) {
-		if (res.from === 'button') {// 来自页面内分享按钮
+		if (res && res.from === 'button') {// 来自页面内分享按钮
 			let info = res.target.dataset.info || {};
-			console.log(info);
 			return {
 				title: (info && info.content && info.content.slice(0, 8) + '...') || '遇见有趣的',
 				path: (info && info.id && `/pagesInteractive/newsdetail?id=${info.id}`) || '',
-				imageUrl: (info && info.images && info.images[0].url) || 'https://cub.image.emily.red/operation/logo.png'
+				imageUrl: (info && info.images[0] && info.images[0].url) || 'https://cub.image.emily.red/operation/logo.png'
 			}
 		} 
 		return {

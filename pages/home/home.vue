@@ -20,10 +20,10 @@
 						<view class="hwmax" style="position: absolute; z-index: 9999; opacity: 0;" v-if="item.title === '分享小程序'" @click="shareApp">
 							<u-button open-type="share">分享</u-button>
 						</view>
-						<view class="listIcon" style="" :data-page="item.page"><image :src="item.path" mode="" class="hwmax"></image></view>
-						<u-cell-item :title="item.title" :data-page="item.page"><u-icon slot="icon" size="80" name="search" color="transparent"></u-icon></u-cell-item>
+						<u-cell-item :title="item.title" :data-page="item.page"><view :class="'margin-right-xs t-icon ' + item.icon" slot="icon"></view></u-cell-item>
 					</view>
 				</view>
+				<view class="" style="height: 10rpx;"></view>
 			</view>
 		</scroll-view>
 		<!-- 底部栏nav -->
@@ -37,6 +37,7 @@
 <script>
 import { mapState } from 'vuex';
 import { _home } from './home.js';
+
 export default {
 	data() {
 		return {
@@ -60,41 +61,41 @@ export default {
 			funcList: [
 				{
 					title: '我的动态',
-					path: '/static/home/mynews.png',
+					icon: '.t-icon-aixin',
 					page: '/pagesHome/mynews'
 				},
 				{
 					title: '账号资料',
-					path: '/static/home/info.png',
+					icon: '.t-icon-gerenziliao',
 					page: '/pagesHome/info'
 				},
 				{
 					title: '学校认证',
-					path: '/static/home/identify.png',
+					icon: '.t-icon-jihua',
 					page: '/pagesHome/identify'
 				},
 				{
 					title: '意见反馈',
-					path: '/static/home/feedback.png',
+					icon: '.t-icon-baogao',
 					page: '/pagesHome/feedback'
 				},
 				{
 					title: '商务合作',
-					path: '/static/home/business.png',
+					icon: 't-icon-shangjiaruzhu',
 					page: '/pagesHome/about_business?page=business'
 				},
 				{
 					title: '关于我们',
-					path: '/static/home/aboutus.png',
+					icon: '.t-icon-women',
 					page: '/pagesHome/about_business?page=about'
 				},
 				{
 					title: '设置',
-					path: '/static/home/setting.png'
+					icon: '.t-icon-shezhi'
 				},
 				{
 					title: '分享小程序',
-					path: '/static/home/share.png'
+					icon: 't-icon-fenxiang'
 				}
 			]
 		};
@@ -147,5 +148,13 @@ export default {
 	top: 50%;
 	transform: translateY(-50%) translateX(30rpx);
 	z-index: 98;
+}
+// icon
+.icon {
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
 }
 </style>

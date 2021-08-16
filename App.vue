@@ -33,6 +33,7 @@
 <style lang="scss">
 	@import "uview-ui/index.scss"; 
 	@import "common/common.css"; 
+	@import "common/iconfont-weapp-icon.css";
 	.page {
 		background-color: #F5F5F5;
 	}

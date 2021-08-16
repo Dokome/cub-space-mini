@@ -14,4 +14,11 @@
           transform: translateY(-50%) translateX(30rpx);
   z-index: 98;
 }
+.icon.data-v-92bb8f34 {
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+}
 
