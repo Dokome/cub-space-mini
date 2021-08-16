@@ -1,9 +1,9 @@
 (global["webpackJsonp"] = global["webpackJsonp"] || []).push([["pagesInteractive/common/vendor"],{
 
 /***/ 158:
-/*!*********************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/pagesInteractive/dataUpdate.js ***!
-  \*********************************************************************************/
+/*!**********************************************************************************!*\
+  !*** C:/Users/ysk/Desktop/次方空间/cub-space-miniapp/pagesInteractive/dataUpdate.js ***!
+  \**********************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 

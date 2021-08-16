@@ -2060,9 +2060,9 @@ function normalizeComponent (
 /***/ }),
 
 /***/ 13:
-/*!********************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/uview-ui/index.js ***!
-  \********************************************************************/
+/*!*********************************************************************!*\
+  !*** C:/Users/ysk/Desktop/次方空间/cub-space-miniapp/uview-ui/index.js ***!
+  \*********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2212,9 +2212,9 @@ var install = function install(Vue) {
 /***/ }),
 
 /***/ 14:
-/*!*******************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/uview-ui/libs/mixin/mixin.js ***!
-  \*******************************************************************************/
+/*!********************************************************************************!*\
+  !*** C:/Users/ysk/Desktop/次方空间/cub-space-miniapp/uview-ui/libs/mixin/mixin.js ***!
+  \********************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2286,9 +2286,9 @@ var install = function install(Vue) {
 /***/ }),
 
 /***/ 15:
-/*!*********************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/uview-ui/libs/request/index.js ***!
-  \*********************************************************************************/
+/*!**********************************************************************************!*\
+  !*** C:/Users/ysk/Desktop/次方空间/cub-space-miniapp/uview-ui/libs/request/index.js ***!
+  \**********************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2467,9 +2467,9 @@ new Request();exports.default = _default;
 /***/ }),
 
 /***/ 16:
-/*!**************************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/uview-ui/libs/function/deepMerge.js ***!
-  \**************************************************************************************/
+/*!***************************************************************************************!*\
+  !*** C:/Users/ysk/Desktop/次方空间/cub-space-miniapp/uview-ui/libs/function/deepMerge.js ***!
+  \***************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2508,9 +2508,9 @@ deepMerge;exports.default = _default;
 /***/ }),
 
 /***/ 17:
-/*!**************************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/uview-ui/libs/function/deepClone.js ***!
-  \**************************************************************************************/
+/*!***************************************************************************************!*\
+  !*** C:/Users/ysk/Desktop/次方空间/cub-space-miniapp/uview-ui/libs/function/deepClone.js ***!
+  \***************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2542,9 +2542,9 @@ deepClone;exports.default = _default;
 /***/ }),
 
 /***/ 18:
-/*!*********************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/uview-ui/libs/function/test.js ***!
-  \*********************************************************************************/
+/*!**********************************************************************************!*\
+  !*** C:/Users/ysk/Desktop/次方空间/cub-space-miniapp/uview-ui/libs/function/test.js ***!
+  \**********************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2784,9 +2784,9 @@ function code(value) {var len = arguments.length > 1 && arguments[1] !== undefin
 /***/ }),
 
 /***/ 19:
-/*!****************************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/uview-ui/libs/function/queryParams.js ***!
-  \****************************************************************************************/
+/*!*****************************************************************************************!*\
+  !*** C:/Users/ysk/Desktop/次方空间/cub-space-miniapp/uview-ui/libs/function/queryParams.js ***!
+  \*****************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8902,17 +8902,17 @@ internalMixin(Vue);
 /***/ }),
 
 /***/ 20:
-/*!**********************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/uview-ui/libs/function/route.js ***!
-  \**********************************************************************************/
+/*!***********************************************************************************!*\
+  !*** C:/Users/ysk/Desktop/次方空间/cub-space-miniapp/uview-ui/libs/function/route.js ***!
+  \***********************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 21));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}function _classCallCheck(instance, Constructor) {if (!(instance instanceof Constructor)) {throw new TypeError("Cannot call a class as a function");}}function _defineProperties(target, props) {for (var i = 0; i < props.length; i++) {var descriptor = props[i];descriptor.enumerable = descriptor.enumerable || false;descriptor.configurable = true;if ("value" in descriptor) descriptor.writable = true;Object.defineProperty(target, descriptor.key, descriptor);}}function _createClass(Constructor, protoProps, staticProps) {if (protoProps) _defineProperties(Constructor.prototype, protoProps);if (staticProps) _defineProperties(Constructor, staticProps);return Constructor;} /**
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          * 路由跳转方法，该方法相对于直接使用uni.xxx的好处是使用更加简单快捷
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          * 并且带有路由拦截功能
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          */var
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         * 路由跳转方法，该方法相对于直接使用uni.xxx的好处是使用更加简单快捷
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         * 并且带有路由拦截功能
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         */var
 
 Router = /*#__PURE__*/function () {
   function Router() {_classCallCheck(this, Router);
@@ -9036,9 +9036,9 @@ new Router().route;exports.default = _default;
 /***/ }),
 
 /***/ 207:
-/*!*********************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/components/card/moreOptions.js ***!
-  \*********************************************************************************/
+/*!**********************************************************************************!*\
+  !*** C:/Users/ysk/Desktop/次方空间/cub-space-miniapp/components/card/moreOptions.js ***!
+  \**********************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9174,9 +9174,9 @@ if (hadRuntime) {
 /***/ }),
 
 /***/ 229:
-/*!********************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/components/pop/newsPublish.js ***!
-  \********************************************************************************/
+/*!*********************************************************************************!*\
+  !*** C:/Users/ysk/Desktop/次方空间/cub-space-miniapp/components/pop/newsPublish.js ***!
+  \*********************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9976,9 +9976,9 @@ if (hadRuntime) {
 /***/ }),
 
 /***/ 230:
-/*!*******************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/components/pop/dataUpdate.js ***!
-  \*******************************************************************************/
+/*!********************************************************************************!*\
+  !*** C:/Users/ysk/Desktop/次方空间/cub-space-miniapp/components/pop/dataUpdate.js ***!
+  \********************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10062,9 +10062,9 @@ var __dataUpdate = {
 /***/ }),
 
 /***/ 24:
-/*!***************************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/uview-ui/libs/function/timeFormat.js ***!
-  \***************************************************************************************/
+/*!****************************************************************************************!*\
+  !*** C:/Users/ysk/Desktop/次方空间/cub-space-miniapp/uview-ui/libs/function/timeFormat.js ***!
+  \****************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10124,9 +10124,9 @@ timeFormat;exports.default = _default;
 /***/ }),
 
 /***/ 25:
-/*!*************************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/uview-ui/libs/function/timeFrom.js ***!
-  \*************************************************************************************/
+/*!**************************************************************************************!*\
+  !*** C:/Users/ysk/Desktop/次方空间/cub-space-miniapp/uview-ui/libs/function/timeFrom.js ***!
+  \**************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10182,9 +10182,9 @@ timeFrom;exports.default = _default;
 /***/ }),
 
 /***/ 26:
-/*!******************************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/uview-ui/libs/function/colorGradient.js ***!
-  \******************************************************************************************/
+/*!*******************************************************************************************!*\
+  !*** C:/Users/ysk/Desktop/次方空间/cub-space-miniapp/uview-ui/libs/function/colorGradient.js ***!
+  \*******************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10326,9 +10326,9 @@ function colorToRgba(color) {var alpha = arguments.length > 1 && arguments[1] !=
 /***/ }),
 
 /***/ 27:
-/*!*********************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/uview-ui/libs/function/guid.js ***!
-  \*********************************************************************************/
+/*!**********************************************************************************!*\
+  !*** C:/Users/ysk/Desktop/次方空间/cub-space-miniapp/uview-ui/libs/function/guid.js ***!
+  \**********************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10377,10 +10377,17 @@ guid;exports.default = _default;
 
 /***/ }),
 
+<<<<<<< HEAD
 /***/ 271:
 /*!********************************************************************************!*\
   !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/uview-ui/libs/util/emitter.js ***!
   \********************************************************************************/
+=======
+/***/ 278:
+/*!*********************************************************************************!*\
+  !*** C:/Users/ysk/Desktop/次方空间/cub-space-miniapp/uview-ui/libs/util/emitter.js ***!
+  \*********************************************************************************/
+>>>>>>> 2840a7f326997be1960ecc8b5bb0804342337843
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10437,10 +10444,65 @@ function _broadcast(componentName, eventName, params) {
 
 /***/ }),
 
+<<<<<<< HEAD
 /***/ 279:
 /*!************************************************************************************!*\
   !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/components/textInput/textInput.js ***!
   \************************************************************************************/
+=======
+/***/ 28:
+/*!***********************************************************************************!*\
+  !*** C:/Users/ysk/Desktop/次方空间/cub-space-miniapp/uview-ui/libs/function/color.js ***!
+  \***********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; // 为了让用户能够自定义主题，会逐步弃用此文件，各颜色通过css提供
+// 为了给某些特殊场景使用和向后兼容，无需删除此文件(2020-06-20)
+var color = {
+  primary: "#2979ff",
+  primaryDark: "#2b85e4",
+  primaryDisabled: "#a0cfff",
+  primaryLight: "#ecf5ff",
+  bgColor: "#f3f4f6",
+
+  info: "#909399",
+  infoDark: "#82848a",
+  infoDisabled: "#c8c9cc",
+  infoLight: "#f4f4f5",
+
+  warning: "#ff9900",
+  warningDark: "#f29100",
+  warningDisabled: "#fcbd71",
+  warningLight: "#fdf6ec",
+
+  error: "#fa3534",
+  errorDark: "#dd6161",
+  errorDisabled: "#fab6b6",
+  errorLight: "#fef0f0",
+
+  success: "#19be6b",
+  successDark: "#18b566",
+  successDisabled: "#71d5a1",
+  successLight: "#dbf1e1",
+
+  mainColor: "#303133",
+  contentColor: "#606266",
+  tipsColor: "#909399",
+  lightColor: "#c0c4cc",
+  borderColor: "#e4e7ed" };var _default =
+
+
+color;exports.default = _default;
+
+/***/ }),
+
+/***/ 286:
+/*!*************************************************************************************!*\
+  !*** C:/Users/ysk/Desktop/次方空间/cub-space-miniapp/components/textInput/textInput.js ***!
+  \*************************************************************************************/
+>>>>>>> 2840a7f326997be1960ecc8b5bb0804342337843
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10573,9 +10635,9 @@ color;exports.default = _default;
 /***/ }),
 
 /***/ 29:
-/*!**************************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/uview-ui/libs/function/type2icon.js ***!
-  \**************************************************************************************/
+/*!***************************************************************************************!*\
+  !*** C:/Users/ysk/Desktop/次方空间/cub-space-miniapp/uview-ui/libs/function/type2icon.js ***!
+  \***************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10650,9 +10712,9 @@ module.exports = g;
 /***/ }),
 
 /***/ 30:
-/*!****************************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/uview-ui/libs/function/randomArray.js ***!
-  \****************************************************************************************/
+/*!*****************************************************************************************!*\
+  !*** C:/Users/ysk/Desktop/次方空间/cub-space-miniapp/uview-ui/libs/function/randomArray.js ***!
+  \*****************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10668,9 +10730,9 @@ randomArray;exports.default = _default;
 /***/ }),
 
 /***/ 31:
-/*!************************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/uview-ui/libs/function/addUnit.js ***!
-  \************************************************************************************/
+/*!*************************************************************************************!*\
+  !*** C:/Users/ysk/Desktop/次方空间/cub-space-miniapp/uview-ui/libs/function/addUnit.js ***!
+  \*************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10687,9 +10749,9 @@ function addUnit() {var value = arguments.length > 0 && arguments[0] !== undefin
 /***/ }),
 
 /***/ 32:
-/*!***********************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/uview-ui/libs/function/random.js ***!
-  \***********************************************************************************/
+/*!************************************************************************************!*\
+  !*** C:/Users/ysk/Desktop/次方空间/cub-space-miniapp/uview-ui/libs/function/random.js ***!
+  \************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10708,9 +10770,9 @@ random;exports.default = _default;
 /***/ }),
 
 /***/ 33:
-/*!*********************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/uview-ui/libs/function/trim.js ***!
-  \*********************************************************************************/
+/*!**********************************************************************************!*\
+  !*** C:/Users/ysk/Desktop/次方空间/cub-space-miniapp/uview-ui/libs/function/trim.js ***!
+  \**********************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10734,9 +10796,9 @@ trim;exports.default = _default;
 /***/ }),
 
 /***/ 34:
-/*!**********************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/uview-ui/libs/function/toast.js ***!
-  \**********************************************************************************/
+/*!***********************************************************************************!*\
+  !*** C:/Users/ysk/Desktop/次方空间/cub-space-miniapp/uview-ui/libs/function/toast.js ***!
+  \***********************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10755,9 +10817,9 @@ toast;exports.default = _default;
 /***/ }),
 
 /***/ 35:
-/*!**************************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/uview-ui/libs/function/getParent.js ***!
-  \**************************************************************************************/
+/*!***************************************************************************************!*\
+  !*** C:/Users/ysk/Desktop/次方空间/cub-space-miniapp/uview-ui/libs/function/getParent.js ***!
+  \***************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10813,9 +10875,9 @@ function getParent(name, keys) {
 /***/ }),
 
 /***/ 36:
-/*!************************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/uview-ui/libs/function/$parent.js ***!
-  \************************************************************************************/
+/*!*************************************************************************************!*\
+  !*** C:/Users/ysk/Desktop/次方空间/cub-space-miniapp/uview-ui/libs/function/$parent.js ***!
+  \*************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10842,9 +10904,9 @@ function $parent() {var name = arguments.length > 0 && arguments[0] !== undefine
 /***/ }),
 
 /***/ 37:
-/*!********************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/uview-ui/libs/function/sys.js ***!
-  \********************************************************************************/
+/*!*********************************************************************************!*\
+  !*** C:/Users/ysk/Desktop/次方空间/cub-space-miniapp/uview-ui/libs/function/sys.js ***!
+  \*********************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10861,9 +10923,9 @@ function sys() {
 /***/ }),
 
 /***/ 38:
-/*!*************************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/uview-ui/libs/function/debounce.js ***!
-  \*************************************************************************************/
+/*!**************************************************************************************!*\
+  !*** C:/Users/ysk/Desktop/次方空间/cub-space-miniapp/uview-ui/libs/function/debounce.js ***!
+  \**************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10901,9 +10963,9 @@ debounce;exports.default = _default;
 /***/ }),
 
 /***/ 39:
-/*!*************************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/uview-ui/libs/function/throttle.js ***!
-  \*************************************************************************************/
+/*!**************************************************************************************!*\
+  !*** C:/Users/ysk/Desktop/次方空间/cub-space-miniapp/uview-ui/libs/function/throttle.js ***!
+  \**************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10944,9 +11006,9 @@ throttle;exports.default = _default;
 /***/ }),
 
 /***/ 4:
-/*!*************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/pages.json ***!
-  \*************************************************************/
+/*!**************************************************************!*\
+  !*** C:/Users/ysk/Desktop/次方空间/cub-space-miniapp/pages.json ***!
+  \**************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -10955,9 +11017,9 @@ throttle;exports.default = _default;
 /***/ }),
 
 /***/ 40:
-/*!*********************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/uview-ui/libs/config/config.js ***!
-  \*********************************************************************************/
+/*!**********************************************************************************!*\
+  !*** C:/Users/ysk/Desktop/次方空间/cub-space-miniapp/uview-ui/libs/config/config.js ***!
+  \**********************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10979,9 +11041,9 @@ var version = '1.8.4';var _default =
 /***/ }),
 
 /***/ 41:
-/*!*********************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/uview-ui/libs/config/zIndex.js ***!
-  \*********************************************************************************/
+/*!**********************************************************************************!*\
+  !*** C:/Users/ysk/Desktop/次方空间/cub-space-miniapp/uview-ui/libs/config/zIndex.js ***!
+  \**********************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11009,9 +11071,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 
 /***/ 42:
-/*!*****************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/store/index.js ***!
-  \*****************************************************************/
+/*!******************************************************************!*\
+  !*** C:/Users/ysk/Desktop/次方空间/cub-space-miniapp/store/index.js ***!
+  \******************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -12197,9 +12259,9 @@ var index = {
 /***/ }),
 
 /***/ 44:
-/*!*****************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/utils/cache.js ***!
-  \*****************************************************************/
+/*!******************************************************************!*\
+  !*** C:/Users/ysk/Desktop/次方空间/cub-space-miniapp/utils/cache.js ***!
+  \******************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -12271,9 +12333,9 @@ module.exports = {
 /***/ }),
 
 /***/ 45:
-/*!******************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/utils/common.js ***!
-  \******************************************************************/
+/*!*******************************************************************!*\
+  !*** C:/Users/ysk/Desktop/次方空间/cub-space-miniapp/utils/common.js ***!
+  \*******************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -12432,9 +12494,9 @@ var interactive = new Interactive();exports.interactive = interactive;
 /***/ }),
 
 /***/ 46:
-/*!*******************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/utils/request.js ***!
-  \*******************************************************************/
+/*!********************************************************************!*\
+  !*** C:/Users/ysk/Desktop/次方空间/cub-space-miniapp/utils/request.js ***!
+  \********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -12549,9 +12611,9 @@ var http = new Http();exports.http = http;
 /***/ }),
 
 /***/ 54:
-/*!*********************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/uview-ui/libs/mixin/mpShare.js ***!
-  \*********************************************************************************/
+/*!**********************************************************************************!*\
+  !*** C:/Users/ysk/Desktop/次方空间/cub-space-miniapp/uview-ui/libs/mixin/mpShare.js ***!
+  \**********************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -12575,9 +12637,9 @@ module.exports = {
 /***/ }),
 
 /***/ 61:
-/*!***********************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/pages/index/index.js ***!
-  \***********************************************************************/
+/*!************************************************************************!*\
+  !*** C:/Users/ysk/Desktop/次方空间/cub-space-miniapp/pages/index/index.js ***!
+  \************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -12659,9 +12721,9 @@ module.exports = {
 /***/ }),
 
 /***/ 62:
-/*!******************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/pages/index/getIndexData.js ***!
-  \******************************************************************************/
+/*!*******************************************************************************!*\
+  !*** C:/Users/ysk/Desktop/次方空间/cub-space-miniapp/pages/index/getIndexData.js ***!
+  \*******************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -12804,9 +12866,9 @@ var __getIndexData = {
 /***/ }),
 
 /***/ 71:
-/*!*********************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/pages/home/home.js ***!
-  \*********************************************************************/
+/*!**********************************************************************!*\
+  !*** C:/Users/ysk/Desktop/次方空间/cub-space-miniapp/pages/home/home.js ***!
+  \**********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 

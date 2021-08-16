@@ -245,7 +245,7 @@ export default {
 	position: absolute;
 	z-index: 9999;
 	right: 40rpx;
-	bottom: 120rpx;
+	bottom: 200rpx;
 	border-radius: 50%;
 }
 </style>
