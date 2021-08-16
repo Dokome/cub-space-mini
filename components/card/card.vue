@@ -1,6 +1,6 @@
 <template>
 	<!-- :class="{ 'margin-top-xs': type === 'news' }" -->
-	<view class="bg-white padding u-border-top" style="width: 100%;">
+	<view class="bg-white padding" style="width: 100%;">
 		<!--
 			动态
 		 -->
@@ -59,8 +59,8 @@
 			<u-modal v-model="modalShow" :show-confirm-button="false" :mask-close-able="true" :show-title="false">
 				<view class="flex flex-direction" @click="moreOptionsClick(newsdata, $event)">
 					<view class="padding" data-type="delete" v-if="!newsdata.btnStatus">删除</view>
-					<view class="padding u-border-top" data-type="report">举报</view>
-					<view class="padding u-border-top" data-type="share" style="position: relative;">
+					<view class="padding" data-type="report">举报</view>
+					<view class="padding" data-type="share" style="position: relative;">
 						转发
 						<button open-type="share" :data-info="newsdata" class="shareButton"></button>
 					</view>
@@ -264,9 +264,9 @@ export default {
 	padding: 0;
 	text-align: left;
 	background-color: transparent;
-	border: transparent;
+	border: none;
 	position: absolute;
 	left: 0;
 	top: 0;
 }
-</style>
+</style> 

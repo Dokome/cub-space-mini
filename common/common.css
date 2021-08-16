@@ -179,6 +179,7 @@
 
 .text-content {
 	line-height: 1.6;
+	/* letter-spacing: .1rpx; */
 }
 
 .text-left {

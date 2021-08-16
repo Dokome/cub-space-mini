@@ -69,9 +69,10 @@ export const __mynews = {
 			}
 		});
 		this.userinfo = data.data.data;
+		this.focusStatus = this.userinfo.focusStatus;
 		// 
 		setTimeout(() => {
 			this.ifLoaddingShow = false;
 		}, 300);
-	}
+	},
 }

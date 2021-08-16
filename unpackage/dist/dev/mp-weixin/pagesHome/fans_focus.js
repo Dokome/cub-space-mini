@@ -24,47 +24,77 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-var _default =
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var _fans_focus = __webpack_require__(/*! ./fans_focus.js */ 390);function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var _default =
 {
   data: function data() {
     return {
+      ViewPart: this.ViewPart,
       //当前页面
       page: '',
       // 页面高度(通过App.vue获取而来)
-      PageHeight: this.windowHeight };
+      PageHeight: this.windowHeight,
+      // 用户列表
+      userList: new Map(),
+      ifLoaddingShow: true,
+      // 用户的总页数
+      totalPage: 1,
+      // 用户的当前页数
+      currentPageNum: 1,
+      // 用户总条数
+      dataTotalNum: 0,
+      // loadmore 组件
+      loadStatus: 'nomore',
+      // 举报文字
+      loadText: {
+        loadmore: '上拉加载更多',
+        loading: '努力加载ing...',
+        nomore: '没有更多了~' } };
+
 
   },
+  methods: _objectSpread({},
+  _fans_focus.__fans_focus),
+
   onLoad: function onLoad(options) {
     this.page = options.page === 'fans' ? '我的粉丝' : '我的关注';
+    this.type = options.page === 'fans' ? 2 : 1;
+    this.getUserList();
   } };exports.default = _default;
 
 /***/ }),
@@ -201,6 +231,12 @@ try {
     },
     uButton: function() {
       return __webpack_require__.e(/*! import() | uview-ui/components/u-button/u-button */ "uview-ui/components/u-button/u-button").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-button/u-button.vue */ 174))
+    },
+    uLoadmore: function() {
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-loadmore/u-loadmore */ "uview-ui/components/u-loadmore/u-loadmore").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-loadmore/u-loadmore.vue */ 210))
+    },
+    loading: function() {
+      return __webpack_require__.e(/*! import() | components/loading/loading */ "components/loading/loading").then(__webpack_require__.bind(null, /*! @/components/loading/loading.vue */ 233))
     }
   }
 } catch (e) {
@@ -224,6 +260,28 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
+  var l0 = _vm.getUsersMapData()
+
+  if (!_vm._isMounted) {
+    _vm.e0 = function($event, item) {
+      var _temp = arguments[arguments.length - 1].currentTarget.dataset,
+        _temp2 = _temp.eventParams || _temp["event-params"],
+        item = _temp2.item
+
+      var _temp, _temp2
+
+      return _vm.enterUserHome(item.userId)
+    }
+  }
+
+  _vm.$mp.data = Object.assign(
+    {},
+    {
+      $root: {
+        l0: l0
+      }
+    }
+  )
 }
 var recyclableRender = false
 var staticRenderFns = []
@@ -233,5 +291,5 @@ render._withStripped = true
 
 /***/ })
 
-},[[96,"common/runtime","common/vendor"]]]);
+},[[96,"common/runtime","common/vendor","pagesHome/common/vendor"]]]);
 //# sourceMappingURL=../../.sourcemap/mp-weixin/pagesHome/fans_focus.js.map

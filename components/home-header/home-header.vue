@@ -15,11 +15,23 @@
 				></u-avatar>
 			</view>
 			<!-- 信息 -->
-			<view class="padding-lr-lg flex-sub flex flex-direction" style="margin-top: 80rpx;">
+			<view class="padding-lr-lg flex-sub flex flex-direction" style="margin-top: 80rpx;position: relative;">
+				<!-- 关注 / 私聊 -->
+				<view class="interactive flex align-center" v-if="!isSelf">
+					<u-button type="primary" class="margin-right-sm" size="medium" :disabled="disabled" :plain="focusStatus"
+						:custom-style="{ width : '100rpx' , height: '65rpx' }" @click="changeFocusStatus">
+						{{ focusStatus ? '已关注' : '+关注' }} 
+					</u-button>
+					<u-button type="primary" plain="true" size="medium"
+						:custom-style="{ width : '100rpx' , height: '65rpx' }"	>私聊
+					</u-button>
+				</view>
 				<!-- 名字 -->
 				<view class="flex align-center">
-					<text class="text-lg text-black text-xxl margin-right-sm" style="font-weight: 500;">{{ userinfo.nickName }}</text>
-					<image :src="`/static/home/gender${ userinfo.gender || 0 }.png`" mode="" style="width: 40rpx; height: 40rpx;"></image>	
+					<view class="flex align-center">
+						<text class="text-lg text-black text-xxl margin-right-sm" style="font-weight: 500;">{{ userinfo.nickName }}</text>
+					</view>
+					<image :src="`/static/home/gender${ userinfo.gender && userinfo.gender - 1 || 0 }.png`" mode="" style="width: 40rpx; height: 40rpx;"></image>	
 				</view>
 				<!-- 标签 -->
 				<view class="margin-tb-sm">
@@ -52,9 +64,15 @@
 				type: Object,
 				default() {
 					return {};
-				}
+				} 
 			},
 			isSelf: {
+				type: Boolean,
+				default() {
+					return true;
+				}
+			},
+			focusStatus: {
 				type: Boolean,
 				default() {
 					return true;
@@ -63,6 +81,9 @@
 		},
 		data() {
 			return {
+				// 关注按钮是否不可点击
+				disabled: false,
+				// 
 				userData: 
 				[
 					{
@@ -84,10 +105,6 @@
 			};
 		},
 		methods: {
-			// 进入功能页面
-			enterFuncPage(e) {
-				this.$api.routerHandle.goto(e.target.dataset.page);
-			},
 			// 更换背景图片
 			async changeBackGround() {
 				if (!this.isSelf) {
@@ -126,11 +143,35 @@
 						// 
 					}
 				});
+			},
+			// 更改关注状态
+			async changeFocusStatus() {
+				this.disabled = true;
+				const data = await this.$http.request({
+					url: '/umsRelation/focusUms',
+					method: 'POST',
+					data: {
+						userId: this.userinfo.userId
+					}
+				});
+				this.$nextTick(() => {
+					uni.showToast({
+						title: !this.focusStatus ? '关注成功' : '取关成功',
+						icon: 'none',
+					});
+					this.disabled = false;
+					uni.$emit('changeFocusStatus', '');
+				})
 			}
 		}
 	}
 </script>
 
 <style lang="scss">
-
+.interactive {
+	position: absolute;
+	right: 40rpx;
+	top: 0;
+	transform: translateY(-120%);
+}
 </style>

@@ -185,7 +185,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
 
 
 
@@ -209,9 +209,11 @@ var _mynews = __webpack_require__(/*! ./mynews.js */ 137);function ownKeys(objec
 {
   data: function data() {
     return {
+      // 是否为自己
       isSelf: true,
       userId: '',
       userinfo: {},
+      focusStatus: false,
       ifLoaddingShow: true,
       ViewPart: this.ViewPart,
       // 动态列表
@@ -235,14 +237,19 @@ var _mynews = __webpack_require__(/*! ./mynews.js */ 137);function ownKeys(objec
   methods: _objectSpread({},
   _mynews.__mynews),
 
-  onLoad: function onLoad() {var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  onLoad: function onLoad() {var _this = this;var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+    uni.$off('changeFocusStatus');
+    uni.$on('changeFocusStatus', function () {
+      _this.getUserInfo({ id: _this.userId });
+    });
     if (options.id) {
-      this.isSelf = false;
       this.userId = options.id;
+      this.isSelf = this.$cache.get('userId') === options.id;
       this.getUserInfo({ id: options.id });
     }
     this.getMynewsData({ id: options.id });
   } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ })
 

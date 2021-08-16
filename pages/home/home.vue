@@ -20,16 +20,15 @@
 						<view class="hwmax" style="position: absolute; z-index: 9999; opacity: 0;" v-if="item.title === '分享小程序'" @click="shareApp">
 							<u-button open-type="share">分享</u-button>
 						</view>
-						<u-cell-item :title="item.title" :data-page="item.page"><view :class="'margin-right-xs t-icon ' + item.icon" slot="icon"></view></u-cell-item>
+						<u-cell-item :title="item.title" :data-page="item.page"><view :class="'text-bold margin-right-sm t-icon ' + item.icon" slot="icon"></view></u-cell-item>
 					</view>
 				</view>
-				<view class="" style="height: 10rpx;"></view>
+				<view class="" style="height: 20rpx;"></view>
 			</view>
 		</scroll-view>
 		<!-- 底部栏nav -->
-		<u-tabbar :list="list" :mid-button="midButton" :inactive-color="inactiveColor" :activeColor="activeColor" :border-top="borderTop" @change="isPublish"></u-tabbar>
+		<u-tabbar :list="list" :mid-button="midButton" :inactive-color="inactiveColor" :activeColor="activeColor" :border-top="borderTop"></u-tabbar>
 		<login v-if="!login"></login>
-		<pop type="publish" v-if="ifPublishShow"></pop>
 		<loading v-if="ifLoaddingShow && login"></loading>
 	</view>
 </template>
@@ -102,13 +101,6 @@ export default {
 	},
 	methods: {
 		..._home,
-		//动态发布
-		isPublish(index) {
-			if (index === 2) {
-				this.ifPublishShow = true;
-				uni.$emit('popUpChange', '');
-			}
-		},
 	},
 	computed: {
 		...mapState(['midButton', 'inactiveColor', 'activeColor', 'borderTop']),

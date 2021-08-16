@@ -5,7 +5,7 @@
 		{ backgroundColor: navBarColor }
 	]" :class="{ 'fixed' : isFixed }">
 		<view 
-			class="flex align-center u-border-bottom" 
+			class="flex align-center" 
 			:class="{ 'justify-center': !!title }"
 			:style="[
 				{ height: CustomBar - StatusBar + 'px', width: '100%' }, 

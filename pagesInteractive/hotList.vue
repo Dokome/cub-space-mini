@@ -25,6 +25,7 @@
 				</view>
 			</view>
 		</scroll-view>
+		<loading v-if="ifLoaddingShow"></loading>
 	</view>
 </template>
 
@@ -32,6 +33,7 @@
 	export default {
 		data() {
 			return {
+				ifLoaddingShow: true,
 				ViewPart: this.ViewPart,
 				hotList: [
 					{
@@ -65,6 +67,7 @@
 				});
 				const result = data.data.data;
 				this.hotList = result;
+				this.ifLoaddingShow = false;
 			}
 		},
 		onLoad: function(option) {

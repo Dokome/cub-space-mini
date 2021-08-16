@@ -8,7 +8,6 @@
     "u-cell-item": "/uview-ui/components/u-cell-item/u-cell-item",
     "u-tabbar": "/uview-ui/components/u-tabbar/u-tabbar",
     "login": "/components/login/login",
-    "pop": "/components/pop/pop",
     "loading": "/components/loading/loading"
   }
 }

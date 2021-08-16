@@ -1,49 +1,4 @@
 /* uni.scss */
-.chat-list .chat-list-item.data-v-bf16e7f4 {
-  height: 150rpx;
-  background-color: #fff;
-}
-.chat-list .chat-list-item .chat-list-item-avatar.data-v-bf16e7f4 {
-  width: 100rpx;
-  height: 100rpx;
-}
-.chat-list .chat-list-item .chat-list-item-info .top.data-v-bf16e7f4 {
-  height: 50rpx;
-}
-.chat-list .chat-list-item .chat-list-item-info .bottom .message.data-v-bf16e7f4 {
-  display: inline-block;
-  width: 510rpx;
-}
-.chat-list .chat-list-item .chat-list-item-info .bottom .number.data-v-bf16e7f4 {
-  display: inline-block;
-  width: 37rpx;
-  line-height: 37rpx;
-  color: white;
-  border-radius: 50%;
-  background-color: #ff5218;
-  text-align: center;
-  margin-right: 10rpx;
-}
-.notice-list .notice-list-header.data-v-bf16e7f4 {
-  height: 180rpx;
-}
-.notice-list .notice-list-header .notice-list-header-item.data-v-bf16e7f4 {
-  width: 80rpx;
-  height: 80rpx;
-}
-.notice-list .notice-list-item.data-v-bf16e7f4 {
-  height: 180rpx;
-}
-.notice-list .notice-list-item .end.data-v-bf16e7f4 {
-  width: 120rpx;
-  height: 120rpx;
-  background-color: #f5f5f7;
-  color: #9ca0a9;
-}
-.notice-list .notice-list-item .content.data-v-bf16e7f4 {
-  display: inline-block;
-  width: 400rpx;
-}
 .outWrapper.data-v-bf16e7f4 {
   overflow: hidden;
 }

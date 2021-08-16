@@ -94,7 +94,7 @@ export default {
 		// 是否显示下边框
 		borderBottom: {
 			type: Boolean,
-			default: true
+			default: false
 		},
 		// 是否显示上边框
 		borderTop: {

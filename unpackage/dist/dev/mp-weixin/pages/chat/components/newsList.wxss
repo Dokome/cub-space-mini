@@ -1,0 +1,27 @@
+/* uni.scss */
+.chat-list .chat-list-item.data-v-16db51ac {
+  height: 150rpx;
+  background-color: #fff;
+}
+.chat-list .chat-list-item .chat-list-item-avatar.data-v-16db51ac {
+  width: 100rpx;
+  height: 100rpx;
+}
+.chat-list .chat-list-item .chat-list-item-info .top.data-v-16db51ac {
+  height: 50rpx;
+}
+.chat-list .chat-list-item .chat-list-item-info .bottom .message.data-v-16db51ac {
+  display: inline-block;
+  width: 510rpx;
+}
+.chat-list .chat-list-item .chat-list-item-info .bottom .number.data-v-16db51ac {
+  display: inline-block;
+  width: 37rpx;
+  line-height: 37rpx;
+  color: white;
+  border-radius: 50%;
+  background-color: #ff5218;
+  text-align: center;
+  margin-right: 10rpx;
+}
+

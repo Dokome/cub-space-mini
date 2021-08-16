@@ -97,6 +97,9 @@ try {
   components = {
     navbar: function() {
       return __webpack_require__.e(/*! import() | components/navbar/navbar */ "components/navbar/navbar").then(__webpack_require__.bind(null, /*! @/components/navbar/navbar.vue */ 181))
+    },
+    loading: function() {
+      return __webpack_require__.e(/*! import() | components/loading/loading */ "components/loading/loading").then(__webpack_require__.bind(null, /*! @/components/loading/loading.vue */ 233))
     }
   }
 } catch (e) {
@@ -201,10 +204,12 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 //
 //
 //
+//
 var _default =
 {
   data: function data() {
     return {
+      ifLoaddingShow: true,
       ViewPart: this.ViewPart,
       hotList: [
       {
@@ -237,7 +242,8 @@ var _default =
                     noToken: options.noToken }));case 3:data = _context.sent;
 
                 result = data.data.data;
-                _this.hotList = result;case 6:case "end":return _context.stop();}}}, _callee);}))();
+                _this.hotList = result;
+                _this.ifLoaddingShow = false;case 7:case "end":return _context.stop();}}}, _callee);}))();
     } },
 
   onLoad: function onLoad(option) {var _this2 = this;

@@ -3,7 +3,7 @@
 		<scroll-view scroll-y="true" :style="{ height: `100vh` }" @scrolltolower="scrollToBottom">
 		<navbar :title="' '" :isFixed="true"></navbar>
 			<view>
-				<home-header v-if="!isSelf" :userinfo="userinfo" :isSelf="isSelf"></home-header>
+				<home-header v-if="!isSelf" :userinfo="userinfo" :isSelf="isSelf" :focusStatus="focusStatus"></home-header>
 				<card type="news" v-for="item in getNewsMapData()" :key="item.id" 
 				:newsdata="item" :isHome="true" @click.native="enterDetail(item.id)"></card>
 				<u-loadmore
@@ -22,9 +22,11 @@ import { __mynews } from './mynews.js';
 export default {
 	data() {
 		return {
+			// 是否为自己
 			isSelf: true,
 			userId: '',
 			userinfo: {},
+			focusStatus: false,
 			ifLoaddingShow: true,
 			ViewPart: this.ViewPart,
 			// 动态列表
@@ -49,9 +51,13 @@ export default {
 		...__mynews,
 	},
 	onLoad(options = {}) {
+		uni.$off('changeFocusStatus');
+		uni.$on('changeFocusStatus', () => {
+			this.getUserInfo({ id: this.userId });
+		});
 		if (options.id) {
-			this.isSelf = false;
 			this.userId = options.id;
+			this.isSelf = this.$cache.get('userId') === options.id;
 			this.getUserInfo({ id: options.id });
 		}
 		this.getMynewsData({ id: options.id });

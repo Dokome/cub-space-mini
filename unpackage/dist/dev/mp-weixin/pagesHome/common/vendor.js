@@ -1,9 +1,9 @@
 (global["webpackJsonp"] = global["webpackJsonp"] || []).push([["pagesHome/common/vendor"],{
 
 /***/ 118:
-/*!*************************************************************************!*\
-  !*** C:/Users/ysk/Desktop/次方空间/cub-space-miniapp/pagesHome/identify.js ***!
-  \*************************************************************************/
+/*!************************************************************************!*\
+  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/pagesHome/identify.js ***!
+  \************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -105,9 +105,9 @@
 /***/ }),
 
 /***/ 137:
-/*!***********************************************************************!*\
-  !*** C:/Users/ysk/Desktop/次方空间/cub-space-miniapp/pagesHome/mynews.js ***!
-  \***********************************************************************/
+/*!**********************************************************************!*\
+  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/pagesHome/mynews.js ***!
+  \**********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -183,11 +183,84 @@ var __mynews = {
 
 
               _this2.userinfo = data.data.data;
+              _this2.focusStatus = _this2.userinfo.focusStatus;
               // 
               setTimeout(function () {
                 _this2.ifLoaddingShow = false;
-              }, 300);case 6:case "end":return _context2.stop();}}}, _callee2);}))();
+              }, 300);case 7:case "end":return _context2.stop();}}}, _callee2);}))();
   } };exports.__mynews = __mynews;
+
+/***/ }),
+
+/***/ 390:
+/*!**************************************************************************!*\
+  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/pagesHome/fans_focus.js ***!
+  \**************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.__fans_focus = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 21));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}function _unsupportedIterableToArray(o, minLen) {if (!o) return;if (typeof o === "string") return _arrayLikeToArray(o, minLen);var n = Object.prototype.toString.call(o).slice(8, -1);if (n === "Object" && o.constructor) n = o.constructor.name;if (n === "Map" || n === "Set") return Array.from(o);if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);}function _iterableToArray(iter) {if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) return _arrayLikeToArray(arr);}function _arrayLikeToArray(arr, len) {if (len == null || len > arr.length) len = arr.length;for (var i = 0, arr2 = new Array(len); i < len; i++) {arr2[i] = arr[i];}return arr2;}var __listDataAddHandle = function __listDataAddHandle(list, map) {
+  // 请求新数据时清空列表
+  list.forEach(function (item) {
+    // 判断数据是否存在
+    map.get(item.userId) ? map.delete(item.userId) : null;
+    map.set(item.userId, item);
+  });
+};
+
+var __fans_focus = {
+  // 动态数据映射
+  getUsersMapData: function getUsersMapData() {
+    if (this.userList) {
+      return _toConsumableArray(this.userList.values());
+    }
+  },
+  // 获取用户列表
+  getUserList: function getUserList() {var _arguments = arguments,_this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var options, data, result;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:options = _arguments.length > 0 && _arguments[0] !== undefined ? _arguments[0] : {};if (!(
+              _this.currentPageNum > _this.totalPage && !options.getNew)) {_context.next = 4;break;}
+              _this.loadStatus = 'nomore';return _context.abrupt("return");case 4:
+
+
+              _this.loadStatus = 'loading';_context.next = 7;return (
+
+                _this.$http.request({
+                  url: '/umsRelation/focusAndFans',
+                  method: 'POST',
+                  data: {
+                    pageNum: _this.currentPageNum,
+                    pageSize: 10,
+                    parmas: {
+                      type: _this.type } } }));case 7:data = _context.sent;
+
+
+
+
+              result = data.data.data;
+              console.log(result.list);
+              if (data.data.code === 200) {
+                _this.currentPageNum++;
+                _this.totalPage = result.totalPage;
+                _this.dataTotalNum = result.total;
+              }
+
+              _this.loadStatus = 'loadmore';
+              if (_this.totalPage === 0 || options.getNew || _this.dataTotalNum < 10) {
+                _this.loadStatus = 'nomore';
+              }
+
+              __listDataAddHandle.call(_this, result.list, _this.userList);
+              setTimeout(function () {
+                _this.ifLoaddingShow = false;
+              }, 500);case 15:case "end":return _context.stop();}}}, _callee);}))();
+  },
+  scrollToBottom: function scrollToBottom() {
+    this.getUserList();
+  },
+  // 进入用户主页
+  enterUserHome: function enterUserHome(id) {
+    this.$api.routerHandle.goto("/pagesHome/mynews?id=".concat(id));
+  } };exports.__fans_focus = __fans_focus;
 
 /***/ })
 

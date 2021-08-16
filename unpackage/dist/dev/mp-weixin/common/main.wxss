@@ -178,6 +178,7 @@
 }
 .text-content {
 	line-height: 1.6;
+	/* letter-spacing: .1rpx; */
 }
 .text-left {
 	text-align: left;
@@ -668,8 +669,8 @@
 }
 .t-icon {
     display: inline-block;
-    width: 40rpx; 
-    height: 40rpx;
+    width: 60rpx; 
+    height: 60rpx;
     background-repeat: no-repeat;
     background-position: center;
     background-size: 100%;
