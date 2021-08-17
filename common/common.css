@@ -524,7 +524,9 @@
 }
 
 /* 背景颜色 */
-
+.bg-transition {
+	background-color: #F9F9F9;
+}
 
 .bg-red {
 	background-color: #e54d42;

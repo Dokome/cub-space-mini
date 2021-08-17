@@ -298,7 +298,9 @@ var _moreOptions = __webpack_require__(/*! ./moreOptions.js */ 208);function _in
       reportModalShow: false,
       // 点赞的即时累加
       likeStatusCount: 0,
-      likeNumCount: 0 };
+      likeNumCount: 0,
+      // 背景色
+      backGround: 'bg-white' };
 
   },
   computed: {
@@ -347,6 +349,13 @@ var _moreOptions = __webpack_require__(/*! ./moreOptions.js */ 208);function _in
         return;
       }
       this.$api.routerHandle.goto("/pagesHome/mynews?id=".concat(id));
+    },
+    // 长按
+    touchstart: function touchstart() {
+      this.backGround = 'bg-transition';
+    },
+    touchend: function touchend() {
+      this.backGround = 'bg-white';
     } }),
 
   props: {

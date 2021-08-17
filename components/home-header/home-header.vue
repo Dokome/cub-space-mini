@@ -38,7 +38,7 @@
 					<!-- ID -->
 					<u-tag :text="`UID:${ userinfo.userId }`" shape="circle" color="#909399" bg-color="#F5F5F5" border-color="#F5F5F5" />
 					<!-- 学校 -->
-					<u-tag :text="`学校:${ userinfo.schoolName }`" shape="circle" color="#909399" bg-color="#F5F5F5" border-color="#F5F5F5"/>
+					<u-tag :text="`学校:${ userinfo.schoolName || '未认证' }`" shape="circle" color="#909399" bg-color="#F5F5F5" border-color="#F5F5F5"/>
 				</view>
 				<!-- 个性签名 -->
 				<view class="text-sm u-line-1 u-tips-color">

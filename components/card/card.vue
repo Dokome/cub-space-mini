@@ -1,6 +1,6 @@
 <template>
 	<!-- :class="{ 'margin-top-xs': type === 'news' }" -->
-	<view class="bg-white padding" style="width: 100%;">
+	<view class="padding wmax" @touchstart="touchstart" :class="backGround" @touchend="touchend">
 		<!--
 			动态
 		 -->
@@ -77,7 +77,7 @@
 			回复类型
 		 -->
 		<view class="" v-if="type === 'reply' || type === 'comment'" @click="replyHandle(commentdata)">
-			<view class="flex bg-white wmax">
+			<view class="flex wmax">
 				<!-- 头像 -->
 				<view class="" style="width: 65rpx;"  @click.stop="enterUserHome(commentdata.userId)">
 					<u-avatar size="60" :src="commentdata.avatarUrl"></u-avatar>
@@ -153,7 +153,9 @@ export default {
 			reportModalShow: false,
 			// 点赞的即时累加
 			likeStatusCount: 0,
-			likeNumCount: 0
+			likeNumCount: 0,
+			// 背景色
+			backGround: 'bg-white',
 		};
 	},
 	computed: {
@@ -202,6 +204,13 @@ export default {
 				return;
 			}
 			this.$api.routerHandle.goto(`/pagesHome/mynews?id=${id}`);
+		},
+		// 长按
+		touchstart(){
+			this.backGround = 'bg-transition';
+		},
+		touchend() {
+			this.backGround = 'bg-white';
 		}
 	},
 	props: {

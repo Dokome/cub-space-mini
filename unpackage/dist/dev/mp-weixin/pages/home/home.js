@@ -241,46 +241,7 @@ var _home2 = __webpack_require__(/*! ./home.js */ 71);function ownKeys(object, e
       'https://img1.baidu.com/it/u=2482470290,1487532761&fm=26&fmt=auto&gp=0.jpg'],
 
       // 页面功能列表
-      funcList: [
-      {
-        title: '我的动态',
-        icon: '.t-icon-aixin',
-        page: '/pagesHome/mynews' },
-
-      {
-        title: '账号资料',
-        icon: '.t-icon-gerenziliao',
-        page: '/pagesHome/info' },
-
-      {
-        title: '学校认证',
-        icon: '.t-icon-jihua',
-        page: '/pagesHome/identify' },
-
-      {
-        title: '意见反馈',
-        icon: '.t-icon-baogao',
-        page: '/pagesHome/feedback' },
-
-      {
-        title: '商务合作',
-        icon: 't-icon-shangjiaruzhu',
-        page: '/pagesHome/about_business?page=business' },
-
-      {
-        title: '关于我们',
-        icon: '.t-icon-women',
-        page: '/pagesHome/about_business?page=about' },
-
-      {
-        title: '设置',
-        icon: '.t-icon-shezhi' },
-
-      {
-        title: '分享小程序',
-        icon: 't-icon-fenxiang' }] };
-
-
+      funcList: [] };
 
   },
   methods: _objectSpread({},

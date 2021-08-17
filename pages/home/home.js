@@ -20,8 +20,9 @@ export const _home = {
 				parentCode: "func_list"
 			}
 		});
-		// this.funcList = data.data.data;
-		// console.log(this.funcList);
+		const result = data.data.data;
+		this.funcList = result;
+		console.log(result);
 		this.$forceUpdate();
 	},
 	// 获取个人信息
@@ -33,6 +34,9 @@ export const _home = {
 		this.userinfo = data.data.data;
 		setTimeout(() => {
 			this.ifLoaddingShow = false;
-		}, 300);
+		}, 300);	
+		if (this.userinfo.schoolName) {
+			this.$cache.set('isAuthor', true, 1000 * 60 * 60 * 2);
+		}
 	 }
 }

@@ -872,7 +872,7 @@ function initData(vueOptions, context) {
     try {
       data = data.call(context); // 支持 Vue.prototype 上挂的数据
     } catch (e) {
-      if (Object({"NODE_ENV":"development","VUE_APP_NAME":"cub-space-mini","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"VUE_APP_NAME":"cub-space-mini","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.warn('根据 Vue 的 data 函数初始化小程序 data 失败，请尽量确保 data 函数中不访问 vm 对象，否则可能影响首次数据渲染速度。', data);
       }
     }
@@ -8379,7 +8379,7 @@ function type(obj) {
 
 function flushCallbacks$1(vm) {
     if (vm.__next_tick_callbacks && vm.__next_tick_callbacks.length) {
-        if (Object({"NODE_ENV":"development","VUE_APP_NAME":"cub-space-mini","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
+        if (Object({"VUE_APP_NAME":"cub-space-mini","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:flushCallbacks[' + vm.__next_tick_callbacks.length + ']');
@@ -8400,14 +8400,14 @@ function nextTick$1(vm, cb) {
     //1.nextTick 之前 已 setData 且 setData 还未回调完成
     //2.nextTick 之前存在 render watcher
     if (!vm.__next_tick_pending && !hasRenderWatcher(vm)) {
-        if(Object({"NODE_ENV":"development","VUE_APP_NAME":"cub-space-mini","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"VUE_APP_NAME":"cub-space-mini","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:nextVueTick');
         }
         return nextTick(cb, vm)
     }else{
-        if(Object({"NODE_ENV":"development","VUE_APP_NAME":"cub-space-mini","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"VUE_APP_NAME":"cub-space-mini","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance$1 = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance$1.is || mpInstance$1.route) + '][' + vm._uid +
                 ']:nextMPTick');
@@ -8493,7 +8493,7 @@ var patch = function(oldVnode, vnode) {
     });
     var diffData = this.$shouldDiffData === false ? data : diff(data, mpData);
     if (Object.keys(diffData).length) {
-      if (Object({"NODE_ENV":"development","VUE_APP_NAME":"cub-space-mini","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"VUE_APP_NAME":"cub-space-mini","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + this._uid +
           ']差量更新',
           JSON.stringify(diffData));
@@ -12667,17 +12667,19 @@ module.exports = {
 
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });exports.__getIndexData = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 21));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _toConsumableArray(arr) {return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();}function _nonIterableSpread() {throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}function _unsupportedIterableToArray(o, minLen) {if (!o) return;if (typeof o === "string") return _arrayLikeToArray(o, minLen);var n = Object.prototype.toString.call(o).slice(8, -1);if (n === "Object" && o.constructor) n = o.constructor.name;if (n === "Map" || n === "Set") return Array.from(o);if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);}function _iterableToArray(iter) {if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);}function _arrayWithoutHoles(arr) {if (Array.isArray(arr)) return _arrayLikeToArray(arr);}function _arrayLikeToArray(arr, len) {if (len == null || len > arr.length) len = arr.length;for (var i = 0, arr2 = new Array(len); i < len; i++) {arr2[i] = arr[i];}return arr2;}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};} // 加载数据
-var __listDataAddHandle = function __listDataAddHandle(list, map) {var isGetNew = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+var __listDataAddHandle = function __listDataAddHandle(list, map) {var isGetNew = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;var tab = arguments.length > 3 ? arguments[3] : undefined;
   // 请求新数据时清空列表
   if (isGetNew) {
     map.clear();
-    this.pageNumList[this.current] = 1;
+    this.pageNumList[tab] = 1;
   }
+
   list.forEach(function (item) {
     // 判断数据是否存在
     map.get(item.id) ? map.delete(item.id) : null;
     map.set(item.id, item);
   });
+  this.$forceUpdate();
 };
 
 var __listDataDeleteHandle = function __listDataDeleteHandle(id) {
@@ -12691,52 +12693,52 @@ var __listDataDeleteHandle = function __listDataDeleteHandle(id) {
 
 var __getIndexData = {
   // 获取广场页数据
-  getNewsData: function getNewsData() {var _arguments = arguments,_this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var options, data, reuslt, list, pageNum, pageSize, totalPage, total;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:options = _arguments.length > 0 && _arguments[0] !== undefined ? _arguments[0] : {};
+  getNewsData: function getNewsData() {var _arguments = arguments,_this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var options, tab, data, reuslt, list, pageNum, pageSize, totalPage, total;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:options = _arguments.length > 0 && _arguments[0] !== undefined ? _arguments[0] : {};
+              tab = options.tab;
               // 开始加载
-              _this.$set(_this.loadStatus, _this.current, 'loading');
+              _this.$set(_this.loadStatus, tab, 'loading');
               // 判断是否达到了最大页面值
-              if (!(_this.pageTotalList[_this.current] < _this.pageNumList[_this.current])) {_context.next = 5;break;}
-              _this.$set(_this.loadStatus, _this.current, 'nomore');return _context.abrupt("return");case 5:
+              if (!(_this.pageTotalList[tab] < _this.pageNumList[tab] && !options.isGetNew)) {_context.next = 6;break;}
+              _this.$set(_this.loadStatus, tab, 'nomore');return _context.abrupt("return");case 6:
 
 
               // 判断缓存中是否有该页面
-              if (!_this.newsDataList[_this.current]) {
-                _this.newsDataList[_this.current] = new Map();
+              if (!_this.newsDataList[tab]) {
+                _this.newsDataList[tab] = new Map();
                 _this.$forceUpdate();
               }
               // 获取数据
-              _context.next = 8;return _this.$http.request({
+              _context.next = 9;return _this.$http.request({
                 url: '/dynamicState/selectDynamicListByPage',
                 method: 'POST',
                 data: {
-                  "pageNum": options.isGetNew ? 1 : _this.pageNumList[_this.current],
+                  "pageNum": options.isGetNew ? 1 : _this.pageNumList[tab],
                   "pageSize": 10,
                   "parmas": {
                     "tab": options.tab } },
 
 
                 skip: true,
-                noToken: options.noToken });case 8:data = _context.sent;
+                noToken: options.noToken });case 9:data = _context.sent;
 
               // 判断是否请求成功
               if (data.data.code === 200) {
-                _this.pageNumList[_this.current]++;
+                _this.pageNumList[tab]++;
                 reuslt = data.data.data;
                 list = reuslt.list, pageNum = reuslt.pageNum, pageSize = reuslt.pageSize, totalPage = reuslt.totalPage, total = reuslt.total;
 
-                _this.pageTotalList[_this.current] = totalPage;
+                _this.pageTotalList[tab] = totalPage;
                 // 添加数据
-                __listDataAddHandle.call(_this, list, _this.newsDataList[_this.current], options.isGetNew);
-                _this.$set(_this.loadStatus, _this.current, 'loadmore');
+                __listDataAddHandle.call(_this, list, _this.newsDataList[tab], options.isGetNew, tab);
+                _this.$set(_this.loadStatus, tab, 'loadmore');
                 _this.$forceUpdate();
               } else {
 
-
-              } // 未认证，未登录
-              // console.log(data);
+              }
               // 取消遮罩
-              setTimeout(function () {_this.ifLoaddingShow = false;
-              }, 500);case 11:case "end":return _context.stop();}}}, _callee);}))();
+              setTimeout(function () {
+                _this.ifLoaddingShow = false;
+              }, 500);case 12:case "end":return _context.stop();}}}, _callee);}))();
   },
 
   // 映射动态数据
@@ -12746,11 +12748,11 @@ var __getIndexData = {
     }
   },
 
-  getHotListDataContent: function getHotListDataContent(index) {
-    if (this.hotList.length > 4) {
-      var temp = JSON.parse(this.hotList);
-      if (temp[index]) {
-        return temp[index].content;
+  getHotListDataContent: function getHotListDataContent(h_index, index) {
+    if (this.hotList[index - 1] && this.hotList[index - 1].length > 4) {
+      var temp = JSON.parse(this.hotList[index - 1]);
+      if (temp[h_index]) {
+        return temp[h_index].content;
       }
     }
   },
@@ -12766,7 +12768,7 @@ var __getIndexData = {
                   noToken: options.noToken }));case 2:data = _context2.sent;
 
               result = JSON.stringify(data.data.data);
-              _this2.hotList = result;case 5:case "end":return _context2.stop();}}}, _callee2);}))();
+              _this2.hotList[options.type - 1] = result;case 5:case "end":return _context2.stop();}}}, _callee2);}))();
   },
 
   // 获取举报列表
@@ -12825,7 +12827,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports._home = vo
     this.$api.routerHandle.goto(e.target.dataset.page);
   },
   // 获取功能列表
-  getFuncList: function getFuncList() {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var data;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:_context.next = 2;return (
+  getFuncList: function getFuncList() {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var data, result;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:_context.next = 2;return (
                 _this.$http.request({
                   url: '/sysElement/getElementByCode',
                   method: 'POST',
@@ -12833,9 +12835,10 @@ Object.defineProperty(exports, "__esModule", { value: true });exports._home = vo
                     parentCode: "func_list" } }));case 2:data = _context.sent;
 
 
-              // this.funcList = data.data.data;
-              // console.log(this.funcList);
-              _this.$forceUpdate();case 4:case "end":return _context.stop();}}}, _callee);}))();
+              result = data.data.data;
+              _this.funcList = result;
+              console.log(result);
+              _this.$forceUpdate();case 7:case "end":return _context.stop();}}}, _callee);}))();
   },
   // 获取个人信息
   getUserInfo: function getUserInfo() {var _this2 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee2() {var data;return _regenerator.default.wrap(function _callee2$(_context2) {while (1) {switch (_context2.prev = _context2.next) {case 0:_context2.next = 2;return (
@@ -12846,7 +12849,10 @@ Object.defineProperty(exports, "__esModule", { value: true });exports._home = vo
               _this2.userinfo = data.data.data;
               setTimeout(function () {
                 _this2.ifLoaddingShow = false;
-              }, 300);case 5:case "end":return _context2.stop();}}}, _callee2);}))();
+              }, 300);
+              if (_this2.userinfo.schoolName) {
+                _this2.$cache.set('isAuthor', true, 1000 * 60 * 60 * 2);
+              }case 6:case "end":return _context2.stop();}}}, _callee2);}))();
   } };exports._home = _home;
 
 /***/ })

@@ -16,12 +16,12 @@
 				</view>
 				<!-- 功能列表 -->
 				<view class="bg-white" @click="enterFuncPage">
-					<view class="" v-for="(item, index) in funcList" style="position: relative;" :key="index">
-						<view class="hwmax" style="position: absolute; z-index: 9; opacity: 0;" v-if="item.title === '分享小程序'" @click="shareApp">
+					<view class="" v-for="(item, index) in funcList" style="position: relative;" :key="item.id">
+						<view class="hwmax" style="position: absolute; z-index: 9; opacity: 0;" v-if="item.content === '分享小程序'" @click="shareApp">
 							<u-button open-type="share">分享</u-button>
 						</view>
-						<u-cell-item :title="item.title" :data-page="item.page">
-							<view :class="'text-bold margin-right-sm t-icon ' + item.icon" slot="icon"></view>
+						<u-cell-item :title="item.content" :data-page="item.jumpLink">
+							<view :class="'text-bold margin-right-sm t-icon ' + item.image" slot="icon"></view>
 						</u-cell-item>
 					</view>
 				</view>
@@ -59,46 +59,7 @@ export default {
 				'https://img1.baidu.com/it/u=2482470290,1487532761&fm=26&fmt=auto&gp=0.jpg'
 			],
 			// 页面功能列表
-			funcList: [
-				{
-					title: '我的动态',
-					icon: '.t-icon-aixin',
-					page: '/pagesHome/mynews'
-				},
-				{
-					title: '账号资料',
-					icon: '.t-icon-gerenziliao',
-					page: '/pagesHome/info'
-				},
-				{
-					title: '学校认证',
-					icon: '.t-icon-jihua',
-					page: '/pagesHome/identify'
-				},
-				{
-					title: '意见反馈',
-					icon: '.t-icon-baogao',
-					page: '/pagesHome/feedback'
-				},
-				{
-					title: '商务合作',
-					icon: 't-icon-shangjiaruzhu',
-					page: '/pagesHome/about_business?page=business'
-				},
-				{
-					title: '关于我们',
-					icon: '.t-icon-women',
-					page: '/pagesHome/about_business?page=about'
-				},
-				{
-					title: '设置',
-					icon: '.t-icon-shezhi'
-				},
-				{
-					title: '分享小程序',
-					icon: 't-icon-fenxiang'
-				}
-			]
+			funcList: []
 		};
 	},
 	methods: {
@@ -113,7 +74,7 @@ export default {
 	onLoad() {
 		uni.$on('updateHome', () => {
 			this.getUserInfo();
-		})
+		});
 		if (this.login) {
 			this.getFuncList();
 			this.getUserInfo();

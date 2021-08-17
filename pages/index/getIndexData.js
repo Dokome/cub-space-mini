@@ -1,15 +1,17 @@
 // 加载数据
-const __listDataAddHandle = function(list, map, isGetNew = false) {
+const __listDataAddHandle = function(list, map, isGetNew = false, tab) {
 	// 请求新数据时清空列表
 	if (isGetNew) {
 		map.clear();
-		this.pageNumList[this.current] = 1;
+		this.pageNumList[tab] = 1;
 	}
+
 	list.forEach(item => {
 		// 判断数据是否存在
 		map.get(item.id) ?  map.delete(item.id) : null;
 		map.set(item.id, item)
-	}) 
+	});
+	this.$forceUpdate();
 }	
 	
 const __listDataDeleteHandle = function(id) {
@@ -24,16 +26,17 @@ const __listDataDeleteHandle = function(id) {
 export const __getIndexData = {
 	// 获取广场页数据
 	async getNewsData(options = {}) {
+		let tab = options.tab;
 		// 开始加载
-		this.$set(this.loadStatus, this.current, 'loading');
+		this.$set(this.loadStatus, tab, 'loading');
 		// 判断是否达到了最大页面值
-		if (this.pageTotalList[this.current] < this.pageNumList[this.current]) {
-			this.$set(this.loadStatus, this.current, 'nomore');
+		if ((this.pageTotalList[tab] < this.pageNumList[tab]) && !options.isGetNew) {
+			this.$set(this.loadStatus, tab, 'nomore');
 			return;
 		}
 		// 判断缓存中是否有该页面
-		if (!this.newsDataList[this.current]) {
-			this.newsDataList[this.current] = new Map();
+		if (!this.newsDataList[tab]) {
+			this.newsDataList[tab] = new Map();
 			this.$forceUpdate();
 		}
 		// 获取数据
@@ -41,7 +44,7 @@ export const __getIndexData = {
 			url: '/dynamicState/selectDynamicListByPage',
 			method: 'POST',
 			data: {
-				"pageNum": options.isGetNew ? 1 : this.pageNumList[this.current],
+				"pageNum": options.isGetNew ? 1 : this.pageNumList[tab],
 				"pageSize": 10,
 				"parmas": {
 					"tab": options.tab
@@ -52,18 +55,17 @@ export const __getIndexData = {
 		});
 		// 判断是否请求成功
 		if (data.data.code === 200) {
-			this.pageNumList[this.current]++;
+			this.pageNumList[tab]++;
 			const reuslt = data.data.data;
 			const { list, pageNum, pageSize, totalPage, total } = reuslt;
 			
-			this.pageTotalList[this.current] = totalPage;
+			this.pageTotalList[tab] = totalPage;
 			// 添加数据
-			__listDataAddHandle.call(this, list, this.newsDataList[this.current], options.isGetNew);
-			this.$set(this.loadStatus, this.current, 'loadmore');
+			__listDataAddHandle.call(this, list, this.newsDataList[tab], options.isGetNew, tab);
+			this.$set(this.loadStatus, tab, 'loadmore');
 			this.$forceUpdate();
 		} else {
-			// 未认证，未登录
-			// console.log(data);
+
 		}
 		// 取消遮罩
 		setTimeout(() => {
@@ -78,11 +80,11 @@ export const __getIndexData = {
 		}
 	},
 	
-	getHotListDataContent(index) {
-		if (this.hotList.length > 4) {
-			let temp = JSON.parse(this.hotList);
-			if (temp[index]) {
-				return temp[index].content;
+	getHotListDataContent(h_index, index) {
+		if (this.hotList[index - 1] && this.hotList[index - 1].length > 4) {
+			let temp = JSON.parse(this.hotList[index - 1]);
+			if (temp[h_index]) {
+				return temp[h_index].content;
 			}
 		}
 	},
@@ -98,7 +100,7 @@ export const __getIndexData = {
 			noToken: options.noToken
 		});
 		const result = JSON.stringify(data.data.data);
-		this.hotList = result;
+		this.hotList[options.type - 1] = result;
 	},
 	
 	// 获取举报列表

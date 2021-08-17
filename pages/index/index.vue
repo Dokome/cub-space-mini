@@ -34,13 +34,12 @@
 						<!-- 轮播图/热榜等 -->
 						<!-- 热榜 -->
 						<view class="margin-sm bg-gray padding-sm flex flex-direction" style="border-radius: 10rpx;" 
-							v-if="(index === 2 || index === 1) && login && hotList && hotList.length > 4" @click="enterHotList">
+							v-if="(index === 2 || index === 1) && login && hotList && hotList[index - 1] && hotList[index - 1].length > 4" @click="enterHotList">
 							<!-- 头部 -->
 							<view class=""><text class="text-bold text-black text-sm">校园热门</text></view>
 							<view class="gridContent flex-sub margin-top-xs">
 								<view class="mycut" v-for="(item, h_index) in 8" :key="h_index">
-									<!-- <image :src="`/static/Img/hotList${h_index + 1}.png`" mode="" style="width: 40rpx; height: 40rpx;flex-shrink: 0;"></image> -->
-									<text class="text-black">{{ getHotListDataContent(h_index) }}</text>
+									<text class="text-black">{{ getHotListDataContent(h_index, index) }}</text>
 								</view>
 							</view>
 						</view>
@@ -61,8 +60,11 @@
 								:bg-color="'#ffffff'"
 							></u-loadmore>
 						</view>
-						<view class="padding flex align-center justify-center u-tips-color" v-else>
-							相关内容认证后显示~
+						<view class="padding flex align-center justify-center u-tips-color" v-else-if="index === 2">
+							{{ isAuthor ? '快来发第一条动态吧~' : '相关内容认证后显示~'}}
+						</view>
+						<view class="padding flex align-center justify-center u-tips-color" v-else-if="index === 0">
+							{{ '快去关注其他用户吧~' }}
 						</view>
 					</view>
 				</scroll-view>
@@ -154,7 +156,7 @@ export default {
 			},
 			// 举报信息列表
 			reportInfoList: [],
-			hotList: '',
+			hotList: new Array(2).fill(''),
 		};
 	},
 	methods: {
@@ -170,6 +172,9 @@ export default {
 			if (this.bannerList && this.bannerList.length) {
 				return this.bannerList.map(item => item.image);
 			}
+		},
+		isAuthor() {
+			return !!this.$cache.get('isAuthor');
 		}
 	},
 	created() {
@@ -202,6 +207,7 @@ export default {
 		});
 		uni.$on('updateData', () => {
 			this.getNewsData({ noToken: true, tab: 1, isGetNew: true });
+			this.getNewsData({ tab: 2, isGetNew: true });
 		})
 	},
 	// 页面分享
