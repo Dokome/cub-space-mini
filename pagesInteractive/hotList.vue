@@ -35,12 +35,7 @@
 			return {
 				ifLoaddingShow: true,
 				ViewPart: this.ViewPart,
-				hotList: [
-					{
-						content: '如何看待B站服务器突然崩溃，哈哈哈哈笑死了，哈哈哈哈哈哈哈哈哈啊哈哈......',
-						images: []
-					}
-				],
+				hotList: [],
 				defaultImg: 'https://image.sapce.club/common/1623820687514623626.jpg',
 				type: 1,
 			};

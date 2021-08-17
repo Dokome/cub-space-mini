@@ -17,10 +17,12 @@
 				<!-- 功能列表 -->
 				<view class="bg-white" @click="enterFuncPage">
 					<view class="" v-for="(item, index) in funcList" style="position: relative;" :key="index">
-						<view class="hwmax" style="position: absolute; z-index: 9999; opacity: 0;" v-if="item.title === '分享小程序'" @click="shareApp">
+						<view class="hwmax" style="position: absolute; z-index: 9; opacity: 0;" v-if="item.title === '分享小程序'" @click="shareApp">
 							<u-button open-type="share">分享</u-button>
 						</view>
-						<u-cell-item :title="item.title" :data-page="item.page"><view :class="'text-bold margin-right-sm t-icon ' + item.icon" slot="icon"></view></u-cell-item>
+						<u-cell-item :title="item.title" :data-page="item.page">
+							<view :class="'text-bold margin-right-sm t-icon ' + item.icon" slot="icon"></view>
+						</u-cell-item>
 					</view>
 				</view>
 				<view class="" style="height: 20rpx;"></view>

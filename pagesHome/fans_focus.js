@@ -35,7 +35,6 @@ export const __fans_focus = {
 		});
 		
 		const result = data.data.data;
-		console.log(result.list);
 		if (data.data.code === 200) {
 			this.currentPageNum++;
 			this.totalPage = result.totalPage;
@@ -58,5 +57,25 @@ export const __fans_focus = {
 	// 进入用户主页
 	enterUserHome(id) {
 		this.$api.routerHandle.goto(`/pagesHome/mynews?id=${id}`);
+	},
+	// 更改关注状态
+	async changeFocusStatus(userId) {
+		const data = await this.$http.request({
+			url: '/umsRelation/focusUms',
+			method: 'POST',
+			data: {
+				userId: userId
+			}
+		});
+		const result = data.data.data;
+		const temp = this.userList.get(userId);
+		this.$set(temp, 'focusStatus', !temp.focusStatus);
+		this.$nextTick(() => {
+			uni.showToast({
+				title: temp.focusStatus ? '关注成功' : '取关成功',
+				icon: 'none',
+			});
+		});
+		this.$forceUpdate();
 	}
 }

@@ -14,7 +14,7 @@
 			<!-- 主体 -->
 			<scroll-view scroll-y="true" class="margin-top-xs">
 				<view class="">
-					<view class="notice-list-item flex align-center bg-white padding" v-for="item in 120" :key="item">
+					<view class="notice-list-item flex align-center bg-white padding" v-for="item in 10" :key="item">
 						<!-- 头像 -->
 						<view class="">
 							<view class="chat-list-item-avatar margin-right-sm">

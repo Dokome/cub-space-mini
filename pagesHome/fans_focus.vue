@@ -17,7 +17,8 @@
 					</view>
 					<!-- 按钮 -->
 					<view class="focusButton">
-						<u-button type="primary" shape="circle" size="mini" :plain="item.focusStatus">
+						<u-button type="primary" shape="circle" size="mini" :plain="item.focusStatus" 
+							@click="changeFocusStatus(item.userId)"> 
 							{{ item.focusStatus ? '已关注' : '+关注' }}
 						</u-button>
 					</view>
