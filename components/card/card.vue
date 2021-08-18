@@ -183,10 +183,8 @@ export default {
 		replyHandle(commentData) {
 			//
 			if (this.enterStateComment) {
-				console.log(123);
 				uni.$emit('inputStatusChange', { type: this.type, data: commentData });
 			} else if (this.type === 'comment' && !this.enterStateComment) {
-				console.log(456);
 				uni.$emit('repylChange', { type: this.type, data: commentData });
 				uni.$emit('inputStatusChange', { type: this.type, data: commentData });
 			}
@@ -200,7 +198,7 @@ export default {
 		},
 		// 进入用户主页
 		enterUserHome(id, anonymousStatus) {
-			if (anonymousStatus) {
+			if (anonymousStatus || this.isIndex) {
 				return;
 			}
 			this.$api.routerHandle.goto(`/pagesHome/mynews?id=${id}`);
@@ -253,7 +251,13 @@ export default {
 		isHome: {
 			type: Boolean,
 			default() {
-				return false
+				return false;
+			}
+		},
+		isIndex: {
+			type: Boolean,
+			default() {
+				return false;
 			}
 		}
 	}

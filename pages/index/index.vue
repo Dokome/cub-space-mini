@@ -50,7 +50,7 @@
 						<!-- 动态数据 -->
 						<view v-if="newsDataList[index] && getNewsMapData(index).length">
 							<card v-for="item of getNewsMapData(index)" :key="item.id" :reportInfoList="reportInfoList"
-							@click.native="enterDetail(item.id)" :newsdata="{ ...item }"></card>
+							@click.native="enterDetail(item.id)" :newsdata="{ ...item }" :isIndex="true"></card>
 							<u-loadmore
 								:status="loadStatus[index]"
 								marginTop="40"

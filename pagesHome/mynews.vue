@@ -3,7 +3,7 @@
 		<scroll-view scroll-y="true" :style="{ height: `100vh` }" @scrolltolower="scrollToBottom">
 		<navbar :title="' '" :isFixed="true"></navbar>
 			<view>
-				<home-header v-if="!isSelf" :userinfo="userinfo" :isSelf="isSelf" :focusStatus="focusStatus"></home-header>
+				<home-header :userinfo="userinfo" :isSelf="isSelf" :focusStatus="focusStatus"></home-header>
 				<card type="news" v-for="item in getNewsMapData()" :key="item.id" 
 				:newsdata="item" :isHome="true" @click.native="enterDetail(item.id)"></card>
 				<u-loadmore

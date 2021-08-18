@@ -35,7 +35,7 @@ export const _home = {
 		setTimeout(() => {
 			this.ifLoaddingShow = false;
 		}, 300);	
-		if (this.userinfo.schoolName) {
+		if (this.userinfo && this.userinfo.schoolName) {
 			this.$cache.set('isAuthor', true, 1000 * 60 * 60 * 2);
 		}
 	 }

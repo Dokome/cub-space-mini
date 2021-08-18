@@ -328,10 +328,8 @@ var _moreOptions = __webpack_require__(/*! ./moreOptions.js */ 208);function _in
     replyHandle: function replyHandle(commentData) {
       //
       if (this.enterStateComment) {
-        console.log(123);
         uni.$emit('inputStatusChange', { type: this.type, data: commentData });
       } else if (this.type === 'comment' && !this.enterStateComment) {
-        console.log(456);
         uni.$emit('repylChange', { type: this.type, data: commentData });
         uni.$emit('inputStatusChange', { type: this.type, data: commentData });
       }
@@ -345,7 +343,7 @@ var _moreOptions = __webpack_require__(/*! ./moreOptions.js */ 208);function _in
     },
     // 进入用户主页
     enterUserHome: function enterUserHome(id, anonymousStatus) {
-      if (anonymousStatus) {
+      if (anonymousStatus || this.isIndex) {
         return;
       }
       this.$api.routerHandle.goto("/pagesHome/mynews?id=".concat(id));
@@ -396,6 +394,12 @@ var _moreOptions = __webpack_require__(/*! ./moreOptions.js */ 208);function _in
       } },
 
     isHome: {
+      type: Boolean,
+      default: function _default() {
+        return false;
+      } },
+
+    isIndex: {
       type: Boolean,
       default: function _default() {
         return false;
