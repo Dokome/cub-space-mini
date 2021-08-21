@@ -4,8 +4,10 @@
 	</view>
 </template>
 <script>
-	import Vue from 'vue'
-	export default {
+	import Vue from 'vue';
+	import GetTimRef from 'components/login/tim.js';
+	import { get } from 'utils/cache.js';
+ 	export default {
 		onLaunch: function() {
 			//获取系统信息来更改头部的高度
 			uni.getSystemInfo({
@@ -19,7 +21,23 @@
 					// #endif		
 					Vue.prototype.windowHeight = e.windowHeight;
 				},
-			})
+			});
+			// 注册TIM相关
+			uni.$once('timCreateSuccess', (tim) => {
+					Vue.prototype.tim = tim;
+			});
+			// 如果有缓存的话直接注册，没有则监听
+			if (get('TIM')) {
+				let params = {
+					userSig: get('userSig'),
+					userId: get('userId'),
+					expires: get('token_deadtime'),
+					appId: get('appId'),
+					
+				}
+				GetTimRef(params);
+			} 
+
 		},
 		onShow: function() {
 			console.log('App Show')

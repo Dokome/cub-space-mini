@@ -1,7 +1,11 @@
 <template>
 	<view class="bg-white replyStyle flex align-center padding shadow-top" :style="[{ bottom: InputBottom + 'px' }]">
 		<!-- 图片选择 -->
-		<view><image src="/static/Img/imgchose.png" mode="" style="width: 50rpx; height: 40rpx;" @click="ImgChooseHandle"></image></view>
+		<view>
+			<image src="/static/Img/imgchose.png" mode="" 
+				style="width: 50rpx; height: 40rpx;" @click="ImgChooseHandle">
+			</image>
+		</view>
 		<!-- 输入框 -->
 		<textarea
 			v-model="inputContent"
@@ -16,7 +20,11 @@
 			:fixed="true"
 		/>
 		<!-- 发送 -->
-		<view><u-button shape="circle" type="primary" :custom-style="{ height: '60rpx', width: '120rpx' }" @click="publishHandle">发送</u-button></view>
+		<view>
+			<u-button shape="circle" type="primary" :custom-style="{ height: '60rpx', width: '120rpx' }" 
+				@click="modeHandle()">发送
+			</u-button>
+			</view>
 		<!-- 图片框 -->
 		<view class="imgchoose padding-xs shadow-top" v-show="ifImgChoose" style="transition: .2s;">
 			<scroll-view :scroll-x="true">
@@ -38,6 +46,12 @@ import { __textInput } from './textInput.js';
 export default {
 	name: 'textInput',
 	props: {
+		mode: {
+			type: String,
+			default() {
+				return 'aboutNews';
+			}
+		},
 		type: {
 			type: String,
 			default() {
@@ -60,7 +74,8 @@ export default {
 			// 是否处于输入状态
 			ifImgChoose: false,
 			// 输入图片
-			imgList: []
+			imgList: [],
+			tim: this.tim
 		};
 	},
 	computed: {
@@ -73,10 +88,23 @@ export default {
 			} else if (this.type === 'reply') {
 				return '回复 ' + this.target.nickName + ':';
 			}
+		},
+		modeHandle() {
+			if (this.mode === 'aboutNews') {
+				return this.publishHandle;
+			} else if (this.mode === 'aboutChat') {
+				return this.chatHandle;
+			}
+		},
+		TIM() {
+			return this.$cache.get('TIM');
 		}
 	},
 	watch: {
 		type(val) {
+			this.clearCurrentInfo();
+		},
+		mode(val) {
 			this.clearCurrentInfo();
 		}
 	},

@@ -14,7 +14,7 @@
 				</view>
 			</view>
 		</scroll-view>
-		<textInput></textInput>
+		<textInput :mode="'aboutChat'"></textInput>
 	</view>
 </template>
 
@@ -22,10 +22,14 @@
 export default {
 	data() {
 		return {
-			ViewPart: this.ViewPart
+			ViewPart: this.ViewPart,
+			content: '',
+			image: '',
 		};
 	},
-	methods: {}
+	methods: {
+		
+	}
 };
 </script>
 

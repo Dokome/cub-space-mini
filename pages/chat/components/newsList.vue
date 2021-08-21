@@ -1,19 +1,20 @@
 <template>
 	<view class="chat-list">
-		<view class="chat-list-item bg-white u-border-bottom padding flex" v-for="item in 20" :key="item" @click="chatDetail">
-			<view class="chat-list-item-avatar margin-right-sm">
-				<u-avatar size="100" :src="'https://image.sapce.club/common/1623820798277584078.jpg'"></u-avatar>
+		<view class="chat-list-item bg-white u-border-bottom padding flex" 
+			v-for="item in dataList" :key="item.conversationID" @click="chatDetail">
+			<view class="chat-list-item-avatar margin-right-sm" v-if="item.userProfile && item.userProfile.avatar">
+				<u-avatar size="100" :src="item.userProfile.avatar"></u-avatar>
 			</view>
 			<view class="chat-list-item-info flex-sub">
 				<view class="top flex align-center justify-between">
-					<text class="text-bold text-df text-black">司空千落</text>
+					<text class="text-bold text-df text-black">{{ item.userProfile.nick }}</text>
 					<text class="u-tips-color text-xs">20:43</text>
 				</view>
 				<view class="bottom flex align-center justify-between flex-sub margin-top-xs">
 					<text class="u-tips-color text-sm text-cut message">
-						会不会我再怎么努力，去成为他心口上的朱会不会我再怎么努力，去成为他心口上的朱会不会我再怎么努力，去成为他心口上的朱会不会我再怎么努力，去成为他心口上的朱
+						{{ item.lastMessage.messageForShow }}
 					</text>
-					<text class="number">5</text>
+					<text class="number" v-if="item.unreadCount">{{ item.unreadCount }}</text>
 				</view>
 			</view>
 		</view>
@@ -26,6 +27,20 @@ export default {
 	data() {
 		return {
 			
+		}
+	},
+	methods: {
+		// 进入聊天详情页
+		chatDetail() {
+			this.$api.routerHandle.goto('/pagesInteractive/chatDetail');
+		}
+	},
+	props:{
+		dataList: {
+			type: Array,
+			default() {
+				return [];
+			}
 		}
 	}
 }

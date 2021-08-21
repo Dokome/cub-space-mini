@@ -22,7 +22,6 @@ export const _home = {
 		});
 		const result = data.data.data;
 		this.funcList = result;
-		console.log(result);
 		this.$forceUpdate();
 	},
 	// 获取个人信息

@@ -1,6 +1,6 @@
 (global["webpackJsonp"] = global["webpackJsonp"] || []).push([["pagesHome/common/vendor"],{
 
-/***/ 102:
+/***/ 105:
 /*!**************************************************************************!*\
   !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/pagesHome/fans_focus.js ***!
   \**************************************************************************/
@@ -92,7 +92,7 @@ var __fans_focus = {
 
 /***/ }),
 
-/***/ 119:
+/***/ 122:
 /*!************************************************************************!*\
   !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/pagesHome/identify.js ***!
   \************************************************************************/
@@ -134,69 +134,87 @@ var __fans_focus = {
 
   },
   // 学校更改
-  confirm: function confirm(e) {
+  schoolConfirm: function schoolConfirm(e) {
     this.school = e[0].label;
     this.schoolId = e[0].value;
   },
-  // 获取认证状态
-  getConfirmStatus: function getConfirmStatus() {var _this2 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee2() {var data, result;return _regenerator.default.wrap(function _callee2$(_context2) {while (1) {switch (_context2.prev = _context2.next) {case 0:_context2.next = 2;return (
+  // 地区更改
+  areaConfirm: function areaConfirm(res) {var _this2 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee2() {var data, result, list;return _regenerator.default.wrap(function _callee2$(_context2) {while (1) {switch (_context2.prev = _context2.next) {case 0:
+              _this2.area.province = res.province.label;
+              _this2.area.city = res.city.label;_context2.next = 4;return (
                 _this2.$http.request({
-                  url: '/umsAccount/getUserInfo',
-                  method: 'GET' }));case 2:data = _context2.sent;
-
-              result = data.data.data;
-              _this2.confirmStatus = result.confirmStatus;
-              setTimeout(function () {
-                _this2.ifLoaddingShow = false;
-              }, 500);case 6:case "end":return _context2.stop();}}}, _callee2);}))();
-  },
-  // 发送验证码
-  sendVerificationCode: function sendVerificationCode() {var _this3 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee3() {var data;return _regenerator.default.wrap(function _callee3$(_context3) {while (1) {switch (_context3.prev = _context3.next) {case 0:if (!
-              _this3.vaildTimmer) {_context3.next = 2;break;}return _context3.abrupt("return");case 2:if (
-
-
-
-              /^[1][3,4,5,7,8,9][0-9]{9}$/.test(_this3.phone)) {_context3.next = 4;break;}return _context3.abrupt("return",
-              uni.showToast({
-                title: '请填写正确的手机号',
-                icon: 'none' }));case 4:_context3.next = 6;return (
-
-
-
-                _this3.$http.request({
-                  url: '/umsConfirm/sendVerificationCode',
+                  url: '/sysSchool/selectSchoolByPc',
                   method: 'POST',
                   data: {
-                    phone: _this3.phone } }));case 6:data = _context3.sent;
+                    province: _this2.area.province,
+                    city: _this2.area.city } }));case 4:data = _context2.sent;
 
-
-              // 请求CD
-              _this3.vaildTimmer = setInterval(function () {
-                if (_this3.vaildTimeCount <= 1) {
-                  clearTimeout(_this3.vaildTimmer);
-                  _this3.vaildTimmer = null;
-                  _this3.vaildTimeCount = 120;
-                }
-                _this3.vaildTimeCount--;
-              }, 1000);case 8:case "end":return _context3.stop();}}}, _callee3);}))();
-  },
-  //获取所有的学校
-  getAllSchool: function getAllSchool() {var _this4 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee4() {var data, result, list;return _regenerator.default.wrap(function _callee4$(_context4) {while (1) {switch (_context4.prev = _context4.next) {case 0:_context4.next = 2;return (
-                _this4.$http.request({
-                  url: '/sysSchool/selectSchools',
-                  method: 'GET' }));case 2:data = _context4.sent;
 
               result = data.data.data;
               list = result.map(function (_ref) {var id = _ref.id,name = _ref.name;
                 return { value: id, label: name };
               });
-              _this4.schoolList = list;case 6:case "end":return _context4.stop();}}}, _callee4);}))();
+              _this2.schoolList = list;case 8:case "end":return _context2.stop();}}}, _callee2);}))();
+  },
+  // 获取认证状态
+  getConfirmStatus: function getConfirmStatus() {var _this3 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee3() {var data, result;return _regenerator.default.wrap(function _callee3$(_context3) {while (1) {switch (_context3.prev = _context3.next) {case 0:_context3.next = 2;return (
+                _this3.$http.request({
+                  url: '/umsAccount/getUserInfo',
+                  method: 'GET' }));case 2:data = _context3.sent;
+
+              result = data.data.data;
+              _this3.confirmStatus = result.confirmStatus;
+              setTimeout(function () {
+                _this3.ifLoaddingShow = false;
+              }, 500);case 6:case "end":return _context3.stop();}}}, _callee3);}))();
+  },
+  // 发送验证码
+  sendVerificationCode: function sendVerificationCode() {var _this4 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee4() {var data;return _regenerator.default.wrap(function _callee4$(_context4) {while (1) {switch (_context4.prev = _context4.next) {case 0:if (!
+              _this4.vaildTimmer) {_context4.next = 2;break;}return _context4.abrupt("return");case 2:if (
+
+
+
+              /^[1][3,4,5,7,8,9][0-9]{9}$/.test(_this4.phone)) {_context4.next = 4;break;}return _context4.abrupt("return",
+              uni.showToast({
+                title: '请填写正确的手机号',
+                icon: 'none' }));case 4:_context4.next = 6;return (
+
+
+
+                _this4.$http.request({
+                  url: '/umsConfirm/sendVerificationCode',
+                  method: 'POST',
+                  data: {
+                    phone: _this4.phone } }));case 6:data = _context4.sent;
+
+
+              // 请求CD
+              _this4.vaildTimmer = setInterval(function () {
+                if (_this4.vaildTimeCount <= 1) {
+                  clearTimeout(_this4.vaildTimmer);
+                  _this4.vaildTimmer = null;
+                  _this4.vaildTimeCount = 120;
+                }
+                _this4.vaildTimeCount--;
+              }, 1000);case 8:case "end":return _context4.stop();}}}, _callee4);}))();
+  },
+  //获取所有的学校
+  getAllSchool: function getAllSchool() {var _this5 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee5() {var data, result, list;return _regenerator.default.wrap(function _callee5$(_context5) {while (1) {switch (_context5.prev = _context5.next) {case 0:_context5.next = 2;return (
+                _this5.$http.request({
+                  url: '/sysSchool/selectSchools',
+                  method: 'GET' }));case 2:data = _context5.sent;
+
+              result = data.data.data;
+              list = result.map(function (_ref2) {var id = _ref2.id,name = _ref2.name;
+                return { value: id, label: name };
+              });
+              _this5.schoolList = list;case 6:case "end":return _context5.stop();}}}, _callee5);}))();
   } };exports.__identify = __identify;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 
-/***/ 138:
+/***/ 141:
 /*!**********************************************************************!*\
   !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/pagesHome/mynews.js ***!
   \**********************************************************************/

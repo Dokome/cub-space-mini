@@ -32,9 +32,27 @@ export const __identify = {
 		}
 	},
 	// 学校更改
-	confirm(e) {
+	schoolConfirm(e) {
 		this.school = e[0].label;
 		this.schoolId = e[0].value;
+	},
+	// 地区更改
+	async areaConfirm(res) {
+		this.area.province = res.province.label;
+		this.area.city = res.city.label;
+		const data = await this.$http.request({
+			url: '/sysSchool/selectSchoolByPc',
+			method: 'POST',
+			data: {
+				province: this.area.province,
+				city: this.area.city
+			}
+		});
+		const result = data.data.data;
+		const list = result.map(({id, name}) => {
+			return { value: id, label: name };
+		});
+		this.schoolList = list;
 	},
 	// 获取认证状态
 	async getConfirmStatus() {

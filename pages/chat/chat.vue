@@ -21,12 +21,13 @@
 			</view>
 		</navbar>
 		<!-- 滑动组件swiper -->
-		<swiper :current="swiperCurrent" @transition="transition" @animationfinish="animationfinish" class="viewPart" :style="{ height: `calc(100vh - ${ViewPart}px - 50rpx)` }">
+		<swiper :current="swiperCurrent" @transition="transition" @animationfinish="animationfinish" 
+			class="viewPart" :style="{ height: `calc(100vh - ${ViewPart}px - 50rpx)` }">
 			<!-- 由于顶部是固定位置，底部是非绝对定位，所及此处计算固定高度 防止头部随页面滚动或出现滑动条 -->
 			<swiper-item>
 				<!-- 视图区域 -->
 				<scroll-view scroll-y="true" class="hmax">
-					<newsList></newsList>
+					<newsList :dataList="getChatList()"></newsList>
 				</scroll-view>
 				<!--  -->
 			</swiper-item>
@@ -46,11 +47,14 @@
 
 <script>
 import { mapState } from 'vuex';
+import { __chat } from './chat.js';
 import newsList from './components/newsList.vue';
 import notice from './components/notice.vue';
 export default {
 	data() {
 		return {
+			chatList: new Map(),
+			tim: this.tim,
 			// 页面高度(通过App.vue获取而来)
 			PageHeight: this.windowHeight,
 			//底部栏
@@ -73,25 +77,9 @@ export default {
 		};
 	},
 	methods: {
-		tabsChange(index) {
-			this.swiperCurrent = index;
-		},
-		// swiper-item左右移动，通知tabs的滑块跟随移动
-		transition(e) {
-			let dx = e.detail.dx;
-			this.$refs.uTabs.setDx(dx);
-		},
-		// 由于swiper的内部机制问题，快速切换swiper不会触发dx的连续变化，需要在结束时重置状态
-		// swiper滑动结束，分别设置tabs和swiper的状态
-		animationfinish(e) {
-			let current = e.detail.current;
-			this.$refs.uTabs.setFinishCurrent(current);
-			this.swiperCurrent = current;
-			this.current = current;
-		},
-		// 进入聊天详情页
-		chatDetail() {
-			this.$api.routerHandle.goto('/pagesInteractive/chatDetail');
+		...__chat,
+		getChatList() {
+			return [...this.chatList.values()];
 		}
 	},
 	computed: {
@@ -103,6 +91,9 @@ export default {
 	components: {
 		newsList,
 		notice
+	},
+	onLoad() {
+		this.getConverSationList();
 	}
 };
 </script>

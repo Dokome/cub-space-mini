@@ -4,10 +4,19 @@
 		<navbar title="学校认证"></navbar>
 		<view class="" v-if="!confirmStatus">
 			<!-- 表单组件 -->
+			<!-- 地区 -->
+			<view class="bg-white padding flex justify-between align-center u-border-bottom" @click="areaShow = true">
+				<label for="nickName">地区</label>
+				<u-picker mode="region" v-model="areaShow" :params="areaParams" @confirm="areaConfirm"></u-picker>
+				<view class="flex-sub flex">
+					<text class="text-right flex-sub"></text>
+					{{ `${area.province} ${area.city}` }}
+				</view>
+			</view>
 			<!-- 学校 -->
-			<view class="bg-white padding flex justify-between align-center u-border-bottom" @click="show = true">
+			<view class="bg-white padding flex justify-between align-center u-border-bottom" @click="schoolShow = true">
 				<label for="nickName">学校</label>
-				<u-select v-model="show" :list="schoolList" mode="single-column" @confirm="confirm"></u-select>
+				<u-select v-model="schoolShow" :list="schoolList" mode="single-column" @confirm="schoolConfirm"></u-select>
 				<view class="flex-sub flex">
 					<text class="text-right flex-sub"></text>
 					{{ school }}
@@ -74,7 +83,16 @@ export default {
 			// 学校ID和学校名称
 			schoolId: '',
 			school: '请选择您的学校',
-			show: false,
+			schoolShow: false,
+			area: {
+				province: '请选择所在地区',
+				city: '',
+			},
+			areaShow: false,
+			areaParams: {
+				province: true,
+				city: true,
+			},
 			schoolList: [
 				{
 					value: '1',
@@ -88,7 +106,7 @@ export default {
 	},
 	onLoad() {
 		this.getConfirmStatus();
-		this.getAllSchool();
+		// this.getAllSchool();
 	}
 };
 </script>

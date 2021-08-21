@@ -16,6 +16,7 @@
 </template>
 
 <script>
+import GetTimRef from './tim.js';
 export default {
 	name: 'login',
 	data() {
@@ -61,6 +62,14 @@ export default {
 					province: res.userInfo.province,
 					country: res.userInfo.country,
 					avatarUrl: res.userInfo.avatarUrl
+					// "code":"0518BK0w3nt3dW2BXu1w37W57448BK0n",
+					// "nickName":"风华正茂",
+					// "gender":1,
+					// "language":"zh_CN",
+					// "city":"",
+					// "province":"",
+					// "country":"",
+					// "avatarUrl":"https://thirdwx.qlogo.cn"
 				},
 				noToken: true
 			});
@@ -72,7 +81,7 @@ export default {
 				this.$cache.remove('userSig');
 			}
 			this.$cache.set('userSig', resultData.userSig, resultData.expires);
-
+			
 			// 添加用户信息缓存
 			if (!this.$cache.get('userId')) {
 				// 当存在旧的缓存
@@ -90,6 +99,18 @@ export default {
 			console.log('token >>> ' + resultData.token);
 			this.$cache.set('token', resultData.token, resultData.expires);
 
+			// 添加appId缓存
+			if (!this.$cache.get('appId')) {
+				// 当存在旧的缓存
+				console.log('old cache appId：' + this.$cache.get('appId'));
+				this.$cache.remove('appId');
+			}
+			console.log('appId >>> ' + resultData.appId);
+			this.$cache.set('appId', resultData.appId, resultData.expires);
+			
+		  // TIM
+			GetTimRef(resultData);
+			
 			// 页面跳转
 			uni.reLaunch({
 				url: '/pages/home/home'
