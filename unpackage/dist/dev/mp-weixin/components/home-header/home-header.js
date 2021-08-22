@@ -312,6 +312,10 @@ var _default2 =
                   _this2.disabled = false;
                   uni.$emit('changeFocusStatus', '');
                 });case 5:case "end":return _context3.stop();}}}, _callee3);}))();
+    },
+    // 进入聊天详情页
+    chatDetail: function chatDetail(id, nick, userIdTo) {
+      this.$api.routerHandle.goto("/pagesInteractive/chatDetail?id=".concat(id + userIdTo, "&nick=").concat(nick, "&userIdTo=").concat(userIdTo));
     } } };exports.default = _default2;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

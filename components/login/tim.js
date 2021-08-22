@@ -11,11 +11,7 @@ function GetTimRef(params = {}) {
 	};
 	let tim = TIM.create(options);
 	tim.registerPlugin({'tim-upload-plugin': TIMUploadPlugin});
-	// tim.setLogLevel(0);
 	let onMessageReceived = (event) => {
-	  // 收到推送的单聊、群聊、群提示、群系统通知的新消息，可通过遍历 event.data 获取消息列表数据并渲染到页面
-	  // event.name - TIM.EVENT.MESSAGE_RECEIVED
-	  // event.data - 存储 Message 对象的数组 - [Message]
 		uni.$emit("reciveChatMsg", event.data);
 	};
 	tim.on(TIM.EVENT.MESSAGE_RECEIVED, onMessageReceived);

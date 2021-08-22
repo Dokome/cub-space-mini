@@ -84,7 +84,7 @@ export const __textInput = {
 		let promise = tim.sendMessage(message);
 		promise.then(function(imResponse) {
 		  // 发送成功
-		  console.log('发送成功');
+			uni.$emit("reciveChatMsg", [imResponse.data.message]);
 		}).catch(function(imError) {
 		  // 发送失败
 		  console.warn('sendMessage error:', imError);

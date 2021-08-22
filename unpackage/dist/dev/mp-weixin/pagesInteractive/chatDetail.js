@@ -192,16 +192,26 @@ var _default =
       ifLoaddingShow: true,
       ViewPart: this.ViewPart,
       pageHeight: this.windowHeight,
+      // 内容
       content: '',
+      // 发送图片
       image: '',
+      // 请求的会话ID
       requestId: '',
       tim: this.tim,
+      // 消息列表
       msgList: [],
       pageTitle: '加载中',
+      // 是否请求完全
       isCompleted: false,
+      // 下一次请求的数据ID
       nextReqMessageID: '',
+      // 顶部高度
       scrollTop: 0,
-      userIdTo: '' };
+      // 发送对象
+      userIdTo: '',
+      // scrollTimmer 防抖
+      scrollTimmer: null };
 
   },
   methods: {
@@ -209,21 +219,35 @@ var _default =
       if (this.isCompleted) {
         return;
       }
+      // 获取信息过程
       var tim = this.tim;
       var promise = tim.getMessageList({ conversationID: this.requestId, count: 15, nextReqMessageID: this.nextReqMessageID });
       promise.then(function (imResponse) {
         _this.msgList = imResponse.data.messageList.concat(_this.msgList); // 消息列表。
+        // 此时是初始化的时候
+        if (_this.scrollTop === 0) {
+          _this.scrollTop = _this.msgList.length * 999;
+          setTimeout(function () {
+            _this.ifLoaddingShow = false;
+          }, 500);
+        }
         _this.nextReqMessageID = imResponse.data.nextReqMessageID; // 用于续拉，分页续拉时需传入该字段。
         _this.isCompleted = imResponse.data.isCompleted; // 表示是否已经拉完所有消息。
-        _this.scrollTop = _this.msgList.length * _this.pageHeight;
-        setTimeout(function () {
-          _this.ifLoaddingShow = false;
+        _this.scrollTimmer = setTimeout(function () {
+          _this.scrollTimmer = null;
         }, 500);
       });
     },
-    // 下拉到顶部的时候刷新
+    // 上到顶部的时候刷新
     scrolltoupper: function scrolltoupper() {
-      console.log(123);
+      if (this.scrollTimmer) {
+        return;
+      }
+      this.getMessageList();
+    },
+    // 进入用户主页
+    enterUserHome: function enterUserHome(id) {
+      this.$api.routerHandle.goto("/pagesHome/mynews?id=".concat(id));
     } },
 
   computed: {
@@ -237,13 +261,18 @@ var _default =
     this.tim.setMessageRead({ conversationID: options.id });
     this.pageTitle = options.nick;
     this.requestId = options.id;
+    // 第一次获取消息列表
     this.getMessageList();
     this.userIdTo = options.userIdTo;
     // 收到消息
     uni.$off("reciveChatMsg");
     uni.$on("reciveChatMsg", function (data) {
+      data = data.filter(function (item) {
+        return item.from === _this2.userIdTo || item.to === _this2.userIdTo;
+      });
       _this2.msgList = _this2.msgList.concat(data);
-      _this2.scrollTop += data.length * _this2.pageHeight;
+      _this2.scrollTop = _this2.msgList.length * 999;
+      _this2.$forceUpdate();
     });
   } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))

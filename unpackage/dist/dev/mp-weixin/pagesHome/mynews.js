@@ -243,7 +243,7 @@ var _mynews = __webpack_require__(/*! ./mynews.js */ 142);function ownKeys(objec
       _this.getUserInfo({ id: _this.userId });
     });
     this.userId = options.id;
-    this.isSelf = !options.id;
+    this.isSelf = !options.id || options.id === this.$cache.get('userId');
     this.getUserInfo({ id: options.id });
     this.getMynewsData({ id: options.id });
   } };exports.default = _default;

@@ -56,7 +56,7 @@ export default {
 			this.getUserInfo({ id: this.userId });
 		});
 		this.userId = options.id;
-		this.isSelf = !options.id;
+		this.isSelf = !options.id || options.id === this.$cache.get('userId');
 		this.getUserInfo({ id: options.id });
 		this.getMynewsData({ id: options.id });
 	}

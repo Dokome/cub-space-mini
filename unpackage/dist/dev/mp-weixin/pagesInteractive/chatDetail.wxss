@@ -30,4 +30,7 @@
   background-color: #d9e4fa;
   color: #000;
 }
+.Anchor.data-v-ebbd7a48 {
+  overflow-anchor: auto;
+}
 

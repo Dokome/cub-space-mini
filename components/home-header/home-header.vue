@@ -22,7 +22,7 @@
 						:custom-style="{ width : '100rpx' , height: '65rpx' }" @click="changeFocusStatus">
 						{{ focusStatus ? '已关注' : '+关注' }} 
 					</u-button>
-					<u-button type="primary" plain="true" size="medium"
+					<u-button type="primary" plain="true" size="medium" @click="chatDetail('C2C',	userinfo.nickName, userinfo.userId)"
 						:custom-style="{ width : '100rpx' , height: '65rpx' }"	>私聊
 					</u-button>
 				</view>
@@ -162,7 +162,11 @@
 					this.disabled = false;
 					uni.$emit('changeFocusStatus', '');
 				})
-			}
+			},
+			// 进入聊天详情页
+			chatDetail(id, nick, userIdTo) {
+				this.$api.routerHandle.goto(`/pagesInteractive/chatDetail?id=${id + userIdTo}&nick=${nick}&userIdTo=${userIdTo}`);
+			},
 		}
 	}
 </script>

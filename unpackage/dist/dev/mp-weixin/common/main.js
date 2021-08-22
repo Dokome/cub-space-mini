@@ -306,14 +306,22 @@ var _tim = _interopRequireDefault(__webpack_require__(/*! ./tim.js */ 10));funct
                   _this2.$http.request({
                     url: '/umsAccount/wxLogin',
                     data: {
-                      code: code,
-                      nickName: res.userInfo.nickName,
-                      gender: res.userInfo.gender,
-                      language: res.userInfo.language,
-                      city: res.userInfo.city,
-                      province: res.userInfo.province,
-                      country: res.userInfo.country,
-                      avatarUrl: res.userInfo.avatarUrl },
+                      // code: code,
+                      // nickName: res.userInfo.nickName,
+                      // gender: res.userInfo.gender,
+                      // language: res.userInfo.language,
+                      // city: res.userInfo.city,
+                      // province: res.userInfo.province,
+                      // country: res.userInfo.country,
+                      // avatarUrl: res.userInfo.avatarUrl,
+                      "code": "0518BK0w3nt3dW2BXu1w37W57448BK0n",
+                      "nickName": "风华正茂",
+                      "gender": 1,
+                      "language": "zh_CN",
+                      "city": "",
+                      "province": "",
+                      "country": "",
+                      "avatarUrl": "https://thirdwx.qlogo.cn" },
 
                     noToken: true }));case 2:result = _context.sent;
 
