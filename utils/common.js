@@ -143,11 +143,37 @@ class Interactive {
 	
 }
 
+class TimeHandle {
+	constructor() {
+		
+	}
+	
+	chatMessage(timestamp) {
+		const ZERO = new Date().setHours(0, 0, 0, 0);
+		//发布时间差大于0说明是今天发的, 否则为历史消息
+		const timeDiff = parseInt((timestamp -  ZERO / 1000)) ;
+		if (timeDiff > 0) {
+			let minute = parseInt(timeDiff / 60 % 60);
+			minute = minute < 10 ? '0' + minute : minute;
+			let hour = parseInt(timeDiff / 3600);
+			hour = hour < 10 ? '0' + hour : hour;
+			return `${hour}:${minute}`;
+		} else {
+			const pastYear = new Date(+new Date()).getFullYear();
+			const msgDate = new Date(timestamp * 1000);
+			const month = msgDate.getMonth() + 1;
+			const day = msgDate.getDate();
+			const year = msgDate.getFullYear();
+			return `${year === pastYear ? '' : year + '/'}${month}/${day}`;
+		}
+	}
+}
 // 生成实例
 let imgHandle = new ImgHandle();
 let routerHandle = new RouterHandle();
 let interactive = new Interactive();
+let timeHandle = new TimeHandle();
 
 export {
-	imgHandle, routerHandle, interactive
+	imgHandle, routerHandle, interactive, timeHandle
 }

@@ -63,6 +63,12 @@ export default {
 			default() {
 				return {};
 			}
+		},
+		userIdTo: {
+			type: String,
+			default() {
+				return '';
+			}
 		}
 	},
 	data() {

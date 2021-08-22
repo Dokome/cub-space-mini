@@ -55,11 +55,9 @@ export default {
 		uni.$on('changeFocusStatus', () => {
 			this.getUserInfo({ id: this.userId });
 		});
-		if (options.id) {
-			this.userId = options.id;
-			this.isSelf = this.$cache.get('userId') === options.id;
-			this.getUserInfo({ id: options.id });
-		}
+		this.userId = options.id;
+		this.isSelf = !options.id;
+		this.getUserInfo({ id: options.id });
 		this.getMynewsData({ id: options.id });
 	}
 };

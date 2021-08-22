@@ -1,14 +1,15 @@
 <template>
 	<view class="chat-list">
 		<view class="chat-list-item bg-white u-border-bottom padding flex" 
-			v-for="item in dataList" :key="item.conversationID" @click="chatDetail">
+			v-for="item in dataList" :key="item.conversationID" 
+			@click="chatDetail(item.conversationID, item.userProfile.nick, item.userProfile.userID)">
 			<view class="chat-list-item-avatar margin-right-sm" v-if="item.userProfile && item.userProfile.avatar">
 				<u-avatar size="100" :src="item.userProfile.avatar"></u-avatar>
 			</view>
 			<view class="chat-list-item-info flex-sub">
 				<view class="top flex align-center justify-between">
 					<text class="text-bold text-df text-black">{{ item.userProfile.nick }}</text>
-					<text class="u-tips-color text-xs">20:43</text>
+					<text class="u-tips-color text-xs">{{ getMessageTime(item.lastMessage.lastTime) }}</text>
 				</view>
 				<view class="bottom flex align-center justify-between flex-sub margin-top-xs">
 					<text class="u-tips-color text-sm text-cut message">
@@ -31,8 +32,11 @@ export default {
 	},
 	methods: {
 		// 进入聊天详情页
-		chatDetail() {
-			this.$api.routerHandle.goto('/pagesInteractive/chatDetail');
+		chatDetail(id, nick, userIdTo) {
+			this.$api.routerHandle.goto(`/pagesInteractive/chatDetail?id=${id}&nick=${nick}&userIdTo=${userIdTo}`);
+		},
+		getMessageTime(timestamp) {
+			return this.$api.timeHandle.chatMessage(timestamp)
 		}
 	},
 	props:{

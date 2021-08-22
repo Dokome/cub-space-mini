@@ -33,7 +33,6 @@
 					userId: get('userId'),
 					expires: get('token_deadtime'),
 					appId: get('appId'),
-					
 				}
 				GetTimRef(params);
 			} 

@@ -42,6 +42,7 @@
 		</swiper>
 		<u-tabbar :list="list" :mid-button="midButton" :inactive-color="inactiveColor" :activeColor="activeColor" :change="navChange" :border-top="borderTop"></u-tabbar>
 		<login v-if="!login"></login>
+		<loading v-if="ifLoaddingShow && login"></loading>
 	</view>
 </template>
 
@@ -54,6 +55,9 @@ export default {
 	data() {
 		return {
 			chatList: new Map(),
+			// 加载动画
+			ifLoaddingShow: true,
+			// tim引用
 			tim: this.tim,
 			// 页面高度(通过App.vue获取而来)
 			PageHeight: this.windowHeight,
@@ -93,7 +97,12 @@ export default {
 		notice
 	},
 	onLoad() {
-		this.getConverSationList();
+		// this.getConverSationList();
+	},
+	onShow() {
+		if (this.login) {
+			this.getConverSationList();
+		}
 	}
 };
 </script>

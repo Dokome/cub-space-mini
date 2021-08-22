@@ -77,14 +77,17 @@ export default {
 		});
 		if (this.login) {
 			this.getFuncList();
-			this.getUserInfo();
 		}
 	},
 	// 页面分享
 	onShareAppMessage() {
 		return this.$api.interactive.onShareFunc();
 	},
-	
+	onShow() {
+		if (this.login) {
+			this.getUserInfo();
+		}
+	}
 };
 </script>
 

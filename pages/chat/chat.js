@@ -24,8 +24,12 @@ export const __chat = {
 			for (let conversation of conversationList) {
 				this.chatList.set(conversation.conversationID, conversation);
 			}
+			console.log(conversationList);
 			this.$forceUpdate();
-		}).catch(function(imError) {
+			setTimeout(() => {
+				this.ifLoaddingShow = false;
+			}, 500)
+		}).catch((imError) => {
 		  console.warn('getConversationList error:', imError); // 获取会话列表失败的相关信息
 		});
 	}
