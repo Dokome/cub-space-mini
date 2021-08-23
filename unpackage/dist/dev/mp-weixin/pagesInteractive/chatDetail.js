@@ -185,6 +185,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var _default =
 {
   data: function data() {
@@ -216,36 +227,40 @@ var _default =
   },
   methods: {
     getMessageList: function getMessageList() {var _this = this;
-      if (this.isCompleted) {
+      if (this.isCompleted || this.scrollTimmer) {
         return;
       }
       // 获取信息过程
       var tim = this.tim;
       var promise = tim.getMessageList({ conversationID: this.requestId, count: 15, nextReqMessageID: this.nextReqMessageID });
       promise.then(function (imResponse) {
+        if (_this.nextReqMessageID === imResponse.data.nextReqMessageID) return;
         _this.msgList = imResponse.data.messageList.concat(_this.msgList); // 消息列表。
-        // 此时是初始化的时候
-        if (_this.scrollTop === 0) {
-          _this.scrollTop = _this.msgList.length * 999;
-          setTimeout(function () {
-            _this.ifLoaddingShow = false;
-          }, 500);
-        }
         _this.nextReqMessageID = imResponse.data.nextReqMessageID; // 用于续拉，分页续拉时需传入该字段。
         _this.isCompleted = imResponse.data.isCompleted; // 表示是否已经拉完所有消息。
+        if (!_this.scrollTop) {
+          _this.scrollTop = _this.msgList.length * 999;
+        }
+        setTimeout(function () {
+          _this.ifLoaddingShow = false;
+        }, 500);
         _this.scrollTimmer = setTimeout(function () {
           _this.scrollTimmer = null;
-        }, 500);
+        }, 1000);
       });
     },
-    // 上到顶部的时候刷新
     scrolltoupper: function scrolltoupper() {
       if (this.scrollTimmer) {
         return;
       }
       this.getMessageList();
     },
-    // 进入用户主页
+    getImgShowStyle: function getImgShowStyle(img) {
+      return ';' + this.$api.imgHandle.multiImgShow([img]);
+    },
+    imgPrview: function imgPrview(url) {
+      this.$api.imgHandle.imgPreview(url, [url]);
+    },
     enterUserHome: function enterUserHome(id) {
       this.$api.routerHandle.goto("/pagesHome/mynews?id=".concat(id));
     } },
@@ -272,8 +287,12 @@ var _default =
       });
       _this2.msgList = _this2.msgList.concat(data);
       _this2.scrollTop = _this2.msgList.length * 999;
+      _this2.tim.setMessageRead({ conversationID: options.id });
       _this2.$forceUpdate();
     });
+  },
+  onUnload: function onUnload() {
+    uni.$off("reciveChatMsg");
   } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

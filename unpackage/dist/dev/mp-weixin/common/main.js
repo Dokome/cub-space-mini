@@ -268,6 +268,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
 var _tim = _interopRequireDefault(__webpack_require__(/*! ./tim.js */ 10));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}var _default =
 {
   name: 'login',
@@ -306,22 +308,14 @@ var _tim = _interopRequireDefault(__webpack_require__(/*! ./tim.js */ 10));funct
                   _this2.$http.request({
                     url: '/umsAccount/wxLogin',
                     data: {
-                      // code: code,
-                      // nickName: res.userInfo.nickName,
-                      // gender: res.userInfo.gender,
-                      // language: res.userInfo.language,
-                      // city: res.userInfo.city,
-                      // province: res.userInfo.province,
-                      // country: res.userInfo.country,
-                      // avatarUrl: res.userInfo.avatarUrl,
-                      "code": "0518BK0w3nt3dW2BXu1w37W57448BK0n",
-                      "nickName": "风华正茂",
-                      "gender": 1,
-                      "language": "zh_CN",
-                      "city": "",
-                      "province": "",
-                      "country": "",
-                      "avatarUrl": "https://thirdwx.qlogo.cn" },
+                      code: code,
+                      nickName: res.userInfo.nickName,
+                      gender: res.userInfo.gender,
+                      language: res.userInfo.language,
+                      city: res.userInfo.city,
+                      province: res.userInfo.province,
+                      country: res.userInfo.country,
+                      avatarUrl: res.userInfo.avatarUrl },
 
                     noToken: true }));case 2:result = _context.sent;
 

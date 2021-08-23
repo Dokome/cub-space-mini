@@ -31,7 +31,7 @@
 					<view class="flex align-center">
 						<text class="text-lg text-black text-xxl margin-right-sm" style="font-weight: 500;">{{ userinfo.nickName }}</text>
 					</view>
-					<image :src="`/static/home/gender${ userinfo.gender && userinfo.gender - 1 || 0 }.png`" mode="" style="width: 40rpx; height: 40rpx;"></image>	
+					<image :src="`/static/home/gender${ userinfo.gender == 1 ? 1 : 0 }.png`" mode="" style="width: 40rpx; height: 40rpx;"></image>	
 				</view>
 				<!-- 标签 -->
 				<view class="margin-tb-sm">

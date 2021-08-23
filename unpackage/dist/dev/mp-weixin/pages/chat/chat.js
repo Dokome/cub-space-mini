@@ -174,7 +174,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
 
 
 
@@ -230,6 +230,7 @@ var _chat = __webpack_require__(/*! ./chat.js */ 97);function _toConsumableArray
 {
   data: function data() {
     return {
+      unreadCount: 0,
       chatList: new Map(),
       // 加载动画
       ifLoaddingShow: true,
@@ -272,14 +273,23 @@ var _chat = __webpack_require__(/*! ./chat.js */ 97);function _toConsumableArray
     newsList: newsList,
     notice: notice },
 
-  onLoad: function onLoad() {
-    // this.getConverSationList();
+  onLoad: function onLoad() {var _this = this;
+    uni.$on("chatListUpdate", function () {
+      if (_this.login) {
+        _this.getConverSationList();
+      }
+    });
   },
   onShow: function onShow() {
     if (this.login) {
       this.getConverSationList();
     }
-  } };exports.default = _default;
+  },
+  watch: {
+    unreadCount: function unreadCount(val) {
+      console.log(123);
+    } } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 

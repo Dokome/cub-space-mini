@@ -11,6 +11,9 @@ class ImgHandle {
 		if (imgList.length === 1) {
 			//定义宽高
 			let [width, height] = [imgList[0].width || BASE, imgList[0].height || BASE];
+			if (width < BASE && height < BASE) {
+				return `height: ${ height * 2}rpx; width: ${ width * 2 }rpx `
+			}
 			//比例系数
 			let scale = width / height;
 			if (scale >= 1) {
@@ -36,7 +39,7 @@ class ImgHandle {
 	}
 	// 图片选择
 	imgSelector(options = {}) {
-		let count = 9 - this.imgList.length;
+		let count = options.count || 9 - this.imgList.length;
 		uni.chooseImage({
 			count: count,
 			sizeType: "compressed",

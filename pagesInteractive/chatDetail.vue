@@ -1,17 +1,28 @@
 <template>
 	<view style="background-color: #fff;">
 		<navbar :title="pageTitle"></navbar>
-		<scroll-view scroll-y="true" @scrolltoupper="scrolltoupper" :scroll-top="scrollTop" class="Anchor" upper-threshold="300"
-			:style="{ height: `calc(100vh - ${ViewPart - 20}px)` }" :scroll-with-animation="true" :scroll-anchoring="true">
-			<view style="padding-bottom: 180rpx;">
+		<scroll-view scroll-y="true" :scroll-top="scrollTop" class="Anchor" :upper-threshold="pageHeight" @scrolltoupper="scrolltoupper"
+			:style="{ height: `calc(100vh - ${ViewPart - 20}px)` }" :scroll-with-animation="!ifLoaddingShow" :scroll-anchoring="true">
+			<view style="padding-bottom: 180rpx;" class="Anchor">
 				<view style="background-color: #F5F5F5;"></view>
-				<view class="isMessage" v-for="item in msgList" 
-					:class="item.from !== userId ? 'isNotSelf' : 'isSelf'" :key="item.time">
+				<view class="isMessage" :class="item.from !== userId ? 'isNotSelf' : 'isSelf'" v-for="item in msgList" :key="item.time">
 					<view :class="item.from !== userId ? 'margin-right-sm' : 'margin-left-sm'">
-						<u-avatar :size="80" :src="item.avatar" @click.stop="enterUserHome(item.from)"></u-avatar>
+						<u-avatar :size="80" :src="item.avatar" @click="enterUserHome(item.from)"></u-avatar>
 					</view>
 					<view class="messageBlock flex align-center justify-center">
-						<text class="text-justify">{{ item.payload.text }}</text>
+						<!-- 文字模式 -->
+						<text class="text-justify" v-if="item.payload.text">{{ item.payload.text }}</text>
+						<!-- 图片模式 -->
+						<view class="" v-if="item.payload.imageInfoArray">
+							<image :src="item.payload.imageInfoArray[2].url" @click="imgPrview(item.payload.imageInfoArray[1].url)"
+								mode="aspectFill" v-if="item.payload.imageInfoArray[2]"
+								:style="{ width: item.payload.imageInfoArray[1].width + 'px',
+									height: item.payload.imageInfoArray[1].height + 'px',
+									maxWidth: '440rpx'
+									}"
+								>
+							</image>
+						</view>
 					</view>
 				</view>
 			</view>
@@ -52,36 +63,40 @@ export default {
 	},
 	methods: {
 		getMessageList() {
-			if (this.isCompleted) {
+			if (this.isCompleted || this.scrollTimmer) {
 				return;
 			}
 			// 获取信息过程
 			let tim = this.tim;
 			let promise = tim.getMessageList({conversationID: this.requestId, count: 15, nextReqMessageID: this.nextReqMessageID});
 			promise.then((imResponse) => {
+				if (this.nextReqMessageID === imResponse.data.nextReqMessageID) return;
 			  this.msgList = imResponse.data.messageList.concat(this.msgList); // 消息列表。
-				// 此时是初始化的时候
-				if (this.scrollTop === 0) {
-					this.scrollTop = this.msgList.length * 999;
-					setTimeout(() => {
-						this.ifLoaddingShow = false;
-					}, 500)
-				}
 			  this.nextReqMessageID = imResponse.data.nextReqMessageID; // 用于续拉，分页续拉时需传入该字段。
 			  this.isCompleted = imResponse.data.isCompleted; // 表示是否已经拉完所有消息。
+				if (!this.scrollTop) {
+					this.scrollTop = this.msgList.length * 999;
+				}
+				setTimeout(() => {
+					this.ifLoaddingShow = false;
+				}, 500);
 				this.scrollTimmer = setTimeout(() => {
 					this.scrollTimmer = null;
-				}, 500);
+				}, 1000)
 			});
 		},
-		// 上到顶部的时候刷新
 		scrolltoupper() {
 			if (this.scrollTimmer) {
 				return;
 			}
 			this.getMessageList();
 		},
-		// 进入用户主页
+		getImgShowStyle(img) {
+			return ';' + this.$api.imgHandle.multiImgShow([img]);
+		},
+		imgPrview(url) {
+			this.$api.imgHandle.imgPreview(url, [url]);
+		},
 		enterUserHome(id) {
 			this.$api.routerHandle.goto(`/pagesHome/mynews?id=${id}`);
 		},
@@ -108,13 +123,21 @@ export default {
 			});
 			this.msgList = this.msgList.concat(data);
 			this.scrollTop = this.msgList.length * 999;
+			this.tim.setMessageRead({conversationID: options.id});
 			this.$forceUpdate();
 		});
+	},
+	onUnload() {
+		uni.$off("reciveChatMsg");
 	}
 };
 </script>
 
 <style lang="scss" scoped>
+.Anchor {
+	overflow-anchor: auto;
+}
+
 .isMessage {
 	// 消息
 	padding: 40rpx 20rpx;
@@ -146,8 +169,5 @@ export default {
 		background-color: #d9e4fa;
 		color: #000;
 	}
-}
-.Anchor {
-	overflow-anchor: auto;
 }
 </style>

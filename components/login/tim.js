@@ -13,6 +13,7 @@ function GetTimRef(params = {}) {
 	tim.registerPlugin({'tim-upload-plugin': TIMUploadPlugin});
 	let onMessageReceived = (event) => {
 		uni.$emit("reciveChatMsg", event.data);
+		uni.$emit("chatListUpdate", '');
 	};
 	tim.on(TIM.EVENT.MESSAGE_RECEIVED, onMessageReceived);
 	 

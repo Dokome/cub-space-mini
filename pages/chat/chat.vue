@@ -54,6 +54,7 @@ import notice from './components/notice.vue';
 export default {
 	data() {
 		return {
+			unreadCount: 0,
 			chatList: new Map(),
 			// 加载动画
 			ifLoaddingShow: true,
@@ -97,11 +98,20 @@ export default {
 		notice
 	},
 	onLoad() {
-		// this.getConverSationList();
+		uni.$on("chatListUpdate", () => {
+			if (this.login) {
+				this.getConverSationList();
+			}
+		});
 	},
 	onShow() {
 		if (this.login) {
 			this.getConverSationList();
+		}
+	},
+	watch: {
+		unreadCount(val) {
+			console.log(123);
 		}
 	}
 };

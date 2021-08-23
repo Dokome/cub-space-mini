@@ -17,14 +17,16 @@ export const __chat = {
 	},
 	// 获取聊天列表
 	getConverSationList() {
+		this.unreadCount = 0;
 		let tim = this.tim;
 		let promise = tim.getConversationList();
 		promise.then((imResponse) => {
 		  const conversationList = imResponse.data.conversationList; // 会话列表，用该列表覆盖原有的会话列表
 			for (let conversation of conversationList) {
+				this.unreadCount += conversation.unreadCount;
 				this.chatList.set(conversation.conversationID, conversation);
 			}
-			console.log(conversationList);
+			this.$store.commit('chatNewsUnread', this.unreadCount);
 			this.$forceUpdate();
 			setTimeout(() => {
 				this.ifLoaddingShow = false;

@@ -13,8 +13,8 @@ export default new Vuex.Store({
 				iconPath: "/static/tabbar/chat.png",
 				selectedIconPath: "/static/tabbar/chat-fill.png",
 				text: '消息',
-				count: 2,
-				isDot: true,
+				count: 0,
+				isDot: false,
 				customIcon: false,
 				pagePath: "/pages/chat/chat"
 			},
@@ -56,7 +56,9 @@ export default new Vuex.Store({
 		//tabbar结束
   },
   mutations: {
-		
+		chatNewsUnread(state, count) {
+			state.list[0].count = count;
+		}
 	},
   actions: {
 		

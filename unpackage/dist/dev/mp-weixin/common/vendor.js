@@ -872,7 +872,7 @@ function initData(vueOptions, context) {
     try {
       data = data.call(context); // 支持 Vue.prototype 上挂的数据
     } catch (e) {
-      if (Object({"NODE_ENV":"development","VUE_APP_NAME":"cub-space-mini","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"VUE_APP_NAME":"cub-space-mini","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.warn('根据 Vue 的 data 函数初始化小程序 data 失败，请尽量确保 data 函数中不访问 vm 对象，否则可能影响首次数据渲染速度。', data);
       }
     }
@@ -1953,6 +1953,7 @@ function GetTimRef() {var params = arguments.length > 0 && arguments[0] !== unde
   tim.registerPlugin({ 'tim-upload-plugin': _timUploadPlugin.default });
   var onMessageReceived = function onMessageReceived(event) {
     uni.$emit("reciveChatMsg", event.data);
+    uni.$emit("chatListUpdate", '');
   };
   tim.on(_timJsSdk.default.EVENT.MESSAGE_RECEIVED, onMessageReceived);
 
@@ -8141,7 +8142,7 @@ function type(obj) {
 
 function flushCallbacks$1(vm) {
     if (vm.__next_tick_callbacks && vm.__next_tick_callbacks.length) {
-        if (Object({"NODE_ENV":"development","VUE_APP_NAME":"cub-space-mini","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
+        if (Object({"VUE_APP_NAME":"cub-space-mini","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:flushCallbacks[' + vm.__next_tick_callbacks.length + ']');
@@ -8162,14 +8163,14 @@ function nextTick$1(vm, cb) {
     //1.nextTick 之前 已 setData 且 setData 还未回调完成
     //2.nextTick 之前存在 render watcher
     if (!vm.__next_tick_pending && !hasRenderWatcher(vm)) {
-        if(Object({"NODE_ENV":"development","VUE_APP_NAME":"cub-space-mini","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"VUE_APP_NAME":"cub-space-mini","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:nextVueTick');
         }
         return nextTick(cb, vm)
     }else{
-        if(Object({"NODE_ENV":"development","VUE_APP_NAME":"cub-space-mini","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"VUE_APP_NAME":"cub-space-mini","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance$1 = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance$1.is || mpInstance$1.route) + '][' + vm._uid +
                 ']:nextMPTick');
@@ -8255,7 +8256,7 @@ var patch = function(oldVnode, vnode) {
     });
     var diffData = this.$shouldDiffData === false ? data : diff(data, mpData);
     if (Object.keys(diffData).length) {
-      if (Object({"NODE_ENV":"development","VUE_APP_NAME":"cub-space-mini","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"VUE_APP_NAME":"cub-space-mini","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + this._uid +
           ']差量更新',
           JSON.stringify(diffData));
@@ -10668,8 +10669,34 @@ guid;exports.default = _default;
   InputBlur: function InputBlur(e) {
     this.InputBottom = 0;
   },
-  ImgChooseHandle: function ImgChooseHandle() {
-    this.ifImgChoose = !this.ifImgChoose;
+  ImgChooseHandle: function ImgChooseHandle() {var _this = this;
+    if (this.mode === 'aboutNews') {
+      this.ifImgChoose = !this.ifImgChoose;
+    } else if (this.mode === 'aboutChat') {
+      var TIM = this.TIM;
+      var tim = this.tim;
+      uni.chooseImage({
+        count: 1,
+        sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+        sourceType: ['album'], // 从相册选择
+        success: function success(res) {
+          var message = tim.createImageMessage({
+            to: _this.userIdTo,
+            conversationType: TIM.TYPES.CONV_C2C,
+            payload: { file: res } });
+
+          // 2. 发送消息
+          var promise = tim.sendMessage(message);
+          promise.then(function (imResponse) {
+            // 发送成功
+            uni.$emit("reciveChatMsg", [imResponse.data.message]);
+          }).catch(function (imError) {
+            // 发送失败
+            console.warn('sendMessage error:', imError);
+          });
+        } });
+
+    }
   },
   imgSelector: function imgSelector() {
     this.$api.imgHandle.imgSelector.call(this);
@@ -10678,8 +10705,8 @@ guid;exports.default = _default;
     this.$api.imgHandle.removeCurrentImg.call(this);
   },
   // 动态相关的回复和评论等
-  publishHandle: function publishHandle() {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var finalId, data, result;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:if (!(
-              _this.inputContent.trim().length === 0)) {_context.next = 2;break;}return _context.abrupt("return",
+  publishHandle: function publishHandle() {var _this2 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var finalId, data, result;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:if (!(
+              _this2.inputContent.trim().length === 0)) {_context.next = 2;break;}return _context.abrupt("return",
               uni.showToast({
                 title: "空空如也~",
                 icon: "none" }));case 2:
@@ -10690,38 +10717,38 @@ guid;exports.default = _default;
                 url: '',
                 method: 'POST',
                 data: {
-                  content: _this.inputContent,
-                  images: _this.imgList } };
+                  content: _this2.inputContent,
+                  images: _this2.imgList } };
 
 
               // 具体配置
-              if (_this.type === 'news' || _this.type === 'comment') {
+              if (_this2.type === 'news' || _this2.type === 'comment') {
                 data.url = '/dynamicComment/pushComment';
-                if (_this.type === 'news') {
-                  data.data.dynamicId = _this.target.id;
+                if (_this2.type === 'news') {
+                  data.data.dynamicId = _this2.target.id;
                 } else {
-                  data.data.rootCommentId = _this.target.id;
+                  data.data.rootCommentId = _this2.target.id;
                 }
-                finalId = _this.target.id;
+                finalId = _this2.target.id;
               } else {
                 data.data = _objectSpread(_objectSpread({},
 
                 data.data), {}, {
-                  parentCommentId: _this.target.id,
-                  parentCommentUserId: _this.target.userId,
-                  rootCommentId: _this.target.rootCommentId });
+                  parentCommentId: _this2.target.id,
+                  parentCommentUserId: _this2.target.userId,
+                  rootCommentId: _this2.target.rootCommentId });
 
                 data.url = '/dynamicComment/replyComment';
-                finalId = _this.target.rootCommentId;
+                finalId = _this2.target.rootCommentId;
               }
               // 发送请求
-              _context.next = 7;return _this.$http.request(data);case 7:result = _context.sent;
+              _context.next = 7;return _this2.$http.request(data);case 7:result = _context.sent;
               // 更新pop内的内容
               uni.$emit('updateCurrentInfo', '');
-              if (_this.type !== 'news') {
-                uni.$emit('repylChange', { type: _this.type, data: _this.target, popDontChange: true, id: finalId });
+              if (_this2.type !== 'news') {
+                uni.$emit('repylChange', { type: _this2.type, data: _this2.target, popDontChange: true, id: finalId });
               }
-              _this.clearCurrentInfo();
+              _this2.clearCurrentInfo();
               if (result.data.code === 200) {
                 uni.showToast({
                   title: '评论成功~',
@@ -10731,6 +10758,12 @@ guid;exports.default = _default;
   },
   // 聊天相关
   chatHandle: function chatHandle() {
+    if (this.inputContent.trim().length === 0) {
+      return uni.showToast({
+        title: "空空如也~",
+        icon: "none" });
+
+    }
     var TIM = this.TIM;
     var tim = this.tim;
     // 发送文本消息，Web 端与小程序端相同
@@ -11240,8 +11273,8 @@ new _vuex.default.Store({
       iconPath: "/static/tabbar/chat.png",
       selectedIconPath: "/static/tabbar/chat-fill.png",
       text: '消息',
-      count: 2,
-      isDot: true,
+      count: 0,
+      isDot: false,
       customIcon: false,
       pagePath: "/pages/chat/chat" },
 
@@ -11282,8 +11315,10 @@ new _vuex.default.Store({
     activeColor: '#5098FF'
     //tabbar结束
   },
-  mutations: {},
-
+  mutations: {
+    chatNewsUnread: function chatNewsUnread(state, count) {
+      state.list[0].count = count;
+    } },
 
   actions: {},
 
@@ -12426,6 +12461,9 @@ var ImgHandle = /*#__PURE__*/function () {
       if (imgList.length === 1) {
         //定义宽高
         var _ref = [imgList[0].width || BASE, imgList[0].height || BASE],width = _ref[0],height = _ref[1];
+        if (width < BASE && height < BASE) {
+          return "height: ".concat(height * 2, "rpx; width: ").concat(width * 2, "rpx ");
+        }
         //比例系数
         var scale = width / height;
         if (scale >= 1) {
@@ -12451,7 +12489,7 @@ var ImgHandle = /*#__PURE__*/function () {
     }
     // 图片选择
   }, { key: "imgSelector", value: function imgSelector() {var _this = this;var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-      var count = 9 - this.imgList.length;
+      var count = options.count || 9 - this.imgList.length;
       uni.chooseImage({
         count: count,
         sizeType: "compressed",
@@ -13044,14 +13082,16 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.__chat = v
   },
   // 获取聊天列表
   getConverSationList: function getConverSationList() {var _this = this;
+    this.unreadCount = 0;
     var tim = this.tim;
     var promise = tim.getConversationList();
     promise.then(function (imResponse) {
       var conversationList = imResponse.data.conversationList; // 会话列表，用该列表覆盖原有的会话列表
       var _iterator = _createForOfIteratorHelper(conversationList),_step;try {for (_iterator.s(); !(_step = _iterator.n()).done;) {var conversation = _step.value;
+          _this.unreadCount += conversation.unreadCount;
           _this.chatList.set(conversation.conversationID, conversation);
         }} catch (err) {_iterator.e(err);} finally {_iterator.f();}
-      console.log(conversationList);
+      _this.$store.commit('chatNewsUnread', _this.unreadCount);
       _this.$forceUpdate();
       setTimeout(function () {
         _this.ifLoaddingShow = false;

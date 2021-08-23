@@ -7,7 +7,33 @@ export const __textInput = {
 		this.InputBottom = 0;
 	},
 	ImgChooseHandle() {
-		this.ifImgChoose = !this.ifImgChoose;
+		if (this.mode === 'aboutNews') {
+			this.ifImgChoose = !this.ifImgChoose;
+		} else if (this.mode === 'aboutChat') {
+			let TIM = this.TIM;
+			let tim = this.tim;
+			uni.chooseImage({
+				count: 1,
+				sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+				sourceType: ['album'], // 从相册选择
+				success: (res) => {
+					let message = tim.createImageMessage({
+						to: this.userIdTo,
+						conversationType: TIM.TYPES.CONV_C2C,
+						payload: { file: res }
+					});
+					// 2. 发送消息
+					let promise = tim.sendMessage(message);
+					promise.then(function(imResponse) {
+						// 发送成功
+						uni.$emit("reciveChatMsg", [imResponse.data.message]);
+					}).catch(function(imError) {
+						// 发送失败
+					console.warn('sendMessage error:', imError);
+			});
+  }
+});
+		}
 	},
 	imgSelector() {
 		this.$api.imgHandle.imgSelector.call(this);
@@ -69,6 +95,12 @@ export const __textInput = {
 	},
 	// 聊天相关
 	chatHandle() {
+		if (this.inputContent.trim().length === 0) {
+			return uni.showToast({
+				title: "空空如也~",
+				icon: "none"
+			});
+		}
 		let TIM = this.TIM;
 		let tim = this.tim;
 		// 发送文本消息，Web 端与小程序端相同
