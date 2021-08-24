@@ -27,7 +27,7 @@
 					Vue.prototype.tim = tim;
 			});
 			// 如果有缓存的话直接注册，没有则监听
-			if (get('TIM')) {
+			if (get('appId')) {
 				let params = {
 					userSig: get('userSig'),
 					userId: get('userId'),

@@ -1,24 +1,42 @@
 <template>
-	<view style="background-color: #fff;">
+	<view style="background-color: #FAFAFA;">
 		<navbar :title="pageTitle"></navbar>
-		<scroll-view scroll-y="true" :scroll-top="scrollTop" class="Anchor" :upper-threshold="pageHeight" @scrolltoupper="scrolltoupper"
-			:style="{ height: `calc(100vh - ${ViewPart - 20}px)` }" :scroll-with-animation="!ifLoaddingShow" :scroll-anchoring="true">
+		<scroll-view scroll-y="true" :scroll-top="scrollTop" class="Anchor" :upper-threshold="pageHeight * 2" @scrolltoupper="scrolltoupper"
+			:style="{ height: `calc(100vh - ${ViewPart - 20}px)` }" 
+			:scroll-with-animation="!ifLoaddingShow" :scroll-anchoring="true">
 			<view style="padding-bottom: 180rpx;" class="Anchor">
+				<view class="padding">
+					<!-- 顶部出现卡片 -->
+					<view class="padding wmax flex" v-if="isCompleted" style="height: 340rpx;">
+						<view class="flex-sub profileCard  flex flex-direction justify-between padding" :class="lbgColor" v-if="userInfo">
+							<view class="">
+								<u-avatar :size="80" :src="userInfo.avatar" v-if=""></u-avatar>
+							</view>
+							<view class="text-white">
+								{{userInfo.nick}}
+							</view>
+							<view class="text-white">
+								打个招呼吧~
+							</view>
+						</view>
+					</view>
+				</view>
 				<view style="background-color: #F5F5F5;"></view>
 				<view class="isMessage" :class="item.from !== userId ? 'isNotSelf' : 'isSelf'" v-for="item in msgList" :key="item.time">
 					<view :class="item.from !== userId ? 'margin-right-sm' : 'margin-left-sm'">
 						<u-avatar :size="80" :src="item.avatar" @click="enterUserHome(item.from)"></u-avatar>
 					</view>
-					<view class="messageBlock flex align-center justify-center">
+					<view class="messageBlock flex align-center justify-center" 
+						:style="{ backgroundColor: chatStyle[item.from !== userId ? 0 : 1] }">
 						<!-- 文字模式 -->
 						<text class="text-justify" v-if="item.payload.text">{{ item.payload.text }}</text>
 						<!-- 图片模式 -->
-						<view class="" v-if="item.payload.imageInfoArray">
+						<view class="flex align-center justify-center" v-if="item.payload.imageInfoArray">
 							<image :src="item.payload.imageInfoArray[2].url" @click="imgPrview(item.payload.imageInfoArray[1].url)"
 								mode="aspectFill" v-if="item.payload.imageInfoArray[2]"
 								:style="{ width: item.payload.imageInfoArray[1].width + 'px',
 									height: item.payload.imageInfoArray[1].height + 'px',
-									maxWidth: '440rpx'
+									maxWidth: '400rpx'
 									}"
 								>
 							</image>
@@ -59,6 +77,7 @@ export default {
 			userIdTo: '',
 			// scrollTimmer 防抖
 			scrollTimmer: null,
+			userInfo: null
 		};
 	},
 	methods: {
@@ -70,7 +89,7 @@ export default {
 			let tim = this.tim;
 			let promise = tim.getMessageList({conversationID: this.requestId, count: 15, nextReqMessageID: this.nextReqMessageID});
 			promise.then((imResponse) => {
-				if (this.nextReqMessageID === imResponse.data.nextReqMessageID) return;
+				if (!!this.nextReqMessageID && this.nextReqMessageID === imResponse.data.nextReqMessageID) return;
 			  this.msgList = imResponse.data.messageList.concat(this.msgList); // 消息列表。
 			  this.nextReqMessageID = imResponse.data.nextReqMessageID; // 用于续拉，分页续拉时需传入该字段。
 			  this.isCompleted = imResponse.data.isCompleted; // 表示是否已经拉完所有消息。
@@ -83,6 +102,8 @@ export default {
 				this.scrollTimmer = setTimeout(() => {
 					this.scrollTimmer = null;
 				}, 1000)
+			}).catch(err => {
+				console.log(err);
 			});
 		},
 		scrolltoupper() {
@@ -104,6 +125,14 @@ export default {
 	computed: {
 		userId() {
 			return this.$cache.get('userId');
+		},
+		chatStyle() {
+			let colorPair = ['#F8D90A, #FDEB71', '#0396FF, #ABDCFF', '#EA5455, #FEB692', '#7360F0, #CE9FFC', '#32CCBC, #90F7EC'];
+			let base = ((this.pageTitle.charCodeAt(0) % 10) >> 1);
+			return colorPair[base].split(',');
+		},
+		lbgColor() {
+			return 'lbg-' + (((this.pageTitle.charCodeAt(0) % 10) >> 1) + 1);
 		}
 	},
 	onLoad(options) {
@@ -115,6 +144,13 @@ export default {
 		// 第一次获取消息列表
 		this.getMessageList();
 		this.userIdTo = options.userIdTo;
+		// 
+		const eventChannel = this.getOpenerEventChannel()
+		// 监听acceptDataFromOpenerPage事件，获取上一页面通过eventChannel传送到当前页面的数据
+		eventChannel.on('acceptDataFromOpenerPage', (data) => {
+		  this.userInfo = data.data;
+		});
+		// 
 		// 收到消息
 		uni.$off("reciveChatMsg");
 		uni.$on("reciveChatMsg", (data) => {
@@ -138,6 +174,11 @@ export default {
 	overflow-anchor: auto;
 }
 
+.profileCard {
+	border-radius: 10rpx;
+	box-shadow: 10rpx 10rpx 10rpx rgba($color: #333333, $alpha: .1);
+}
+
 .isMessage {
 	// 消息
 	padding: 40rpx 20rpx;
@@ -159,6 +200,7 @@ export default {
 	.messageBlock {
 		background-color: #0081ff;
 		color: #fff;
+		box-shadow: 10rpx 10rpx 10rpx rgba($color: #333333, $alpha: .1);
 	}
 }
 .isSelf {

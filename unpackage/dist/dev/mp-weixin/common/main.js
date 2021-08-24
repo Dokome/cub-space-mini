@@ -520,7 +520,7 @@ var _default = { onLaunch: function onLaunch() {//获取系统信息来更改头
       _vue.default.prototype.tim = tim;
     });
     // 如果有缓存的话直接注册，没有则监听
-    if ((0, _cache.get)('TIM')) {
+    if ((0, _cache.get)('appId')) {
       var params = {
         userSig: (0, _cache.get)('userSig'),
         userId: (0, _cache.get)('userId'),

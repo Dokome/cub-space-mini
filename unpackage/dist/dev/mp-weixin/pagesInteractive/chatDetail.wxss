@@ -2,6 +2,11 @@
 .Anchor.data-v-ebbd7a48 {
   overflow-anchor: auto;
 }
+.profileCard.data-v-ebbd7a48 {
+  border-radius: 10rpx;
+  -webkit-box-shadow: 10rpx 10rpx 10rpx rgba(51, 51, 51, 0.1);
+          box-shadow: 10rpx 10rpx 10rpx rgba(51, 51, 51, 0.1);
+}
 .isMessage.data-v-ebbd7a48 {
   padding: 40rpx 20rpx;
   display: -webkit-box;
@@ -21,6 +26,8 @@
 .isNotSelf .messageBlock.data-v-ebbd7a48 {
   background-color: #0081ff;
   color: #fff;
+  -webkit-box-shadow: 10rpx 10rpx 10rpx rgba(51, 51, 51, 0.1);
+          box-shadow: 10rpx 10rpx 10rpx rgba(51, 51, 51, 0.1);
 }
 .isSelf.data-v-ebbd7a48 {
   -webkit-box-orient: horizontal;

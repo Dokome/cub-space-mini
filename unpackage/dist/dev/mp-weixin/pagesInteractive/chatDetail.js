@@ -196,6 +196,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 var _default =
 {
   data: function data() {
@@ -222,7 +240,8 @@ var _default =
       // 发送对象
       userIdTo: '',
       // scrollTimmer 防抖
-      scrollTimmer: null };
+      scrollTimmer: null,
+      userInfo: null };
 
   },
   methods: {
@@ -234,7 +253,7 @@ var _default =
       var tim = this.tim;
       var promise = tim.getMessageList({ conversationID: this.requestId, count: 15, nextReqMessageID: this.nextReqMessageID });
       promise.then(function (imResponse) {
-        if (_this.nextReqMessageID === imResponse.data.nextReqMessageID) return;
+        if (!!_this.nextReqMessageID && _this.nextReqMessageID === imResponse.data.nextReqMessageID) return;
         _this.msgList = imResponse.data.messageList.concat(_this.msgList); // 消息列表。
         _this.nextReqMessageID = imResponse.data.nextReqMessageID; // 用于续拉，分页续拉时需传入该字段。
         _this.isCompleted = imResponse.data.isCompleted; // 表示是否已经拉完所有消息。
@@ -247,6 +266,8 @@ var _default =
         _this.scrollTimmer = setTimeout(function () {
           _this.scrollTimmer = null;
         }, 1000);
+      }).catch(function (err) {
+        console.log(err);
       });
     },
     scrolltoupper: function scrolltoupper() {
@@ -268,6 +289,14 @@ var _default =
   computed: {
     userId: function userId() {
       return this.$cache.get('userId');
+    },
+    chatStyle: function chatStyle() {
+      var colorPair = ['#F8D90A, #FDEB71', '#0396FF, #ABDCFF', '#EA5455, #FEB692', '#7360F0, #CE9FFC', '#32CCBC, #90F7EC'];
+      var base = this.pageTitle.charCodeAt(0) % 10 >> 1;
+      return colorPair[base].split(',');
+    },
+    lbgColor: function lbgColor() {
+      return 'lbg-' + ((this.pageTitle.charCodeAt(0) % 10 >> 1) + 1);
     } },
 
   onLoad: function onLoad(options) {var _this2 = this;
@@ -279,6 +308,13 @@ var _default =
     // 第一次获取消息列表
     this.getMessageList();
     this.userIdTo = options.userIdTo;
+    // 
+    var eventChannel = this.getOpenerEventChannel();
+    // 监听acceptDataFromOpenerPage事件，获取上一页面通过eventChannel传送到当前页面的数据
+    eventChannel.on('acceptDataFromOpenerPage', function (data) {
+      _this2.userInfo = data.data;
+    });
+    // 
     // 收到消息
     uni.$off("reciveChatMsg");
     uni.$on("reciveChatMsg", function (data) {

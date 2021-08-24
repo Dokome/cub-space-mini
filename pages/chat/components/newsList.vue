@@ -2,7 +2,7 @@
 	<view class="chat-list">
 		<view class="chat-list-item bg-white u-border-bottom padding flex" 
 			v-for="item in dataList" :key="item.conversationID" 
-			@click="chatDetail(item.conversationID, item.userProfile.nick, item.userProfile.userID)">
+			@click="chatDetail(item.conversationID, item.userProfile.nick, item.userProfile.userID, item.userProfile)">
 			<view class="chat-list-item-avatar margin-right-sm" v-if="item.userProfile && item.userProfile.avatar">
 				<u-avatar size="100" :src="item.userProfile.avatar"></u-avatar>
 			</view>
@@ -32,8 +32,9 @@ export default {
 	},
 	methods: {
 		// 进入聊天详情页
-		chatDetail(id, nick, userIdTo) {
-			this.$api.routerHandle.goto(`/pagesInteractive/chatDetail?id=${id}&nick=${nick}&userIdTo=${userIdTo}`);
+		chatDetail(id, nick, userIdTo, profile) {
+			this.$api.routerHandle
+			.goto(`/pagesInteractive/chatDetail?id=${id}&nick=${nick}&userIdTo=${userIdTo}`, profile);
 		},
 		getMessageTime(timestamp) {
 			return this.$api.timeHandle.chatMessage(timestamp)

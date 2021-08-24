@@ -189,8 +189,9 @@ var _default2 =
   },
   methods: {
     // 进入聊天详情页
-    chatDetail: function chatDetail(id, nick, userIdTo) {
-      this.$api.routerHandle.goto("/pagesInteractive/chatDetail?id=".concat(id, "&nick=").concat(nick, "&userIdTo=").concat(userIdTo));
+    chatDetail: function chatDetail(id, nick, userIdTo, profile) {
+      this.$api.routerHandle.
+      goto("/pagesInteractive/chatDetail?id=".concat(id, "&nick=").concat(nick, "&userIdTo=").concat(userIdTo), profile);
     },
     getMessageTime: function getMessageTime(timestamp) {
       return this.$api.timeHandle.chatMessage(timestamp);

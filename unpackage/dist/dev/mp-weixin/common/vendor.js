@@ -1946,10 +1946,12 @@ var _cache = __webpack_require__(/*! utils/cache.js */ 13);function _interopRequ
 function GetTimRef() {var params = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   // 创建TIM对象
   var appId = params.appId;
+  if (!appId) return; //当没登录且缓存不存在的时候直接退出
   var options = {
     SDKAppID: appId // 接入时需要将0替换为您的即时通信应用的 SDKAppID
   };
   var tim = _timJsSdk.default.create(options);
+  if (!tim) return; //当没登录且缓存不存在的时候直接退出
   tim.registerPlugin({ 'tim-upload-plugin': _timUploadPlugin.default });
   var onMessageReceived = function onMessageReceived(event) {
     uni.$emit("reciveChatMsg", event.data);

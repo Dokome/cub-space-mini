@@ -670,6 +670,32 @@
 	-webkit-box-shadow: 0rpx -1rpx 12rpx rgba(0,0,0,.05);
 	        box-shadow: 0rpx -1rpx 12rpx rgba(0,0,0,.05);
 }
+/* 渐变背景色 */
+.lbg-1 {
+	background-image: -webkit-linear-gradient(45deg, #F8D90A, #FDEB71);
+	background-image: linear-gradient(45deg, #F8D90A, #FDEB71);
+	color: #fff;
+}
+.lbg-2 {
+	background-image: -webkit-linear-gradient(45deg, #0396FF, #ABDCFF);
+	background-image: linear-gradient(45deg, #0396FF, #ABDCFF);
+	color: #fff;
+}
+.lbg-3 {
+	background-image: -webkit-linear-gradient(45deg, #EA5455, #FEB692);
+	background-image: linear-gradient(45deg, #EA5455, #FEB692);
+	color: #fff;
+}
+.lbg-4 {
+	background-image: -webkit-linear-gradient(45deg, #7360F0, #CE9FFC);
+	background-image: linear-gradient(45deg, #7360F0, #CE9FFC);
+	color: #fff;
+}
+.lbg-5 {
+	background-image: -webkit-linear-gradient(45deg, #32CCBC, #90F7EC);
+	background-image: linear-gradient(45deg, #32CCBC, #90F7EC);
+	color: #fff;
+}
 .t-icon {
     display: inline-block;
     width: 60rpx; 

@@ -130,7 +130,7 @@
 	"preloadRule": {
 		"pages/home/home": {
 			"network": "all",
-			"packages": ["pagesHome"]
+			"packages": ["pagesHome"] 
 		},
 		"pages/index/index": {
 			"network": "all",

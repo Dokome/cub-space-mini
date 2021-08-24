@@ -6,10 +6,12 @@ import { get, remove, set } from 'utils/cache.js';
 function GetTimRef(params = {}) {
 	// 创建TIM对象
 	let appId = params.appId;
+	if (!appId) return; //当没登录且缓存不存在的时候直接退出
 	let options = {
 	  SDKAppID: appId // 接入时需要将0替换为您的即时通信应用的 SDKAppID
 	};
 	let tim = TIM.create(options);
+	if (!tim) return; //当没登录且缓存不存在的时候直接退出
 	tim.registerPlugin({'tim-upload-plugin': TIMUploadPlugin});
 	let onMessageReceived = (event) => {
 		uni.$emit("reciveChatMsg", event.data);

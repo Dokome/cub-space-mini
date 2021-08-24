@@ -104,7 +104,7 @@ export default {
 			
 		  // TIM
 			GetTimRef(resultData);
-			
+
 			// 页面跳转
 			uni.reLaunch({
 				url: '/pages/home/home'
