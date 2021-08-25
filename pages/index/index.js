@@ -19,6 +19,10 @@ export const __indexMethods = {
 	enterHotList() {
 		this.$api.routerHandle.goto('/pagesInteractive/hotList', JSON.parse(this.current));
 	},
+	// 进入轮播图页面
+	enterOutHtml(index) {
+		this.$api.routerHandle.goto('/pagesInteractive/webView?src=' + this.bannerList[index].jumpLink);
+	},
 	//进入动态详情
 	enterDetail(id) {
 		this.ifPublishShow = false;

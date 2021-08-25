@@ -1,6 +1,6 @@
 <template>
 	<view>
-		
+		<web-view :src="src"></web-view>
 	</view>
 </template>
 
@@ -8,8 +8,11 @@
 	export default {
 		data() {
 			return {
-				
+				src: '',
 			};
+		},
+		onLoad(data) {
+			this.src = data.src;
 		}
 	}
 </script>

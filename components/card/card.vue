@@ -115,7 +115,7 @@
 						</view>
 					</view>
 					<!-- 回复框 -->
-					<view class="padding margin-top-xs" style="background-color: #F3F4F6; border-radius: 10rpx;" v-if="!enterStateComment && commentdata.childCommentLength">
+<!-- 					<view class="padding margin-top-xs" style="background-color: #F3F4F6; border-radius: 10rpx;" v-if="!enterStateComment && commentdata.childCommentLength">
 						<view class="wmax">
 							<view class="clamp1">
 							</view>
@@ -123,11 +123,18 @@
 						<view class="">
 							<text class="text-blue">查看全部{{ commentdata.childCommentLength }}条回复</text>
 						</view>
-					</view>
+					</view> -->
 					<!-- 互动 -->
 					<view class="flex justify-between align-center margin-top-sm">
 						<!-- 左/转发 -->
-						<view class="flex align-center u-tips-color">{{ commentdata.pushTime }}</view>
+						<view class="flex align-center">
+							<view class="flex align-center u-tips-color margin-right-sm">
+								{{ commentdata.pushTime }}
+							</view>
+							<u-tag :text="commentdata.childCommentLength + '回复'" v-if="commentdata.childCommentLength"
+								shape="circle" color="#333" bg-color="#F5F5F5" border-color="#F5F5F5"  >
+							</u-tag>
+						</view>
 						<!-- 右/点赞评论 -->
 						<view class="flex align-center">
 							<image src="/static/Img/chat.png" mode="aspectFill" style="width: 30rpx; height: 30rpx;"></image>

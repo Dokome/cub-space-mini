@@ -137,7 +137,8 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;function _createForOfIteratorHelper(o, allowArrayLike) {var it;if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) {if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") {if (it) o = it;var i = 0;var F = function F() {};return { s: F, n: function n() {if (i >= o.length) return { done: true };return { done: false, value: o[i++] };}, e: function e(_e) {throw _e;}, f: F };}throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}var normalCompletion = true,didErr = false,err;return { s: function s() {it = o[Symbol.iterator]();}, n: function n() {var step = it.next();normalCompletion = step.done;return step;}, e: function e(_e2) {didErr = true;err = _e2;}, f: function f() {try {if (!normalCompletion && it.return != null) it.return();} finally {if (didErr) throw err;}} };}function _unsupportedIterableToArray(o, minLen) {if (!o) return;if (typeof o === "string") return _arrayLikeToArray(o, minLen);var n = Object.prototype.toString.call(o).slice(8, -1);if (n === "Object" && o.constructor) n = o.constructor.name;if (n === "Map" || n === "Set") return Array.from(o);if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);}function _arrayLikeToArray(arr, len) {if (len == null || len > arr.length) len = arr.length;for (var i = 0, arr2 = new Array(len); i < len; i++) {arr2[i] = arr[i];}return arr2;} //
+//
 //
 //
 //
@@ -187,6 +188,9 @@ var _default =
   name: 'notice',
   data: function data() {
     return {
+      // tim引用
+      tim: this.tim,
+      CID: 'C2C1622109839081240311',
       headerList: [
       {
         title: '官方公告',
@@ -200,15 +204,47 @@ var _default =
       {
         title: '关注',
         img: '/static/Img/focus.png',
-        page: '/pagesHome/fans_focus?page=focus' }] };
+        page: '/pagesHome/fans_focus?page=focus' }],
 
 
+      nextReqMessageID: '',
+      isCompleted: false,
+      msgList: [] };
 
   },
   methods: {
     enterList: function enterList(e) {
       this.$api.routerHandle.goto(e.target.dataset.page);
-    } } };exports.default = _default;
+    },
+    getMsgList: function getMsgList() {var _this = this;
+      if (this.isCompleted) {
+        return;
+      }
+      // 获取信息过程
+      var tim = this.tim;
+      var promise = tim.getMessageList({ conversationID: this.CID, count: 15, nextReqMessageID: this.nextReqMessageID });
+      promise.then(function (imResponse) {
+        if (!!_this.nextReqMessageID && _this.nextReqMessageID === imResponse.data.nextReqMessageID) return;var _iterator = _createForOfIteratorHelper(
+        imResponse.data.messageList.reverse()),_step;try {for (_iterator.s(); !(_step = _iterator.n()).done;) {var msg = _step.value;
+            if (msg.type === 'TIMCustomElem') {
+              msg.payload.data = JSON.parse(msg.payload.data);
+              _this.msgList.push(msg.payload.data);
+            }
+          }} catch (err) {_iterator.e(err);} finally {_iterator.f();}
+        _this.nextReqMessageID = imResponse.data.nextReqMessageID; // 用于续拉，分页续拉时需传入该字段。
+        _this.isCompleted = imResponse.data.isCompleted; // 表示是否已经拉完所有消息。
+        console.log(_this.msgList);
+      });
+    } },
+
+  props: {},
+
+
+  mounted: function mounted() {
+    if (this.$cache.get('token')) {
+      this.getMsgList();
+    }
+  } };exports.default = _default;
 
 /***/ }),
 

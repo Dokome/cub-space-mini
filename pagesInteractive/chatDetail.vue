@@ -1,14 +1,15 @@
 <template>
-	<view style="background-color: #FAFAFA;">
+	<view style="background-color: #F3F3F3;">
 		<navbar :title="pageTitle"></navbar>
 		<scroll-view scroll-y="true" :scroll-top="scrollTop" class="Anchor" :upper-threshold="pageHeight * 2" @scrolltoupper="scrolltoupper"
-			:style="{ height: `calc(100vh - ${ViewPart - 20}px)` }" 
+			:style="{ height: `calc(100vh - ${ViewPart - 20}px)` }"
 			:scroll-with-animation="!ifLoaddingShow" :scroll-anchoring="true">
 			<view style="padding-bottom: 180rpx;" class="Anchor">
 				<view class="padding">
 					<!-- 顶部出现卡片 -->
 					<view class="padding wmax flex" v-if="isCompleted" style="height: 340rpx;">
-						<view class="flex-sub profileCard  flex flex-direction justify-between padding" :class="lbgColor" v-if="userInfo">
+						<view class="flex-sub profileCard  flex flex-direction justify-between padding"
+						 :class="lbgColor" v-if="userInfo" @click="enterUserHome(userIdTo)">
 							<view class="">
 								<u-avatar :size="80" :src="userInfo.avatar" v-if=""></u-avatar>
 							</view>
@@ -22,7 +23,7 @@
 					</view>
 				</view>
 				<view style="background-color: #F5F5F5;"></view>
-				<view class="isMessage" :class="item.from !== userId ? 'isNotSelf' : 'isSelf'" v-for="item in msgList" :key="item.time">
+				<view class="isMessage" :class="item.from !== userId ? 'isNotSelf' : 'isSelf'" v-for="item in msgList" :key="item.ID">
 					<view :class="item.from !== userId ? 'margin-right-sm' : 'margin-left-sm'">
 						<u-avatar :size="80" :src="item.avatar" @click="enterUserHome(item.from)"></u-avatar>
 					</view>
@@ -41,11 +42,14 @@
 								>
 							</image>
 						</view>
+						<!-- 语音模式 -->
 					</view>
 				</view>
+				<!-- 上顶框 -->
+				<view class="" :style="{ height: paddingHeight + 'px' }"></view>
 			</view>
 		</scroll-view>
-		<textInput :mode="'aboutChat'" :userIdTo="userIdTo"></textInput>
+		<textInput :mode="'aboutChat'" :userIdTo="userIdTo" :keyBoardFlag="keyBoardFlag" :buttonColor="chatStyle[0]"></textInput>
 		<loading v-if="ifLoaddingShow"></loading>
 	</view>
 </template>
@@ -77,7 +81,11 @@ export default {
 			userIdTo: '',
 			// scrollTimmer 防抖
 			scrollTimmer: null,
-			userInfo: null
+			userInfo: null,
+			paddingHeight: 0,
+			keyBoardFlag: false,
+			recorderManager: null,
+			innerAudioContext: null
 		};
 	},
 	methods: {
@@ -101,7 +109,7 @@ export default {
 				}, 500);
 				this.scrollTimmer = setTimeout(() => {
 					this.scrollTimmer = null;
-				}, 1000)
+				}, 200)
 			}).catch(err => {
 				console.log(err);
 			});
@@ -120,14 +128,14 @@ export default {
 		},
 		enterUserHome(id) {
 			this.$api.routerHandle.goto(`/pagesHome/mynews?id=${id}`);
-		},
+		}
 	},
 	computed: {
 		userId() {
 			return this.$cache.get('userId');
 		},
 		chatStyle() {
-			let colorPair = ['#F8D90A, #FDEB71', '#0396FF, #ABDCFF', '#EA5455, #FEB692', '#7360F0, #CE9FFC', '#32CCBC, #90F7EC'];
+			let colorPair = ['#F8D90A, #FFF', '#0396FF, #FFF', '#EA5455, #FFF', '#7360F0, #FFF', '#32CCBC, #FFF'];
 			let base = ((this.pageTitle.charCodeAt(0) % 10) >> 1);
 			return colorPair[base].split(',');
 		},
@@ -153,6 +161,14 @@ export default {
 		// 
 		// 收到消息
 		uni.$off("reciveChatMsg");
+		uni.$off("keyboardChange");
+		uni.$on("keyboardChange", (height) => {
+			this.paddingHeight = height;
+			this.$nextTick(() =>{
+				this.scrollTop += height;
+				this.$forceUpdate();
+			})
+		});
 		uni.$on("reciveChatMsg", (data) => {
 			data = data.filter((item) => {
 				return item.from === this.userIdTo || item.to === this.userIdTo;
@@ -161,6 +177,10 @@ export default {
 			this.scrollTop = this.msgList.length * 999;
 			this.tim.setMessageRead({conversationID: options.id});
 			this.$forceUpdate();
+		});
+		// 获取麦克风权限
+		uni.authorize({
+		  scope: 'scope.record',
 		});
 	},
 	onUnload() {
@@ -181,7 +201,7 @@ export default {
 
 .isMessage {
 	// 消息
-	padding: 40rpx 20rpx;
+	padding: 30rpx 20rpx;
 	display: flex;
 	display: flex;
 	justify-content: flex-start;

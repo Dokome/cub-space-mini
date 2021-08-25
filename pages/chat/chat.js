@@ -24,7 +24,10 @@ export const __chat = {
 		  const conversationList = imResponse.data.conversationList; // 会话列表，用该列表覆盖原有的会话列表
 			for (let conversation of conversationList) {
 				this.unreadCount += conversation.unreadCount;
-				this.chatList.set(conversation.conversationID, conversation);
+				if (conversation.conversationID === "C2C1622109839081240311") {
+					continue;
+				}
+				this.chatList.set(conversation.conversationID, conversation); 
 			}
 			this.$store.commit('chatNewsUnread', this.unreadCount);
 			this.$forceUpdate();

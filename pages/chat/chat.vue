@@ -40,7 +40,9 @@
 				<!--  -->
 			</swiper-item>
 		</swiper>
-		<u-tabbar :list="list" :mid-button="midButton" :inactive-color="inactiveColor" :activeColor="activeColor" :change="navChange" :border-top="borderTop"></u-tabbar>
+		<u-tabbar :list="list" :mid-button="midButton" :inactive-color="inactiveColor" 
+							:activeColor="activeColor" :change="navChange" :border-top="borderTop">
+		</u-tabbar>
 		<login v-if="!login"></login>
 		<loading v-if="ifLoaddingShow && login"></loading>
 	</view>
@@ -55,6 +57,8 @@ export default {
 	data() {
 		return {
 			unreadCount: 0,
+			// 系统消息
+			official: null,
 			chatList: new Map(),
 			// 加载动画
 			ifLoaddingShow: true,
@@ -110,9 +114,7 @@ export default {
 		}
 	},
 	watch: {
-		unreadCount(val) {
-			console.log(123);
-		}
+
 	}
 };
 </script>

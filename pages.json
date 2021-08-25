@@ -81,22 +81,20 @@
 					"enablePullDownRefresh": false
 				}
 
-			}    ,{
-                    "path" : "mynews",
-                    "style" :                                                                                    
-                {
-                    "navigationBarTitleText": "",
-                    "enablePullDownRefresh": false
-                }
-                
-                }
-            ]
+			}, {
+				"path": "mynews",
+				"style": {
+					"navigationBarTitleText": "",
+					"enablePullDownRefresh": false
+				}
+
+			}]
 		},
 		//home页面模块
 		{
 			"root": "pagesInteractive",
 			"pages": [{
-				"path": "usersIndex",
+				"path": "webView",
 				"style": {
 					"navigationBarTitleText": "",
 					"enablePullDownRefresh": false
@@ -130,7 +128,7 @@
 	"preloadRule": {
 		"pages/home/home": {
 			"network": "all",
-			"packages": ["pagesHome"] 
+			"packages": ["pagesHome"]
 		},
 		"pages/index/index": {
 			"network": "all",

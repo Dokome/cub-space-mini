@@ -14,11 +14,12 @@
 			<!-- 主体 -->
 			<scroll-view scroll-y="true" class="margin-top-xs">
 				<view class="">
-					<view class="notice-list-item flex align-center bg-white padding" v-for="item in 10" :key="item">
+					<view class="notice-list-item flex align-center bg-white padding" 
+								v-for="item in msgList" :key="item.ID" v-if="item.type === 'TIMCustomElem'">
 						<!-- 头像 -->
 						<view class="">
 							<view class="chat-list-item-avatar margin-right-sm">
-								<u-avatar size="100" :src="'https://image.sapce.club/common/1623820798277584078.jpg'"></u-avatar>
+								<u-avatar size="100" :src="item.avatar"></u-avatar>
 							</view>
 						</view>
 						<!-- 主体 -->
@@ -48,6 +49,9 @@ export default {
 	name: 'notice',
 	data() {
 		return {
+			// tim引用
+			tim: this.tim,
+			CID: 'C2C1622109839081240311',
 			headerList: [
 				{
 					title: '官方公告',
@@ -63,14 +67,45 @@ export default {
 					img: '/static/Img/focus.png',
 					page: '/pagesHome/fans_focus?page=focus'
 				},
-			]
+			],
+			nextReqMessageID: '',
+			isCompleted: false,
+			msgList: [],
 		}
 	},
 	methods: {
 		enterList(e) {
 			this.$api.routerHandle.goto(e.target.dataset.page);
+		},
+		getMsgList() {
+			if (this.isCompleted) {
+				return;
+			}
+			// 获取信息过程
+			let tim = this.tim;
+			let promise = tim.getMessageList({conversationID: this.CID, count: 15, nextReqMessageID: this.nextReqMessageID});
+			promise.then((imResponse) => {
+				if (!!this.nextReqMessageID && this.nextReqMessageID === imResponse.data.nextReqMessageID) return;
+				for (let msg of imResponse.data.messageList.reverse()) {
+					if (msg.type === 'TIMCustomElem') {
+						msg.payload.data = JSON.parse(msg.payload.data);
+						this.msgList.push(msg.payload.data);
+					}
+				}
+				this.nextReqMessageID = imResponse.data.nextReqMessageID; // 用于续拉，分页续拉时需传入该字段。
+				this.isCompleted = imResponse.data.isCompleted; // 表示是否已经拉完所有消息。
+				console.log(this.msgList);
+			});
 		}
-	}
+	},
+	props: {
+		
+	},
+	mounted() {
+		if (this.$cache.get('token')) {
+			this.getMsgList();
+		}
+	},
 }
 </script>
 

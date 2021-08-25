@@ -81,6 +81,9 @@ try {
   components = {
     uButton: function() {
       return __webpack_require__.e(/*! import() | uview-ui/components/u-button/u-button */ "uview-ui/components/u-button/u-button").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-button/u-button.vue */ 179))
+    },
+    uIcon: function() {
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-icon/u-icon */ "uview-ui/components/u-icon/u-icon").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-icon/u-icon.vue */ 313))
     }
   }
 } catch (e) {
@@ -137,7 +140,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
 
 
 
@@ -181,46 +184,68 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 
 
-var _textInput = __webpack_require__(/*! ./textInput.js */ 310);function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var _default2 =
-{
-  name: 'textInput',
-  props: {
-    mode: {
-      type: String,
-      default: function _default() {
-        return 'aboutNews';
-      } },
-
-    type: {
-      type: String,
-      default: function _default() {
-        return 'news';
-      } },
-
-    target: {
-      type: Object,
-      default: function _default() {
-        return {};
-      } },
-
-    userIdTo: {
-      type: String,
-      default: function _default() {
-        return '';
-      } } },
 
 
-  data: function data() {
-    return {
-      ViewPart: this.ViewPart,
-      InputBottom: 0,
-      // 输入内容
-      inputContent: '',
-      // 是否处于输入状态
+
+
+
+var _textInput = __webpack_require__(/*! ./textInput.js */ 310);function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;} //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+var recorderManager = uni.getRecorderManager();var innerAudioContext = uni.createInnerAudioContext();var _default2 = { name: 'textInput', props: { mode: { type: String, default: function _default() {return 'aboutNews';} }, type: { type: String, default: function _default() {return 'news';} }, target: { type: Object, default: function _default() {return {};} }, userIdTo: { type: String, default: function _default() {return '';} }, keyBoardFlag: { type: Boolean, default: function _default() {return false;} }, buttonColor: { type: String, default: function _default() {return '';} } }, data: function data() {return { ViewPart: this.ViewPart, InputBottom: 0, // 输入内容
+      inputContent: '', // 是否处于输入状态
       ifImgChoose: false,
       // 输入图片
       imgList: [],
-      tim: this.tim };
+      tim: this.tim,
+      ifFocus: false,
+      // 录音文件
+      audioPath: '',
+      // 是否处于录音模式
+      ifRecord: false };
 
   },
   computed: {
@@ -243,6 +268,13 @@ var _textInput = __webpack_require__(/*! ./textInput.js */ 310);function ownKeys
     },
     TIM: function TIM() {
       return this.$cache.get('TIM');
+    },
+    ifSendShow: function ifSendShow() {
+      if (this.mode === 'aboutNews') {
+        return true;
+      } else if (this.mode === 'aboutChat') {
+        return !!this.inputContent.trim().length;
+      }
     } },
 
   watch: {
@@ -256,7 +288,10 @@ var _textInput = __webpack_require__(/*! ./textInput.js */ 310);function ownKeys
   methods: _objectSpread({},
   _textInput.__textInput),
 
-  onLoad: function onLoad() {} };exports.default = _default2;
+  onLoad: function onLoad() {
+
+  } };exports.default = _default2;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 

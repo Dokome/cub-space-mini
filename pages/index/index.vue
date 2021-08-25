@@ -45,7 +45,8 @@
 						</view>
 						<!-- 轮播图 -->
 						<view class="margin-top-xs hmax" style="height: 236rpx;" v-if="bannerList && bannerList.length && (index === 1 || index === 2)">
-							<u-swiper height="236" mode="dot" border-radius="8" :list="bannerListMap" :effect3d="true"></u-swiper>
+							<u-swiper height="236" mode="dot" border-radius="8" @click="enterOutHtml"
+							:list="bannerListMap" :effect3d="true"></u-swiper>
 						</view>
 						<!-- 动态数据 -->
 						<view v-if="newsDataList[index] && getNewsMapData(index).length">

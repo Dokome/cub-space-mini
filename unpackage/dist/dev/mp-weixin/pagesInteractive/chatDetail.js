@@ -214,6 +214,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 var _default =
 {
   data: function data() {
@@ -241,7 +245,11 @@ var _default =
       userIdTo: '',
       // scrollTimmer 防抖
       scrollTimmer: null,
-      userInfo: null };
+      userInfo: null,
+      paddingHeight: 0,
+      keyBoardFlag: false,
+      recorderManager: null,
+      innerAudioContext: null };
 
   },
   methods: {
@@ -265,7 +273,7 @@ var _default =
         }, 500);
         _this.scrollTimmer = setTimeout(function () {
           _this.scrollTimmer = null;
-        }, 1000);
+        }, 200);
       }).catch(function (err) {
         console.log(err);
       });
@@ -291,7 +299,7 @@ var _default =
       return this.$cache.get('userId');
     },
     chatStyle: function chatStyle() {
-      var colorPair = ['#F8D90A, #FDEB71', '#0396FF, #ABDCFF', '#EA5455, #FEB692', '#7360F0, #CE9FFC', '#32CCBC, #90F7EC'];
+      var colorPair = ['#F8D90A, #FFF', '#0396FF, #FFF', '#EA5455, #FFF', '#7360F0, #FFF', '#32CCBC, #FFF'];
       var base = this.pageTitle.charCodeAt(0) % 10 >> 1;
       return colorPair[base].split(',');
     },
@@ -317,6 +325,14 @@ var _default =
     // 
     // 收到消息
     uni.$off("reciveChatMsg");
+    uni.$off("keyboardChange");
+    uni.$on("keyboardChange", function (height) {
+      _this2.paddingHeight = height;
+      _this2.$nextTick(function () {
+        _this2.scrollTop += height;
+        _this2.$forceUpdate();
+      });
+    });
     uni.$on("reciveChatMsg", function (data) {
       data = data.filter(function (item) {
         return item.from === _this2.userIdTo || item.to === _this2.userIdTo;
@@ -326,6 +342,10 @@ var _default =
       _this2.tim.setMessageRead({ conversationID: options.id });
       _this2.$forceUpdate();
     });
+    // 获取麦克风权限
+    uni.authorize({
+      scope: 'scope.record' });
+
   },
   onUnload: function onUnload() {
     uni.$off("reciveChatMsg");

@@ -1,10 +1,12 @@
 export const __textInput = {
 	InputFocus(e) {
-		this.InputBottom = e.detail.height;
 		this.ifImgChoose = false;
 	},
-	InputBlur(e) {
-		this.InputBottom = 0;
+	keyboardChange(e) {
+		this.InputBottom = e.detail.height;
+		if (this.mode === 'aboutChat') {
+			uni.$emit("keyboardChange", e.detail.height)
+		}
 	},
 	ImgChooseHandle() {
 		if (this.mode === 'aboutNews') {

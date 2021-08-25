@@ -10,7 +10,6 @@
 		<textarea
 			v-model="inputContent"
 			@focus="InputFocus"
-			@blur="InputBlur"
 			:show-confirm-bar="false"
 			auto-height
 			class="textarea"
@@ -18,13 +17,17 @@
 			:placeholder="inputPlaceHolder"
 			maxlength="200"
 			:fixed="true"
+			:hold-keyboard="mode === 'aboutChat' && true"
+			@keyboardheightchange="keyboardChange"
 		/>
 		<!-- 发送 -->
 		<view>
-			<u-button shape="circle" type="primary" :custom-style="{ height: '60rpx', width: '120rpx' }" 
+			<u-button shape="circle" type="primary" v-if="ifSendShow"
+				:custom-style="{ height: '60rpx', width: '120rpx', backgroundColor: buttonColor }" 
 				@click="modeHandle()">发送
 			</u-button>
-			</view>
+			<u-icon type="" name="mic" size="50" color="#989EB4" v-else></u-icon>
+		</view>
 		<!-- 图片框 -->
 		<view class="imgchoose padding-xs shadow-top" v-show="ifImgChoose" style="transition: .2s;">
 			<scroll-view :scroll-x="true">
@@ -42,6 +45,8 @@
 </template>
 
 <script>
+const recorderManager = uni.getRecorderManager();
+const innerAudioContext = uni.createInnerAudioContext();
 import { __textInput } from './textInput.js';
 export default {
 	name: 'textInput',
@@ -69,6 +74,18 @@ export default {
 			default() {
 				return '';
 			}
+		},
+		keyBoardFlag: {
+			type: Boolean,
+			default() {
+				return false
+			}
+		},
+		buttonColor: {
+			type: String,
+			default() {
+				return '';
+			}
 		}
 	},
 	data() {
@@ -81,7 +98,12 @@ export default {
 			ifImgChoose: false,
 			// 输入图片
 			imgList: [],
-			tim: this.tim
+			tim: this.tim,
+			ifFocus: false,
+			// 录音文件
+			audioPath: '',
+			// 是否处于录音模式
+			ifRecord: false
 		};
 	},
 	computed: {
@@ -104,6 +126,13 @@ export default {
 		},
 		TIM() {
 			return this.$cache.get('TIM');
+		},
+		ifSendShow() {
+			if (this.mode === 'aboutNews') {
+				return true;
+			} else if (this.mode === 'aboutChat') {
+				return !!this.inputContent.trim().length;
+			}
 		}
 	},
 	watch: {
@@ -117,7 +146,9 @@ export default {
 	methods: {
 		...__textInput
 	},
-	onLoad() {}
+	onLoad() {
+
+	}
 };
 </script>
 
