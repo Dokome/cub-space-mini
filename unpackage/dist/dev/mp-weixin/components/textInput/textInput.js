@@ -189,6 +189,19 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 var _textInput = __webpack_require__(/*! ./textInput.js */ 310);function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;} //
 //
 //
@@ -235,23 +248,29 @@ var _textInput = __webpack_require__(/*! ./textInput.js */ 310);function ownKeys
 //
 //
 //
-var recorderManager = uni.getRecorderManager();var innerAudioContext = uni.createInnerAudioContext();var _default2 = { name: 'textInput', props: { mode: { type: String, default: function _default() {return 'aboutNews';} }, type: { type: String, default: function _default() {return 'news';} }, target: { type: Object, default: function _default() {return {};} }, userIdTo: { type: String, default: function _default() {return '';} }, keyBoardFlag: { type: Boolean, default: function _default() {return false;} }, buttonColor: { type: String, default: function _default() {return '';} } }, data: function data() {return { ViewPart: this.ViewPart, InputBottom: 0, // 输入内容
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+// 录音
+var recorderManager = uni.getRecorderManager();var _default2 = { name: 'textInput', props: { mode: { type: String, default: function _default() {return 'aboutNews';} }, type: { type: String, default: function _default() {return 'news';} }, target: { type: Object, default: function _default() {return {};} }, userIdTo: { type: String, default: function _default() {return '';} }, keyBoardFlag: { type: Boolean, default: function _default() {return false;} }, buttonColor: { type: String, default: function _default() {return '';} } }, data: function data() {return { ViewPart: this.ViewPart, InputBottom: 0, // 输入内容
       inputContent: '', // 是否处于输入状态
-      ifImgChoose: false,
-      // 输入图片
-      imgList: [],
-      tim: this.tim,
-      ifFocus: false,
-      // 录音文件
-      audioPath: '',
-      // 是否处于录音模式
-      ifRecord: false };
-
-  },
-  computed: {
-    imgStyle: function imgStyle() {
-      return this.$api.imgHandle.multiImgShow.call(this);
-    },
+      ifImgChoose: false, // 输入图片
+      imgList: [], tim: this.tim, ifFocus: false, // 是否处于录音模式
+      ifRecord: false, // 录音开始位置
+      recordStartPoint: null, // 录音提醒文字
+      recordTitle: '按住说话', // 是否在录音中
+      isRecording: false, // 是否能录音成功
+      ifRecordSucc: false };}, computed: { imgStyle: function imgStyle() {return this.$api.imgHandle.multiImgShow.call(this);},
     inputPlaceHolder: function inputPlaceHolder() {
       if (this.type === 'comment' || this.type === 'news') {
         return '爱国 友善 文明';
@@ -288,8 +307,27 @@ var recorderManager = uni.getRecorderManager();var innerAudioContext = uni.creat
   methods: _objectSpread({},
   _textInput.__textInput),
 
-  onLoad: function onLoad() {
+  mounted: function mounted() {var _this = this;
+    recorderManager.onStop(function (res) {
+      var tim = _this.tim;
+      if (_this.ifRecordSucc) {
+        // 4. 创建消息实例，接口返回的实例可以上屏
+        var message = tim.createAudioMessage({
+          to: _this.userIdTo,
+          conversationType: _this.TIM.TYPES.CONV_C2C,
+          payload: {
+            file: res } });
 
+
+        var promise = tim.sendMessage(message);
+        promise.then(function (imResponse) {
+          uni.$emit("reciveChatMsg", [imResponse.data.message]);
+        }).catch(function (imError) {
+          // 发送失败
+          console.warn('sendMessage error:', imError);
+        });
+      }
+    });
   } };exports.default = _default2;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

@@ -233,7 +233,6 @@ var _default =
           }} catch (err) {_iterator.e(err);} finally {_iterator.f();}
         _this.nextReqMessageID = imResponse.data.nextReqMessageID; // 用于续拉，分页续拉时需传入该字段。
         _this.isCompleted = imResponse.data.isCompleted; // 表示是否已经拉完所有消息。
-        console.log(_this.msgList);
       });
     } },
 

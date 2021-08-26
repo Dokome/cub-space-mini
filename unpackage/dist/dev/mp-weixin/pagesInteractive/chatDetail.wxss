@@ -40,4 +40,114 @@
   background-color: #d9e4fa;
   color: #000;
 }
+.blockDance .blockDance-item.data-v-ebbd7a48 {
+  width: 8rpx;
+  background-color: #000;
+  margin-right: 5rpx;
+  border-radius: 4rpx;
+  -webkit-animation-duration: .3s;
+          animation-duration: .3s;
+  -webkit-animation-fill-mode: forwards;
+          animation-fill-mode: forwards;
+  -webkit-animation-iteration-count: infinite;
+          animation-iteration-count: infinite;
+  -webkit-animation-direction: alternate;
+          animation-direction: alternate;
+  -webkit-animation-play-state: paused;
+          animation-play-state: paused;
+}
+.blockDance .blockDance-item.data-v-ebbd7a48:nth-child(1) {
+  height: 20rpx;
+  -webkit-animation-name: dance1-data-v-ebbd7a48;
+          animation-name: dance1-data-v-ebbd7a48;
+}
+.blockDance .blockDance-item.data-v-ebbd7a48:nth-child(2) {
+  height: 40rpx;
+  -webkit-animation-name: dance2-data-v-ebbd7a48;
+          animation-name: dance2-data-v-ebbd7a48;
+}
+.blockDance .blockDance-item.data-v-ebbd7a48:nth-child(3) {
+  height: 30rpx;
+  -webkit-animation-name: dance3-data-v-ebbd7a48;
+          animation-name: dance3-data-v-ebbd7a48;
+}
+.blockDance .blockDance-item.data-v-ebbd7a48:nth-child(4) {
+  height: 20rpx;
+  -webkit-animation-name: dance4-data-v-ebbd7a48;
+          animation-name: dance4-data-v-ebbd7a48;
+}
+@-webkit-keyframes dance1-data-v-ebbd7a48 {
+from {
+    height: 20rpx;
+}
+to {
+    height: 40rpx;
+}
+}
+@keyframes dance1-data-v-ebbd7a48 {
+from {
+    height: 20rpx;
+}
+to {
+    height: 40rpx;
+}
+}
+@-webkit-keyframes dance2-data-v-ebbd7a48 {
+from {
+    height: 40rpx;
+}
+to {
+    height: 20rpx;
+}
+}
+@keyframes dance2-data-v-ebbd7a48 {
+from {
+    height: 40rpx;
+}
+to {
+    height: 20rpx;
+}
+}
+@-webkit-keyframes dance3-data-v-ebbd7a48 {
+from {
+    height: 30rpx;
+}
+50% {
+    height: 40rpx;
+}
+to {
+    height: 30rpx;
+}
+}
+@keyframes dance3-data-v-ebbd7a48 {
+from {
+    height: 30rpx;
+}
+50% {
+    height: 40rpx;
+}
+to {
+    height: 30rpx;
+}
+}
+@-webkit-keyframes dance4-data-v-ebbd7a48 {
+from {
+    height: 20rpx;
+}
+to {
+    height: 40rpx;
+}
+}
+@keyframes dance4-data-v-ebbd7a48 {
+from {
+    height: 20rpx;
+}
+to {
+    height: 40rpx;
+}
+}
+.animateRuning.data-v-ebbd7a48 {
+  -webkit-animation-play-state: running !important;
+          animation-play-state: running !important;
+}
 

@@ -19,15 +19,28 @@
 			:fixed="true"
 			:hold-keyboard="mode === 'aboutChat' && true"
 			@keyboardheightchange="keyboardChange"
+			v-if="!ifRecord"
 		/>
+		
+		<view class="textarea flex-sub text-center" id="record"v-else 
+			@touchstart="longpressRecordStart"
+			@touchmove="recordTouchMove"
+			@touchend="recordEnd"
+			>
+		{{ recordTitle }}</view>
+		
 		<!-- 发送 -->
 		<view>
 			<u-button shape="circle" type="primary" v-if="ifSendShow"
 				:custom-style="{ height: '60rpx', width: '120rpx', backgroundColor: buttonColor }" 
 				@click="modeHandle()">发送
 			</u-button>
-			<u-icon type="" name="mic" size="50" color="#989EB4" v-else></u-icon>
+			<!-- 录音模式 -->
+			<view class=""  v-else @click="changeRecordState">
+				<u-icon type="" :name="ifRecord ? 'mic-off' : 'mic'" size="50" color="#989EB4"></u-icon>
+			</view>
 		</view>
+		
 		<!-- 图片框 -->
 		<view class="imgchoose padding-xs shadow-top" v-show="ifImgChoose" style="transition: .2s;">
 			<scroll-view :scroll-x="true">
@@ -45,8 +58,8 @@
 </template>
 
 <script>
+// 录音
 const recorderManager = uni.getRecorderManager();
-const innerAudioContext = uni.createInnerAudioContext();
 import { __textInput } from './textInput.js';
 export default {
 	name: 'textInput',
@@ -100,10 +113,16 @@ export default {
 			imgList: [],
 			tim: this.tim,
 			ifFocus: false,
-			// 录音文件
-			audioPath: '',
 			// 是否处于录音模式
-			ifRecord: false
+			ifRecord: false,
+			// 录音开始位置
+			recordStartPoint: null,
+			// 录音提醒文字
+			recordTitle: '按住说话',
+			// 是否在录音中
+			isRecording: false,
+			// 是否能录音成功
+			ifRecordSucc: false,
 		};
 	},
 	computed: {
@@ -146,8 +165,27 @@ export default {
 	methods: {
 		...__textInput
 	},
-	onLoad() {
-
+	mounted() {
+		recorderManager.onStop(res => {
+			let tim = this.tim;
+			if (this.ifRecordSucc) {
+				// 4. 创建消息实例，接口返回的实例可以上屏
+				const message = tim.createAudioMessage({
+				  to: this.userIdTo,
+				  conversationType: this.TIM.TYPES.CONV_C2C,
+				  payload: {
+				    file: res
+				  },
+				});
+				let promise = tim.sendMessage(message);
+				promise.then(function(imResponse) {
+				  uni.$emit("reciveChatMsg", [imResponse.data.message]);
+				}).catch(function(imError) {
+				  // 发送失败
+				  console.warn('sendMessage error:', imError);
+				});
+			}
+		});
 	}
 };
 </script>

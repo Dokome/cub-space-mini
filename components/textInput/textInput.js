@@ -1,3 +1,4 @@
+const recorderManager = uni.getRecorderManager();
 export const __textInput = {
 	InputFocus(e) {
 		this.ifImgChoose = false;
@@ -131,5 +132,98 @@ export const __textInput = {
 		this.ifImgChoose = false;
 		this.imgList = [];
 		this.$forceUpdate();
+	},
+	// 录音模式
+	changeRecordState() {
+		this.ifRecord = !this.ifRecord;
+		if (this.ifRecord) {
+			uni.authorize({
+					scope: 'scope.record',
+					success: (res) => {
+						// 已授权 可以录音
+					},
+					fail: (res) => {
+						// 未授权 提醒授权
+						this.toSettingPage({
+							success: (authRes) => {
+								let authState = authRes.authSetting['scope.record'];
+								this.ifRecord = authState;
+							},
+							fail: (err) => {
+								this.ifRecord = false;
+							}
+						});
+					}
+			})
+		}
+	},
+	// 开始录音
+	longpressRecordStart(e) {
+		this.recordStartPoint = e.changedTouches[0];
+		if (e.target.id === 'record') {
+			uni.authorize({
+					scope: 'scope.record',
+					success: (res) => {
+						// 已授权 开始录音
+						recorderManager.start();
+						this.recordTitle = '正在说话',
+						this.isRecording = true;
+						this.ifRecordSucc = true;
+					},
+					fail: (res) => {
+						// 未授权 提醒授权 取消录音状态
+						this.toSettingPage({
+							success: (authRes) => {
+								let authState = authRes.authSetting['scope.record'];
+								this.ifRecord = authState;
+							},
+							fail: (err) => {
+								this.ifRecord = false;
+							}
+						});
+					}
+			});
+		}
+	},
+	// 录音时手指移动
+	recordTouchMove(e) {
+		if (this.isRecording) {
+			let point = e.changedTouches[0];
+			if (this.recordStartPoint.clientY - point.clientY > 100) {
+				this.recordTitle = "松开后取消发送";
+				this.ifRecordSucc = false;
+			} else if (this.recordStartPoint.clientY - point.clientY > 20) {
+				this.recordTitle = "上滑可取消";
+				this.ifRecordSucc = true;
+			} else {
+				this.recordTitle = "正在说话";
+				this.ifRecordSucc = true;
+			}
+		}
+	},
+	// 录音结束
+	recordEnd() {
+		this.isRecording = false;
+		recorderManager.stop();
+		this.recordTitle = '按住说话';
+	},
+	// 前往设置页
+	toSettingPage(options = {}) {
+		uni.showModal({
+			title: '前往授权',
+			content: '语音功能需要授权录音功能',
+			cancelText: '取消',
+			confirmText: '确定',
+			success: (res) => {
+				if (res.confirm) {
+					uni.openSetting(options);
+				} else if(res.cancel) {
+					this.ifRecord = false;
+				}
+			},
+			fail:(err) => {
+				this.ifRecord = false;
+			}
+		})
 	}
 }

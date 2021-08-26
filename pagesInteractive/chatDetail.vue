@@ -23,7 +23,7 @@
 					</view>
 				</view>
 				<view style="background-color: #F5F5F5;"></view>
-				<view class="isMessage" :class="item.from !== userId ? 'isNotSelf' : 'isSelf'" v-for="item in msgList" :key="item.ID">
+				<view class="isMessage" :class="item.from !== userId ? 'isNotSelf' : 'isSelf'" v-for="(item, I_index) in msgList" :key="item.ID">
 					<view :class="item.from !== userId ? 'margin-right-sm' : 'margin-left-sm'">
 						<u-avatar :size="80" :src="item.avatar" @click="enterUserHome(item.from)"></u-avatar>
 					</view>
@@ -43,6 +43,14 @@
 							</image>
 						</view>
 						<!-- 语音模式 -->
+						<view class="flex align-center" v-if="item.payload.remoteAudioUrl" 
+							@click="audioPlayHandle(item.payload.url, I_index, $event)">
+							<view class="blockDance flex align-center" :style="{ height: '40rpx'}">
+								<view v-for="(item, index) in 4" :class="{ 'animateRuning' : I_index === playAudioIndex }"
+									:key="index" class="blockDance-item" :my="I_index"></view>
+							</view>
+							<text class="margin-left-xs">{{ item.payload.second + 's' }}</text>
+						</view>
 					</view>
 				</view>
 				<!-- 上顶框 -->
@@ -55,6 +63,8 @@
 </template>
 
 <script>
+// 播放
+const innerAudioContext = uni.createInnerAudioContext();
 export default {
 	data() {
 		return {
@@ -85,7 +95,7 @@ export default {
 			paddingHeight: 0,
 			keyBoardFlag: false,
 			recorderManager: null,
-			innerAudioContext: null
+			playAudioIndex: -1,
 		};
 	},
 	methods: {
@@ -128,6 +138,14 @@ export default {
 		},
 		enterUserHome(id) {
 			this.$api.routerHandle.goto(`/pagesHome/mynews?id=${id}`);
+		},
+		audioPlayHandle(src, I_index, e) {
+				this.playAudioIndex = I_index;
+				this.$forceUpdate();
+				innerAudioContext.src = src;
+				innerAudioContext.play(() => {
+					console.log('开始播放');
+			})
 		}
 	},
 	computed: {
@@ -178,10 +196,10 @@ export default {
 			this.tim.setMessageRead({conversationID: options.id});
 			this.$forceUpdate();
 		});
-		// 获取麦克风权限
-		uni.authorize({
-		  scope: 'scope.record',
-		});
+		// 音频结束
+		innerAudioContext.onEnded(() => {
+			this.playAudioIndex = -1;
+		})
 	},
 	onUnload() {
 		uni.$off("reciveChatMsg");
@@ -231,5 +249,80 @@ export default {
 		background-color: #d9e4fa;
 		color: #000;
 	}
+}
+
+.blockDance {
+	.blockDance-item {
+		width: 8rpx;
+		background-color: #000;
+		margin-right: 5rpx;
+		border-radius: 4rpx;
+		animation-duration: .3s;
+		animation-fill-mode: forwards;
+		animation-iteration-count: infinite;
+		animation-direction: alternate;
+		animation-play-state: paused;
+		&:nth-child(1) {
+			height: 20rpx;
+			animation-name: dance1;
+		}
+		&:nth-child(2) {
+			height: 40rpx;
+			animation-name: dance2;
+		}
+		&:nth-child(3) {
+			height: 30rpx;
+			animation-name: dance3;
+		}
+		&:nth-child(4) {
+			height: 20rpx;
+			animation-name: dance4;
+		}
+	}
+}
+
+@keyframes dance1 {
+	from {
+		height: 20rpx;
+	}
+	to {
+		height: 40rpx;
+	}
+}
+
+@keyframes dance2 {
+	from {
+		height: 40rpx;
+	}
+	to {
+		height: 20rpx;
+	}
+}
+
+@keyframes dance3 {
+	from {
+		height: 30rpx;
+	}
+
+	50% {
+		height: 40rpx;
+	}
+	
+	to {
+		height: 30rpx;
+	}
+}
+
+@keyframes dance4 {
+	from {
+		height: 20rpx;
+	}
+	to {
+		height: 40rpx;
+	}
+}
+
+.animateRuning {
+	animation-play-state: running !important;
 }
 </style>

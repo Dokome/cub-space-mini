@@ -218,7 +218,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-var _default =
+//
+//
+//
+//
+//
+//
+//
+//
+
+// 播放
+var innerAudioContext = uni.createInnerAudioContext();var _default =
 {
   data: function data() {
     return {
@@ -249,7 +259,7 @@ var _default =
       paddingHeight: 0,
       keyBoardFlag: false,
       recorderManager: null,
-      innerAudioContext: null };
+      playAudioIndex: -1 };
 
   },
   methods: {
@@ -292,6 +302,14 @@ var _default =
     },
     enterUserHome: function enterUserHome(id) {
       this.$api.routerHandle.goto("/pagesHome/mynews?id=".concat(id));
+    },
+    audioPlayHandle: function audioPlayHandle(src, I_index, e) {
+      this.playAudioIndex = I_index;
+      this.$forceUpdate();
+      innerAudioContext.src = src;
+      innerAudioContext.play(function () {
+        console.log('开始播放');
+      });
     } },
 
   computed: {
@@ -342,10 +360,10 @@ var _default =
       _this2.tim.setMessageRead({ conversationID: options.id });
       _this2.$forceUpdate();
     });
-    // 获取麦克风权限
-    uni.authorize({
-      scope: 'scope.record' });
-
+    // 音频结束
+    innerAudioContext.onEnded(function () {
+      _this2.playAudioIndex = -1;
+    });
   },
   onUnload: function onUnload() {
     uni.$off("reciveChatMsg");
