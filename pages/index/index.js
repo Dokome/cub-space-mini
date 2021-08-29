@@ -17,11 +17,12 @@ export const __indexMethods = {
 	},
 	//进入热榜页面
 	enterHotList() {
-		this.$api.routerHandle.goto('/pagesInteractive/hotList', JSON.parse(this.current));
+		this.$api.routerHandle.goto('/pagesInteractive/hotList', this.current);
 	},
 	// 进入轮播图页面
 	enterOutHtml(index) {
-		this.$api.routerHandle.goto('/pagesInteractive/webView?src=' + this.bannerList[index].jumpLink);
+		const list = this.current === 1 ? this.bannerListR : this.bannerListS;
+		this.$api.routerHandle.goto('/pagesInteractive/webView?src=' + list[index].jumpLink);
 	},
 	//进入动态详情
 	enterDetail(id) {

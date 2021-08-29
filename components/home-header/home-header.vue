@@ -22,7 +22,7 @@
 						:custom-style="{ width : '100rpx' , height: '65rpx' }" @click="changeFocusStatus">
 						{{ focusStatus ? '已关注' : '+关注' }} 
 					</u-button>
-					<u-button type="primary" plain="true" size="medium" @click="chatDetail('C2C',	userinfo.nickName, userinfo.userId)"
+					<u-button type="primary" plain="true" size="medium" @click="chatDetail('C2C',	userinfo.nickName, userinfo.userId, userinfo)"
 						:custom-style="{ width : '100rpx' , height: '65rpx' }"	>私聊
 					</u-button>
 				</view>
@@ -31,10 +31,10 @@
 					<view class="flex align-center">
 						<text class="text-lg text-black text-xxl margin-right-sm" style="font-weight: 500;">{{ userinfo.nickName }}</text>
 					</view>
-					<image :src="`/static/home/gender${ userinfo.gender == 1 ? 1 : 0 }.png`" mode="" style="width: 40rpx; height: 40rpx;"></image>	
+					<image :src="`/static/home/gender${ userinfo.gender == 2 ? 1 : 0 }.png`" mode="" style="width: 40rpx; height: 40rpx;"></image>	
 				</view>
 				<!-- 标签 -->
-				<view class="margin-tb-sm">
+				<view class="margin-tb-sm flex" style="flex-wrap: nowrap;">
 					<!-- ID -->
 					<u-tag :text="`UID:${ userinfo.userId }`" shape="circle" color="#909399" bg-color="#F5F5F5" border-color="#F5F5F5" />
 					<!-- 学校 -->
@@ -164,8 +164,8 @@
 				})
 			},
 			// 进入聊天详情页
-			chatDetail(id, nick, userIdTo) {
-				this.$api.routerHandle.goto(`/pagesInteractive/chatDetail?id=${id + userIdTo}&nick=${nick}&userIdTo=${userIdTo}`);
+			chatDetail(id, nick, userIdTo, userinfo) {
+				this.$api.routerHandle.goto(`/pagesInteractive/chatDetail?id=${id + userIdTo}&nick=${nick}&userIdTo=${userIdTo}`, userinfo);
 			},
 		}
 	}

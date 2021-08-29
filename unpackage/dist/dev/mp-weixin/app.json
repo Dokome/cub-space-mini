@@ -24,7 +24,8 @@
         "webView",
         "hotList",
         "newsdetail",
-        "chatDetail"
+        "chatDetail",
+        "officialNews"
       ]
     }
   ],

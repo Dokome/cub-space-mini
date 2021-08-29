@@ -17,6 +17,16 @@
   font-size: 20rpx;
   padding: 6rpx 12rpx;
 }
+.u-size-large.data-v-95cf93f4 {
+  font-size: 30rpx;
+  padding: 22rpx 45rpx;
+}
+.u-size-largeCur.data-v-95cf93f4 {
+  font-size: 30rpx;
+  padding: 22rpx 45rpx;
+  color: #fff !important;
+  background-color: #E79F33 !important;
+}
 .u-mode-light-primary.data-v-95cf93f4 {
   background-color: #ecf5ff;
   color: #2979ff;

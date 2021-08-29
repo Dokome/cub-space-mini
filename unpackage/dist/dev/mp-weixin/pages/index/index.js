@@ -96,28 +96,28 @@ var components
 try {
   components = {
     navbar: function() {
-      return __webpack_require__.e(/*! import() | components/navbar/navbar */ "components/navbar/navbar").then(__webpack_require__.bind(null, /*! @/components/navbar/navbar.vue */ 186))
+      return __webpack_require__.e(/*! import() | components/navbar/navbar */ "components/navbar/navbar").then(__webpack_require__.bind(null, /*! @/components/navbar/navbar.vue */ 194))
     },
     uTabsSwiper: function() {
-      return Promise.all(/*! import() | uview-ui/components/u-tabs-swiper/u-tabs-swiper */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-tabs-swiper/u-tabs-swiper")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-tabs-swiper/u-tabs-swiper.vue */ 193))
+      return Promise.all(/*! import() | uview-ui/components/u-tabs-swiper/u-tabs-swiper */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-tabs-swiper/u-tabs-swiper")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-tabs-swiper/u-tabs-swiper.vue */ 201))
     },
     uSwiper: function() {
-      return __webpack_require__.e(/*! import() | uview-ui/components/u-swiper/u-swiper */ "uview-ui/components/u-swiper/u-swiper").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-swiper/u-swiper.vue */ 200))
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-swiper/u-swiper */ "uview-ui/components/u-swiper/u-swiper").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-swiper/u-swiper.vue */ 208))
     },
     card: function() {
-      return Promise.all(/*! import() | components/card/card */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/card/card")]).then(__webpack_require__.bind(null, /*! @/components/card/card.vue */ 207))
+      return Promise.all(/*! import() | components/card/card */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/card/card")]).then(__webpack_require__.bind(null, /*! @/components/card/card.vue */ 215))
     },
     uLoadmore: function() {
-      return __webpack_require__.e(/*! import() | uview-ui/components/u-loadmore/u-loadmore */ "uview-ui/components/u-loadmore/u-loadmore").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-loadmore/u-loadmore.vue */ 215))
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-loadmore/u-loadmore */ "uview-ui/components/u-loadmore/u-loadmore").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-loadmore/u-loadmore.vue */ 223))
     },
     uTabbar: function() {
-      return Promise.all(/*! import() | uview-ui/components/u-tabbar/u-tabbar */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-tabbar/u-tabbar")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-tabbar/u-tabbar.vue */ 222))
+      return Promise.all(/*! import() | uview-ui/components/u-tabbar/u-tabbar */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-tabbar/u-tabbar")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-tabbar/u-tabbar.vue */ 230))
     },
     pop: function() {
-      return Promise.all(/*! import() | components/pop/pop */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/pop/pop")]).then(__webpack_require__.bind(null, /*! @/components/pop/pop.vue */ 229))
+      return Promise.all(/*! import() | components/pop/pop */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/pop/pop")]).then(__webpack_require__.bind(null, /*! @/components/pop/pop.vue */ 237))
     },
     loading: function() {
-      return __webpack_require__.e(/*! import() | components/loading/loading */ "components/loading/loading").then(__webpack_require__.bind(null, /*! @/components/loading/loading.vue */ 238))
+      return __webpack_require__.e(/*! import() | components/loading/loading */ "components/loading/loading").then(__webpack_require__.bind(null, /*! @/components/loading/loading.vue */ 246))
     }
   }
 } catch (e) {
@@ -334,6 +334,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
 var _vuex = __webpack_require__(/*! vuex */ 47);
 var _index = __webpack_require__(/*! ./index.js */ 64);
 var _getIndexData = __webpack_require__(/*! ./getIndexData.js */ 65);function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var _default =
@@ -375,7 +378,9 @@ var _getIndexData = __webpack_require__(/*! ./getIndexData.js */ 65);function ow
 
 
       //轮播图数据
-      bannerList: [],
+      bannerListS: [],
+      // 
+      bannerListR: [],
       // 是否显示发布弹框
       ifPublishShow: true,
       //主要渲染数据
@@ -400,6 +405,7 @@ var _getIndexData = __webpack_require__(/*! ./getIndexData.js */ 65);function ow
       reportInfoList: [],
       hotList: new Array(2).fill('') };
 
+
   },
   methods: _objectSpread(_objectSpread({},
   _index.__indexMethods),
@@ -411,8 +417,10 @@ var _getIndexData = __webpack_require__(/*! ./getIndexData.js */ 65);function ow
       return !!this.$cache.get('token');
     },
     bannerListMap: function bannerListMap() {
-      if (this.bannerList && this.bannerList.length) {
-        return this.bannerList.map(function (item) {return item.image;});
+      if (this.bannerListR && this.bannerListR.length && this.current === 1) {
+        return this.bannerListR.map(function (item) {return item.image;});
+      } else if (this.bannerListS && this.bannerListS.length && this.current === 2) {
+        return this.bannerListS.map(function (item) {return item.image;});
       }
     },
     isAuthor: function isAuthor() {

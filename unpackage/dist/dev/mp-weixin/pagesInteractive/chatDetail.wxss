@@ -35,6 +35,17 @@
   -webkit-flex-direction: row-reverse;
           flex-direction: row-reverse;
   justify-self: flex-start;
+  position: relative;
+}
+.isSelf .chatNewsBack.data-v-ebbd7a48 {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  -webkit-transform: translateX(-50%) translateY(-100%);
+          transform: translateX(-50%) translateY(-100%);
+  border-radius: 10rpx;
 }
 .isSelf .messageBlock.data-v-ebbd7a48 {
   background-color: #d9e4fa;
@@ -42,11 +53,11 @@
 }
 .blockDance .blockDance-item.data-v-ebbd7a48 {
   width: 8rpx;
-  background-color: #000;
   margin-right: 5rpx;
   border-radius: 4rpx;
   -webkit-animation-duration: .3s;
           animation-duration: .3s;
+  background-color: #000;
   -webkit-animation-fill-mode: forwards;
           animation-fill-mode: forwards;
   -webkit-animation-iteration-count: infinite;

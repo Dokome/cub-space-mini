@@ -94,16 +94,16 @@ var components
 try {
   components = {
     navbar: function() {
-      return __webpack_require__.e(/*! import() | components/navbar/navbar */ "components/navbar/navbar").then(__webpack_require__.bind(null, /*! @/components/navbar/navbar.vue */ 186))
+      return __webpack_require__.e(/*! import() | components/navbar/navbar */ "components/navbar/navbar").then(__webpack_require__.bind(null, /*! @/components/navbar/navbar.vue */ 194))
     },
     uSwitch: function() {
-      return __webpack_require__.e(/*! import() | uview-ui/components/u-switch/u-switch */ "uview-ui/components/u-switch/u-switch").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-switch/u-switch.vue */ 290))
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-switch/u-switch */ "uview-ui/components/u-switch/u-switch").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-switch/u-switch.vue */ 319))
     },
     uButton: function() {
-      return __webpack_require__.e(/*! import() | uview-ui/components/u-button/u-button */ "uview-ui/components/u-button/u-button").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-button/u-button.vue */ 179))
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-button/u-button */ "uview-ui/components/u-button/u-button").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-button/u-button.vue */ 187))
     },
     loading: function() {
-      return __webpack_require__.e(/*! import() | components/loading/loading */ "components/loading/loading").then(__webpack_require__.bind(null, /*! @/components/loading/loading.vue */ 238))
+      return __webpack_require__.e(/*! import() | components/loading/loading */ "components/loading/loading").then(__webpack_require__.bind(null, /*! @/components/loading/loading.vue */ 246))
     }
   }
 } catch (e) {
@@ -247,9 +247,10 @@ var _default =
                 result = data.data.data;
                 _this.gender = result.gender;_this.avatar = result.avatarUrl;_this.sign = result.sign;_this.nickName = result.nickName;
                 _this.forbiddenInfo = [result.uuid, result.phone, result.schoolName, result.realName, result.studentCode];
+                _this.gender = !(_this.gender - 1);
                 setTimeout(function () {
                   _this.ifLoaddingShow = false;
-                }, 300);case 10:case "end":return _context.stop();}}}, _callee);}))();
+                }, 300);case 11:case "end":return _context.stop();}}}, _callee);}))();
     },
     // 按钮点击事件
     buttonClickHandle: function buttonClickHandle() {
@@ -263,13 +264,14 @@ var _default =
                 _this2.avatarIsChange) {_context2.next = 4;break;}_context2.next = 3;return (
                   _this2.$http.upLoadFile(_this2.avatar));case 3:_this2.avatar = _context2.sent;case 4:_context2.next = 6;return (
 
+
                   _this2.$http.request({
                     url: '/umsAccount/updateUserInfo',
                     data: {
                       nickName: _this2.nickName,
                       avatarUrl: _this2.avatar,
                       sign: _this2.sign,
-                      gender: _this2.gender ? 1 : 0 } }));case 6:data = _context2.sent;
+                      gender: !_this2.gender ? 2 : 1 } }));case 6:data = _context2.sent;
 
 
                 if (data.data.code === 200) {

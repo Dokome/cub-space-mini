@@ -19,11 +19,11 @@
 			:fixed="true"
 			:hold-keyboard="mode === 'aboutChat' && true"
 			@keyboardheightchange="keyboardChange"
-			v-if="!ifRecord"
+			v-show="!ifRecord"
 		/>
 		
-		<view class="textarea flex-sub text-center" id="record"v-else 
-			@touchstart="longpressRecordStart"
+		<view class="textarea flex-sub text-center" id="record" v-show="ifRecord" 
+			@touchstart="longpressRecordStart" :style="{ backgroundColor: isRecordingBgc }"
 			@touchmove="recordTouchMove"
 			@touchend="recordEnd"
 			>
@@ -91,7 +91,7 @@ export default {
 		keyBoardFlag: {
 			type: Boolean,
 			default() {
-				return false
+				return false;
 			}
 		},
 		buttonColor: {
@@ -152,6 +152,9 @@ export default {
 			} else if (this.mode === 'aboutChat') {
 				return !!this.inputContent.trim().length;
 			}
+		},
+		isRecordingBgc() {
+			return this.isRecording ? '#ccc' : '#f3f4f6';
 		}
 	},
 	watch: {

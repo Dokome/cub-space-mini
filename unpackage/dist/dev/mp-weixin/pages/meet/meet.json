@@ -2,7 +2,12 @@
   "navigationBarTitleText": "遇见",
   "enablePullDownRefresh": false,
   "usingComponents": {
+    "u-popup": "/uview-ui/components/u-popup/u-popup",
+    "u-tag": "/uview-ui/components/u-tag/u-tag",
+    "u-button": "/uview-ui/components/u-button/u-button",
     "u-tabbar": "/uview-ui/components/u-tabbar/u-tabbar",
-    "login": "/components/login/login"
+    "login": "/components/login/login",
+    "loading": "/components/loading/loading",
+    "meet-loading": "/pages/meet/matchAnimate"
   }
 }

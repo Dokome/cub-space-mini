@@ -12,24 +12,24 @@
 				</view>
 			</view>
 			<!-- 主体 -->
-			<scroll-view scroll-y="true" class="margin-top-xs">
+			<scroll-view scroll-y="true" class="margin-top-xs" style="height: 100%;">
 				<view class="">
 					<view class="notice-list-item flex align-center bg-white padding" 
-								v-for="item in msgList" :key="item.ID" v-if="item.type === 'TIMCustomElem'">
+								v-for="(item, I_index) in msgList" :key="I_index">
 						<!-- 头像 -->
 						<view class="">
 							<view class="chat-list-item-avatar margin-right-sm">
-								<u-avatar size="100" :src="item.avatar"></u-avatar>
+								<u-avatar size="100" :src="item.avatarUrl"></u-avatar>
 							</view>
 						</view>
 						<!-- 主体 -->
 						<view class="flex flex-direction align-start justify-evenly flex-sub">
 							<!-- 关系 -->
-							<text class="u-tips-color text-sm">{{ 'dk' }} {{ '赞' }}了你的 {{ '评论' }}</text>
+							<text class="u-tips-color text-sm">{{ item.nickName }} {{ '赞' }}了你的 {{ '评论' }}</text>
 							<!-- 内容 -->
 							<view class="margin-tb-xs mycut" style="width: 100%;">
 								<text class="u-tips-color text-sm mycut content">
-									是真的牛批是真的牛批是真的牛批是真的牛批是真的牛批是真的牛批是真的牛批是真的牛批是真的牛批是真的牛批是真的牛批是真的牛批是真的牛批
+									{{ item.bizContent }}
 								</text>
 							</view>
 							<!-- 时间 -->
@@ -38,6 +38,11 @@
 						<!-- 末尾跳转 -->
 						<view class="end flex justify-center align-center padding-sm"><text class="text-sm">点击跳转原文&gt&gt</text></view>
 					</view>
+					<u-loadmore
+						:status="loadStatus"
+						:load-text="loadText"
+						:bg-color="'#ffffff'"
+					></u-loadmore>
 				</view>
 			</scroll-view>
 		</view>
@@ -51,11 +56,12 @@ export default {
 		return {
 			// tim引用
 			tim: this.tim,
-			CID: 'C2C1622109839081240311',
+			CID: 'C2Cadministrator',
 			headerList: [
 				{
 					title: '官方公告',
 					img: '/static/Img/notice.png',
+					page: '/pagesInteractive/officialNews'
 				},
 				{
 					title: '粉丝',
@@ -71,29 +77,45 @@ export default {
 			nextReqMessageID: '',
 			isCompleted: false,
 			msgList: [],
+			// loadmore 组件
+			loadStatus: 'nomore',
+			// 举报文字
+			loadText: {
+				loadmore: '上拉加载更多',
+				loading: '努力加载ing...',
+				nomore: '没有更多了~'
+			},
 		}
 	},
 	methods: {
+		scrolltolower() {
+			this.getMsgList();
+		},
 		enterList(e) {
 			this.$api.routerHandle.goto(e.target.dataset.page);
 		},
 		getMsgList() {
 			if (this.isCompleted) {
+				this.loadStatus = 'nomore';
 				return;
 			}
 			// 获取信息过程
+			this.loadStatus = 'loading';
 			let tim = this.tim;
 			let promise = tim.getMessageList({conversationID: this.CID, count: 15, nextReqMessageID: this.nextReqMessageID});
 			promise.then((imResponse) => {
 				if (!!this.nextReqMessageID && this.nextReqMessageID === imResponse.data.nextReqMessageID) return;
+				console.log(imResponse.data.messageList);
 				for (let msg of imResponse.data.messageList.reverse()) {
 					if (msg.type === 'TIMCustomElem') {
-						msg.payload.data = JSON.parse(msg.payload.data);
-						this.msgList.push(msg.payload.data);
+						let data = JSON.parse(msg.payload.data || '{}').content;
+						this.msgList.push(data);
 					}
 				}
 				this.nextReqMessageID = imResponse.data.nextReqMessageID; // 用于续拉，分页续拉时需传入该字段。
 				this.isCompleted = imResponse.data.isCompleted; // 表示是否已经拉完所有消息。
+			}).finally(() => {
+				this.loadStatus = 'loadmore';
 			});
 		}
 	},
@@ -104,6 +126,10 @@ export default {
 		if (this.$cache.get('token')) {
 			this.getMsgList();
 		}
+		uni.$off('noticeListUpdate')
+		uni.$on('noticeListUpdate', () => {
+			this.getMsgList();
+		})
 	},
 }
 </script>

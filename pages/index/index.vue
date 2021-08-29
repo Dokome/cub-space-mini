@@ -36,7 +36,7 @@
 						<view class="margin-sm bg-gray padding-sm flex flex-direction" style="border-radius: 10rpx;" 
 							v-if="(index === 2 || index === 1) && login && hotList && hotList[index - 1] && hotList[index - 1].length > 4" @click="enterHotList">
 							<!-- 头部 -->
-							<view class=""><text class="text-bold text-black text-sm">校园热门</text></view>
+							<view class=""><text class="text-bold text-black text-sm">{{ index === 1 ? '今日热门' : '校园热门' }}</text></view>
 							<view class="gridContent flex-sub margin-top-xs">
 								<view class="mycut" v-for="(item, h_index) in 8" :key="h_index">
 									<text class="text-black">{{ getHotListDataContent(h_index, index) }}</text>
@@ -44,7 +44,10 @@
 							</view>
 						</view>
 						<!-- 轮播图 -->
-						<view class="margin-top-xs hmax" style="height: 236rpx;" v-if="bannerList && bannerList.length && (index === 1 || index === 2)">
+						<view class="margin-top-xs hmax" style="height: 236rpx;" 
+							v-if="(bannerListR && bannerListR.length && index === 1) ||
+										(bannerListS && bannerListS.length && index === 2)"
+							>
 							<u-swiper height="236" mode="dot" border-radius="8" @click="enterOutHtml"
 							:list="bannerListMap" :effect3d="true"></u-swiper>
 						</view>
@@ -134,7 +137,9 @@ export default {
 				}
 			],
 			//轮播图数据
-			bannerList: [],
+			bannerListS: [],
+			// 
+			bannerListR: [],
 			// 是否显示发布弹框
 			ifPublishShow: true,
 			//主要渲染数据
@@ -158,6 +163,7 @@ export default {
 			// 举报信息列表
 			reportInfoList: [],
 			hotList: new Array(2).fill(''),
+			
 		};
 	},
 	methods: {
@@ -170,8 +176,10 @@ export default {
 			return !!this.$cache.get('token');
 		},
 		bannerListMap() {
-			if (this.bannerList && this.bannerList.length) {
-				return this.bannerList.map(item => item.image);
+			if (this.bannerListR && this.bannerListR.length && this.current === 1) {
+				return this.bannerListR.map(item => item.image);
+			} else if (this.bannerListS && this.bannerListS.length && this.current === 2) {
+				return this.bannerListS.map(item => item.image);
 			}
 		},
 		isAuthor() {

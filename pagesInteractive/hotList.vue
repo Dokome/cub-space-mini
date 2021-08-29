@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<!-- 头部 -->
-		<navbar title="校园热榜"></navbar>
+		<navbar :title="`${ type === 1 ? '今日' : '校园'}热门`"></navbar>
 		<!-- 热榜内容 -->
 		<scroll-view scroll-y="true" :style="{ height: `calc(100vh - ${ViewPart - 20}px)`}">
 			<view>

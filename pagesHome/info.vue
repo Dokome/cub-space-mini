@@ -20,7 +20,7 @@
 		<!-- 性别 -->
 		<view class="bg-white padding flex justify-between align-center u-border-bottom">
 			<label for="gender">性别</label>
-			<u-switch v-model="gender" active-color="red" inactive-color="blue" :active-value="1" :inactive-value="0" :disabled="!disabled"></u-switch>
+			<u-switch v-model="gender" active-color="blue" inactive-color="red" :disabled="!disabled"></u-switch>
 		</view>
 		<view class="margin-bottom-xs"></view>
 		<!-- 资料不可修改部分 -->
@@ -66,6 +66,7 @@ export default {
 			let result = data.data.data;
 			({ gender: this.gender, avatarUrl: this.avatar, sign: this.sign, nickName: this.nickName } = result);
 			this.forbiddenInfo = [result.uuid, result.phone, result.schoolName, result.realName, result.studentCode];
+			this.gender = !(this.gender - 1);
 			setTimeout(() => {
 				this.ifLoaddingShow = false;
 			}, 300);
@@ -82,13 +83,14 @@ export default {
 			if (this.avatarIsChange) {
 				this.avatar = await this.$http.upLoadFile(this.avatar);
 			}
+
 			const data = await this.$http.request({
 				url: '/umsAccount/updateUserInfo',
 				data: {
 					nickName: this.nickName,
 					avatarUrl: this.avatar,
 					sign: this.sign,
-					gender: this.gender ? 1 : 0
+					gender: !this.gender ? 2 : 1
 				}
 			});
 			if (data.data.code === 200) {

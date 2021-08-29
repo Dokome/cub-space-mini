@@ -101,7 +101,6 @@ export default {
 			}
 			console.log('appId >>> ' + resultData.appId);
 			this.$cache.set('appId', resultData.appId, resultData.expires);
-			
 		  // TIM
 			GetTimRef(resultData);
 

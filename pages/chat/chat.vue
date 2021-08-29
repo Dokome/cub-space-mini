@@ -34,7 +34,7 @@
 			<!-- 通知 -->
 			<swiper-item>
 				<!-- 视图区域 -->
-				<scroll-view scroll-y="true" class="hmax">
+				<scroll-view scroll-y="true" class="hmax" @scrolltolower="noticeListUpdate">
 					<notice></notice>
 				</scroll-view>
 				<!--  -->
@@ -89,6 +89,9 @@ export default {
 		...__chat,
 		getChatList() {
 			return [...this.chatList.values()];
+		},
+		noticeListUpdate() {
+			uni.$emit('noticeListUpdate', '');
 		}
 	},
 	computed: {

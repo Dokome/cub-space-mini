@@ -4,6 +4,7 @@
   "usingComponents": {
     "navbar": "/components/navbar/navbar",
     "u-avatar": "/uview-ui/components/u-avatar/u-avatar",
+    "u-tag": "/uview-ui/components/u-tag/u-tag",
     "text-input": "/components/textInput/textInput",
     "loading": "/components/loading/loading"
   }

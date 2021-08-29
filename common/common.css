@@ -108,6 +108,9 @@
 	justify-content: space-evenly;
 }
 
+.flex-basis {
+	flex-basis: 0;
+}
 
 /* ==================
           文本

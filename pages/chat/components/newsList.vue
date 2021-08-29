@@ -13,7 +13,7 @@
 				</view>
 				<view class="bottom flex align-center justify-between flex-sub margin-top-xs">
 					<text class="u-tips-color text-sm text-cut message">
-						{{ item.lastMessage.messageForShow }}
+						{{ item.lastMessage.isRevoked ? '撤回了一条消息' : item.lastMessage.messageForShow}}
 					</text>
 					<text class="number" v-if="item.unreadCount">{{ item.unreadCount }}</text>
 				</view>

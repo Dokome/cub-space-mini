@@ -136,6 +136,7 @@ export const __textInput = {
 	// 录音模式
 	changeRecordState() {
 		this.ifRecord = !this.ifRecord;
+		this.InputBottom = 0;
 		if (this.ifRecord) {
 			uni.authorize({
 					scope: 'scope.record',

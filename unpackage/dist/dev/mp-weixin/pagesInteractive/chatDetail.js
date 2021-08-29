@@ -96,16 +96,19 @@ var components
 try {
   components = {
     navbar: function() {
-      return __webpack_require__.e(/*! import() | components/navbar/navbar */ "components/navbar/navbar").then(__webpack_require__.bind(null, /*! @/components/navbar/navbar.vue */ 186))
+      return __webpack_require__.e(/*! import() | components/navbar/navbar */ "components/navbar/navbar").then(__webpack_require__.bind(null, /*! @/components/navbar/navbar.vue */ 194))
     },
     uAvatar: function() {
-      return __webpack_require__.e(/*! import() | uview-ui/components/u-avatar/u-avatar */ "uview-ui/components/u-avatar/u-avatar").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-avatar/u-avatar.vue */ 172))
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-avatar/u-avatar */ "uview-ui/components/u-avatar/u-avatar").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-avatar/u-avatar.vue */ 180))
+    },
+    uTag: function() {
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-tag/u-tag */ "uview-ui/components/u-tag/u-tag").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-tag/u-tag.vue */ 274))
     },
     textInput: function() {
-      return Promise.all(/*! import() | components/textInput/textInput */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/textInput/textInput")]).then(__webpack_require__.bind(null, /*! @/components/textInput/textInput.vue */ 305))
+      return Promise.all(/*! import() | components/textInput/textInput */[__webpack_require__.e("common/vendor"), __webpack_require__.e("components/textInput/textInput")]).then(__webpack_require__.bind(null, /*! @/components/textInput/textInput.vue */ 334))
     },
     loading: function() {
-      return __webpack_require__.e(/*! import() | components/loading/loading */ "components/loading/loading").then(__webpack_require__.bind(null, /*! @/components/loading/loading.vue */ 238))
+      return __webpack_require__.e(/*! import() | components/loading/loading */ "components/loading/loading").then(__webpack_require__.bind(null, /*! @/components/loading/loading.vue */ 246))
     }
   }
 } catch (e) {
@@ -226,6 +229,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 // 播放
 var innerAudioContext = uni.createInnerAudioContext();var _default =
@@ -259,7 +277,10 @@ var innerAudioContext = uni.createInnerAudioContext();var _default =
       paddingHeight: 0,
       keyBoardFlag: false,
       recorderManager: null,
-      playAudioIndex: -1 };
+      playAudioIndex: -1,
+      newsBackIndex: -1,
+      newsBackStartTime: undefined,
+      newsBackTimmer: null };
 
   },
   methods: {
@@ -287,6 +308,7 @@ var innerAudioContext = uni.createInnerAudioContext();var _default =
       }).catch(function (err) {
         console.log(err);
       });
+      this.$forceUpdate();
     },
     scrolltoupper: function scrolltoupper() {
       if (this.scrollTimmer) {
@@ -298,17 +320,73 @@ var innerAudioContext = uni.createInnerAudioContext();var _default =
       return ';' + this.$api.imgHandle.multiImgShow([img]);
     },
     imgPrview: function imgPrview(url) {
+      if (this.newsBackIndex !== -1) return;
       this.$api.imgHandle.imgPreview(url, [url]);
     },
     enterUserHome: function enterUserHome(id) {
       this.$api.routerHandle.goto("/pagesHome/mynews?id=".concat(id));
     },
     audioPlayHandle: function audioPlayHandle(src, I_index, e) {
+      innerAudioContext.stop();
       this.playAudioIndex = I_index;
       this.$forceUpdate();
       innerAudioContext.src = src;
-      innerAudioContext.play(function () {
-        console.log('开始播放');
+      innerAudioContext.play();
+    },
+    // 撤回消息更改对象
+    backTargetChangeStart: function backTargetChangeStart(e) {var _this2 = this;
+      this.newsBackStartTime = +new Date();
+      this.newsBackTimmer = setTimeout(function () {
+        _this2.newsBackIndex = e.target.dataset.backindex;
+        _this2.$forceUpdate();
+      }, 800);
+    },
+    backTargetChangeEnd: function backTargetChangeEnd(e) {
+      if (+new Date() - this.newsBackStartTime < 800) {
+        this.newsBackStartTime = undefined;
+        this.newsBackIndex = -1;
+        clearTimeout(this.newsBackTimmer);
+        this.newsBackTimmer = null;
+        this.$forceUpdate();
+      }
+    },
+    cancle: function cancle() {
+      if (this.newsBackIndex === -1 || !this.newsBackStartTime) return;
+      if (+new Date() - this.newsBackStartTime > 2000) {
+        this.newsBackStartTime = undefined;
+        this.newsBackIndex = -1;
+        clearTimeout(this.newsBackTimmer);
+        this.newsBackTimmer = null;
+        this.$forceUpdate();
+      }
+    },
+    newsBackClickHandle: function newsBackClickHandle(message) {var _this3 = this;
+      // 主动撤回消息
+      var tim = this.tim;
+      var promise = tim.revokeMessage(message);
+      promise.then(function (imResponse) {
+        // 消息撤回成功
+        _this3.$set(message, 'isRevoked', true);
+        console.log("撤回成功");
+      }).catch(function (imError) {
+        if (imError.code == 20016) {
+          return uni.showToast({
+            title: '已超过2分钟无法撤回~',
+            icon: 'none' });
+
+        }
+      });
+    },
+    // 删除撤回提示
+    deleteRevokedMsg: function deleteRevokedMsg(message) {var _this4 = this;
+      var tim = this.tim;
+      var promise = tim.deleteMessage([message]);
+      promise.then(function (imResponse) {
+        // 删除消息成功
+        _this4.$set(message, 'isDeleted', true);
+      }).catch(function (imError) {
+        // 删除消息失败
+        console.warn('deleteMessage error:', imError);
       });
     } },
 
@@ -325,7 +403,7 @@ var innerAudioContext = uni.createInnerAudioContext();var _default =
       return 'lbg-' + ((this.pageTitle.charCodeAt(0) % 10 >> 1) + 1);
     } },
 
-  onLoad: function onLoad(options) {var _this2 = this;
+  onLoad: function onLoad(options) {var _this5 = this;
     // 将某会话下所有未读消息已读上报
     var tim = this.tim;
     this.tim.setMessageRead({ conversationID: options.id });
@@ -338,35 +416,42 @@ var innerAudioContext = uni.createInnerAudioContext();var _default =
     var eventChannel = this.getOpenerEventChannel();
     // 监听acceptDataFromOpenerPage事件，获取上一页面通过eventChannel传送到当前页面的数据
     eventChannel.on('acceptDataFromOpenerPage', function (data) {
-      _this2.userInfo = data.data;
+      _this5.userInfo = data.data;
     });
     // 
     // 收到消息
     uni.$off("reciveChatMsg");
     uni.$off("keyboardChange");
     uni.$on("keyboardChange", function (height) {
-      _this2.paddingHeight = height;
-      _this2.$nextTick(function () {
-        _this2.scrollTop += height;
-        _this2.$forceUpdate();
+      _this5.paddingHeight = height;
+      _this5.$nextTick(function () {
+        _this5.scrollTop += height;
+        _this5.$forceUpdate();
       });
     });
     uni.$on("reciveChatMsg", function (data) {
       data = data.filter(function (item) {
-        return item.from === _this2.userIdTo || item.to === _this2.userIdTo;
+        return item.from === _this5.userIdTo || item.to === _this5.userIdTo;
       });
-      _this2.msgList = _this2.msgList.concat(data);
-      _this2.scrollTop = _this2.msgList.length * 999;
-      _this2.tim.setMessageRead({ conversationID: options.id });
-      _this2.$forceUpdate();
+      _this5.msgList = _this5.msgList.concat(data);
+      _this5.scrollTop = _this5.msgList.length * 999;
+      _this5.tim.setMessageRead({ conversationID: options.id });
+      _this5.$forceUpdate();
     });
     // 音频结束
+    innerAudioContext.onStop(function () {
+      _this5.playAudioIndex = -1;
+      _this5.$forceUpdate();
+    });
+
     innerAudioContext.onEnded(function () {
-      _this2.playAudioIndex = -1;
+      _this5.playAudioIndex = -1;
+      _this5.$forceUpdate();
     });
   },
   onUnload: function onUnload() {
     uni.$off("reciveChatMsg");
+    innerAudioContext.stop();
   } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

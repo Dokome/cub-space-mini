@@ -6,7 +6,7 @@
 		'u-mode-' + mode + '-' + type
 	]"
 	 class="u-tag margin-right" :style="[customStyle]" @tap="clickTag">
-		<text class="">{{text}}</text>
+		<text class="" style="white-space: nowrap;">{{text}}</text>
 		<view class="u-icon-wrap" @tap.stop>
 			<u-icon @click="close" size="22" v-if="closeable" :color="closeIconColor" 
 			name="close" class="u-close-icon" :style="[iconStyle]"></u-icon>
@@ -178,6 +178,18 @@
 	.u-size-mini {
 		font-size: 20rpx;
 		padding: 6rpx 12rpx;
+	}
+	
+	.u-size-large {
+		font-size: 30rpx;
+		padding: 22rpx 45rpx;
+	}
+	
+	.u-size-largeCur {
+		font-size: 30rpx;
+		padding: 22rpx 45rpx;
+		color: #fff !important;
+		background-color: #E79F33 !important;
 	}
 
 	.u-mode-light-primary {

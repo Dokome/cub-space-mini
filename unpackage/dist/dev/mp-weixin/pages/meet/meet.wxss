@@ -4,8 +4,8 @@
 }
 .outWrapper.data-v-b605cd34 {
   height: 100vh;
-  background-image: -webkit-linear-gradient(225deg, #D4BABD, #E5C2D8, #E2D2DE, #F5D3D9, #E6E6EB, #DBE0E9, #F5ECEB, #F5D4DA);
-  background-image: linear-gradient(225deg, #D4BABD, #E5C2D8, #E2D2DE, #F5D3D9, #E6E6EB, #DBE0E9, #F5ECEB, #F5D4DA);
+  background-image: url(https://image.sapce.club/static/bgImage.jpg);
+  background-size: 100vh;
 }
 .meet-main.data-v-b605cd34 {
   height: 80vh;
@@ -45,7 +45,7 @@
   width: 200rpx;
   height: 200rpx;
   position: absolute;
-  z-index: 999999;
+  z-index: 999;
 }
 @-webkit-keyframes wave-data-v-b605cd34 {
 from {

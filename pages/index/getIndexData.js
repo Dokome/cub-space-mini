@@ -127,7 +127,19 @@ export const __getIndexData = {
 		});
 		
 		const result = data.data.data;
-		this.bannerList = result;
+		this.bannerListR = result;
+		
+		const data2 = await this.$http.request({
+			url: '/sysElement/getElementByCode',
+			method: 'POST',
+			data: {
+				parentCode: "school_banner"
+			},
+			noToken: options.noToken
+		});
+		
+		const result2 = data2.data.data;
+		this.bannerListS = result2;
 	},
 	
 	// 删除数据

@@ -1,5 +1,5 @@
 <template>
-	<view style="background-color: #F3F3F3;">
+	<view style="background-color: #F3F3F3;" @click="cancle">
 		<navbar :title="pageTitle"></navbar>
 		<scroll-view scroll-y="true" :scroll-top="scrollTop" class="Anchor" :upper-threshold="pageHeight * 2" @scrolltoupper="scrolltoupper"
 			:style="{ height: `calc(100vh - ${ViewPart - 20}px)` }"
@@ -11,10 +11,10 @@
 						<view class="flex-sub profileCard  flex flex-direction justify-between padding"
 						 :class="lbgColor" v-if="userInfo" @click="enterUserHome(userIdTo)">
 							<view class="">
-								<u-avatar :size="80" :src="userInfo.avatar" v-if=""></u-avatar>
+								<u-avatar :size="80" :src="userInfo.avatar || userInfo.avatarUrl" ></u-avatar>
 							</view>
 							<view class="text-white">
-								{{userInfo.nick}}
+								{{userInfo.nick || userInfo.nickName}}
 							</view>
 							<view class="text-white">
 								打个招呼吧~
@@ -23,34 +23,49 @@
 					</view>
 				</view>
 				<view style="background-color: #F5F5F5;"></view>
-				<view class="isMessage" :class="item.from !== userId ? 'isNotSelf' : 'isSelf'" v-for="(item, I_index) in msgList" :key="item.ID">
-					<view :class="item.from !== userId ? 'margin-right-sm' : 'margin-left-sm'">
-						<u-avatar :size="80" :src="item.avatar" @click="enterUserHome(item.from)"></u-avatar>
-					</view>
-					<view class="messageBlock flex align-center justify-center" 
-						:style="{ backgroundColor: chatStyle[item.from !== userId ? 0 : 1] }">
-						<!-- 文字模式 -->
-						<text class="text-justify" v-if="item.payload.text">{{ item.payload.text }}</text>
-						<!-- 图片模式 -->
-						<view class="flex align-center justify-center" v-if="item.payload.imageInfoArray">
-							<image :src="item.payload.imageInfoArray[2].url" @click="imgPrview(item.payload.imageInfoArray[1].url)"
-								mode="aspectFill" v-if="item.payload.imageInfoArray[2]"
-								:style="{ width: item.payload.imageInfoArray[1].width + 'px',
-									height: item.payload.imageInfoArray[1].height + 'px',
-									maxWidth: '400rpx'
-									}"
-								>
-							</image>
+				<view  v-for="(item, I_index) in msgList" :key="item.ID" >
+					<view class="isMessage" v-if="!item.isRevoked && !item.isDeleted" :class="item.from !== userId ? 'isNotSelf' : 'isSelf'">
+						<view :class="item.from !== userId ? 'margin-right-sm' : 'margin-left-sm'">
+							<u-avatar :size="80" :src="item.avatar" @click="enterUserHome(item.from)"></u-avatar>
 						</view>
-						<!-- 语音模式 -->
-						<view class="flex align-center" v-if="item.payload.remoteAudioUrl" 
-							@click="audioPlayHandle(item.payload.url, I_index, $event)">
-							<view class="blockDance flex align-center" :style="{ height: '40rpx'}">
-								<view v-for="(item, index) in 4" :class="{ 'animateRuning' : I_index === playAudioIndex }"
-									:key="index" class="blockDance-item" :my="I_index"></view>
+						<view class="messageBlock flex align-center justify-center" :data-backIndex="item.random" 
+							@touchstart="backTargetChangeStart" @touchend="backTargetChangeEnd"
+							:style="{ backgroundColor: chatStyle[item.from !== userId ? 0 : 1] }">
+							<!-- 文字模式 -->
+							<text class="text-justify" v-if="item.payload.text" :data-backIndex="item.random" >{{ item.payload.text }}</text>
+							<!-- 图片模式 -->
+							<view class="flex align-center justify-center" v-if="item.payload.imageInfoArray">
+								<image :src="item.payload.imageInfoArray[2].url" @click="imgPrview(item.payload.imageInfoArray[1].url)"
+									mode="aspectFill" v-if="item.payload.imageInfoArray[2]"
+									:style="{ width: item.payload.imageInfoArray[1].width + 'px',
+										height: item.payload.imageInfoArray[1].height + 'px',
+										maxWidth: '400rpx' 
+										}" :data-backIndex="item.random" 
+									>
+								</image>
 							</view>
-							<text class="margin-left-xs">{{ item.payload.second + 's' }}</text>
+							<!-- 语音模式 -->
+							<view class="flex align-center" v-if="item.payload.remoteAudioUrl" :data-backIndex="item.random" 
+								@click="audioPlayHandle(item.payload.url, I_index, $event)">
+								<view class="blockDance flex align-center" :style="{ height: '40rpx'}">
+									<view :class="{ 'animateRuning' : I_index === playAudioIndex}"
+										v-for="(item, index) in 4" :data-backIndex="item.random" 
+										:key="index" class="blockDance-item" ></view>
+								</view>
+								<text class="margin-left-xs" :data-backIndex="item.random">{{ (item.payload.second || 0.5)  + 's' }}</text>
+							</view>
+							<!-- 消息撤回框 -->
+							<view class="chatNewsBack padding-xs" @click="newsBackClickHandle(item)"
+								v-if="item.from === userId && newsBackIndex === item.random" >
+								撤回消息
+							</view>
 						</view>
+					</view>
+					<view class="flex justify-center align-center" v-if="item.isRevoked && !item.isDeleted">
+						<u-tag :text="`${ userId === item.from ? '你' : '对方'}撤回了一条消息`" 
+						shape="circle" color="#909399" bg-color="#F5F5F5" border-color="#F5F5F5" 
+						@click="deleteRevokedMsg(item)"
+						/>
 					</view>
 				</view>
 				<!-- 上顶框 -->
@@ -96,6 +111,9 @@ export default {
 			keyBoardFlag: false,
 			recorderManager: null,
 			playAudioIndex: -1,
+			newsBackIndex: -1,
+			newsBackStartTime: undefined,
+			newsBackTimmer: null
 		};
 	},
 	methods: {
@@ -123,6 +141,7 @@ export default {
 			}).catch(err => {
 				console.log(err);
 			});
+			this.$forceUpdate();
 		},
 		scrolltoupper() {
 			if (this.scrollTimmer) {
@@ -134,18 +153,74 @@ export default {
 			return ';' + this.$api.imgHandle.multiImgShow([img]);
 		},
 		imgPrview(url) {
+			if (this.newsBackIndex !== -1) return;
 			this.$api.imgHandle.imgPreview(url, [url]);
 		},
 		enterUserHome(id) {
 			this.$api.routerHandle.goto(`/pagesHome/mynews?id=${id}`);
 		},
 		audioPlayHandle(src, I_index, e) {
+			innerAudioContext.stop();
 				this.playAudioIndex = I_index;
 				this.$forceUpdate();
 				innerAudioContext.src = src;
-				innerAudioContext.play(() => {
-					console.log('开始播放');
-			})
+				innerAudioContext.play();
+		},
+		// 撤回消息更改对象
+		backTargetChangeStart(e) {
+			this.newsBackStartTime = +new Date();
+			this.newsBackTimmer = setTimeout(() => {
+				this.newsBackIndex = e.target.dataset.backindex;
+				this.$forceUpdate();
+			}, 800)
+		},
+		backTargetChangeEnd(e) {
+			if ((+new Date() -  this.newsBackStartTime) < 800) {
+				this.newsBackStartTime = undefined;
+				this.newsBackIndex = -1;
+				clearTimeout(this.newsBackTimmer);
+				this.newsBackTimmer = null;
+				this.$forceUpdate();
+			}
+		},
+		cancle() {
+			if (this.newsBackIndex === -1 || !this.newsBackStartTime) return;
+			if ((+new Date() -  this.newsBackStartTime) > 2000) {
+				this.newsBackStartTime = undefined;
+				this.newsBackIndex = -1;
+				clearTimeout(this.newsBackTimmer);
+				this.newsBackTimmer = null;
+				this.$forceUpdate();
+			}
+		},
+		newsBackClickHandle(message) {
+			// 主动撤回消息
+			let tim = this.tim;
+			let promise = tim.revokeMessage(message);
+			promise.then((imResponse) => {
+			  // 消息撤回成功
+				this.$set(message, 'isRevoked', true);
+				console.log("撤回成功");
+			}).catch(function(imError) {
+				if (imError.code == 20016) {
+					return uni.showToast({
+						title: '已超过2分钟无法撤回~',
+						icon: 'none'
+					});
+				}
+			});
+		},
+		// 删除撤回提示
+		deleteRevokedMsg(message) {
+			let tim = this.tim;
+			let promise = tim.deleteMessage([message]);
+			promise.then((imResponse) => {
+			  // 删除消息成功
+				this.$set(message, 'isDeleted', true);
+			}).catch(function(imError) {
+			  // 删除消息失败
+			  console.warn('deleteMessage error:', imError);
+			});
 		}
 	},
 	computed: {
@@ -197,12 +272,19 @@ export default {
 			this.$forceUpdate();
 		});
 		// 音频结束
+		innerAudioContext.onStop(() => {
+			this.playAudioIndex = -1;
+			this.$forceUpdate();
+		});
+		
 		innerAudioContext.onEnded(() => {
 			this.playAudioIndex = -1;
-		})
+			this.$forceUpdate();
+		});
 	},
 	onUnload() {
 		uni.$off("reciveChatMsg");
+		innerAudioContext.stop();
 	}
 };
 </script>
@@ -234,7 +316,6 @@ export default {
 }
 
 .isNotSelf {
-	// 自己
 	.messageBlock {
 		background-color: #0081ff;
 		color: #fff;
@@ -242,9 +323,18 @@ export default {
 	}
 }
 .isSelf {
-	// 对方
 	flex-direction: row-reverse;
 	justify-self: flex-start;
+	position: relative;
+	.chatNewsBack {
+		position: absolute;
+		top: 0;
+		right: 0;
+		background-color: rgba($color: #000000, $alpha: .5);
+		color: white;
+		transform: translateX(-50%) translateY(-100%);
+		border-radius: 10rpx;
+	}
 	.messageBlock {
 		background-color: #d9e4fa;
 		color: #000;
@@ -254,10 +344,10 @@ export default {
 .blockDance {
 	.blockDance-item {
 		width: 8rpx;
-		background-color: #000;
 		margin-right: 5rpx;
 		border-radius: 4rpx;
 		animation-duration: .3s;
+		background-color: #000;
 		animation-fill-mode: forwards;
 		animation-iteration-count: infinite;
 		animation-direction: alternate;
