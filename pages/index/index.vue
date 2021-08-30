@@ -28,15 +28,20 @@
 			<!-- 由于顶部是固定位置，底部是非绝对定位，所及此处计算固定高度 防止头部随页面滚动或出现滑动条 -->
 			<swiper-item v-for="(item, index) in navlist" :key="index">
 				<!-- 视图区域 -->
-				<scroll-view scroll-y="true" class="hmax" v-if="newsDataList[index]" @scroll="scroll" 
-					@scrolltolower="scrollToBottom(index)" :scroll-top="scrollTop">
+				<scroll-view scroll-y="true" class="hmax" v-if="newsDataList[index]" @scroll="scroll" @scrolltolower="scrollToBottom(index)" :scroll-top="scrollTop">
 					<view>
 						<!-- 轮播图/热榜等 -->
 						<!-- 热榜 -->
-						<view class="margin-sm bg-gray padding-sm flex flex-direction" style="border-radius: 10rpx;" 
-							v-if="(index === 2 || index === 1) && login && hotList && hotList[index - 1] && hotList[index - 1].length > 4" @click="enterHotList">
+						<view
+							class="margin-sm bg-gray padding-sm flex flex-direction"
+							style="border-radius: 10rpx;"
+							v-if="(index === 2 || index === 1) && login && hotList && hotList[index - 1] && hotList[index - 1].length > 4"
+							@click="enterHotList"
+						>
 							<!-- 头部 -->
-							<view class=""><text class="text-bold text-black text-sm">{{ index === 1 ? '今日热门' : '校园热门' }}</text></view>
+							<view class="">
+								<text class="text-bold text-black text-sm">{{ index === 1 ? '今日热门' : '校园热门' }}</text>
+							</view>
 							<view class="gridContent flex-sub margin-top-xs">
 								<view class="mycut" v-for="(item, h_index) in 8" :key="h_index">
 									<text class="text-black">{{ getHotListDataContent(h_index, index) }}</text>
@@ -44,17 +49,23 @@
 							</view>
 						</view>
 						<!-- 轮播图 -->
-						<view class="margin-top-xs hmax" style="height: 236rpx;" 
-							v-if="(bannerListR && bannerListR.length && index === 1) ||
-										(bannerListS && bannerListS.length && index === 2)"
-							>
-							<u-swiper height="236" mode="dot" border-radius="8" @click="enterOutHtml"
-							:list="bannerListMap" :effect3d="true"></u-swiper>
+						<view
+							class="hmax"
+							style="height: 240rpx;"
+							v-if="(bannerListR && bannerListR.length && index === 1) || (bannerListS && bannerListS.length && index === 2)"
+						>
+							<u-swiper height="240" mode="round" indicator-pos="bottomRight" @click="enterOutHtml" :list="bannerListMap"></u-swiper>
 						</view>
 						<!-- 动态数据 -->
 						<view v-if="newsDataList[index] && getNewsMapData(index).length">
-							<card v-for="item of getNewsMapData(index)" :key="item.id" :reportInfoList="reportInfoList"
-							@click.native="enterDetail(item.id)" :newsdata="{ ...item }" :isIndex="true"></card>
+							<card
+								v-for="item of getNewsMapData(index)"
+								:key="item.id"
+								:reportInfoList="reportInfoList"
+								@click.native="enterDetail(item.id)"
+								:newsdata="{ ...item }"
+								:isIndex="true"
+							></card>
 							<u-loadmore
 								:status="loadStatus[index]"
 								marginTop="40"
@@ -65,11 +76,9 @@
 							></u-loadmore>
 						</view>
 						<view class="padding flex align-center justify-center u-tips-color" v-else-if="index === 2">
-							{{ isAuthor ? '快来发第一条动态吧~' : '相关内容认证后显示~'}}
+							{{ isAuthor ? '快来发第一条动态吧~' : '相关内容认证后显示~' }}
 						</view>
-						<view class="padding flex align-center justify-center u-tips-color" v-else-if="index === 0">
-							{{ '快去关注其他用户吧~' }}
-						</view>
+						<view class="padding flex align-center justify-center u-tips-color" v-else-if="index === 0">{{ '快去关注其他用户吧~' }}</view>
 					</view>
 				</scroll-view>
 				<!--  -->
@@ -89,9 +98,7 @@
 		<pop type="publish" v-if="ifPublishShow"></pop>
 		<loading v-if="ifLoaddingShow"></loading>
 		<!-- 回到顶部 -->
-		<view class="gotop flex align-center justify-center" @click="goBackToTop">
-			<image src="/static/Img/gotop.png"  class="hwmax"></image>
-		</view>
+		<view class="gotop flex align-center justify-center" @click="goBackToTop"><image src="/static/Img/gotop.png" class="hwmax"></image></view>
 	</view>
 </template>
 
@@ -110,7 +117,7 @@ export default {
 			scrollTop: 0,
 			//滚动前的高度
 			old: {
-			  scrollTop: 0
+				scrollTop: 0
 			},
 			// 初始加载动画
 			ifLoaddingShow: true,
@@ -138,7 +145,7 @@ export default {
 			],
 			//轮播图数据
 			bannerListS: [],
-			// 
+			//
 			bannerListR: [],
 			// 是否显示发布弹框
 			ifPublishShow: true,
@@ -162,13 +169,12 @@ export default {
 			},
 			// 举报信息列表
 			reportInfoList: [],
-			hotList: new Array(2).fill(''),
-			
+			hotList: new Array(2).fill('')
 		};
 	},
 	methods: {
 		...__indexMethods,
-		...__getIndexData,
+		...__getIndexData
 	},
 	computed: {
 		...mapState(['midButton', 'inactiveColor', 'activeColor', 'borderTop']),
@@ -208,21 +214,21 @@ export default {
 		this.getNewsData({ noToken: true, tab: this.current, isGetNew: true });
 		setTimeout(() => {
 			uni.stopPullDownRefresh();
-		}, 1000)
+		}, 1000);
 	},
 	onLoad() {
-		uni.$on('deleteData', (id) => {
+		uni.$on('deleteData', id => {
 			this.deleteData(id);
 		});
 		uni.$on('updateData', () => {
 			this.getNewsData({ noToken: true, tab: 1, isGetNew: true });
 			this.getNewsData({ tab: 2, isGetNew: true });
-		})
+		});
 	},
 	// 页面分享
 	onShareAppMessage(res) {
 		return this.$api.interactive.onShareFunc(res);
-	},
+	}
 };
 </script>
 
