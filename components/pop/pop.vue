@@ -13,7 +13,7 @@
 						<u-input
 							type="textarea"
 							:clearable="false"
-							maxlength="140"
+							maxlength="360"
 							height="600"
 							:custom-style="{ 'background': 'white' }"
 							:placeholder="'分享生活 留住美好'"

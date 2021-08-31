@@ -1,0 +1,1 @@
+<view><view class="bg"><image class="start-img" src="{{startImage}}"></image><u-button vue-id="71e6087a-1" size="default" type="primary" shape="circle" custom-style="{{customStyle}}" data-event-opts="{{[['^click',[['jump']]]]}}" bind:click="__e" bind:__l="__l" vue-slots="{{['default']}}">{{"跳过"+countDownNum+'秒'}}</u-button></view></view>

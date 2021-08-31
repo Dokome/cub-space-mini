@@ -5,7 +5,7 @@ export const _home = {
 	},
 	// 关注公众号
 	focusOfficial() {
-		console.log('关注成功');
+		this.$api.routerHandle.goto('/pagesInteractive/webView?src=https://mp.weixin.qq.com/s/yo0juBljBUpHYP-yBMxJ0w');
 	},
 	// 进入功能页面
 	enterFuncPage(e) {
