@@ -25,7 +25,7 @@
 			</view>
 		</view>
 		<view class="" style="margin-top: 250rpx;">
-			<u-button  ripple="true"  @click="filterShow = false"
+			<u-button  ripple="true"  @click="handleCancleMatch"
 			:custom-style="{ width: '400rpx', background: 'linear-gradient(-26deg, #A268F4, #7D4CFF)', color: '#fff', height: '100rpx'}">取消匹配</u-button>
 		</view>
 	</view>
@@ -44,8 +44,14 @@ export default {
 	},
 	data() {
 		return {
-			
 		}
+	},
+	methods: {
+		handleCancleMatch() {
+			uni.$emit('ifSuccChange', '');
+		}
+	},
+	mounted() {
 	}
 }
 </script>

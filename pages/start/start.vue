@@ -39,6 +39,9 @@ export default {
 		this.getStartImage();
 		// 倒计时
 		this.countDown();
+		uni.$once('unreadUpdate', (unreadCount) => {
+			this.$store.commit('chatNewsUnread', unreadCount);
+		});
 	},
 	onUnload() {
 		if (this.timer) {
@@ -56,7 +59,7 @@ export default {
 		// 点击跳过
 		jump: function() {
 			wx.switchTab({
-				url: '../index/index'
+				url: '../index/index',
 			});
 		},
 		// 倒计时

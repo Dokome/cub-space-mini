@@ -1940,7 +1940,7 @@ uni$1;exports.default = _default;
 "use strict";
 /* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _timJsSdk = _interopRequireDefault(__webpack_require__(/*! tim-js-sdk */ 11));
 var _timUploadPlugin = _interopRequireDefault(__webpack_require__(/*! tim-upload-plugin */ 12));
-var _cache = __webpack_require__(/*! utils/cache.js */ 13);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+var _cache = __webpack_require__(/*! utils/cache.js */ 13);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _createForOfIteratorHelper(o, allowArrayLike) {var it;if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) {if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") {if (it) o = it;var i = 0;var F = function F() {};return { s: F, n: function n() {if (i >= o.length) return { done: true };return { done: false, value: o[i++] };}, e: function e(_e) {throw _e;}, f: F };}throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}var normalCompletion = true,didErr = false,err;return { s: function s() {it = o[Symbol.iterator]();}, n: function n() {var step = it.next();normalCompletion = step.done;return step;}, e: function e(_e2) {didErr = true;err = _e2;}, f: function f() {try {if (!normalCompletion && it.return != null) it.return();} finally {if (didErr) throw err;}} };}function _unsupportedIterableToArray(o, minLen) {if (!o) return;if (typeof o === "string") return _arrayLikeToArray(o, minLen);var n = Object.prototype.toString.call(o).slice(8, -1);if (n === "Object" && o.constructor) n = o.constructor.name;if (n === "Map" || n === "Set") return Array.from(o);if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);}function _arrayLikeToArray(arr, len) {if (len == null || len > arr.length) len = arr.length;for (var i = 0, arr2 = new Array(len); i < len; i++) {arr2[i] = arr[i];}return arr2;}
 
 
 function GetTimRef() {var params = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
@@ -1976,9 +1976,17 @@ function GetTimRef() {var params = arguments.length > 0 && arguments[0] !== unde
   }
 
   var onSdkReady = function onSdkReady(event) {
-    uni.reLaunch({
-      url: '/pages/chat/chat' });
-
+    tim.getConversationList().then(function (imResponse) {
+      var conversationList = imResponse.data.conversationList; // 会话列表，用该列表覆盖原有的会话列表
+      var unreadCount = 0;var _iterator = _createForOfIteratorHelper(
+      conversationList),_step;try {for (_iterator.s(); !(_step = _iterator.n()).done;) {var conversation = _step.value;
+          unreadCount += conversation.unreadCount;
+        }
+        // 让index更新消息
+      } catch (err) {_iterator.e(err);} finally {_iterator.f();}uni.$emit('unreadUpdate', unreadCount);
+    }).catch(function (imError) {
+      console.warn('getConversationList error:', imError); // 获取会话列表失败的相关信息
+    });
   };
   tim.on(_timJsSdk.default.EVENT.SDK_READY, onSdkReady);
 
@@ -2002,6 +2010,10 @@ GetTimRef;exports.default = _default;
 Object.defineProperty(exports, "__esModule", { value: true });exports.__chat = void 0;function _createForOfIteratorHelper(o, allowArrayLike) {var it;if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) {if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") {if (it) o = it;var i = 0;var F = function F() {};return { s: F, n: function n() {if (i >= o.length) return { done: true };return { done: false, value: o[i++] };}, e: function e(_e) {throw _e;}, f: F };}throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}var normalCompletion = true,didErr = false,err;return { s: function s() {it = o[Symbol.iterator]();}, n: function n() {var step = it.next();normalCompletion = step.done;return step;}, e: function e(_e2) {didErr = true;err = _e2;}, f: function f() {try {if (!normalCompletion && it.return != null) it.return();} finally {if (didErr) throw err;}} };}function _unsupportedIterableToArray(o, minLen) {if (!o) return;if (typeof o === "string") return _arrayLikeToArray(o, minLen);var n = Object.prototype.toString.call(o).slice(8, -1);if (n === "Object" && o.constructor) n = o.constructor.name;if (n === "Map" || n === "Set") return Array.from(o);if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);}function _arrayLikeToArray(arr, len) {if (len == null || len > arr.length) len = arr.length;for (var i = 0, arr2 = new Array(len); i < len; i++) {arr2[i] = arr[i];}return arr2;}var __chat = {
   tabsChange: function tabsChange(index) {
     this.swiperCurrent = index;
+    if (index === 1) {
+      this.tim.setMessageRead({ conversationID: 'C2Cadministrator' });
+      this.$store.commit('chatNewsUnread', this.unreadCount);
+    }
   },
   // swiper-item左右移动，通知tabs的滑块跟随移动
   transition: function transition(e) {
@@ -13014,7 +13026,6 @@ module.exports = {
     }, 100);
   },
   scrolltoupper: function scrolltoupper() {var _this3 = this;
-    console.log(123);
     setTimeout(function () {
       _this3.$set(_this3.old, 'scrollTop', 0);
     }, 300);

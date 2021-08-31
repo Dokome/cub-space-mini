@@ -25,7 +25,7 @@
 						</u-cell-item>
 					</view>
 				</view>
-				<view class="" style="height: 20rpx;"></view>
+				<view class="" style="height: 100rpx;"></view>
 			</view>
 		</scroll-view>
 		<!-- 底部栏nav -->

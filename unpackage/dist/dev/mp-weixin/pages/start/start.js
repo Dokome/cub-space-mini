@@ -153,7 +153,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 25));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};} //
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 25));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};} //
 //
 //
 //
@@ -189,11 +189,14 @@ var _default =
 
     } },
 
-  onLoad: function onLoad() {
+  onLoad: function onLoad() {var _this = this;
     // 页面加载获取品宣图
     this.getStartImage();
     // 倒计时
     this.countDown();
+    uni.$once('unreadUpdate', function (unreadCount) {
+      _this.$store.commit('chatNewsUnread', unreadCount);
+    });
   },
   onUnload: function onUnload() {
     if (this.timer) {
@@ -203,10 +206,10 @@ var _default =
   },
   methods: {
     // 获取品宣图
-    getStartImage: function getStartImage() {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var result;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:_context.next = 2;return (
-                  _this.$http.request({ url: '/sysCode/selectProductImage', method: 'GET' }));case 2:result = _context.sent;
+    getStartImage: function getStartImage() {var _this2 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var result;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:_context.next = 2;return (
+                  _this2.$http.request({ url: '/sysCode/selectProductImage', method: 'GET' }));case 2:result = _context.sent;
                 // 品宣图
-                _this.startImage = result.data.data.value;case 4:case "end":return _context.stop();}}}, _callee);}))();
+                _this2.startImage = result.data.data.value;case 4:case "end":return _context.stop();}}}, _callee);}))();
     },
     // 点击跳过
     jump: function jump() {
@@ -215,18 +218,19 @@ var _default =
 
     },
     // 倒计时
-    countDown: function countDown() {var _this2 = this;
+    countDown: function countDown() {var _this3 = this;
       // 定时器
       this.timer = setInterval(function () {
-        if (_this2.countDownNum == 0) {
+        if (_this3.countDownNum == 0) {
           wx.switchTab({
             url: '../index/index' });
 
         } else {
-          _this2.countDownNum--;
+          _this3.countDownNum--;
         }
       }, 1000);
     } } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 

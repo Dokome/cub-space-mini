@@ -248,7 +248,10 @@ var _tim = _interopRequireDefault(__webpack_require__(/*! ./tim.js */ 10));funct
                 console.log('appId >>> ' + resultData.appId);
                 _this2.$cache.set('appId', resultData.appId, resultData.expires);
                 // TIM
-                (0, _tim.default)(resultData);case 15:case "end":return _context.stop();}}}, _callee);}))();
+                (0, _tim.default)(resultData);
+                uni.reLaunch({
+                  url: '/pages/index/index' });case 16:case "end":return _context.stop();}}}, _callee);}))();
+
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

@@ -168,7 +168,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 25));
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 25));
 
 
 
@@ -262,7 +262,8 @@ var _vuex = __webpack_require__(/*! vuex */ 47);function _interopRequireDefault(
       sets: [0, 0],
       onlineCount: 0,
       meetCount: 0,
-      selfAvatar: '' };
+      selfAvatar: '',
+      ifSucc: false };
 
   },
   methods: {
@@ -334,23 +335,35 @@ var _vuex = __webpack_require__(/*! vuex */ 47);function _interopRequireDefault(
                 _this5.meetCount = result.count;case 5:case "end":return _context5.stop();}}}, _callee5);}))();
     },
     // 开始匹配
-    matchStartHandle: function matchStartHandle() {var _this6 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee6() {var data, result, succFlag;return _regenerator.default.wrap(function _callee6$(_context6) {while (1) {switch (_context6.prev = _context6.next) {case 0:
-                _this6.IfMeetLoadingShow = true;_context6.next = 3;return (
-                  _this6.$http.request({
-                    url: '/social/meetSomeBody',
-                    method: 'GET' }));case 3:data = _context6.sent;
-
-                result = data.data.data;
-                succFlag = false;
-                if (data.data.code === 200) {
-                  succFlag = true;
-                }
-                setTimeout(function () {
-                  _this6.IfMeetLoadingShow = false;
-                  if (succFlag) {
-                    _this6.chatDetail('C2C', result.nickName, result.userId, result);
+    matchStartHandle: function matchStartHandle() {var _this6 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee7() {var cnt, timmer;return _regenerator.default.wrap(function _callee7$(_context7) {while (1) {switch (_context7.prev = _context7.next) {case 0:if (
+                _this6.meetCount) {_context7.next = 2;break;}return _context7.abrupt("return");case 2:
+                cnt = 8;
+                _this6.ifSucc = true;
+                _this6.IfMeetLoadingShow = true;
+                timmer = null;
+                (function (fn, delay) {
+                  function __interval() {
+                    fn();
+                    if (!cnt || !this.ifSucc) {
+                      clearTimeout(timmer);
+                      return;
+                    }
+                    timmer = setTimeout(__interval.bind(this), delay);
                   }
-                }, 2000);case 8:case "end":return _context6.stop();}}}, _callee6);}))();
+                  __interval.call(_this6);
+                })( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee6() {var data, result;return _regenerator.default.wrap(function _callee6$(_context6) {while (1) {switch (_context6.prev = _context6.next) {case 0:
+                          cnt--;if (!(
+                          !cnt && _this6.ifSucc)) {_context6.next = 9;break;}_context6.next = 4;return (
+                            _this6.$http.request({
+                              url: '/social/meetSomeBody',
+                              method: 'GET' }));case 4:data = _context6.sent;
+
+                          result = data.data.data;
+                          _this6.IfMeetLoadingShow = false;
+                          _this6.chatDetail('C2C', result.nickName, result.userId, result);return _context6.abrupt("return",
+                          true);case 9:case "end":return _context6.stop();}}}, _callee6);})),
+
+                500);case 7:case "end":return _context7.stop();}}}, _callee7);}))();
     },
     // 进入聊天详情页
     chatDetail: function chatDetail(id, nick, userIdTo, userInfo) {
@@ -367,9 +380,13 @@ var _vuex = __webpack_require__(/*! vuex */ 47);function _interopRequireDefault(
     meetLoading: meetLoading },
 
   onLoad: function onLoad() {var _this7 = this;
+    uni.$on('ifSuccChange', function () {
+      _this7.ifSucc = false;
+      _this7.IfMeetLoadingShow = false;
+    });
     setTimeout(function () {
       _this7.ifLoading = false;
-    }, 1000);
+    }, 1500);
   },
   onShow: function onShow() {
     this.getSets();
@@ -377,6 +394,7 @@ var _vuex = __webpack_require__(/*! vuex */ 47);function _interopRequireDefault(
     this.getMeetCount();
     this.getUserInfo();
   } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 

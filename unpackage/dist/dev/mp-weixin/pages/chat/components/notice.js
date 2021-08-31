@@ -107,6 +107,26 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
+  var l0 = _vm.__map(_vm.msgList, function(item, I_index) {
+    var $orig = _vm.__get_orig(item)
+
+    var m0 = _vm.getoperation(item.operation)
+    var m1 = _vm.getbizType(item.bizType)
+    return {
+      $orig: $orig,
+      m0: m0,
+      m1: m1
+    }
+  })
+
+  _vm.$mp.data = Object.assign(
+    {},
+    {
+      $root: {
+        l0: l0
+      }
+    }
+  )
 }
 var recyclableRender = false
 var staticRenderFns = []
@@ -141,6 +161,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;function _createForOfIteratorHelper(o, allowArrayLike) {var it;if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) {if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") {if (it) o = it;var i = 0;var F = function F() {};return { s: F, n: function n() {if (i >= o.length) return { done: true };return { done: false, value: o[i++] };}, e: function e(_e) {throw _e;}, f: F };}throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}var normalCompletion = true,didErr = false,err;return { s: function s() {it = o[Symbol.iterator]();}, n: function n() {var step = it.next();normalCompletion = step.done;return step;}, e: function e(_e2) {didErr = true;err = _e2;}, f: function f() {try {if (!normalCompletion && it.return != null) it.return();} finally {if (didErr) throw err;}} };}function _unsupportedIterableToArray(o, minLen) {if (!o) return;if (typeof o === "string") return _arrayLikeToArray(o, minLen);var n = Object.prototype.toString.call(o).slice(8, -1);if (n === "Object" && o.constructor) n = o.constructor.name;if (n === "Map" || n === "Set") return Array.from(o);if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);}function _arrayLikeToArray(arr, len) {if (len == null || len > arr.length) len = arr.length;for (var i = 0, arr2 = new Array(len); i < len; i++) {arr2[i] = arr[i];}return arr2;} //
+//
+//
 //
 //
 //
@@ -231,11 +253,25 @@ var _default =
 
   },
   methods: {
+    getoperation: function getoperation(index) {
+      return ['点赞', '转发', '评论', '回复', '关注'][index - 1];
+    },
+    getbizType: function getbizType(index) {
+      return ['评论', '动态', '你'][index - 1];
+    },
     scrolltolower: function scrolltolower() {
       this.getMsgList();
     },
     enterList: function enterList(e) {
-      this.$api.routerHandle.goto(e.target.dataset.page);
+      this.$api.routerHandle.goto(e.target.dataset.page, this.officialNews);
+    },
+    // 进入用户主页
+    enterUserHome: function enterUserHome(id) {
+      this.$api.routerHandle.goto("/pagesHome/mynews?id=".concat(id));
+    },
+    // 进入文章详情页
+    enterNewsDetail: function enterNewsDetail(id) {
+      this.$api.routerHandle.goto("/pagesInteractive/newsdetail?id=".concat(id));
     },
     getMsgList: function getMsgList() {var _this = this;
       if (this.isCompleted) {
@@ -251,17 +287,19 @@ var _default =
         console.log(imResponse.data.messageList);var _iterator = _createForOfIteratorHelper(
         imResponse.data.messageList.reverse()),_step;try {for (_iterator.s(); !(_step = _iterator.n()).done;) {var msg = _step.value;
             if (msg.type === 'TIMCustomElem') {
-              // let data = JSON.parse(msg.payload.data || '{}');
-              // if (msg.payload.extension) {
-              // 	console.log(msg.payload.extension);
-              // }
+              var data = JSON.parse(msg.payload.data || '{}');
+              var event = msg.payload.extension;
+              if (event === 'event.notify') {
+                _this.msgList.push(data);
+              } else if (event === 'event.notice' && data.content) {
+                _this.officialNews.push(data);
+              }
             }
-          }
-          // console.log(this.msgList);
-        } catch (err) {_iterator.e(err);} finally {_iterator.f();}_this.nextReqMessageID = imResponse.data.nextReqMessageID; // 用于续拉，分页续拉时需传入该字段。
+          }} catch (err) {_iterator.e(err);} finally {_iterator.f();}
+        _this.nextReqMessageID = imResponse.data.nextReqMessageID; // 用于续拉，分页续拉时需传入该字段。
         _this.isCompleted = imResponse.data.isCompleted; // 表示是否已经拉完所有消息。
       }).finally(function () {
-        _this.loadStatus = 'loadmore';
+        _this.loadStatus = _this.isCompleted ? 'nomore' : 'loadmore';
       });
     } },
 

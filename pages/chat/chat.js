@@ -1,6 +1,10 @@
 export const __chat = {
 	tabsChange(index) {
 		this.swiperCurrent = index;
+		if (index === 1) {
+			this.tim.setMessageRead({conversationID: 'C2Cadministrator'});
+			this.$store.commit('chatNewsUnread', this.unreadCount);
+		}
 	},
 	// swiper-item左右移动，通知tabs的滑块跟随移动
 	transition(e) {

@@ -17,26 +17,28 @@
 					<view class="notice-list-item flex align-center bg-white padding" 
 								v-for="(item, I_index) in msgList" :key="I_index">
 						<!-- 头像 -->
-						<view class="">
+						<view class="" @click.stop="enterUserHome(item.userId)">
 							<view class="chat-list-item-avatar margin-right-sm">
-								<u-avatar size="100" :src="item.avatarUrl"></u-avatar>
+								<u-avatar size="100" :src="item.face"></u-avatar>
 							</view>
 						</view>
 						<!-- 主体 -->
 						<view class="flex flex-direction align-start justify-evenly flex-sub">
 							<!-- 关系 -->
-							<text class="u-tips-color text-sm">{{ item.nickName }} {{ '赞' }}了你的 {{ '评论' }}</text>
+							<text class="u-tips-color text-sm">{{ item.nickname }} {{ getoperation(item.operation) }} 了 {{ getbizType(item.bizType) }}</text>
 							<!-- 内容 -->
 							<view class="margin-tb-xs mycut" style="width: 100%;">
-								<text class="u-tips-color text-sm mycut content">
-									{{ item.bizContent }}
+								<text class="u-tips-color text-sm mycut content" v-if="item.content">
+									{{ item.content }}
 								</text>
 							</view>
 							<!-- 时间 -->
-							<text class="u-tips-color text-xs">7/30</text>
+							<text class="u-tips-color text-xs">{{ item.pushTime }}</text>
 						</view>
 						<!-- 末尾跳转 -->
-						<view class="end flex justify-center align-center padding-sm"><text class="text-sm">点击跳转原文&gt&gt</text></view>
+						<view class="end flex justify-center align-center padding-sm" v-if="item.bizType != 3" @click="enterNewsDetail(item.bizId)">
+							<text class="text-sm">点击跳转原文&gt&gt</text>
+						</view>
 					</view>
 					<u-loadmore
 						:status="loadStatus"
@@ -89,11 +91,25 @@ export default {
 		}
 	},
 	methods: {
+		getoperation(index) {
+			return ['点赞', '转发', '评论', '回复', '关注'][index - 1];
+		},
+		getbizType(index) {
+			return ['评论', '动态', '你'][index - 1];
+		},
 		scrolltolower() {
 			this.getMsgList();
 		},
 		enterList(e) {
-			this.$api.routerHandle.goto(e.target.dataset.page);
+			this.$api.routerHandle.goto(e.target.dataset.page, this.officialNews);
+		},
+		// 进入用户主页
+		enterUserHome(id) {
+			this.$api.routerHandle.goto(`/pagesHome/mynews?id=${id}`);
+		},
+		// 进入文章详情页
+		enterNewsDetail(id) {
+			this.$api.routerHandle.goto(`/pagesInteractive/newsdetail?id=${id}`);
 		},
 		getMsgList() {
 			if (this.isCompleted) {
@@ -109,17 +125,19 @@ export default {
 				console.log(imResponse.data.messageList);
 				for (let msg of imResponse.data.messageList.reverse()) {
 					if (msg.type === 'TIMCustomElem') {
-						// let data = JSON.parse(msg.payload.data || '{}');
-						// if (msg.payload.extension) {
-						// 	console.log(msg.payload.extension);
-						// }
+						const data = JSON.parse(msg.payload.data || '{}');
+						const event = msg.payload.extension;
+						if (event === 'event.notify') {
+							this.msgList.push(data);
+						} else if (event === 'event.notice' && data.content) {
+							this.officialNews.push(data); 
+						}
 					}
 				}
-					// console.log(this.msgList);
 				this.nextReqMessageID = imResponse.data.nextReqMessageID; // 用于续拉，分页续拉时需传入该字段。
 				this.isCompleted = imResponse.data.isCompleted; // 表示是否已经拉完所有消息。
 			}).finally(() => {
-				this.loadStatus = 'loadmore';
+				this.loadStatus = this.isCompleted ? 'nomore' : 'loadmore' ;
 			});
 		}
 	},

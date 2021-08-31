@@ -72,7 +72,6 @@ export const __indexMethods = {
 		}, 100)
 	},
 	scrolltoupper() {
-		console.log(123);
 		setTimeout(() => {
 			this.$set(this.old, 'scrollTop', 0);
 		}, 300);

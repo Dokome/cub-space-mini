@@ -54,9 +54,16 @@
 						<view
 							class="hmax"
 							style="height: 240rpx;"
-							v-if="(bannerListR && bannerListR.length && index === 1) || (bannerListS && bannerListS.length && index === 2)"
+							v-if="(bannerListR && bannerListR.length && index === 1)"
 						>
 							<u-swiper height="240" mode="round" indicator-pos="bottomRight" @click="enterOutHtml" :list="bannerListMap"></u-swiper>
+						</view>
+						<view
+							class="hmax"
+							style="height: 240rpx;"
+							v-if="(bannerListS && bannerListS.length && index === 2)"
+						>
+						<u-swiper height="240" mode="round" indicator-pos="bottomRight" @click="enterOutHtml" :list="bannerListMap"></u-swiper>
 						</view>
 						<!-- 动态数据 -->
 						<view v-if="newsDataList[index] && getNewsMapData(index).length">

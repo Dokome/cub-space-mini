@@ -14,7 +14,7 @@
 			<!-- 中间部分头像等 -->
 			<view class="meet-main-center justify-center align-center flex" @click="matchStartHandle">
 				<!-- 中间动画 -->
-				<view class="meet-main-center-bgAnimate" v-for="item in 20" :key="item"
+				<view class="meet-main-center-bgAnimate" v-for="item in 8" :key="item"
 					:style="{ animationDelay: `${(item / 2) - 1}s`}"></view>
 				<view class="meet-main-center-text flex justify-center align-center"><text class="text-bold text-white">遇见</text></view>
 			</view>
@@ -92,7 +92,8 @@
 				sets: [0, 0],
 				onlineCount: 0,
 				meetCount: 0,
-				selfAvatar: ''
+				selfAvatar: '',
+				ifSucc: false,
 			}
 		},
 		methods: {
@@ -165,22 +166,34 @@
 			},
 			// 开始匹配
 			async matchStartHandle() {
+				if (!this.meetCount) return;
+				let cnt = 8;
+				this.ifSucc = true;
 				this.IfMeetLoadingShow = true;
-				const data = await this.$http.request({
-					url: '/social/meetSomeBody',
-					method: 'GET'
-				});
-				const result = data.data.data;
-				let succFlag = false;
-				if (data.data.code === 200) {
-					succFlag = true;
-				}
-				setTimeout(() => {
-					this.IfMeetLoadingShow = false;
-					if (succFlag) {
-						this.chatDetail('C2C', result.nickName, result.userId, result)
+				let timmer = null;
+				((fn, delay) => {
+					function __interval() {
+						fn();
+						if (!cnt || !this.ifSucc) {
+							clearTimeout(timmer);
+							return;
+						}
+						timmer = setTimeout(__interval.bind(this), delay);
 					}
-				}, 2000);
+					__interval.call(this);
+				})(async () => {
+					cnt--;
+					if (!cnt && this.ifSucc) {
+						const data = await this.$http.request({
+							url: '/social/meetSomeBody',
+							method: 'GET'
+						});
+						const result = data.data.data;
+						this.IfMeetLoadingShow = false;
+						this.chatDetail('C2C', result.nickName, result.userId, result);
+						return true;
+					}
+				}, 500);
 			},
 			// 进入聊天详情页
 			chatDetail(id, nick, userIdTo, userInfo) {
@@ -197,9 +210,13 @@
 			meetLoading,
 		},
 		onLoad() {
+			uni.$on('ifSuccChange', () => {
+				this.ifSucc = false;
+				this.IfMeetLoadingShow = false;
+			});
 			setTimeout(() => {
 				this.ifLoading = false;
-			}, 1000);
+			}, 1500);
 		},
 		onShow() {
 			this.getSets();

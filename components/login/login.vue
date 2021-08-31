@@ -107,6 +107,9 @@ export default {
 			this.$cache.set('appId', resultData.appId, resultData.expires);
 		  // TIM
 			GetTimRef(resultData);
+			uni.reLaunch({
+				url: '/pages/index/index'
+			})
 		}
 	}
 };

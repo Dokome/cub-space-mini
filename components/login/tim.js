@@ -35,10 +35,18 @@ function GetTimRef(params = {}) {
 		remove('TIM');
 	}
 	
-	let onSdkReady = function(event) {
-	  uni.reLaunch({
-	  	url: '/pages/chat/chat'
-	  })
+	let onSdkReady = (event) => {
+		tim.getConversationList().then((imResponse) => {
+		  const conversationList = imResponse.data.conversationList; // 会话列表，用该列表覆盖原有的会话列表
+			let unreadCount = 0;
+			for (let conversation of conversationList) {
+				unreadCount += conversation.unreadCount;
+			}
+			// 让index更新消息
+			uni.$emit('unreadUpdate', unreadCount);
+		}).catch((imError) => {
+		  console.warn('getConversationList error:', imError); // 获取会话列表失败的相关信息
+		});
 	};
 	tim.on(TIM.EVENT.SDK_READY, onSdkReady);
 	

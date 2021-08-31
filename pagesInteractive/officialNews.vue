@@ -3,17 +3,17 @@
 		<navbar :title="'官方公告'"></navbar>
 		<scroll-view scroll-y="true" :style="{ height: `calc(100vh - ${ViewPart - 20}px)` }">
 			<view class="padding-sm">
-				<view class="card margin-bottom-sm flex flex-direction" v-for="item in 10">
+				<view class="card margin-bottom-sm flex flex-direction" v-for="(item, index) in dataList" :key="index" @click="enterdetail(item.link)">
 					<view class="bg-white flex-twice flex-basis">
-						<image src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fattach.bbs.miui.com%2Fforum%2F201304%2F25%2F195133e7a1l7b4f5117y4y.jpg&refer=http%3A%2F%2Fattach.bbs.miui.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1632730148&t=1058a9a70023b0257f63424ad8c03324" 
+						<image :src="item.image" 
 							mode="aspectFill" class="hwmax">
 						</image>
 					</view>
 					<view class="flex-sub flex flex-direction padding-sm flex-basis">
-						<view class="text-lg text-bold text-black margin-bottom-xs">我是标题</view>
-						<view class="u-tips-color">我是名字</view>
+						<view class="text-lg text-bold text-black margin-bottom-xs">{{ item.title }}</view>
+						<view class="u-tips-color">{{ item.content }}</view>
 						<view class="flex flex-sub text-sm u-tips-color justify-between" style="align-items: center;">
-							<text>2021/8/28</text>
+							<text>{{ item.pushTime }}</text>
 							<text class="text-blue margin-right">查看详情&gt</text>
 						</view>
 					</view>
@@ -28,7 +28,20 @@
 		data() {
 			return {
 				ViewPart: this.ViewPart,
+				dataList: [],
 			};
+		},
+		methods: {
+			enterdetail(src) {
+				this.$api.routerHandle.goto(`/pagesInteractive/webView?src=${src}`);
+			}
+		},
+		onLoad() {
+			const eventChannel = this.getOpenerEventChannel()
+			// 监听acceptDataFromOpenerPage事件，获取上一页面通过eventChannel传送到当前页面的数据
+			eventChannel.on('acceptDataFromOpenerPage', (data) => {
+			  this.dataList = data.data;
+			});
 		}
 	}
 </script>

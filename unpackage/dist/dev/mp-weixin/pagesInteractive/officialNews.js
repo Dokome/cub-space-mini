@@ -182,8 +182,21 @@ var _default =
 {
   data: function data() {
     return {
-      ViewPart: this.ViewPart };
+      ViewPart: this.ViewPart,
+      dataList: [] };
 
+  },
+  methods: {
+    enterdetail: function enterdetail(src) {
+      this.$api.routerHandle.goto("/pagesInteractive/webView?src=".concat(src));
+    } },
+
+  onLoad: function onLoad() {var _this = this;
+    var eventChannel = this.getOpenerEventChannel();
+    // 监听acceptDataFromOpenerPage事件，获取上一页面通过eventChannel传送到当前页面的数据
+    eventChannel.on('acceptDataFromOpenerPage', function (data) {
+      _this.dataList = data.data;
+    });
   } };exports.default = _default;
 
 /***/ }),
