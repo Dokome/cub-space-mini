@@ -24,12 +24,13 @@
 		</navbar>
 
 		<!-- 滑动组件swiper -->
-		<swiper :current="swiperCurrent" @transition="transition" @animationfinish="animationfinish" class="viewPart" :style="{ height: `calc(100vh - ${ViewPart}px - 30px)` }">
+		<swiper :current="swiperCurrent" @transition="transition" @touchstart="startHandleStart" @touchend="startHandleSEnd"
+		@animationfinish="animationfinish" class="viewPart" :style="{ height: `calc(100vh - ${ViewPart}px - 30px)` }">
 			<!-- 由于顶部是固定位置，底部是非绝对定位，所及此处计算固定高度 防止头部随页面滚动或出现滑动条 -->
 			<swiper-item v-for="(item, index) in navlist" :key="index">
 				<!-- 视图区域 -->
 				<scroll-view scroll-y="true" class="hmax" v-if="newsDataList[index]" @scroll="scroll" 
-					@scrolltolower="scrollToBottom(index)" :scroll-top="scrollTop">
+					@scrolltolower="scrollToBottom(index)" :scroll-top="scrollTop" @scrolltoupper="scrolltoupper">
 					<view>
 						<!-- 轮播图/热榜等 -->
 						<!-- 热榜 -->
@@ -163,7 +164,7 @@ export default {
 			// 举报信息列表
 			reportInfoList: [],
 			hotList: new Array(2).fill(''),
-			
+			startPoint: undefined,
 		};
 	},
 	methods: {

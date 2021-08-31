@@ -34,6 +34,14 @@ function GetTimRef(params = {}) {
 		console.log('old cache TIM：' + get('TIM'));
 		remove('TIM');
 	}
+	
+	let onSdkReady = function(event) {
+	  uni.reLaunch({
+	  	url: '/pages/chat/chat'
+	  })
+	};
+	tim.on(TIM.EVENT.SDK_READY, onSdkReady);
+	
 	set('TIM', TIM, params.expires);
 	uni.$emit('timCreateSuccess', tim);
 }

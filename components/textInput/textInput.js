@@ -4,9 +4,10 @@ export const __textInput = {
 		this.ifImgChoose = false;
 	},
 	keyboardChange(e) {
+		if (this.InputBottom > 0 && e.detail.height > this.InputBottom) return; //第一次打开会多出
 		this.InputBottom = e.detail.height;
 		if (this.mode === 'aboutChat') {
-			uni.$emit("keyboardChange", e.detail.height)
+			uni.$emit("keyboardChange", e.detail.height);
 		}
 	},
 	ImgChooseHandle() {

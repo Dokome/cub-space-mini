@@ -872,7 +872,7 @@ function initData(vueOptions, context) {
     try {
       data = data.call(context); // 支持 Vue.prototype 上挂的数据
     } catch (e) {
-      if (Object({"NODE_ENV":"development","VUE_APP_NAME":"cub-space-mini","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"VUE_APP_NAME":"cub-space-mini","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.warn('根据 Vue 的 data 函数初始化小程序 data 失败，请尽量确保 data 函数中不访问 vm 对象，否则可能影响首次数据渲染速度。', data);
       }
     }
@@ -1974,6 +1974,14 @@ function GetTimRef() {var params = arguments.length > 0 && arguments[0] !== unde
     console.log('old cache TIM：' + (0, _cache.get)('TIM'));
     (0, _cache.remove)('TIM');
   }
+
+  var onSdkReady = function onSdkReady(event) {
+    uni.reLaunch({
+      url: '/pages/chat/chat' });
+
+  };
+  tim.on(_timJsSdk.default.EVENT.SDK_READY, onSdkReady);
+
   (0, _cache.set)('TIM', _timJsSdk.default, params.expires);
   uni.$emit('timCreateSuccess', tim);
 }var _default =
@@ -8144,7 +8152,7 @@ function type(obj) {
 
 function flushCallbacks$1(vm) {
     if (vm.__next_tick_callbacks && vm.__next_tick_callbacks.length) {
-        if (Object({"NODE_ENV":"development","VUE_APP_NAME":"cub-space-mini","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
+        if (Object({"VUE_APP_NAME":"cub-space-mini","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:flushCallbacks[' + vm.__next_tick_callbacks.length + ']');
@@ -8165,14 +8173,14 @@ function nextTick$1(vm, cb) {
     //1.nextTick 之前 已 setData 且 setData 还未回调完成
     //2.nextTick 之前存在 render watcher
     if (!vm.__next_tick_pending && !hasRenderWatcher(vm)) {
-        if(Object({"NODE_ENV":"development","VUE_APP_NAME":"cub-space-mini","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"VUE_APP_NAME":"cub-space-mini","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + vm._uid +
                 ']:nextVueTick');
         }
         return nextTick(cb, vm)
     }else{
-        if(Object({"NODE_ENV":"development","VUE_APP_NAME":"cub-space-mini","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG){
+        if(Object({"VUE_APP_NAME":"cub-space-mini","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG){
             var mpInstance$1 = vm.$scope;
             console.log('[' + (+new Date) + '][' + (mpInstance$1.is || mpInstance$1.route) + '][' + vm._uid +
                 ']:nextMPTick');
@@ -8258,7 +8266,7 @@ var patch = function(oldVnode, vnode) {
     });
     var diffData = this.$shouldDiffData === false ? data : diff(data, mpData);
     if (Object.keys(diffData).length) {
-      if (Object({"NODE_ENV":"development","VUE_APP_NAME":"cub-space-mini","VUE_APP_PLATFORM":"mp-weixin","BASE_URL":"/"}).VUE_APP_DEBUG) {
+      if (Object({"VUE_APP_NAME":"cub-space-mini","VUE_APP_PLATFORM":"mp-weixin","NODE_ENV":"development","BASE_URL":"/"}).VUE_APP_DEBUG) {
         console.log('[' + (+new Date) + '][' + (mpInstance.is || mpInstance.route) + '][' + this._uid +
           ']差量更新',
           JSON.stringify(diffData));
@@ -10763,6 +10771,7 @@ var __textInput = {
     this.ifImgChoose = false;
   },
   keyboardChange: function keyboardChange(e) {
+    if (this.InputBottom > 0 && e.detail.height > this.InputBottom) return; //第一次打开会多出
     this.InputBottom = e.detail.height;
     if (this.mode === 'aboutChat') {
       uni.$emit("keyboardChange", e.detail.height);
@@ -12919,14 +12928,17 @@ module.exports = {
     }
   },
   // 拖动屏幕
-  startHandle: function startHandle(e) {
-    uni.startPullDownRefresh({
-      success: function success() {
-        setTimeout(function () {
-          uni.stopPullDownRefresh();
-        }, 1000);
-      } });
-
+  startHandleStart: function startHandleStart(e) {
+    this.startPoint = e.changedTouches[0];
+  },
+  startHandleSEnd: function startHandleSEnd(e) {
+    if (this.old.scrollTop > this.PageHeight * 0.4 || this.old.scrollTop > 10) return;
+    var endPoint = e.changedTouches[0];
+    if (endPoint.clientY - this.startPoint.clientY > 20) {
+      this.$set(this.old, 'scrollTop', 0);
+      this.scrollTop = 0;
+      uni.startPullDownRefresh();
+    }
   },
   //滑到页面的最下部分
   scrollToBottom: function scrollToBottom(index) {
@@ -12936,26 +12948,25 @@ module.exports = {
   goBackToTop: function goBackToTop(e) {var _this = this;
     this.scrollTop = this.old.scrollTop;
     this.$nextTick(function () {
-      this.scrollTop = 0;
+      _this.scrollTop = 0;
+      uni.startPullDownRefresh();
     });
-    if (this.gotopTimmer) {
-      return;
-    }
-    //限制请求1s/次
-    this.gotopTimmer = setTimeout(function () {
-      _this.getNewsData({ noToken: true, tab: _this.current, isGetNew: true });
-      _this.timmer = null;
-    }, 1000);
   },
   scroll: function scroll(e) {var _this2 = this;
     if (this.scrollTimmer) {
       return;
     }
-    //限制请求.5s/次
+    //限制请求.3s/次
     this.scrollTimmer = setTimeout(function () {
-      _this2.old.scrollTop = Math.floor(e.detail.scrollTop);
+      _this2.$set(_this2.old, 'scrollTop', Math.floor(e.detail.scrollTop));
       _this2.scrollTimmer = null;
-    }, 2000);
+    }, 100);
+  },
+  scrolltoupper: function scrolltoupper() {var _this3 = this;
+    console.log(123);
+    setTimeout(function () {
+      _this3.$set(_this3.old, 'scrollTop', 0);
+    }, 300);
   } };exports.__indexMethods = __indexMethods;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

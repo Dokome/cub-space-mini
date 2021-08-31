@@ -37,14 +37,17 @@ export const __indexMethods = {
 		}
 	},
 	// 拖动屏幕
-	startHandle(e) {
-		uni.startPullDownRefresh({
-			success: () => {
-				setTimeout(() => {
-					uni.stopPullDownRefresh();
-				}, 1000)
-			}
-		})
+	startHandleStart(e) {
+		this.startPoint = e.changedTouches[0];
+	},
+	startHandleSEnd(e) {
+		if ((this.old.scrollTop > (this.PageHeight * 0.4)) || this.old.scrollTop > 10) return;
+		let endPoint = e.changedTouches[0];
+		if (endPoint.clientY - this.startPoint.clientY > 20) {
+			this.$set(this.old, 'scrollTop', 0);
+			this.scrollTop = 0;
+			uni.startPullDownRefresh();
+		}
 	},
 	//滑到页面的最下部分
 	scrollToBottom(index) {
@@ -53,26 +56,25 @@ export const __indexMethods = {
 	// 返回顶部
 	goBackToTop(e) {
 		this.scrollTop = this.old.scrollTop;
-		this.$nextTick(function() {
-		    this.scrollTop = 0;
-		});
-		if(this.gotopTimmer) {
-			return;
-		}
-		//限制请求1s/次
-		this.gotopTimmer = setTimeout(() => {
-			this.getNewsData({ noToken: true, tab: this.current, isGetNew: true });
-			this.timmer = null;
-		}, 1000)
+		this.$nextTick(() => {
+			this.scrollTop = 0;
+			uni.startPullDownRefresh();
+		})
 	},
 	scroll(e) {
 		if(this.scrollTimmer) {
 			return;
 		}
-		//限制请求.5s/次
+		//限制请求.3s/次
 		this.scrollTimmer = setTimeout(() => {
-			this.old.scrollTop = Math.floor(e.detail.scrollTop);
+			this.$set(this.old, 'scrollTop', Math.floor(e.detail.scrollTop))
 			this.scrollTimmer = null;
-		}, 2000)
+		}, 100)
+	},
+	scrolltoupper() {
+		console.log(123);
+		setTimeout(() => {
+			this.$set(this.old, 'scrollTop', 0);
+		}, 300);
 	}
 }

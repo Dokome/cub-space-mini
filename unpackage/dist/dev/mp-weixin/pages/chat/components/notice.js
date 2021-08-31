@@ -225,8 +225,9 @@ var _default =
       loadText: {
         loadmore: '上拉加载更多',
         loading: '努力加载ing...',
-        nomore: '没有更多了~' } };
+        nomore: '没有更多了~' },
 
+      officialNews: [] };
 
   },
   methods: {
@@ -250,11 +251,14 @@ var _default =
         console.log(imResponse.data.messageList);var _iterator = _createForOfIteratorHelper(
         imResponse.data.messageList.reverse()),_step;try {for (_iterator.s(); !(_step = _iterator.n()).done;) {var msg = _step.value;
             if (msg.type === 'TIMCustomElem') {
-              var data = JSON.parse(msg.payload.data || '{}').content;
-              _this.msgList.push(data);
+              // let data = JSON.parse(msg.payload.data || '{}');
+              // if (msg.payload.extension) {
+              // 	console.log(msg.payload.extension);
+              // }
             }
-          }} catch (err) {_iterator.e(err);} finally {_iterator.f();}
-        _this.nextReqMessageID = imResponse.data.nextReqMessageID; // 用于续拉，分页续拉时需传入该字段。
+          }
+          // console.log(this.msgList);
+        } catch (err) {_iterator.e(err);} finally {_iterator.f();}_this.nextReqMessageID = imResponse.data.nextReqMessageID; // 用于续拉，分页续拉时需传入该字段。
         _this.isCompleted = imResponse.data.isCompleted; // 表示是否已经拉完所有消息。
       }).finally(function () {
         _this.loadStatus = 'loadmore';

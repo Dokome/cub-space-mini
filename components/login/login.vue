@@ -23,16 +23,20 @@ export default {
 	name: 'login',
 	data() {
 		return {
-			officalImg: 'https://cub.image.emily.red/operation/logo.png'
+			officalImg: 'https://cub.image.emily.red/operation/logo.png',
+			tim: this.tim
 		};
 	},
 	computed: {
 		customStyle() {
 			return {
 				width: '300rpx',
-				padding: '10rpx'
+				padding: '10rpx',
 			};
 		}
+	},
+	watch: {
+		
 	},
 	methods: {
 		// 授权登录
@@ -103,11 +107,6 @@ export default {
 			this.$cache.set('appId', resultData.appId, resultData.expires);
 		  // TIM
 			GetTimRef(resultData);
-
-			// 页面跳转
-			uni.reLaunch({
-				url: '/pages/home/home'
-			});
 		}
 	}
 };

@@ -85,6 +85,7 @@ export default {
 				loading: '努力加载ing...',
 				nomore: '没有更多了~'
 			},
+			officialNews: []
 		}
 	},
 	methods: {
@@ -108,10 +109,13 @@ export default {
 				console.log(imResponse.data.messageList);
 				for (let msg of imResponse.data.messageList.reverse()) {
 					if (msg.type === 'TIMCustomElem') {
-						let data = JSON.parse(msg.payload.data || '{}').content;
-						this.msgList.push(data);
+						// let data = JSON.parse(msg.payload.data || '{}');
+						// if (msg.payload.extension) {
+						// 	console.log(msg.payload.extension);
+						// }
 					}
 				}
+					// console.log(this.msgList);
 				this.nextReqMessageID = imResponse.data.nextReqMessageID; // 用于续拉，分页续拉时需传入该字段。
 				this.isCompleted = imResponse.data.isCompleted; // 表示是否已经拉完所有消息。
 			}).finally(() => {
