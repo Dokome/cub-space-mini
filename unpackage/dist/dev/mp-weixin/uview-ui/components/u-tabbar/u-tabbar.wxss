@@ -1,7 +1,6 @@
 /* uni.scss */
 .u-fixed-placeholder.data-v-180fb800 {
-  -webkit-box-sizing: content-box;
-          box-sizing: content-box;
+  box-sizing: content-box;
 }
 .u-tabbar__content.data-v-180fb800 {
 
@@ -22,8 +21,7 @@
   left: 0;
   width: 100%;
   z-index: 998;
-  -webkit-box-sizing: content-box;
-          box-sizing: content-box;
+  box-sizing: content-box;
 }
 .u-tabbar__content__circle__border.data-v-180fb800 {
   border-radius: 100%;

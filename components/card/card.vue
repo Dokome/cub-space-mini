@@ -1,14 +1,16 @@
 <template>
-	<!-- :class="{ 'margin-top-xs': type === 'news' }" -->
-	<view class="padding wmax" @touchstart="touchstart" :class="backGround" @touchend="touchend">
+	<!-- :class="{ 'margin-space': type === 'news' }" -->
+	<view class="padding wmax u-border-bottom" @touchstart="touchstart" :class="backGround" @touchend="touchend">
 		<!--
 			动态
 		 -->
 		<view class="" v-if="type === 'news'">
 			<!-- 动态、作者信息 -->
 			<view class="flex" style="position: relative;" v-if="!isHome">
-				<!-- 操作框(三个点) -->
-				<view class="text-lg moreOptions" @click.stop="moreOptions">. . .</view>
+				<!-- 更多 -->
+				<view class="moreOptions" @click.stop="moreOptions">
+					<image src="/static/Img/more.png" mode="aspectFill" style="width: 30px; height: 6px;"></image>
+				</view>
 				<!-- 头像 -->
 				<view class="margin-top-xs"><u-avatar size="80" :src="newsdata.avatarUrl" 
 				 @click.stop="enterUserHome(newsdata.userId, newsdata.anonymousStatus)"></u-avatar></view>
@@ -16,7 +18,7 @@
 				<view class="margin-left-sm padding-top-xs">
 					<!-- 名字/学校 -->
 					<view class="flex align-center">
-						<view class="text-black" >{{ newsdata.nickName }}</view>
+						<view class="text-black .text-bold-600" >{{ newsdata.nickName }}</view>
 					</view>
 					<!-- 时间 -->
 					<view class="u-tips-color text-sm margin-top-xs">{{ newsdata.pushTime }}</view>
@@ -28,11 +30,11 @@
 			</view>
 			<!-- 文字栏 -->
 			<!-- <view class="margin-tb-xs text-black text-content"  :class="{ clamp3: clamp }">{{ newsdata.content }}</view> -->
-			<view class="margin-tb-xs text-black text-content" >
+			<view class="margin-tb-xs text-df-plus text-black text-content" >
 				<text>{{ newsdata.content }}</text>
 			</view>
 			<!-- 图片栏 -->
-			<view class="margin-tb-sm img_Con" style="width: 600rpx;" v-if="newsdata.images && newsdata.images.length">
+			<view class="margin-tb-sm img_Con" style="width: 690rpx;" v-if="newsdata.images && newsdata.images.length">
 				<view :class="imgNewStyle" v-for="(item, index) in newsdata.images" :key="index">
 					<image :src="item.url" mode="aspectFill" @click.stop="imgPrview(item.url, newsdata.images)" 
 						class="show_img" :style="imgNewStyle">
@@ -44,17 +46,17 @@
 			<view class="flex justify-between align-center margin-top-sm">
 				<!-- 左/转发 -->
 				<view class="flex align-center">
-					<image src="/static/Img/share.png" mode="aspectFill" style="width: 30rpx; height: 30rpx;"></image>
-					<text class="margin-left-xs text-sm">{{ newsdata.forwardNum }}</text>
+					<image src="/static/Img/share.png" mode="aspectFill" style="width: 38rpx; height: 38rpx;"></image>
+					<text class="margin-left-xs text-df">{{ newsdata.forwardNum }}</text>
 				</view>
 				<!-- 右/点赞评论 -->
 				<view class="flex align-center">
-					<image src="/static/Img/chat.png" mode="aspectFill" style="width: 30rpx; height: 30rpx;"></image>
-					<text class="margin-left-xs text-sm">{{ newsdata.commentNum }}</text>
+					<image src="/static/Img/chat.png" mode="aspectFill" style="width: 38rpx; height: 38rpx;"></image>
+					<text class="margin-left-xs text-df">{{ newsdata.commentNum }}</text>
 					<text class="margin-lr"></text>
 					<view class="" @click.stop="likeHandle(newsdata, 1)">
-						<image :src="`/static/Img/thumb${likeStatus ? '-B' : ''}.png`" mode="aspectFill" style="width: 30rpx; height: 30rpx;"></image>
-						<text class="margin-left-xs text-sm">{{ likeNum }}</text>
+						<image :src="`/static/Img/thumb${likeStatus ? '-B' : ''}.png`" mode="aspectFill" style="width: 38rpx; height: 38rpx;"></image>
+						<text class="margin-left-xs text-df">{{ likeNum }}</text>
 					</view>
 				</view>
 			</view>
@@ -108,7 +110,7 @@
 							<text>{{ commentdata.content }}</text>
 						</view>
 						<!-- 配图 -->
-						<view class="margin-tb-sm img_Con" style="width: 600rpx;" v-if="commentdata.images && commentdata.images.length">
+						<view class="margin-tb-sm img_Con" style="width: 630rpx;" v-if="commentdata.images && commentdata.images.length">
 							<view :class="imgComStyle" v-for="(item, index) in commentdata.images" :key="index">
 								<image :src="item.url" mode="aspectFill" class="show_img" :style="imgComStyle" 
 									@click.stop="imgPrview(item.url, commentdata.images)">
@@ -139,10 +141,10 @@
 						</view>
 						<!-- 右/点赞评论 -->
 						<view class="flex align-center">
-							<image src="/static/Img/chat.png" mode="aspectFill" style="width: 30rpx; height: 30rpx;"></image>
+							<image src="/static/Img/chat.png" mode="aspectFill" style="width: 35rpx; height: 35rpx;"></image>
 							<text class="margin-lr"></text>
 							<view class="" @click.stop="likeHandle(commentdata, 2)">
-								<image :src="`/static/Img/thumb${likeStatus ? '-B' : ''}.png`" mode="aspectFill" style="width: 30rpx; height: 30rpx;"></image>
+								<image :src="`/static/Img/thumb${likeStatus ? '-B' : ''}.png`" mode="aspectFill" style="width: 35rpx; height: 35rpx;"></image>
 								<text class="margin-left-xs text-sm">{{ likeNum }}</text>
 							</view>
 						</view>
@@ -280,8 +282,8 @@ export default {
 <style lang="scss">
 .moreOptions {
 	position: absolute;
-	right: 0;
-	top: 0;
+	right: 5px;
+	top: 10px;
 	z-index: 999;
 }
 .shareButton {

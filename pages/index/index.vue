@@ -14,8 +14,10 @@
 					bar-width="50"
 					inactive-color="#858585"
 					active-color="#333"
-					:bar-style="{ background: '#0081FF' }"
-					:active-item-style="{ fontSize: '32rpx', transition: '0.1s' }"
+					:bold="false"
+					:show-bar="false"
+					:bar-style="{background: '#0081FF'}"
+					:active-item-style="{ fontSize: '36rpx', transition: '0.1s' }"
 					gutter="30"
 					@change="tabsChange"
 				></u-tabs-swiper>
@@ -34,18 +36,18 @@
 						<!-- 轮播图/热榜等 -->
 						<!-- 热榜 -->
 						<view
-							class="margin-sm bg-gray padding-sm flex flex-direction"
-							style="border-radius: 10rpx;"
+							class="bg-white padding-sm flex flex-direction"
+							style="margin-block-start: 10rpx; margin-block-end: 10rpx;"
 							v-if="(index === 2 || index === 1) && login && hotList && hotList[index - 1] && hotList[index - 1].length > 4"
 							@click="enterHotList"
 						>
 							<!-- 头部 -->
 							<view class="">
-								<text class="text-bold text-black text-sm">{{ index === 1 ? '今日热门' : '校园热门' }}</text>
+								<text class="text-bold-600 text-black text-lg">{{ index === 1 ? '今日热门' : '校园热门' }}</text>
 							</view>
 							<view class="gridContent flex-sub margin-top-xs">
 								<view class="mycut" v-for="(item, h_index) in 8" :key="h_index">
-									<text class="text-black">{{ getHotListDataContent(h_index, index) }}</text>
+									<text class="text-black text-df-plus">{{h_index+1}}. {{ getHotListDataContent(h_index, index) }}</text>
 								</view>
 							</view>
 						</view>
@@ -76,8 +78,6 @@
 							></card>
 							<u-loadmore
 								:status="loadStatus[index]"
-								marginTop="40"
-								marginBottom="40"
 								v-if="getNewsMapData(index).length"
 								:load-text="loadText"
 								:bg-color="'#ffffff'"
@@ -250,7 +250,7 @@ export default {
 
 .outWrapper {
 	overflow: hidden;
-	background-color: #fff;
+	background-color: #F3F4F6;
 }
 
 .viewPart {
