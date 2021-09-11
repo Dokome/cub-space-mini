@@ -11,7 +11,7 @@ const BASE_URL = {
 	_LOC: 'http://localhost:9091/api'
 }
 
-const CUR_BASE_URL = BASE_URL._DEV;
+const CUR_BASE_URL = BASE_URL._PRO;
 
 // 请求相关
 class Http {

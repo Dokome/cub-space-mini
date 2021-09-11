@@ -209,7 +209,8 @@ var _default =
     getStartImage: function getStartImage() {var _this2 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var result;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:_context.next = 2;return (
                   _this2.$http.request({ url: '/sysCode/selectProductImage', method: 'GET' }));case 2:result = _context.sent;
                 // 品宣图
-                _this2.startImage = result.data.data.value;case 4:case "end":return _context.stop();}}}, _callee);}))();
+                _this2.startImage = result.data.data.value;
+                console.log(_this2.startImage);case 5:case "end":return _context.stop();}}}, _callee);}))();
     },
     // 点击跳过
     jump: function jump() {

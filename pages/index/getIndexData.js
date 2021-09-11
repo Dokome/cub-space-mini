@@ -84,7 +84,8 @@ export const __getIndexData = {
 		if (this.hotList[index - 1] && this.hotList[index - 1].length > 4) {
 			let temp = JSON.parse(this.hotList[index - 1]);
 			if (temp[h_index]) {
-				return temp[h_index].content;
+				let res = temp[h_index].content.replace(/\r\n/g,"").replace(/\n/g,"");
+				return res;
 			}
 		}
 	},

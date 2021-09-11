@@ -283,11 +283,10 @@ var _default =
       var tim = this.tim;
       var promise = tim.getMessageList({ conversationID: this.CID, count: 15, nextReqMessageID: this.nextReqMessageID });
       promise.then(function (imResponse) {
-        if (!!_this.nextReqMessageID && _this.nextReqMessageID === imResponse.data.nextReqMessageID) return;
-        console.log(imResponse.data.messageList);var _iterator = _createForOfIteratorHelper(
+        if (!!_this.nextReqMessageID && _this.nextReqMessageID === imResponse.data.nextReqMessageID) return;var _iterator = _createForOfIteratorHelper(
         imResponse.data.messageList.reverse()),_step;try {for (_iterator.s(); !(_step = _iterator.n()).done;) {var msg = _step.value;
             if (msg.type === 'TIMCustomElem') {
-              var data = JSON.parse(msg.payload.data || '{}');
+              var data = JSON.parse(msg.payload && msg.payload.data || '{}');
               var event = msg.payload.extension;
               if (event === 'event.notify') {
                 _this.msgList.push(data);
@@ -310,9 +309,12 @@ var _default =
     if (this.$cache.get('token')) {
       this.getMsgList();
     }
-    uni.$off('noticeListUpdate');
-    uni.$on('noticeListUpdate', function () {
-      _this2.getMsgList();
+    uni.$on('noticeListUpdate', function (msg) {
+      if (msg) {
+        _this2.msgList.unshift(JSON.parse(msg.payload.data || '{}'));
+      } else {
+        _this2.getMsgList();
+      }
     });
   } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))

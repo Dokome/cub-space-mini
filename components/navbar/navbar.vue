@@ -14,8 +14,11 @@
 			>
 			<slot class="wmax" v-if="!title"></slot>
 			<view style="position: relative;" v-else class="flex justify-center wmax">
-				<view class="listIcon" style="" @click="back">
+				<view class="listIcon" style="" @click="back" v-if="ifBack">
 					<image src="/static/Img/back.png" mode="" class="hwmax"></image>
+				</view>
+				<view class="listIcon flex align-center justify-center close" v-if="!ifBack" @click="closePage">
+					<image src="/static/Img/close.png" mode="" class="hwmax"></image>
 				</view>
 				<text class="text-lg text-bold text-black">{{title}}</text>
 			</view>
@@ -46,6 +49,18 @@
 				dafault() {
 					return false;
 				}
+			},
+			ifBack: {
+				type: Boolean,
+				default() {
+					return true;
+				}
+			},
+			ifBackToIndexPage: {
+				type: Boolean,
+				default() {
+					return true;
+				}
 			}
 		},
 		data() {
@@ -58,6 +73,9 @@
 			//返回上一页
 			back() {
 				this.$api.routerHandle.goback();
+			},
+			closePage() {
+				uni.$emit('popUpChange', '');
 			}
 		}
 	}
@@ -79,5 +97,10 @@
 		position: fixed;
 		top: 0;
 		z-index: 99999;
+	}
+	
+	.close {
+		width: 40rpx;
+		height: 40rpx;
 	}
 </style>

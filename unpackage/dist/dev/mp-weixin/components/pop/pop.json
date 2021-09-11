@@ -1,6 +1,7 @@
 {
   "usingComponents": {
     "u-popup": "/uview-ui/components/u-popup/u-popup",
+    "navbar": "/components/navbar/navbar",
     "u-input": "/uview-ui/components/u-input/u-input",
     "u-switch": "/uview-ui/components/u-switch/u-switch",
     "u-button": "/uview-ui/components/u-button/u-button",

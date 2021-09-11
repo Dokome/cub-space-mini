@@ -4,10 +4,11 @@ export const __newsPublish = {
 	},
 	
 	imgRemove(index) {
-		this.$api.imgHandle.removeCurrentImg.call(this);
+		this.$api.imgHandle.removeCurrentImg.call(this, index);
 	},
 	
 	async newsPublishHandle() {
+		this.ifMaskShow = true;
 		// 内容校验
 		if (this.newsTextContent.trim().length === 0) {
 			return uni.showToast({
@@ -45,6 +46,7 @@ export const __newsPublish = {
 		// 发布成功
 		uni.hideLoading();
 		if (data.data.code === 200) {
+			this.ifMaskShow = false;
 			this.show = false;
 			uni.$emit('updateData', '');
 			setTimeout(() => {

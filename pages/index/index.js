@@ -31,10 +31,8 @@ export const __indexMethods = {
 	},
 	//动态发布
 	isPublish(index) {
-		if (index === 2) {
-			this.ifPublishShow = true;
-			uni.$emit('popUpChange', '');
-		}
+		this.ifPublishShow = true;
+		uni.$emit('popUpChange', '');
 	},
 	// 拖动屏幕
 	startHandleStart(e) {

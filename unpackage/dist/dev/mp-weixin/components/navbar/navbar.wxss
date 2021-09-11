@@ -14,4 +14,8 @@
   top: 0;
   z-index: 99999;
 }
+.close {
+  width: 40rpx;
+  height: 40rpx;
+}
 

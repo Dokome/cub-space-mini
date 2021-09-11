@@ -27,5 +27,8 @@
   right: 40rpx;
   bottom: 200rpx;
   border-radius: 50%;
+  -webkit-box-shadow: 3rpx 3rpx 5rpx rgba(0, 0, 0, 0.4);
+          box-shadow: 3rpx 3rpx 5rpx rgba(0, 0, 0, 0.4);
+  overflow: hidden;
 }
 

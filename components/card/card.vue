@@ -28,7 +28,9 @@
 			</view>
 			<!-- 文字栏 -->
 			<!-- <view class="margin-tb-xs text-black text-content"  :class="{ clamp3: clamp }">{{ newsdata.content }}</view> -->
-			<view class="margin-tb-xs text-black text-content" >{{ newsdata.content }}</view>
+			<view class="margin-tb-xs text-black text-content" >
+				<text>{{ newsdata.content }}</text>
+			</view>
 			<!-- 图片栏 -->
 			<view class="margin-tb-sm img_Con" style="width: 600rpx;" v-if="newsdata.images && newsdata.images.length">
 				<view :class="imgNewStyle" v-for="(item, index) in newsdata.images" :key="index">

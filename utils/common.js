@@ -11,7 +11,7 @@ class ImgHandle {
 		if (imgList.length === 1) {
 			//定义宽高
 			let [width, height] = [imgList[0].width || BASE, imgList[0].height || BASE];
-			if (width < BASE && height < BASE) {
+			if (width * 2 < BASE && height * 2 < BASE) {
 				return `height: ${ height * 2}rpx; width: ${ width * 2 }rpx `
 			}
 			//比例系数
@@ -92,9 +92,16 @@ class RouterHandle {
 	}
 	// 返回页面
 	goback() {
-		uni.navigateBack({
-			delta: 1
-		})
+		let num = getCurrentPages().length;
+		if (num > 1) {
+			uni.navigateBack({
+				delta: 1
+			})
+		} else {
+			uni.navigateTo({
+				url: '/pages/index/index'
+			});
+		}
 	}
 }
 

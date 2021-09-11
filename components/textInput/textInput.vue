@@ -45,8 +45,9 @@
 		<view class="imgchoose padding-xs shadow-top" v-show="ifImgChoose" style="transition: .2s;">
 			<scroll-view :scroll-x="true">
 				<view class="flex imgBox">
-					<view class="imgBox-item" v-for="(item, index) in imgList" v-if="item" :key="index">
-						<image :src="item.url" mode="aspectFill" class="imgBox-img" @click="imgRemove(index)"></image>
+					<view class="imgBox-item" v-for="(item, index) in imgList" v-if="item" :key="index" style="position: relative;">
+						<image :src="item.url" mode="aspectFill" class="imgBox-img"@click="imgPrview(item.url, imgList)"></image>
+						<image src="/static/Img/close.png" class="closeIcon" @click="imgRemove(index)"></image>
 					</view>
 					<view class="imgBox-item" v-if="imgList && imgList.length < 9">
 						<image src="/static/Img/addImg.png" mode="aspectFill" class="imgBox-img" @click="imgSelector"></image>
@@ -166,7 +167,11 @@ export default {
 		}
 	},
 	methods: {
-		...__textInput
+		...__textInput,
+		// 图片预览
+		imgPrview(url, imgList) {
+			this.$api.imgHandle.imgPreview(url, imgList && imgList.map(item => item.url));
+		},
 	},
 	mounted() {
 		recorderManager.onStop(res => {
@@ -233,5 +238,15 @@ export default {
 			height: 180rpx;
 		}
 	}
+}
+
+.closeIcon {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 50rpx;
+	height: 50rpx;
+	border-radius: 50%;
+	background-color: #fff;
 }
 </style>

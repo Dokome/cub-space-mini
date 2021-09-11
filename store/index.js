@@ -25,14 +25,14 @@ export default new Vuex.Store({
 				customIcon: false,
 				pagePath: "/pages/meet/meet"
 			},
-			{
-				iconPath: "/static/tabbar/publish.png",
-				selectedIconPath: "/static/tabbar/publish.png",
-				text: '发布',
-				midButton: true,
-				customIcon: false,
-				// pagePath: "/pages/publish/publish"
-			},
+			// {
+			// 	iconPath: "/static/tabbar/publish.png",
+			// 	selectedIconPath: "/static/tabbar/publish.png",
+			// 	text: '发布',
+			// 	midButton: true,
+			// 	customIcon: false,
+			// 	// pagePath: "/pages/publish/publish"
+			// },
 			{
 				iconPath: "/static/tabbar/index.png",
 				selectedIconPath: "/static/tabbar/index-fill.png",

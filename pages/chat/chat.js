@@ -3,6 +3,9 @@ export const __chat = {
 		this.swiperCurrent = index;
 		if (index === 1) {
 			this.tim.setMessageRead({conversationID: 'C2Cadministrator'});
+			this.unreadCount -= this.unreadCountNotice;
+			this.unreadCount = this.unreadCount >= 0 ? this.unreadCount : 0;
+			this.unreadCountNotice = 0;
 			this.$store.commit('chatNewsUnread', this.unreadCount);
 		}
 	},
@@ -29,6 +32,7 @@ export const __chat = {
 			for (let conversation of conversationList) {
 				this.unreadCount += conversation.unreadCount;
 				if (conversation.conversationID === "C2Cadministrator") {
+					this.unreadCountNotice += conversation.unreadCount;
 					continue;
 				}
 				this.chatList.set(conversation.conversationID, conversation); 

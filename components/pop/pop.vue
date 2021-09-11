@@ -1,11 +1,10 @@
 <template>
 	<view class="">
-		<u-popup mode="bottom" v-model="show" :closeable="true" close-icon-pos="top-left" :custom-style="{ zIndex: '88' }" border-radius="15">
+		<u-popup mode="bottom" v-model="show" :custom-style="{ zIndex: '88' }" border-radius="15">
 			<view class="content" :style="{ height: type === 'publish' ? '100vh' : '85vh' }">
-				<view class="flex justify-center align-center text-bold text-black u-border-bottom" :style="[{ height: CustomBar + 'px' }]">
-					{{ type === 'publish' ? '发布' : '回复' }}
-					<!-- publish 发布 reply 回复 login 登录 -->
-				</view>
+				<!-- 全屏遮罩 -->
+				<view class="mask" v-if="ifMaskShow && type === 'publish'"></view>
+				<navbar :title="type === 'publish' ? '发布' : '回复'" :ifBack="false"></navbar>
 				<!-- 发布功能 -->
 				<scroll-view scroll-y="true" :style="{ height: `calc(100% - ${CustomBar}px)` }" v-if="type === 'publish'">
 					<!-- 文字信息 -->
@@ -25,8 +24,9 @@
 					<view class="imgchoose padding-xs">
 						<scroll-view :scroll-x="true">
 							<view class="flex imgBox">
-								<view class="imgBox-item" v-for="(item, index) in imgList" :key="index">
-									<image :src="item.url" mode="aspectFill" class="imgBox-img" @click="imgRemove(index)"></image>
+								<view class="imgBox-item" v-for="(item, index) in imgList" :key="index" style="position: relative;">
+									<image :src="item.url" mode="aspectFill" class="imgBox-img" @click="imgPrview(item.url, imgList)"></image>
+									<image src="/static/Img/close.png" class="closeIcon" @click="imgRemove(index)"></image>
 								</view>
 								<view class="imgBox-item">
 									<!-- 添加图片 -->
@@ -114,7 +114,8 @@ export default {
 			// 文本信息
 			newsTextContent: '',
 			// 发布时的图片列表
-			imgList: []
+			imgList: [],
+			ifMaskShow: false,
 		};
 	},
 	methods: {
@@ -123,7 +124,11 @@ export default {
 		// 控制pop的显示
 		popUpChange() {
 			this.show = !this.show;
-		}
+		},
+		// 图片预览
+		imgPrview(url, imgList) {
+			this.$api.imgHandle.imgPreview(url, imgList && imgList.map(item => item.url));
+		},
 	},
 	mounted() {
 		// 先把其他页面的时间全部注销
@@ -167,6 +172,8 @@ export default {
 				// 回复状态转化为回复动态
 				uni.$emit('changeStateBackNew');
 				this.clearData();
+			} else if (!state) {
+				// uni.$emit()
 			}
 		}
 	}
@@ -174,6 +181,16 @@ export default {
 </script>
 
 <style lang="scss">
+.closeIcon {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 50rpx;
+	height: 50rpx;
+	border-radius: 50%;
+	background-color: #fff;
+}
+	
 .imgBox {
 	display: flex;
 	flex-wrap: nowrap;
@@ -192,5 +209,14 @@ export default {
 	width: 100%;
 	background-color: #fff;
 	left: 0;
+}
+
+.mask {
+	position: absolute;
+	width: 100vw;
+	height: 100vh;
+	left: 0;
+	top: 0;
+	z-index: 99999999999999999;
 }
 </style>

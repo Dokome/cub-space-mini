@@ -1954,8 +1954,12 @@ function GetTimRef() {var params = arguments.length > 0 && arguments[0] !== unde
   if (!tim) return; //当没登录且缓存不存在的时候直接退出
   tim.registerPlugin({ 'tim-upload-plugin': _timUploadPlugin.default });
   var onMessageReceived = function onMessageReceived(event) {
+    if (event.data[0].type === 'TIMTextElem') {
+      uni.$emit("chatListUpdate", '');
+    } else if (event.data[0].type === 'TIMCustomElem') {
+      uni.$emit('noticeListUpdate', event.data[0]);
+    }
     uni.$emit("reciveChatMsg", event.data);
-    uni.$emit("chatListUpdate", '');
   };
   tim.on(_timJsSdk.default.EVENT.MESSAGE_RECEIVED, onMessageReceived);
 
@@ -2012,6 +2016,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.__chat = v
     this.swiperCurrent = index;
     if (index === 1) {
       this.tim.setMessageRead({ conversationID: 'C2Cadministrator' });
+      this.unreadCount -= this.unreadCountNotice;
+      this.unreadCount = this.unreadCount >= 0 ? this.unreadCount : 0;
+      this.unreadCountNotice = 0;
       this.$store.commit('chatNewsUnread', this.unreadCount);
     }
   },
@@ -2038,6 +2045,7 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.__chat = v
       var _iterator = _createForOfIteratorHelper(conversationList),_step;try {for (_iterator.s(); !(_step = _iterator.n()).done;) {var conversation = _step.value;
           _this.unreadCount += conversation.unreadCount;
           if (conversation.conversationID === "C2Cadministrator") {
+            _this.unreadCountNotice += conversation.unreadCount;
             continue;
           }
           _this.chatList.set(conversation.conversationID, conversation);
@@ -9361,24 +9369,25 @@ module.exports = __webpack_require__(/*! regenerator-runtime */ 26);
   },
 
   imgRemove: function imgRemove(index) {
-    this.$api.imgHandle.removeCurrentImg.call(this);
+    this.$api.imgHandle.removeCurrentImg.call(this, index);
   },
 
-  newsPublishHandle: function newsPublishHandle() {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var _iterator, _step, img, newImg, uploadData, data;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:if (!(
-
-              _this.newsTextContent.trim().length === 0)) {_context.next = 2;break;}return _context.abrupt("return",
+  newsPublishHandle: function newsPublishHandle() {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var _iterator, _step, img, newImg, uploadData, data;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
+              _this.ifMaskShow = true;
+              // 内容校验
+              if (!(_this.newsTextContent.trim().length === 0)) {_context.next = 3;break;}return _context.abrupt("return",
               uni.showToast({
                 title: '空空如也~',
-                icon: 'none' }));case 2:
+                icon: 'none' }));case 3:
 
 
               uni.showLoading({
                 title: '正在发布中' });
 
               // 上传图片
-              _iterator = _createForOfIteratorHelper(_this.imgList);_context.prev = 4;_iterator.s();case 6:if ((_step = _iterator.n()).done) {_context.next = 14;break;}img = _step.value;_context.next = 10;return (
-                _this.$http.upLoadFile(img.url));case 10:newImg = _context.sent;
-              _this.$set(img, 'url', newImg);case 12:_context.next = 6;break;case 14:_context.next = 19;break;case 16:_context.prev = 16;_context.t0 = _context["catch"](4);_iterator.e(_context.t0);case 19:_context.prev = 19;_iterator.f();return _context.finish(19);case 22:
+              _iterator = _createForOfIteratorHelper(_this.imgList);_context.prev = 5;_iterator.s();case 7:if ((_step = _iterator.n()).done) {_context.next = 15;break;}img = _step.value;_context.next = 11;return (
+                _this.$http.upLoadFile(img.url));case 11:newImg = _context.sent;
+              _this.$set(img, 'url', newImg);case 13:_context.next = 7;break;case 15:_context.next = 20;break;case 17:_context.prev = 17;_context.t0 = _context["catch"](5);_iterator.e(_context.t0);case 20:_context.prev = 20;_iterator.f();return _context.finish(20);case 23:
 
               // 定义data
               uploadData = {
@@ -9388,10 +9397,10 @@ module.exports = __webpack_require__(/*! regenerator-runtime */ 26);
 
 
               // 发送请求
-              _context.next = 25;return _this.$http.request({
+              _context.next = 26;return _this.$http.request({
                 url: '/dynamicState/pushDynamic',
                 method: 'POST',
-                data: uploadData });case 25:data = _context.sent;
+                data: uploadData });case 26:data = _context.sent;
 
 
               // 清空数据
@@ -9402,6 +9411,7 @@ module.exports = __webpack_require__(/*! regenerator-runtime */ 26);
               // 发布成功
               uni.hideLoading();
               if (data.data.code === 200) {
+                _this.ifMaskShow = false;
                 _this.show = false;
                 uni.$emit('updateData', '');
                 setTimeout(function () {
@@ -9411,7 +9421,7 @@ module.exports = __webpack_require__(/*! regenerator-runtime */ 26);
                     duration: 1000 });
 
                 }, 200);
-              }case 31:case "end":return _context.stop();}}}, _callee, null, [[4, 16, 19, 22]]);}))();
+              }case 32:case "end":return _context.stop();}}}, _callee, null, [[5, 17, 20, 23]]);}))();
   } };exports.__newsPublish = __newsPublish;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
@@ -10846,7 +10856,7 @@ randomArray;exports.default = _default;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.__textInput = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 25));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}var recorderManager = uni.getRecorderManager();
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.__textInput = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 25));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}function _createForOfIteratorHelper(o, allowArrayLike) {var it;if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) {if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") {if (it) o = it;var i = 0;var F = function F() {};return { s: F, n: function n() {if (i >= o.length) return { done: true };return { done: false, value: o[i++] };}, e: function e(_e) {throw _e;}, f: F };}throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}var normalCompletion = true,didErr = false,err;return { s: function s() {it = o[Symbol.iterator]();}, n: function n() {var step = it.next();normalCompletion = step.done;return step;}, e: function e(_e2) {didErr = true;err = _e2;}, f: function f() {try {if (!normalCompletion && it.return != null) it.return();} finally {if (didErr) throw err;}} };}function _unsupportedIterableToArray(o, minLen) {if (!o) return;if (typeof o === "string") return _arrayLikeToArray(o, minLen);var n = Object.prototype.toString.call(o).slice(8, -1);if (n === "Object" && o.constructor) n = o.constructor.name;if (n === "Map" || n === "Set") return Array.from(o);if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);}function _arrayLikeToArray(arr, len) {if (len == null || len > arr.length) len = arr.length;for (var i = 0, arr2 = new Array(len); i < len; i++) {arr2[i] = arr[i];}return arr2;}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}var recorderManager = uni.getRecorderManager();
 var __textInput = {
   InputFocus: function InputFocus(e) {
     this.ifImgChoose = false;
@@ -10891,14 +10901,22 @@ var __textInput = {
     this.$api.imgHandle.imgSelector.call(this);
   },
   imgRemove: function imgRemove(index) {
-    this.$api.imgHandle.removeCurrentImg.call(this);
+    this.$api.imgHandle.removeCurrentImg.call(this, index);
   },
   // 动态相关的回复和评论等
-  publishHandle: function publishHandle() {var _this2 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var finalId, data, result;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:if (!(
+  publishHandle: function publishHandle() {var _this2 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var _iterator, _step, img, newImg, finalId, data, result;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:if (!(
               _this2.inputContent.trim().length === 0)) {_context.next = 2;break;}return _context.abrupt("return",
               uni.showToast({
                 title: "空空如也~",
                 icon: "none" }));case 2:
+
+
+
+              // 上传图片
+              _iterator = _createForOfIteratorHelper(_this2.imgList);_context.prev = 3;_iterator.s();case 5:if ((_step = _iterator.n()).done) {_context.next = 14;break;}img = _step.value;_context.next = 9;return (
+                _this2.$http.upLoadFile(img.url));case 9:newImg = _context.sent;
+              _this2.$set(img, 'url', newImg);
+              console.log(img);case 12:_context.next = 5;break;case 14:_context.next = 19;break;case 16:_context.prev = 16;_context.t0 = _context["catch"](3);_iterator.e(_context.t0);case 19:_context.prev = 19;_iterator.f();return _context.finish(19);case 22:
 
 
               finalId = undefined;
@@ -10931,7 +10949,7 @@ var __textInput = {
                 finalId = _this2.target.rootCommentId;
               }
               // 发送请求
-              _context.next = 7;return _this2.$http.request(data);case 7:result = _context.sent;
+              _context.next = 27;return _this2.$http.request(data);case 27:result = _context.sent;
               // 更新pop内的内容
               uni.$emit('updateCurrentInfo', '');
               if (_this2.type !== 'news') {
@@ -10943,7 +10961,7 @@ var __textInput = {
                   title: '评论成功~',
                   icon: 'none' });
 
-              }case 12:case "end":return _context.stop();}}}, _callee);}))();
+              }case 32:case "end":return _context.stop();}}}, _callee, null, [[3, 16, 19, 22]]);}))();
   },
   // 聊天相关
   chatHandle: function chatHandle() {
@@ -11456,14 +11474,14 @@ new _vuex.default.Store({
       customIcon: false,
       pagePath: "/pages/meet/meet" },
 
-    {
-      iconPath: "/static/tabbar/publish.png",
-      selectedIconPath: "/static/tabbar/publish.png",
-      text: '发布',
-      midButton: true,
-      customIcon: false
-      // pagePath: "/pages/publish/publish"
-    },
+    // {
+    // 	iconPath: "/static/tabbar/publish.png",
+    // 	selectedIconPath: "/static/tabbar/publish.png",
+    // 	text: '发布',
+    // 	midButton: true,
+    // 	customIcon: false,
+    // 	// pagePath: "/pages/publish/publish"
+    // },
     {
       iconPath: "/static/tabbar/index.png",
       selectedIconPath: "/static/tabbar/index-fill.png",
@@ -12632,7 +12650,7 @@ var ImgHandle = /*#__PURE__*/function () {
       if (imgList.length === 1) {
         //定义宽高
         var _ref = [imgList[0].width || BASE, imgList[0].height || BASE],width = _ref[0],height = _ref[1];
-        if (width < BASE && height < BASE) {
+        if (width * 2 < BASE && height * 2 < BASE) {
           return "height: ".concat(height * 2, "rpx; width: ").concat(width * 2, "rpx ");
         }
         //比例系数
@@ -12713,9 +12731,16 @@ RouterHandle = /*#__PURE__*/function () {
     }
     // 返回页面
   }, { key: "goback", value: function goback() {
-      uni.navigateBack({
-        delta: 1 });
+      var num = getCurrentPages().length;
+      if (num > 1) {
+        uni.navigateBack({
+          delta: 1 });
 
+      } else {
+        uni.navigateTo({
+          url: '/pages/index/index' });
+
+      }
     } }]);return RouterHandle;}();var
 
 
@@ -12822,7 +12847,7 @@ var BASE_URL = {
   _LOC: 'http://localhost:9091/api' };
 
 
-var CUR_BASE_URL = BASE_URL._DEV;
+var CUR_BASE_URL = BASE_URL._PRO;
 
 // 请求相关
 var Http = /*#__PURE__*/function () {
@@ -12985,10 +13010,8 @@ module.exports = {
   },
   //动态发布
   isPublish: function isPublish(index) {
-    if (index === 2) {
-      this.ifPublishShow = true;
-      uni.$emit('popUpChange', '');
-    }
+    this.ifPublishShow = true;
+    uni.$emit('popUpChange', '');
   },
   // 拖动屏幕
   startHandleStart: function startHandleStart(e) {
@@ -13128,7 +13151,8 @@ var __getIndexData = {
     if (this.hotList[index - 1] && this.hotList[index - 1].length > 4) {
       var temp = JSON.parse(this.hotList[index - 1]);
       if (temp[h_index]) {
-        return temp[h_index].content;
+        var res = temp[h_index].content.replace(/\r\n/g, "").replace(/\n/g, "");
+        return res;
       }
     }
   },

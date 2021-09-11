@@ -14,8 +14,12 @@ function GetTimRef(params = {}) {
 	if (!tim) return; //当没登录且缓存不存在的时候直接退出
 	tim.registerPlugin({'tim-upload-plugin': TIMUploadPlugin});
 	let onMessageReceived = (event) => {
+		if (event.data[0].type === 'TIMTextElem') {
+			uni.$emit("chatListUpdate", '');
+		} else if (event.data[0].type === 'TIMCustomElem') {
+			uni.$emit('noticeListUpdate', event.data[0]);
+		}
 		uni.$emit("reciveChatMsg", event.data);
-		uni.$emit("chatListUpdate", '');
 	};
 	tim.on(TIM.EVENT.MESSAGE_RECEIVED, onMessageReceived);
 	 

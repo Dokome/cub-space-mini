@@ -18,7 +18,6 @@
 					:active-item-style="{ fontSize: '32rpx', transition: '0.1s' }"
 					gutter="30"
 					@change="tabsChange"
-					d
 				></u-tabs-swiper>
 			</view>
 		</navbar>
@@ -101,13 +100,15 @@
 			:activeColor="activeColor"
 			:change="navChange"
 			:border-top="borderTop"
-			@change="isPublish"
 		></u-tabbar>
 		<!-- 弹出层 -->
 		<pop type="publish" v-if="ifPublishShow"></pop>
 		<loading v-if="ifLoaddingShow"></loading>
 		<!-- 回到顶部 -->
-		<view class="gotop flex align-center justify-center" @click="goBackToTop"><image src="/static/Img/gotop.png" class="hwmax"></image></view>
+		<view class="gotop flex align-center justify-center">
+			<image src="/static/Img/gotop.png" @click="goBackToTop" v-show="old.scrollTop > 800" class="hwmax"></image>
+			<image src="/static/Img/publish.png" @click="isPublish" v-show="old.scrollTop <= 800" class="hwmax"></image>
+		</view>
 	</view>
 </template>
 
@@ -257,10 +258,8 @@ export default {
 }
 
 .gridContent {
-	// width: 100%;
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
-	// grid-template-rows: repeat(4, 1fr);
 	grid-gap: 10rpx;
 }
 
@@ -278,5 +277,7 @@ export default {
 	right: 40rpx;
 	bottom: 200rpx;
 	border-radius: 50%;
+	box-shadow: 3rpx 3rpx 5rpx rgba($color: #000000, $alpha: .4);
+	overflow: hidden;
 }
 </style>

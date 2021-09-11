@@ -122,10 +122,9 @@ export default {
 			let promise = tim.getMessageList({conversationID: this.CID, count: 15, nextReqMessageID: this.nextReqMessageID});
 			promise.then((imResponse) => {
 				if (!!this.nextReqMessageID && this.nextReqMessageID === imResponse.data.nextReqMessageID) return;
-				console.log(imResponse.data.messageList);
 				for (let msg of imResponse.data.messageList.reverse()) {
 					if (msg.type === 'TIMCustomElem') {
-						const data = JSON.parse(msg.payload.data || '{}');
+						const data = JSON.parse((msg.payload && msg.payload.data) || '{}');
 						const event = msg.payload.extension;
 						if (event === 'event.notify') {
 							this.msgList.push(data);
@@ -148,10 +147,13 @@ export default {
 		if (this.$cache.get('token')) {
 			this.getMsgList();
 		}
-		uni.$off('noticeListUpdate')
-		uni.$on('noticeListUpdate', () => {
-			this.getMsgList();
-		})
+		uni.$on('noticeListUpdate', (msg) => {
+			if (msg) {
+				this.msgList.unshift(JSON.parse(msg.payload.data || '{}'));
+			} else {
+				this.getMsgList();
+			}
+		});
 	},
 }
 </script>

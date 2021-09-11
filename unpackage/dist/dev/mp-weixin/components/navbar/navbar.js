@@ -114,7 +114,10 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
+//
+//
+//
 //
 //
 //
@@ -161,6 +164,18 @@ var _default2 =
       type: Boolean,
       dafault: function dafault() {
         return false;
+      } },
+
+    ifBack: {
+      type: Boolean,
+      default: function _default() {
+        return true;
+      } },
+
+    ifBackToIndexPage: {
+      type: Boolean,
+      default: function _default() {
+        return true;
       } } },
 
 
@@ -174,7 +189,11 @@ var _default2 =
     //返回上一页
     back: function back() {
       this.$api.routerHandle.goback();
+    },
+    closePage: function closePage() {
+      uni.$emit('popUpChange', '');
     } } };exports.default = _default2;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 

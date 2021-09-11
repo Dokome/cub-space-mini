@@ -40,4 +40,13 @@
   width: 180rpx;
   height: 180rpx;
 }
+.closeIcon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 50rpx;
+  height: 50rpx;
+  border-radius: 50%;
+  background-color: #fff;
+}
 

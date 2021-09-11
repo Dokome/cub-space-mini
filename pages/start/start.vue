@@ -55,6 +55,7 @@ export default {
 			const result = await this.$http.request({ url: '/sysCode/selectProductImage', method: 'GET' });
 			// 品宣图
 			this.startImage = result.data.data.value;
+			console.log(this.startImage);
 		},
 		// 点击跳过
 		jump: function() {

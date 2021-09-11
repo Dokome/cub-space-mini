@@ -202,7 +202,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 var _textInput = __webpack_require__(/*! ./textInput.js */ 347);function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;} //
+//
 //
 //
 //
@@ -270,8 +272,7 @@ var recorderManager = uni.getRecorderManager();var _default2 = { name: 'textInpu
       recordStartPoint: null, // 录音提醒文字
       recordTitle: '按住说话', // 是否在录音中
       isRecording: false, // 是否能录音成功
-      ifRecordSucc: false };}, computed: { imgStyle: function imgStyle() {return this.$api.imgHandle.multiImgShow.call(this);},
-    inputPlaceHolder: function inputPlaceHolder() {
+      ifRecordSucc: false };}, computed: { imgStyle: function imgStyle() {return this.$api.imgHandle.multiImgShow.call(this);}, inputPlaceHolder: function inputPlaceHolder() {
       if (this.type === 'comment' || this.type === 'news') {
         return '爱国 友善 文明';
       } else if (this.type === 'reply') {
@@ -307,8 +308,12 @@ var recorderManager = uni.getRecorderManager();var _default2 = { name: 'textInpu
       this.clearCurrentInfo();
     } },
 
-  methods: _objectSpread({},
-  _textInput.__textInput),
+  methods: _objectSpread(_objectSpread({},
+  _textInput.__textInput), {}, {
+    // 图片预览
+    imgPrview: function imgPrview(url, imgList) {
+      this.$api.imgHandle.imgPreview(url, imgList && imgList.map(function (item) {return item.url;}));
+    } }),
 
   mounted: function mounted() {var _this = this;
     recorderManager.onStop(function (res) {

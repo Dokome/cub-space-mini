@@ -177,6 +177,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 var _colorGradient = _interopRequireDefault(__webpack_require__(/*! ../../libs/function/colorGradient */ 30));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}
 var color = _colorGradient.default;var _uni$getSystemInfoSyn =
 uni.getSystemInfoSync(),windowWidth = _uni$getSystemInfoSyn.windowWidth;
@@ -327,6 +328,13 @@ var preId = 'UEl_';
       type: Object,
       default: function _default() {
         return {};
+      } },
+
+    // 右上角小红点
+    noticePoint: {
+      type: Number,
+      default: function _default() {
+        return -1;
       } } },
 
 

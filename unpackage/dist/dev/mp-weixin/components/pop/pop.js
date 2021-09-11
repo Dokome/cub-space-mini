@@ -82,6 +82,9 @@ try {
     uPopup: function() {
       return __webpack_require__.e(/*! import() | uview-ui/components/u-popup/u-popup */ "uview-ui/components/u-popup/u-popup").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-popup/u-popup.vue */ 275))
     },
+    navbar: function() {
+      return __webpack_require__.e(/*! import() | components/navbar/navbar */ "components/navbar/navbar").then(__webpack_require__.bind(null, /*! @/components/navbar/navbar.vue */ 202))
+    },
     uInput: function() {
       return Promise.all(/*! import() | uview-ui/components/u-input/u-input */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uview-ui/components/u-input/u-input")]).then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-input/u-input.vue */ 334))
     },
@@ -295,7 +298,8 @@ var _dataUpdate = __webpack_require__(/*! ./dataUpdate.js */ 251);function ownKe
       // 文本信息
       newsTextContent: '',
       // 发布时的图片列表
-      imgList: [] };
+      imgList: [],
+      ifMaskShow: false };
 
   },
   methods: _objectSpread(_objectSpread(_objectSpread({},
@@ -304,6 +308,10 @@ var _dataUpdate = __webpack_require__(/*! ./dataUpdate.js */ 251);function ownKe
     // 控制pop的显示
     popUpChange: function popUpChange() {
       this.show = !this.show;
+    },
+    // 图片预览
+    imgPrview: function imgPrview(url, imgList) {
+      this.$api.imgHandle.imgPreview(url, imgList && imgList.map(function (item) {return item.url;}));
     } }),
 
   mounted: function mounted() {var _this = this;
@@ -348,6 +356,8 @@ var _dataUpdate = __webpack_require__(/*! ./dataUpdate.js */ 251);function ownKe
         // 回复状态转化为回复动态
         uni.$emit('changeStateBackNew');
         this.clearData();
+      } else if (!state) {
+        // uni.$emit()
       }
     } } };exports.default = _default2;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))

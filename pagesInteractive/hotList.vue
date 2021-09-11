@@ -36,7 +36,7 @@
 				ifLoaddingShow: true,
 				ViewPart: this.ViewPart,
 				hotList: [],
-				defaultImg: 'https://image.sapce.club/common/1623820687514623626.jpg',
+				defaultImg: 'https://cub.image.emily.red/operation/logo.png',
 				type: 1,
 			};
 		},
@@ -70,8 +70,8 @@
 		  // 监听acceptDataFromOpenerPage事件，获取上一页面通过eventChannel传送到当前页面的数据
 		  eventChannel.on('acceptDataFromOpenerPage', (data) => {
 		    this.type = data.data;
+				this.getHotList({ type: this.type });
 		  });
-			this.getHotList({ type: this.type });
 		}
 	}
 </script>

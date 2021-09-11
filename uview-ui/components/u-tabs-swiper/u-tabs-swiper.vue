@@ -8,6 +8,7 @@
 				<view class="u-tabs-item" :style="[tabItemStyle(index)]"
 				 v-for="(item, index) in getTabs" :key="index" :class="[preId + index]" @tap="emit(index)">
 					<u-badge :count="item[count] || item['count'] || 0" :offset="offset" size="mini"></u-badge>
+					<view class="noticePoint" v-if="noticePoint == index"></view>
 					{{ item[name] || item['name']}}
 				</view>
 				<view v-if="showBar" class="u-scroll-bar" :style="[tabBarStyle]"></view>
@@ -167,6 +168,13 @@
 				type: Object,
 				default() {
 					return {}
+				}
+			},
+			// 右上角小红点
+			noticePoint: {
+				type: Number,
+				default() {
+					return -1
 				}
 			}
 		},
@@ -484,5 +492,15 @@
 	.u-scroll-bar {
 		position: absolute;
 		bottom: 4rpx;
+	}
+	
+	.noticePoint {
+		position: absolute;
+		right: 0;
+		top: 30%;
+		width: 10rpx;
+		height: 10rpx;
+		border-radius: 50%;
+		background-color: red;
 	}
 </style>

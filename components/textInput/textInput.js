@@ -43,7 +43,7 @@ export const __textInput = {
 		this.$api.imgHandle.imgSelector.call(this);
 	},
 	imgRemove(index) {
-		this.$api.imgHandle.removeCurrentImg.call(this);
+		this.$api.imgHandle.removeCurrentImg.call(this, index);
 	},
 	// 动态相关的回复和评论等
 	async publishHandle() {
@@ -53,6 +53,14 @@ export const __textInput = {
 				icon: "none"
 			});
 		}
+		
+		// 上传图片
+		for (const img of this.imgList) {
+			const newImg = await this.$http.upLoadFile(img.url);
+			this.$set(img, 'url', newImg);
+		console.log(img);
+		}		
+		
 		let finalId = undefined;
 		let data = {
 			url: '',

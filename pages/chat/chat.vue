@@ -17,6 +17,8 @@
 					:active-item-style="{ fontSize: '32rpx', transition: '0.1s' }"
 					gutter="30"
 					@change="tabsChange"
+					count="count"
+					:noticePoint="noticePoint"
 				></u-tabs-swiper>
 			</view>
 		</navbar>
@@ -56,6 +58,7 @@ import notice from './components/notice.vue';
 export default {
 	data() {
 		return {
+			unreadCountNotice: 0,
 			unreadCount: 0,
 			// 系统消息
 			official: null,
@@ -98,6 +101,9 @@ export default {
 		...mapState(['midButton', 'inactiveColor', 'activeColor', 'borderTop']),
 		login() {
 			return !!this.$cache.get('token');
+		},
+		noticePoint() {
+			return this.unreadCountNotice ? 1 : -1;
 		}
 	},
 	components: {
