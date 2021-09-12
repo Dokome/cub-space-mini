@@ -516,11 +516,13 @@
 	color: #666666;
 }
 .bg-shadeTop {
+	background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 1)), to(rgba(0, 0, 0, 0.01)));
 	background-image: -webkit-linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.01));
 	background-image: linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.01));
 	color: #ffffff;
 }
 .bg-shadeBottom {
+	background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.01)), to(rgba(0, 0, 0, 1)));
 	background-image: -webkit-linear-gradient(rgba(0, 0, 0, 0.01), rgba(0, 0, 0, 1));
 	background-image: linear-gradient(rgba(0, 0, 0, 0.01), rgba(0, 0, 0, 1));
 	color: #ffffff;
@@ -675,7 +677,8 @@
 }
 /* 上部阴影 带3d感 */
 .shadow-top {
-	box-shadow: 0rpx -1rpx 12rpx rgba(0,0,0,.05);
+	-webkit-box-shadow: 0rpx -1rpx 12rpx rgba(0,0,0,.05);
+	        box-shadow: 0rpx -1rpx 12rpx rgba(0,0,0,.05);
 }
 /* 渐变背景色 */
 .lbg-1 {
@@ -772,7 +775,8 @@ image {
 }
 view,
 text {
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
 .u-font-xs {
   font-size: 22rpx;
@@ -3885,7 +3889,8 @@ page {
   left: 0;
   top: 0;
   pointer-events: none;
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   -webkit-transform-origin: 0 0;
   transform-origin: 0 0;
   width: 199.8%;

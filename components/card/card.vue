@@ -84,7 +84,7 @@
 		 -->
 		<view class="" v-if="type === 'reply' || type === 'comment'" @click="replyHandle(commentdata)">
 			<view class="flex wmax">
-				<!-- 头像 -->
+				<!-- 头像 --> 
 				<view class="" style="width: 65rpx;"  @click.stop="enterUserHome(commentdata.userId)">
 					<u-avatar size="60" :src="commentdata.avatarUrl"></u-avatar>
 				</view>

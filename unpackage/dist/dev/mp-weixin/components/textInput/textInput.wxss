@@ -1,6 +1,7 @@
 /* uni.scss */
 .replyStyle {
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   width: 100%;
   position: fixed;
   z-index: 99999999;
