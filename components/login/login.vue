@@ -105,11 +105,21 @@ export default {
 			}
 			console.log('appId >>> ' + resultData.appId);
 			this.$cache.set('appId', resultData.appId, resultData.expires);
-		  // TIM
+			
+			// 遇见背景图
+			if (!this.$cache.get('meetBackgroundImage')) {
+				// 当存在旧的缓存
+				console.log('old cache meetBackgroundImage：' + this.$cache.get('meetBackgroundImage'));
+				this.$cache.remove('meetBackgroundImage');
+			}
+			console.log('meetBackgroundImage >>> ' + resultData.meetBackgroundImage);
+			this.$cache.set('meetBackgroundImage', resultData.meetBackgroundImage, resultData.expires);
+			
+		  // TIM 
 			GetTimRef(resultData);
 			uni.reLaunch({
 				url: '/pages/index/index'
-			})
+			});
 		}
 	}
 };

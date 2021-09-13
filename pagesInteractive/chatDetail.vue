@@ -2,7 +2,7 @@
 	<view style="background-color: #F3F3F3;" @click="cancle">
 		<navbar :title="pageTitle"></navbar>
 		<scroll-view scroll-y="true" :scroll-top="scrollTop" class="Anchor" :upper-threshold="pageHeight * 2" @scrolltoupper="scrolltoupper"
-			:style="{ height: `calc(100vh - ${ViewPart - 20}px)` }"
+			:style="{ height: `calc(100vh - ${ViewPart - 20}px)`}"
 			:scroll-with-animation="!ifLoaddingShow" :scroll-anchoring="true">
 			<view style="padding-bottom: 180rpx;" class="Anchor">
 				<view class="padding">
@@ -32,7 +32,11 @@
 							@touchstart="backTargetChangeStart" @touchend="backTargetChangeEnd"
 							:style="{ backgroundColor: chatStyle[item.from !== userId ? 0 : 1] }">
 							<!-- 文字模式 -->
-							<text class="text-justify" v-if="item.payload.text" :data-backIndex="item.random" >{{ item.payload.text }}</text>
+							<!-- <view class="flex" v-if="item.payload.text" :data-backIndex="item.random" > -->
+								<!-- <rich-text :nodes="emojicontentRender(item.payload.text)"></rich-text> -->
+							<!-- </view> -->
+							<text class="text-justify">{{item.payload.text}}</text>
+								
 							<!-- 图片模式 -->
 							<view class="flex align-center justify-center" v-if="item.payload.imageInfoArray">
 								<image :src="item.payload.imageInfoArray[2].url" @click="imgPrview(item.payload.imageInfoArray[1].url)"
@@ -71,6 +75,17 @@
 				<!-- 上顶框 -->
 				<view class="" :style="{ height: paddingHeight + 'px' }"></view>
 			</view>
+			<!-- 表情框 -->
+<!-- 			<scroll-view scroll-y="true" class="emojiBox bg-white wmax" 
+				style="height: 300px; width: 100%;" v-if="paddingHeight">
+				<view class="flex" style="flex-wrap: wrap;">
+					<view class="emojiItem" v-for="(emoji, e_index) in emojiName" :key="e_index"  @click="emojiSelect(emoji)">
+						<view class="emojiTtemImg flex align-center justify-center">
+							<image :src="getEmoji(emoji)" mode="aspectFill" style="width: 60%; height: 60%;"></image>
+						</view>
+					</view>
+				</view>
+			</scroll-view> -->
 		</scroll-view>
 		<textInput :mode="'aboutChat'" :userIdTo="userIdTo" :keyBoardFlag="keyBoardFlag" :buttonColor="chatStyle[0]"></textInput>
 		<loading v-if="ifLoaddingShow"></loading>
@@ -78,11 +93,13 @@
 </template>
 
 <script>
+import { emojiUrl, emojiMap, emojiName } from 'utils/emoji.js';
 // 播放
 const innerAudioContext = uni.createInnerAudioContext();
 export default {
 	data() {
 		return {
+			emojiName: emojiName,
 			ifLoaddingShow: true,
 			ViewPart: this.ViewPart,
 			pageHeight: this.windowHeight,
@@ -221,6 +238,21 @@ export default {
 			  // 删除消息失败
 			  console.warn('deleteMessage error:', imError);
 			});
+		},
+		emojicontentRender(content) {
+			return content.replace(/\[([\S\s]+?)\]/g, (name) => {
+				if (emojiMap[name]) {
+					return `<img src="${ emojiUrl + emojiMap[name]}" class="emojiStyle"></img>`;
+				} else {
+					return name;
+				}
+			});
+		},
+		getEmoji(name) {
+			return emojiUrl + emojiMap[name];
+		},
+		emojiSelect(name) {
+			uni.$emit('textInputAddEmoji', name);
 		}
 	},
 	computed: {
@@ -260,7 +292,7 @@ export default {
 			this.$nextTick(() =>{
 				this.scrollTop += height;
 				this.$forceUpdate();
-			})
+			});
 		});
 		uni.$on("reciveChatMsg", (data) => {
 			data = data.filter((item) => {
@@ -290,6 +322,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+	
 .Anchor {
 	overflow-anchor: auto;
 }
@@ -371,6 +404,32 @@ export default {
 	}
 }
 
+	
+.emojiItem {
+	position: relative;
+	width: 12.5%;
+	height: 0;
+	padding-top: 12.5%;
+	.emojiTtemImg {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		left: 0;
+		top: 0;
+	}
+}
+
+.emojiStyle {
+	width: 50rpx;
+	height: 50rpx;
+	vertical-align: text-bottom;
+}
+	
+.emojiBox {
+	position: fixed;
+	bottom: 0;
+}
+
 @keyframes dance1 {
 	from {
 		height: 20rpx;
@@ -415,4 +474,5 @@ export default {
 .animateRuning {
 	animation-play-state: running !important;
 }
+
 </style>

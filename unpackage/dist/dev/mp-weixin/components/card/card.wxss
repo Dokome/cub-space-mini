@@ -1,8 +1,8 @@
 /* uni.scss */
 .moreOptions {
   position: absolute;
-  right: 5px;
-  top: 10px;
+  right: 5rpx;
+  top: 20rpx;
   z-index: 999;
 }
 .shareButton {
@@ -15,5 +15,10 @@
   position: absolute;
   left: 0;
   top: 0;
+}
+.emojiStyle {
+  width: 50rpx;
+  height: 50rpx;
+  vertical-align: text-bottom;
 }
 

@@ -72,5 +72,11 @@ export const __dataUpdate = {
 		this.totalPage = 1;
 		this.currentPageNum = 1;
 		this.dataTotalNum = 0;
+	},
+	
+	// 删除某条回复
+	deleteComment(id) {
+		this.replyList.delete(id);
+		this.$forceUpdate();
 	}
 }

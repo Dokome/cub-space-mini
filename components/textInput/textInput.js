@@ -4,8 +4,11 @@ export const __textInput = {
 		this.ifImgChoose = false;
 	},
 	keyboardChange(e) {
+		this.inputState = !!e.detail.height;
+		this.emojiShow = false;
 		if (this.InputBottom > 0 && e.detail.height > this.InputBottom) return; //第一次打开会多出
 		this.InputBottom = e.detail.height;
+		this.$forceUpdate();
 		if (this.mode === 'aboutChat') {
 			uni.$emit("keyboardChange", e.detail.height);
 		}
@@ -47,6 +50,9 @@ export const __textInput = {
 	},
 	// 动态相关的回复和评论等
 	async publishHandle() {
+		if (this.emojiShow) {
+			this.chooseEmoji();
+		}
 		if (this.inputContent.trim().length === 0) {
 			return uni.showToast({
 				title: "空空如也~",
@@ -58,7 +64,6 @@ export const __textInput = {
 		for (const img of this.imgList) {
 			const newImg = await this.$http.upLoadFile(img.url);
 			this.$set(img, 'url', newImg);
-		console.log(img);
 		}		
 		
 		let finalId = undefined;
@@ -107,6 +112,9 @@ export const __textInput = {
 	},
 	// 聊天相关
 	chatHandle() {
+		if (this.emojiShow) {
+			this.chooseEmoji();
+		}
 		if (this.inputContent.trim().length === 0) {
 			return uni.showToast({
 				title: "空空如也~",
@@ -235,5 +243,20 @@ export const __textInput = {
 				this.ifRecord = false;
 			}
 		})
+	},
+	chooseEmoji() {
+		if (!this.emojiShow) {
+			this.emojiShow = true;
+			this.InputBottom = 300;
+			if (this.mode === 'aboutChat') {
+				uni.$emit("keyboardChange", 300);
+			}
+		} else {
+			this.emojiShow = false;
+			this.InputBottom = 0;
+			if (this.mode === 'aboutChat') {
+				uni.$emit("keyboardChange", 0);
+			}
+		}
 	}
 }

@@ -1,6 +1,7 @@
 <template>
 	<!-- :class="{ 'margin-space': type === 'news' }" -->
-	<view class="padding wmax u-border-bottom" @touchstart="touchstart" :class="backGround" @touchend="touchend">
+	<view class="padding wmax" @touchstart="touchstart" 
+		:class="backGround + ` ${type === 'news' ? 'margin-bottom-xs' : ''}`" @touchend="touchend">
 		<!--
 			动态
 		 -->
@@ -9,7 +10,7 @@
 			<view class="flex" style="position: relative;" v-if="!isHome">
 				<!-- 更多 -->
 				<view class="moreOptions" @click.stop="moreOptions">
-					<image src="/static/Img/more.png" mode="aspectFill" style="width: 30px; height: 6px;"></image>
+					<image src="/static/Img/more.png" mode="aspectFill" style="width: 60rpx; height: 12rpx;"></image>
 				</view>
 				<!-- 头像 -->
 				<view class="margin-top-xs"><u-avatar size="80" :src="newsdata.avatarUrl" 
@@ -30,7 +31,7 @@
 			</view>
 			<!-- 文字栏 -->
 			<!-- <view class="margin-tb-xs text-black text-content"  :class="{ clamp3: clamp }">{{ newsdata.content }}</view> -->
-			<view class="margin-tb-xs text-df-plus text-black text-content" >
+			<view class="margin-tb-xs text-df-plus text-black text-content" style="word-break: break-word;">
 				<text>{{ newsdata.content }}</text>
 			</view>
 			<!-- 图片栏 -->
@@ -83,9 +84,18 @@
 			回复类型
 		 -->
 		<view class="" v-if="type === 'reply' || type === 'comment'" @click="replyHandle(commentdata)">
-			<view class="flex wmax">
+			<u-modal v-model="commentShow" :show-confirm-button="false" :mask-close-able="true" :show-title="false">
+				<view class="flex flex-direction">
+					<view class="padding" @click="deleteCommentHandle"><text>删除</text></view>
+				</view>
+			</u-modal>
+			<view class="flex wmax" style="position: relative;">
+				<!-- 更多 -->
+				<view class="moreOptions" @click.stop="commentOpts(commentdata.id)" v-if="commentdata.selfCommentType">
+					<image src="/static/Img/more.png" mode="aspectFill" style="width: 40rpx; height: 8rpx;"></image>
+				</view>
 				<!-- 头像 --> 
-				<view class="" style="width: 65rpx;"  @click.stop="enterUserHome(commentdata.userId)">
+				<view class="" style="width: 65rpx;"  @click.stop="enterUserHome(commentdata.userId, commentdata.anonymousStatus)">
 					<u-avatar size="60" :src="commentdata.avatarUrl"></u-avatar>
 				</view>
 				<!-- 主体 -->
@@ -107,7 +117,9 @@
 									<text>{{ commentdata.parentCommentUserNickName }}</text>
 								</text>
 							</text>
-							<text>{{ commentdata.content }}</text>
+							<view class="flex" style="word-break: break-word;">
+								<rich-text :nodes="emojicontentRender(commentdata.content)"></rich-text>
+							</view>
 						</view>
 						<!-- 配图 -->
 						<view class="margin-tb-sm img_Con" style="width: 630rpx;" v-if="commentdata.images && commentdata.images.length">
@@ -118,16 +130,6 @@
 							</view>
 						</view>
 					</view>
-					<!-- 回复框 -->
-<!-- 					<view class="padding margin-top-xs" style="background-color: #F3F4F6; border-radius: 10rpx;" v-if="!enterStateComment && commentdata.childCommentLength">
-						<view class="wmax">
-							<view class="clamp1">
-							</view>
-						</view>
-						<view class="">
-							<text class="text-blue">查看全部{{ commentdata.childCommentLength }}条回复</text>
-						</view>
-					</view> -->
 					<!-- 互动 -->
 					<view class="flex justify-between align-center margin-top-sm">
 						<!-- 左/转发 -->
@@ -156,6 +158,7 @@
 </template>
 
 <script>
+import { emojiUrl, emojiMap, emojiName } from 'utils/emoji.js';
 import { __moreOptionsHandle } from './moreOptions.js';
 export default {
 	name: 'card',
@@ -171,6 +174,8 @@ export default {
 			likeNumCount: 0,
 			// 背景色
 			backGround: 'bg-white',
+			commentShow: false,
+			deleteCommentId: undefined,
 		};
 	},
 	computed: {
@@ -224,6 +229,15 @@ export default {
 		},
 		touchend() {
 			this.backGround = 'bg-white';
+		},
+		emojicontentRender(content) {
+			return content.replace(/\[([\S\s]+?)\]/g, (name) => {
+				if (emojiMap[name]) {
+					return `<img src="${ emojiUrl + emojiMap[name]}" class="emojiStyle"></img>`;
+				} else {
+					return name;
+				}
+			});
 		}
 	},
 	props: {
@@ -282,8 +296,8 @@ export default {
 <style lang="scss">
 .moreOptions {
 	position: absolute;
-	right: 5px;
-	top: 10px;
+	right: 5rpx;
+	top: 20rpx;
 	z-index: 999;
 }
 .shareButton {
@@ -296,5 +310,11 @@ export default {
 	position: absolute;
 	left: 0;
 	top: 0;
+}
+
+.emojiStyle {
+	width: 50rpx;
+	height: 50rpx;
+	vertical-align: text-bottom;
 }
 </style> 

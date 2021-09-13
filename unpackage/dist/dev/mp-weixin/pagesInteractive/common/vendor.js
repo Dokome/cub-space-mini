@@ -84,6 +84,11 @@ var __dataUpdate = {
   // 请求更新数据
   scrollToBottom: function scrollToBottom() {
     this.getNewComment({ id: this.newsDetail.id, noToken: true, delay: 100 });
+  },
+  // 删除某条回复
+  deleteComment: function deleteComment(id) {
+    this.newsCommentList.delete(id);
+    this.$forceUpdate();
   } };exports.__dataUpdate = __dataUpdate;
 
 /***/ })

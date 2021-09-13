@@ -17,10 +17,15 @@
 			:placeholder="inputPlaceHolder"
 			maxlength="200"
 			:fixed="true"
-			:hold-keyboard="mode === 'aboutChat' && true"
+			:hold-keyboard="ifHoldKeyboard"
 			@keyboardheightchange="keyboardChange"
 			v-show="!ifRecord"
 		/>
+		
+		<view class="margin-right-sm" v-if="!ifRecord && !inputState && mode==='aboutNews'">
+			<image src="/static/Img/smileface.png" mode="aspectFill" 
+			style="width: 40rpx; height: 40rpx;" @click="chooseEmoji"></image>
+		</view>
 		
 		<view class="textarea flex-sub text-center" id="record" v-show="ifRecord" 
 			@touchstart="longpressRecordStart" :style="{ backgroundColor: isRecordingBgc }"
@@ -124,9 +129,14 @@ export default {
 			isRecording: false,
 			// 是否能录音成功
 			ifRecordSucc: false,
+			emojiShow: false,
+			inputState: false,
 		};
 	},
 	computed: {
+		ifHoldKeyboard() {
+			return this.mode === 'aboutChat';
+		},
 		imgStyle() {
 			return this.$api.imgHandle.multiImgShow.call(this);
 		},
@@ -164,6 +174,11 @@ export default {
 		},
 		mode(val) {
 			this.clearCurrentInfo();
+		},
+		emojiShow(val) {
+			if (this.mode === 'aboutNews') {
+				uni.$emit('emojiStateChange', val);
+			}
 		}
 	},
 	methods: {
@@ -174,6 +189,10 @@ export default {
 		},
 	},
 	mounted() {
+		uni.$off('textInputAddEmoji');
+		uni.$on('textInputAddEmoji', (name) => {
+			this.inputContent += name;
+		})
 		recorderManager.onStop(res => {
 			let tim = this.tim;
 			if (this.ifRecordSucc) {

@@ -80,10 +80,10 @@ var components
 try {
   components = {
     uAvatar: function() {
-      return __webpack_require__.e(/*! import() | uview-ui/components/u-avatar/u-avatar */ "uview-ui/components/u-avatar/u-avatar").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-avatar/u-avatar.vue */ 188))
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-avatar/u-avatar */ "uview-ui/components/u-avatar/u-avatar").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-avatar/u-avatar.vue */ 191))
     },
     uButton: function() {
-      return __webpack_require__.e(/*! import() | uview-ui/components/u-button/u-button */ "uview-ui/components/u-button/u-button").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-button/u-button.vue */ 195))
+      return __webpack_require__.e(/*! import() | uview-ui/components/u-button/u-button */ "uview-ui/components/u-button/u-button").then(__webpack_require__.bind(null, /*! @/uview-ui/components/u-button/u-button.vue */ 198))
     }
   }
 } catch (e) {
@@ -247,10 +247,20 @@ var _tim = _interopRequireDefault(__webpack_require__(/*! ./tim.js */ 10));funct
                 }
                 console.log('appId >>> ' + resultData.appId);
                 _this2.$cache.set('appId', resultData.appId, resultData.expires);
-                // TIM
+
+                // 遇见背景图
+                if (!_this2.$cache.get('meetBackgroundImage')) {
+                  // 当存在旧的缓存
+                  console.log('old cache meetBackgroundImage：' + _this2.$cache.get('meetBackgroundImage'));
+                  _this2.$cache.remove('meetBackgroundImage');
+                }
+                console.log('meetBackgroundImage >>> ' + resultData.meetBackgroundImage);
+                _this2.$cache.set('meetBackgroundImage', resultData.meetBackgroundImage, resultData.expires);
+
+                // TIM 
                 (0, _tim.default)(resultData);
                 uni.reLaunch({
-                  url: '/pages/index/index' });case 16:case "end":return _context.stop();}}}, _callee);}))();
+                  url: '/pages/index/index' });case 19:case "end":return _context.stop();}}}, _callee);}))();
 
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))

@@ -1,5 +1,5 @@
 <template>
-	<view class="outWrapper flex align-center justify-center">
+	<view class="outWrapper flex align-center justify-center" :style="{backgroundImage: bgUrl}">
 		<view class="meet-main flex align-center justify-between flex-direction">
 			<!-- 顶部  剩余次数  筛选		 -->
 			<view class="meet-main-header flex justify-between align-center">
@@ -204,6 +204,9 @@
 			...mapState(['midButton', 'inactiveColor', 'activeColor', 'borderTop']),
 			login() {
 				return !!this.$cache.get('token');
+			},
+			bgUrl() {
+				return 'url(' + this.$cache.get('meetBackgroundImage') + ')'
 			}
 		},
 		components: {
@@ -234,7 +237,6 @@
 	
 	.outWrapper {
 		height: 100vh;
-		background-image: url(https://image.sapce.club/static/bgImage.jpg);
 		background-size: 100vh;
 	}
 	

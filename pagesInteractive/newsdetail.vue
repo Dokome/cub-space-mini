@@ -21,6 +21,16 @@
 				<view class="bg-white" style="height: 100rpx;"></view>
 			</view>
 			<view class="" style="height: 100rpx;"></view>
+			<scroll-view scroll-y="true" class="emojiBox bg-white wmax" 
+				style="height: 300px; width: 100%;" v-if="emojiShow">
+				<view class="flex" style="flex-wrap: wrap;">
+					<view class="emojiItem" v-for="(emoji, e_index) in emojiName" :key="e_index"  @click="emojiSelect(emoji)">
+						<view class="emojiTtemImg flex align-center justify-center">
+							<image :src="getEmoji(emoji)" mode="aspectFill" style="width: 60%; height: 60%;"></image>
+						</view>
+					</view>
+				</view>
+			</scroll-view>
 		</scroll-view>
 		<!-- 回复 -->
 		<pop type="reply"></pop>
@@ -31,9 +41,12 @@
 
 <script>
 import { __dataUpdate } from './dataUpdate.js'
+import { emojiUrl, emojiMap, emojiName } from 'utils/emoji.js';
 export default {
 	data() {
 		return {
+			newsId: undefined,
+			emojiName: emojiName,
 			ifLoaddingShow: true,
 			ViewPart: this.ViewPart,
 			// 评论信息
@@ -58,6 +71,7 @@ export default {
 				loading: '努力加载ing...',
 				nomore: '没有更多了~'
 			},
+			emojiShow: false
 		};
 	},
 	computed: {
@@ -67,14 +81,23 @@ export default {
 	},
 	methods: {
 		...__dataUpdate,
+		getEmoji(name) {
+			return emojiUrl + emojiMap[name];
+		},
+		emojiSelect(name) {
+			uni.$emit('textInputAddEmoji', name);
+		}
 	},
 	onLoad(options) {
+		this.newsId = options.id;
 		this.getNewsInfo({ id: options.id, noToken: true });
 		this.getNewComment({ id: options.id, noToken: true });
 		// 注销之前的监听器
 		uni.$off('inputStatusChange');
 		uni.$off('changeStateBackNew');
 		uni.$off('updateCurrentInfo');
+		uni.$off('deleteCommentDetail');
+		uni.$off('emojiStateChange');
 		// 回复对象转化
 		uni.$on('inputStatusChange', (options) => {
 			this.inputType = options.type;
@@ -91,6 +114,12 @@ export default {
 		uni.$on('updateCurrentInfo', () => {
 			this.getNewComment({ id: options.id, noToken: true, delay: 100, getNew: true});
 		});
+		uni.$on('deleteCommentDetail', (id) => {
+			this.deleteComment(id);
+		});
+		uni.$on('emojiStateChange', (state) => {
+			this.emojiShow = state;
+		})
 	},
 	// 页面分享
 	onShareAppMessage(res) {
@@ -99,4 +128,24 @@ export default {
 };
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+	.emojiBox {
+		position: fixed;
+		bottom: 0;
+		z-index: 99999;
+	}
+	
+	.emojiItem {
+		position: relative;
+		width: 12.5%;
+		height: 0;
+		padding-top: 12.5%;
+		.emojiTtemImg {
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			left: 0;
+			top: 0;
+		}
+	}
+</style>

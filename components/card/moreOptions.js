@@ -64,5 +64,30 @@ export const __moreOptionsHandle = {
 	// 分享
 	async shareNews(id) {
 		this.$api.interactive.newsShareHandle.call(this, id);
+	},
+	// 评论的更多
+	commentOpts(commentID) {
+		this.commentShow = true;
+		this.deleteCommentId = commentID;
+	},
+	// 删除
+	async deleteCommentHandle() {
+		this.commentShow = false;
+		const data = await this.$http.request({
+			url: '/dynamicComment/deleteComment',
+			method: 'POST',
+			data: {
+				commentId: this.deleteCommentId
+			}
+		});
+		if (data.data.code === 200) {
+			uni.showToast({
+				title: '删除成功',
+				icon: 'none'
+			});
+			uni.$emit('deleteCommentDetail', this.deleteCommentId);
+			uni.$emit('deleteComment', this.deleteCommentId);
+		}
+		this.deleteCommentId = undefined;
 	}
 }

@@ -74,5 +74,10 @@ export const __dataUpdate = {
 	// 请求更新数据
 	scrollToBottom() {
 		this.getNewComment({ id: this.newsDetail.id, noToken: true, delay: 100});
+	},
+	// 删除某条回复
+	deleteComment(id) {
+		this.newsCommentList.delete(id);
+		this.$forceUpdate();
 	}
 }

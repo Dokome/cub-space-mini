@@ -34,6 +34,7 @@ class ImgHandle {
 				}
 			}
 		}
+		if (singleImg) singleImg += ';border-radius: 10rpx;'
 		//返回对应css类
 		return singleImg || `img_${ imgList.length }`;
 	}
@@ -98,7 +99,7 @@ class RouterHandle {
 				delta: 1
 			})
 		} else {
-			uni.navigateTo({
+			uni.reLaunch({
 				url: '/pages/index/index'
 			});
 		}

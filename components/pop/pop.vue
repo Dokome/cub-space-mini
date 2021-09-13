@@ -135,6 +135,11 @@ export default {
 		uni.$off('repylChange');
 		uni.$off('popUpChange');
 		uni.$off('updatePopCurrentInfo');
+		uni.$off('deleteComment');
+		// 删除评论
+		uni.$on('deleteComment', (id) => {
+			this.deleteComment(id);
+		})
 		//弹起下落(发布)
 		uni.$on('popUpChange', status => {
 			this.popUpChange();
