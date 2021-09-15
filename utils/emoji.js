@@ -117,3 +117,43 @@ export const emojiName = [
 	'[生气]',
 	'[口罩]'
 ];
+
+export const _TextMsgParser = (msg) => {
+  const renderDom = [];
+  let left = -1;
+  let right = -1;
+  while (msg) {
+    left = msg.indexOf('[');
+    right = msg.indexOf(']');
+    if (left === 0) {
+      if (right === -1) {
+        renderDom.push({ name: 'text', text: msg });
+        break;
+      }
+      // 在表中查找 emoji是否存在
+      const _emoji = emojiMap[msg.slice(0, right + 1)];
+      if (_emoji) {
+        renderDom.push({
+          name: 'image',
+          src: emojiUrl + _emoji,
+        });
+        msg = msg.slice(right + 1);
+      } else {
+        renderDom.push({
+          name: 'text',
+          text: '[',
+        });
+        msg = msg.slice(1);
+      }
+    } else {
+      // 是否找到了 left
+      const ifFindLeft = left !== -1;
+      renderDom.push({
+        name: 'text',
+        text: ifFindLeft ? msg.slice(0, left) : msg,
+      });
+      msg = ifFindLeft ? msg.slice(left) : '';
+    }
+  }
+  return renderDom;
+};

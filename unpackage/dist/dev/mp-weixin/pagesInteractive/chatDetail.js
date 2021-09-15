@@ -132,6 +132,26 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
+  var l0 =
+    _vm.paddingHeight && !_vm.inputState
+      ? _vm.__map(_vm.emojiName, function(emoji, e_index) {
+          var $orig = _vm.__get_orig(emoji)
+
+          var m0 = _vm.getEmoji(emoji)
+          return {
+            $orig: $orig,
+            m0: m0
+          }
+        })
+      : null
+  _vm.$mp.data = Object.assign(
+    {},
+    {
+      $root: {
+        l0: l0
+      }
+    }
+  )
 }
 var recyclableRender = false
 var staticRenderFns = []
@@ -260,116 +280,129 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _emoji = __webpack_require__(/*! utils/emoji.js */ 172); //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
+
+
+
+
+var _emoji = __webpack_require__(/*! utils/emoji.js */ 172);function _createForOfIteratorHelper(o, allowArrayLike) {var it;if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) {if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") {if (it) o = it;var i = 0;var F = function F() {};return { s: F, n: function n() {if (i >= o.length) return { done: true };return { done: false, value: o[i++] };}, e: function e(_e) {throw _e;}, f: F };}throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");}var normalCompletion = true,didErr = false,err;return { s: function s() {it = o[Symbol.iterator]();}, n: function n() {var step = it.next();normalCompletion = step.done;return step;}, e: function e(_e2) {didErr = true;err = _e2;}, f: function f() {try {if (!normalCompletion && it.return != null) it.return();} finally {if (didErr) throw err;}} };}function _unsupportedIterableToArray(o, minLen) {if (!o) return;if (typeof o === "string") return _arrayLikeToArray(o, minLen);var n = Object.prototype.toString.call(o).slice(8, -1);if (n === "Object" && o.constructor) n = o.constructor.name;if (n === "Map" || n === "Set") return Array.from(o);if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);}function _arrayLikeToArray(arr, len) {if (len == null || len > arr.length) len = arr.length;for (var i = 0, arr2 = new Array(len); i < len; i++) {arr2[i] = arr[i];}return arr2;}
 // 播放
-var innerAudioContext = uni.createInnerAudioContext();var _default = { data: function data() {return { emojiName: _emoji.emojiName, ifLoaddingShow: true, ViewPart: this.ViewPart, pageHeight: this.windowHeight, // 内容
-      content: '', // 发送图片
-      image: '', // 请求的会话ID
-      requestId: '', tim: this.tim, // 消息列表
-      msgList: [], pageTitle: '加载中', // 是否请求完全
-      isCompleted: false, // 下一次请求的数据ID
-      nextReqMessageID: '', // 顶部高度
-      scrollTop: 0, // 发送对象
-      userIdTo: '', // scrollTimmer 防抖
-      scrollTimmer: null, userInfo: null, paddingHeight: 0, keyBoardFlag: false, recorderManager: null, playAudioIndex: -1, newsBackIndex: -1, newsBackStartTime: undefined, newsBackTimmer: null };}, methods: { getMessageList: function getMessageList() {var _this = this;if (this.isCompleted || this.scrollTimmer) {return;} // 获取信息过程
-      var tim = this.tim;var promise = tim.getMessageList({ conversationID: this.requestId, count: 15, nextReqMessageID: this.nextReqMessageID });promise.then(function (imResponse) {if (!!_this.nextReqMessageID && _this.nextReqMessageID === imResponse.data.nextReqMessageID) return;_this.msgList = imResponse.data.messageList.concat(_this.msgList); // 消息列表。
+var innerAudioContext = uni.createInnerAudioContext();var _default =
+{
+  data: function data() {
+    return {
+      emojiName: _emoji.emojiName,
+      ifLoaddingShow: true,
+      ViewPart: this.ViewPart,
+      pageHeight: this.windowHeight,
+      // 内容
+      content: '',
+      // 发送图片
+      image: '',
+      // 请求的会话ID
+      requestId: '',
+      tim: this.tim,
+      // 消息列表
+      msgList: [],
+      pageTitle: '加载中',
+      // 是否请求完全
+      isCompleted: false,
+      // 下一次请求的数据ID
+      nextReqMessageID: '',
+      // 顶部高度
+      scrollTop: 0,
+      // 发送对象
+      userIdTo: '',
+      // scrollTimmer 防抖
+      scrollTimmer: null,
+      userInfo: null,
+      paddingHeight: 0,
+      keyBoardFlag: false,
+      recorderManager: null,
+      playAudioIndex: -1,
+      newsBackIndex: -1,
+      newsBackStartTime: undefined,
+      newsBackTimmer: null,
+      inputState: false };
+
+  },
+  methods: {
+    getMessageList: function getMessageList() {var _this = this;
+      if (this.isCompleted || this.scrollTimmer) {
+        return;
+      }
+      // 获取信息过程
+      var tim = this.tim;
+      var promise = tim.getMessageList({ conversationID: this.requestId, count: 15, nextReqMessageID: this.nextReqMessageID });
+      promise.then(function (imResponse) {
+        if (!!_this.nextReqMessageID && _this.nextReqMessageID === imResponse.data.nextReqMessageID) return;
+        // 渲染数据
+        var _iterator = _createForOfIteratorHelper(imResponse.data.messageList),_step;try {for (_iterator.s(); !(_step = _iterator.n()).done;) {var msg = _step.value;
+            if (msg.payload.text) {
+              _this.$set(msg.payload, 'textDom', _this.TextMsgParser(msg.payload.text));
+            }
+          }
+          // 
+        } catch (err) {_iterator.e(err);} finally {_iterator.f();}_this.msgList = imResponse.data.messageList.concat(_this.msgList); // 消息列表。
         _this.nextReqMessageID = imResponse.data.nextReqMessageID; // 用于续拉，分页续拉时需传入该字段。
         _this.isCompleted = imResponse.data.isCompleted; // 表示是否已经拉完所有消息。
-        if (!_this.scrollTop) {_this.scrollTop = _this.msgList.length * 999;}setTimeout(function () {_this.ifLoaddingShow = false;}, 500);_this.scrollTimmer = setTimeout(function () {_this.scrollTimmer = null;}, 200);}).catch(function (err) {console.log(err);});this.$forceUpdate();}, scrolltoupper: function scrolltoupper() {if (this.scrollTimmer) {return;}this.getMessageList();}, getImgShowStyle: function getImgShowStyle(img) {return ';' + this.$api.imgHandle.multiImgShow([img]);}, imgPrview: function imgPrview(url) {if (this.newsBackIndex !== -1) return;this.$api.imgHandle.imgPreview(url, [url]);}, enterUserHome: function enterUserHome(id) {this.$api.routerHandle.goto("/pagesHome/mynews?id=".concat(id));}, audioPlayHandle: function audioPlayHandle(src, I_index, e) {innerAudioContext.stop();this.playAudioIndex = I_index;this.$forceUpdate();innerAudioContext.src = src;innerAudioContext.play();}, // 撤回消息更改对象
-    backTargetChangeStart: function backTargetChangeStart(e) {var _this2 = this;this.newsBackStartTime = +new Date();this.newsBackTimmer = setTimeout(function () {_this2.newsBackIndex = e.target.dataset.backindex;_this2.$forceUpdate();}, 800);}, backTargetChangeEnd: function backTargetChangeEnd(e) {if (+new Date() - this.newsBackStartTime < 800) {this.newsBackStartTime = undefined;this.newsBackIndex = -1;clearTimeout(this.newsBackTimmer);this.newsBackTimmer = null;this.$forceUpdate();}}, cancle: function cancle() {if (this.newsBackIndex === -1 || !this.newsBackStartTime) return;if (+new Date() - this.newsBackStartTime > 2000) {
+        if (!_this.scrollTop) {
+          _this.scrollTop = _this.msgList.length * 999;
+        }
+        setTimeout(function () {
+          _this.ifLoaddingShow = false;
+        }, 500);
+        _this.scrollTimmer = setTimeout(function () {
+          _this.scrollTimmer = null;
+        }, 200);
+      }).catch(function (err) {
+        console.log(err);
+      });
+      this.$forceUpdate();
+    },
+    scrolltoupper: function scrolltoupper() {
+      if (this.scrollTimmer) {
+        return;
+      }
+      this.getMessageList();
+    },
+    getImgShowStyle: function getImgShowStyle(img) {
+      return ';' + this.$api.imgHandle.multiImgShow([img]);
+    },
+    imgPrview: function imgPrview(url) {
+      if (this.newsBackIndex !== -1) return;
+      this.$api.imgHandle.imgPreview(url, [url]);
+    },
+    enterUserHome: function enterUserHome(id) {
+      this.$api.routerHandle.goto("/pagesHome/mynews?id=".concat(id));
+    },
+    audioPlayHandle: function audioPlayHandle(src, I_index, e) {
+      innerAudioContext.stop();
+      this.playAudioIndex = I_index;
+      this.$forceUpdate();
+      innerAudioContext.src = src;
+      innerAudioContext.play();
+    },
+    // 撤回消息更改对象
+    backTargetChangeStart: function backTargetChangeStart(e) {var _this2 = this;
+      this.newsBackStartTime = +new Date();
+      this.newsBackTimmer = setTimeout(function () {
+        _this2.newsBackIndex = e.target.dataset.backindex;
+        _this2.$forceUpdate();
+      }, 800);
+    },
+    backTargetChangeEnd: function backTargetChangeEnd(e) {
+      if (+new Date() - this.newsBackStartTime < 800) {
+        this.newsBackStartTime = undefined;
+        this.newsBackIndex = -1;
+        clearTimeout(this.newsBackTimmer);
+        this.newsBackTimmer = null;
+        this.$forceUpdate();
+      }
+    },
+    cancle: function cancle() {
+      if (this.newsBackIndex === -1 || !this.newsBackStartTime) return;
+      if (+new Date() - this.newsBackStartTime > 2000) {
         this.newsBackStartTime = undefined;
         this.newsBackIndex = -1;
         clearTimeout(this.newsBackTimmer);
@@ -420,6 +453,9 @@ var innerAudioContext = uni.createInnerAudioContext();var _default = { data: fun
     },
     emojiSelect: function emojiSelect(name) {
       uni.$emit('textInputAddEmoji', name);
+    },
+    TextMsgParser: function TextMsgParser(msg) {
+      return (0, _emoji._TextMsgParser)(msg);
     } },
 
   computed: {
@@ -454,7 +490,8 @@ var innerAudioContext = uni.createInnerAudioContext();var _default = { data: fun
     // 收到消息
     uni.$off("reciveChatMsg");
     uni.$off("keyboardChange");
-    uni.$on("keyboardChange", function (height) {
+    uni.$on("keyboardChange", function (height, inputState) {
+      _this5.inputState = inputState;
       _this5.paddingHeight = height;
       _this5.$nextTick(function () {
         _this5.scrollTop += height;
@@ -463,6 +500,9 @@ var innerAudioContext = uni.createInnerAudioContext();var _default = { data: fun
     });
     uni.$on("reciveChatMsg", function (data) {
       data = data.filter(function (item) {
+        if (item.payload.text) {
+          _this5.$set(item.payload, 'textDom', _this5.TextMsgParser(item.payload.text));
+        }
         return item.from === _this5.userIdTo || item.to === _this5.userIdTo;
       });
       _this5.msgList = _this5.msgList.concat(data);

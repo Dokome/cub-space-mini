@@ -2449,7 +2449,7 @@ var install = function install(Vue) {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.emojiName = exports.emojiMap = exports.emojiUrl = void 0;var emojiUrl = 'https://image.sapce.club/emoji';exports.emojiUrl = emojiUrl;
+Object.defineProperty(exports, "__esModule", { value: true });exports._TextMsgParser = exports.emojiName = exports.emojiMap = exports.emojiUrl = void 0;var emojiUrl = 'https://image.sapce.club/emoji';exports.emojiUrl = emojiUrl;
 var emojiMap = {
   '[doge•圣诞]': '/bxhl/doge-sd.png',
   '[妙啊•圣诞]': '/bxhl/ma-sd.png',
@@ -2567,6 +2567,47 @@ var emojiName = [
 '[抓狂]',
 '[生气]',
 '[口罩]'];exports.emojiName = emojiName;
+
+
+var _TextMsgParser = function _TextMsgParser(msg) {
+  var renderDom = [];
+  var left = -1;
+  var right = -1;
+  while (msg) {
+    left = msg.indexOf('[');
+    right = msg.indexOf(']');
+    if (left === 0) {
+      if (right === -1) {
+        renderDom.push({ name: 'text', text: msg });
+        break;
+      }
+      // 在表中查找 emoji是否存在
+      var _emoji = emojiMap[msg.slice(0, right + 1)];
+      if (_emoji) {
+        renderDom.push({
+          name: 'image',
+          src: emojiUrl + _emoji });
+
+        msg = msg.slice(right + 1);
+      } else {
+        renderDom.push({
+          name: 'text',
+          text: '[' });
+
+        msg = msg.slice(1);
+      }
+    } else {
+      // 是否找到了 left
+      var ifFindLeft = left !== -1;
+      renderDom.push({
+        name: 'text',
+        text: ifFindLeft ? msg.slice(0, left) : msg });
+
+      msg = ifFindLeft ? msg.slice(left) : '';
+    }
+  }
+  return renderDom;
+};exports._TextMsgParser = _TextMsgParser;
 
 /***/ }),
 
@@ -11047,7 +11088,7 @@ var __textInput = {
     this.InputBottom = e.detail.height;
     this.$forceUpdate();
     if (this.mode === 'aboutChat') {
-      uni.$emit("keyboardChange", e.detail.height);
+      uni.$emit("keyboardChange", e.detail.height, this.inputState);
     }
   },
   ImgChooseHandle: function ImgChooseHandle() {var _this = this;

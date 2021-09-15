@@ -22,7 +22,7 @@
 			v-show="!ifRecord"
 		/>
 		
-		<view class="margin-right-sm" v-if="!ifRecord && !inputState && mode==='aboutNews'">
+		<view class="margin-right-sm" v-if="!ifRecord && !inputState">
 			<image src="/static/Img/smileface.png" mode="aspectFill" 
 			style="width: 40rpx; height: 40rpx;" @click="chooseEmoji"></image>
 		</view>

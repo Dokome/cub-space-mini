@@ -10,7 +10,7 @@ export const __textInput = {
 		this.InputBottom = e.detail.height;
 		this.$forceUpdate();
 		if (this.mode === 'aboutChat') {
-			uni.$emit("keyboardChange", e.detail.height);
+			uni.$emit("keyboardChange", e.detail.height, this.inputState);
 		}
 	},
 	ImgChooseHandle() {

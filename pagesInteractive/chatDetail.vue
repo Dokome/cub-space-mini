@@ -32,10 +32,15 @@
 							@touchstart="backTargetChangeStart" @touchend="backTargetChangeEnd"
 							:style="{ backgroundColor: chatStyle[item.from !== userId ? 0 : 1] }">
 							<!-- 文字模式 -->
-							<!-- <view class="flex" v-if="item.payload.text" :data-backIndex="item.random" > -->
-								<!-- <rich-text :nodes="emojicontentRender(item.payload.text)"></rich-text> -->
-							<!-- </view> -->
-							<text class="text-justify">{{item.payload.text}}</text>
+							<view class="flex align-end" v-if="item.payload.text" style="flex-wrap: wrap;">
+								<view class="" v-for="(msg, m_index) in item.payload.textDom" :key="m_index" :data-backIndex="item.random">
+									<text v-if="msg.name === 'text'">{{ msg.text }}</text>
+									<image :src="msg.src" mode="aspectFill" v-if="msg.name === 'image'" 
+										style="width: 40rpx; height: 40rpx;vertical-align: text-bottom;">
+									</image>
+								</view>
+							</view>
+							<!-- <text class="text-justify" v-if="item.payload.text">{{item.payload.text}}</text> -->
 								
 							<!-- 图片模式 -->
 							<view class="flex align-center justify-center" v-if="item.payload.imageInfoArray">
@@ -75,17 +80,17 @@
 				<!-- 上顶框 -->
 				<view class="" :style="{ height: paddingHeight + 'px' }"></view>
 			</view>
-			<!-- 表情框 -->
-<!-- 			<scroll-view scroll-y="true" class="emojiBox bg-white wmax" 
-				style="height: 300px; width: 100%;" v-if="paddingHeight">
-				<view class="flex" style="flex-wrap: wrap;">
-					<view class="emojiItem" v-for="(emoji, e_index) in emojiName" :key="e_index"  @click="emojiSelect(emoji)">
-						<view class="emojiTtemImg flex align-center justify-center">
-							<image :src="getEmoji(emoji)" mode="aspectFill" style="width: 60%; height: 60%;"></image>
-						</view>
+		</scroll-view>
+		<!-- 表情框 -->
+		<scroll-view scroll-y="true" class="emojiBox bg-white wmax" 
+			style="height: 300px; width: 100%;" v-if="paddingHeight && !inputState">
+			<view class="flex" style="flex-wrap: wrap;">
+				<view class="emojiItem" v-for="(emoji, e_index) in emojiName" :key="e_index"  @click="emojiSelect(emoji)">
+					<view class="emojiTtemImg flex align-center justify-center">
+						<image :src="getEmoji(emoji)" mode="aspectFill" style="width: 60%; height: 60%;"></image>
 					</view>
 				</view>
-			</scroll-view> -->
+			</view>
 		</scroll-view>
 		<textInput :mode="'aboutChat'" :userIdTo="userIdTo" :keyBoardFlag="keyBoardFlag" :buttonColor="chatStyle[0]"></textInput>
 		<loading v-if="ifLoaddingShow"></loading>
@@ -93,7 +98,7 @@
 </template>
 
 <script>
-import { emojiUrl, emojiMap, emojiName } from 'utils/emoji.js';
+import { emojiUrl, emojiMap, emojiName, _TextMsgParser } from 'utils/emoji.js';
 // 播放
 const innerAudioContext = uni.createInnerAudioContext();
 export default {
@@ -130,7 +135,8 @@ export default {
 			playAudioIndex: -1,
 			newsBackIndex: -1,
 			newsBackStartTime: undefined,
-			newsBackTimmer: null
+			newsBackTimmer: null,
+			inputState: false,
 		};
 	},
 	methods: {
@@ -143,6 +149,13 @@ export default {
 			let promise = tim.getMessageList({conversationID: this.requestId, count: 15, nextReqMessageID: this.nextReqMessageID});
 			promise.then((imResponse) => {
 				if (!!this.nextReqMessageID && this.nextReqMessageID === imResponse.data.nextReqMessageID) return;
+				// 渲染数据
+				for (let msg of imResponse.data.messageList) {
+					if (msg.payload.text) {
+						this.$set(msg.payload, 'textDom', this.TextMsgParser(msg.payload.text));
+					}
+				}
+				// 
 			  this.msgList = imResponse.data.messageList.concat(this.msgList); // 消息列表。
 			  this.nextReqMessageID = imResponse.data.nextReqMessageID; // 用于续拉，分页续拉时需传入该字段。
 			  this.isCompleted = imResponse.data.isCompleted; // 表示是否已经拉完所有消息。
@@ -253,6 +266,9 @@ export default {
 		},
 		emojiSelect(name) {
 			uni.$emit('textInputAddEmoji', name);
+		},
+		TextMsgParser(msg) {
+			return _TextMsgParser(msg);
 		}
 	},
 	computed: {
@@ -287,7 +303,8 @@ export default {
 		// 收到消息
 		uni.$off("reciveChatMsg");
 		uni.$off("keyboardChange");
-		uni.$on("keyboardChange", (height) => {
+		uni.$on("keyboardChange", (height, inputState) => {
+			this.inputState = inputState;
 			this.paddingHeight = height;
 			this.$nextTick(() =>{
 				this.scrollTop += height;
@@ -296,6 +313,9 @@ export default {
 		});
 		uni.$on("reciveChatMsg", (data) => {
 			data = data.filter((item) => {
+				if (item.payload.text) {
+					this.$set(item.payload, 'textDom', this.TextMsgParser(item.payload.text));
+				}
 				return item.from === this.userIdTo || item.to === this.userIdTo;
 			});
 			this.msgList = this.msgList.concat(data);
