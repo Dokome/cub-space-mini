@@ -1931,9 +1931,9 @@ uni$1;exports.default = _default;
 /***/ }),
 
 /***/ 10:
-/*!**************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/components/login/tim.js ***!
-  \**************************************************************************/
+/*!**************************************************************!*\
+  !*** E:/uni-app/cfkj/cub-space-mini/components/login/tim.js ***!
+  \**************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2004,9 +2004,9 @@ GetTimRef;exports.default = _default;
 /***/ }),
 
 /***/ 105:
-/*!*********************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/pages/chat/chat.js ***!
-  \*********************************************************************/
+/*!*********************************************************!*\
+  !*** E:/uni-app/cfkj/cub-space-mini/pages/chat/chat.js ***!
+  \*********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2063,9 +2063,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.__chat = v
 /***/ }),
 
 /***/ 11:
-/*!************************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/node_modules/tim-js-sdk/tim-js.js ***!
-  \************************************************************************************/
+/*!************************************************************************!*\
+  !*** E:/uni-app/cfkj/cub-space-mini/node_modules/tim-js-sdk/tim-js.js ***!
+  \************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2075,9 +2075,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.__chat = v
 /***/ }),
 
 /***/ 12:
-/*!******************************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/node_modules/tim-upload-plugin/index.js ***!
-  \******************************************************************************************/
+/*!******************************************************************************!*\
+  !*** E:/uni-app/cfkj/cub-space-mini/node_modules/tim-upload-plugin/index.js ***!
+  \******************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2087,9 +2087,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.__chat = v
 /***/ }),
 
 /***/ 13:
-/*!*****************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/utils/cache.js ***!
-  \*****************************************************************/
+/*!*****************************************************!*\
+  !*** E:/uni-app/cfkj/cub-space-mini/utils/cache.js ***!
+  \*****************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2290,9 +2290,9 @@ function normalizeComponent (
 /***/ }),
 
 /***/ 17:
-/*!********************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/uview-ui/index.js ***!
-  \********************************************************************/
+/*!********************************************************!*\
+  !*** E:/uni-app/cfkj/cub-space-mini/uview-ui/index.js ***!
+  \********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2442,9 +2442,9 @@ var install = function install(Vue) {
 /***/ }),
 
 /***/ 172:
-/*!*****************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/utils/emoji.js ***!
-  \*****************************************************************/
+/*!*****************************************************!*\
+  !*** E:/uni-app/cfkj/cub-space-mini/utils/emoji.js ***!
+  \*****************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2612,9 +2612,9 @@ var _TextMsgParser = function _TextMsgParser(msg) {
 /***/ }),
 
 /***/ 18:
-/*!*******************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/uview-ui/libs/mixin/mixin.js ***!
-  \*******************************************************************************/
+/*!*******************************************************************!*\
+  !*** E:/uni-app/cfkj/cub-space-mini/uview-ui/libs/mixin/mixin.js ***!
+  \*******************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2686,9 +2686,9 @@ var _TextMsgParser = function _TextMsgParser(msg) {
 /***/ }),
 
 /***/ 19:
-/*!*********************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/uview-ui/libs/request/index.js ***!
-  \*********************************************************************************/
+/*!*********************************************************************!*\
+  !*** E:/uni-app/cfkj/cub-space-mini/uview-ui/libs/request/index.js ***!
+  \*********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8916,9 +8916,9 @@ internalMixin(Vue);
 /***/ }),
 
 /***/ 20:
-/*!**************************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/uview-ui/libs/function/deepMerge.js ***!
-  \**************************************************************************************/
+/*!**************************************************************************!*\
+  !*** E:/uni-app/cfkj/cub-space-mini/uview-ui/libs/function/deepMerge.js ***!
+  \**************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8957,9 +8957,9 @@ deepMerge;exports.default = _default;
 /***/ }),
 
 /***/ 21:
-/*!**************************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/uview-ui/libs/function/deepClone.js ***!
-  \**************************************************************************************/
+/*!**************************************************************************!*\
+  !*** E:/uni-app/cfkj/cub-space-mini/uview-ui/libs/function/deepClone.js ***!
+  \**************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8991,9 +8991,9 @@ deepClone;exports.default = _default;
 /***/ }),
 
 /***/ 22:
-/*!*********************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/uview-ui/libs/function/test.js ***!
-  \*********************************************************************************/
+/*!*********************************************************************!*\
+  !*** E:/uni-app/cfkj/cub-space-mini/uview-ui/libs/function/test.js ***!
+  \*********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9233,9 +9233,9 @@ function code(value) {var len = arguments.length > 1 && arguments[1] !== undefin
 /***/ }),
 
 /***/ 23:
-/*!****************************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/uview-ui/libs/function/queryParams.js ***!
-  \****************************************************************************************/
+/*!****************************************************************************!*\
+  !*** E:/uni-app/cfkj/cub-space-mini/uview-ui/libs/function/queryParams.js ***!
+  \****************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9302,9 +9302,9 @@ queryParams;exports.default = _default;
 /***/ }),
 
 /***/ 231:
-/*!*********************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/components/card/moreOptions.js ***!
-  \*********************************************************************************/
+/*!*********************************************************************!*\
+  !*** E:/uni-app/cfkj/cub-space-mini/components/card/moreOptions.js ***!
+  \*********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9406,9 +9406,9 @@ queryParams;exports.default = _default;
 /***/ }),
 
 /***/ 24:
-/*!**********************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/uview-ui/libs/function/route.js ***!
-  \**********************************************************************************/
+/*!**********************************************************************!*\
+  !*** E:/uni-app/cfkj/cub-space-mini/uview-ui/libs/function/route.js ***!
+  \**********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9551,9 +9551,9 @@ module.exports = __webpack_require__(/*! regenerator-runtime */ 26);
 /***/ }),
 
 /***/ 253:
-/*!********************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/components/pop/newsPublish.js ***!
-  \********************************************************************************/
+/*!********************************************************************!*\
+  !*** E:/uni-app/cfkj/cub-space-mini/components/pop/newsPublish.js ***!
+  \********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9623,9 +9623,9 @@ module.exports = __webpack_require__(/*! regenerator-runtime */ 26);
 /***/ }),
 
 /***/ 254:
-/*!*******************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/components/pop/dataUpdate.js ***!
-  \*******************************************************************************/
+/*!*******************************************************************!*\
+  !*** E:/uni-app/cfkj/cub-space-mini/components/pop/dataUpdate.js ***!
+  \*******************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10495,9 +10495,9 @@ if (hadRuntime) {
 /***/ }),
 
 /***/ 28:
-/*!***************************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/uview-ui/libs/function/timeFormat.js ***!
-  \***************************************************************************************/
+/*!***************************************************************************!*\
+  !*** E:/uni-app/cfkj/cub-space-mini/uview-ui/libs/function/timeFormat.js ***!
+  \***************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10557,9 +10557,9 @@ timeFormat;exports.default = _default;
 /***/ }),
 
 /***/ 29:
-/*!*************************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/uview-ui/libs/function/timeFrom.js ***!
-  \*************************************************************************************/
+/*!*************************************************************************!*\
+  !*** E:/uni-app/cfkj/cub-space-mini/uview-ui/libs/function/timeFrom.js ***!
+  \*************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10646,9 +10646,9 @@ module.exports = g;
 /***/ }),
 
 /***/ 30:
-/*!******************************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/uview-ui/libs/function/colorGradient.js ***!
-  \******************************************************************************************/
+/*!******************************************************************************!*\
+  !*** E:/uni-app/cfkj/cub-space-mini/uview-ui/libs/function/colorGradient.js ***!
+  \******************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10790,9 +10790,9 @@ function colorToRgba(color) {var alpha = arguments.length > 1 && arguments[1] !=
 /***/ }),
 
 /***/ 31:
-/*!*********************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/uview-ui/libs/function/guid.js ***!
-  \*********************************************************************************/
+/*!*********************************************************************!*\
+  !*** E:/uni-app/cfkj/cub-space-mini/uview-ui/libs/function/guid.js ***!
+  \*********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10842,9 +10842,9 @@ guid;exports.default = _default;
 /***/ }),
 
 /***/ 318:
-/*!*********************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/uview-ui/libs/util/province.js ***!
-  \*********************************************************************************/
+/*!*********************************************************************!*\
+  !*** E:/uni-app/cfkj/cub-space-mini/uview-ui/libs/util/province.js ***!
+  \*********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10854,9 +10854,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 
 /***/ 319:
-/*!*****************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/uview-ui/libs/util/city.js ***!
-  \*****************************************************************************/
+/*!*****************************************************************!*\
+  !*** E:/uni-app/cfkj/cub-space-mini/uview-ui/libs/util/city.js ***!
+  \*****************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10866,9 +10866,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 
 /***/ 32:
-/*!**********************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/uview-ui/libs/function/color.js ***!
-  \**********************************************************************************/
+/*!**********************************************************************!*\
+  !*** E:/uni-app/cfkj/cub-space-mini/uview-ui/libs/function/color.js ***!
+  \**********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10914,9 +10914,9 @@ color;exports.default = _default;
 /***/ }),
 
 /***/ 320:
-/*!*****************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/uview-ui/libs/util/area.js ***!
-  \*****************************************************************************/
+/*!*****************************************************************!*\
+  !*** E:/uni-app/cfkj/cub-space-mini/uview-ui/libs/util/area.js ***!
+  \*****************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10926,9 +10926,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 
 /***/ 33:
-/*!**************************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/uview-ui/libs/function/type2icon.js ***!
-  \**************************************************************************************/
+/*!**************************************************************************!*\
+  !*** E:/uni-app/cfkj/cub-space-mini/uview-ui/libs/function/type2icon.js ***!
+  \**************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10972,9 +10972,9 @@ type2icon;exports.default = _default;
 /***/ }),
 
 /***/ 34:
-/*!****************************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/uview-ui/libs/function/randomArray.js ***!
-  \****************************************************************************************/
+/*!****************************************************************************!*\
+  !*** E:/uni-app/cfkj/cub-space-mini/uview-ui/libs/function/randomArray.js ***!
+  \****************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10990,9 +10990,9 @@ randomArray;exports.default = _default;
 /***/ }),
 
 /***/ 342:
-/*!********************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/uview-ui/libs/util/emitter.js ***!
-  \********************************************************************************/
+/*!********************************************************************!*\
+  !*** E:/uni-app/cfkj/cub-space-mini/uview-ui/libs/util/emitter.js ***!
+  \********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11050,9 +11050,9 @@ function _broadcast(componentName, eventName, params) {
 /***/ }),
 
 /***/ 35:
-/*!************************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/uview-ui/libs/function/addUnit.js ***!
-  \************************************************************************************/
+/*!************************************************************************!*\
+  !*** E:/uni-app/cfkj/cub-space-mini/uview-ui/libs/function/addUnit.js ***!
+  \************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11069,9 +11069,9 @@ function addUnit() {var value = arguments.length > 0 && arguments[0] !== undefin
 /***/ }),
 
 /***/ 350:
-/*!************************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/components/textInput/textInput.js ***!
-  \************************************************************************************/
+/*!************************************************************************!*\
+  !*** E:/uni-app/cfkj/cub-space-mini/components/textInput/textInput.js ***!
+  \************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11342,9 +11342,9 @@ var __textInput = {
 /***/ }),
 
 /***/ 36:
-/*!***********************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/uview-ui/libs/function/random.js ***!
-  \***********************************************************************************/
+/*!***********************************************************************!*\
+  !*** E:/uni-app/cfkj/cub-space-mini/uview-ui/libs/function/random.js ***!
+  \***********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11363,9 +11363,9 @@ random;exports.default = _default;
 /***/ }),
 
 /***/ 37:
-/*!*********************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/uview-ui/libs/function/trim.js ***!
-  \*********************************************************************************/
+/*!*********************************************************************!*\
+  !*** E:/uni-app/cfkj/cub-space-mini/uview-ui/libs/function/trim.js ***!
+  \*********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11389,9 +11389,9 @@ trim;exports.default = _default;
 /***/ }),
 
 /***/ 38:
-/*!**********************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/uview-ui/libs/function/toast.js ***!
-  \**********************************************************************************/
+/*!**********************************************************************!*\
+  !*** E:/uni-app/cfkj/cub-space-mini/uview-ui/libs/function/toast.js ***!
+  \**********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11410,9 +11410,9 @@ toast;exports.default = _default;
 /***/ }),
 
 /***/ 39:
-/*!**************************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/uview-ui/libs/function/getParent.js ***!
-  \**************************************************************************************/
+/*!**************************************************************************!*\
+  !*** E:/uni-app/cfkj/cub-space-mini/uview-ui/libs/function/getParent.js ***!
+  \**************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11468,9 +11468,9 @@ function getParent(name, keys) {
 /***/ }),
 
 /***/ 4:
-/*!*************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/pages.json ***!
-  \*************************************************************/
+/*!*************************************************!*\
+  !*** E:/uni-app/cfkj/cub-space-mini/pages.json ***!
+  \*************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -11479,9 +11479,9 @@ function getParent(name, keys) {
 /***/ }),
 
 /***/ 40:
-/*!************************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/uview-ui/libs/function/$parent.js ***!
-  \************************************************************************************/
+/*!************************************************************************!*\
+  !*** E:/uni-app/cfkj/cub-space-mini/uview-ui/libs/function/$parent.js ***!
+  \************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11508,9 +11508,9 @@ function $parent() {var name = arguments.length > 0 && arguments[0] !== undefine
 /***/ }),
 
 /***/ 41:
-/*!********************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/uview-ui/libs/function/sys.js ***!
-  \********************************************************************************/
+/*!********************************************************************!*\
+  !*** E:/uni-app/cfkj/cub-space-mini/uview-ui/libs/function/sys.js ***!
+  \********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11527,9 +11527,9 @@ function sys() {
 /***/ }),
 
 /***/ 42:
-/*!*************************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/uview-ui/libs/function/debounce.js ***!
-  \*************************************************************************************/
+/*!*************************************************************************!*\
+  !*** E:/uni-app/cfkj/cub-space-mini/uview-ui/libs/function/debounce.js ***!
+  \*************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11567,9 +11567,9 @@ debounce;exports.default = _default;
 /***/ }),
 
 /***/ 43:
-/*!*************************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/uview-ui/libs/function/throttle.js ***!
-  \*************************************************************************************/
+/*!*************************************************************************!*\
+  !*** E:/uni-app/cfkj/cub-space-mini/uview-ui/libs/function/throttle.js ***!
+  \*************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11610,9 +11610,9 @@ throttle;exports.default = _default;
 /***/ }),
 
 /***/ 44:
-/*!*********************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/uview-ui/libs/config/config.js ***!
-  \*********************************************************************************/
+/*!*********************************************************************!*\
+  !*** E:/uni-app/cfkj/cub-space-mini/uview-ui/libs/config/config.js ***!
+  \*********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11634,9 +11634,9 @@ var version = '1.8.4';var _default =
 /***/ }),
 
 /***/ 45:
-/*!*********************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/uview-ui/libs/config/zIndex.js ***!
-  \*********************************************************************************/
+/*!*********************************************************************!*\
+  !*** E:/uni-app/cfkj/cub-space-mini/uview-ui/libs/config/zIndex.js ***!
+  \*********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11664,9 +11664,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 /***/ }),
 
 /***/ 46:
-/*!*****************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/store/index.js ***!
-  \*****************************************************************/
+/*!*****************************************************!*\
+  !*** E:/uni-app/cfkj/cub-space-mini/store/index.js ***!
+  \*****************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -11682,15 +11682,16 @@ new _vuex.default.Store({
     show: true,
     bgColor: '#ffffff',
     borderTop: false,
-    list: [{
-      iconPath: "/static/tabbar/chat.png",
-      selectedIconPath: "/static/tabbar/chat-fill.png",
-      text: '消息',
-      count: 0,
-      isDot: false,
-      customIcon: false,
-      pagePath: "/pages/chat/chat" },
-
+    list: [
+    // {
+    // 	iconPath: "/static/tabbar/chat.png",
+    // 	selectedIconPath: "/static/tabbar/chat-fill.png",
+    // 	text: '消息',
+    // 	count: 0,
+    // 	isDot: false,
+    // 	customIcon: false,
+    // 	pagePath: "/pages/chat/chat"
+    // },
     {
       iconPath: "/static/tabbar/meet.png",
       selectedIconPath: "/static/tabbar/meet-fill.png",
@@ -12854,9 +12855,9 @@ var index = {
 /***/ }),
 
 /***/ 48:
-/*!******************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/utils/common.js ***!
-  \******************************************************************/
+/*!******************************************************!*\
+  !*** E:/uni-app/cfkj/cub-space-mini/utils/common.js ***!
+  \******************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -13052,9 +13053,9 @@ var timeHandle = new TimeHandle();exports.timeHandle = timeHandle;
 /***/ }),
 
 /***/ 49:
-/*!*******************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/utils/request.js ***!
-  \*******************************************************************/
+/*!*******************************************************!*\
+  !*** E:/uni-app/cfkj/cub-space-mini/utils/request.js ***!
+  \*******************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -13169,9 +13170,9 @@ var http = new Http();exports.http = http;
 /***/ }),
 
 /***/ 57:
-/*!*********************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/uview-ui/libs/mixin/mpShare.js ***!
-  \*********************************************************************************/
+/*!*********************************************************************!*\
+  !*** E:/uni-app/cfkj/cub-space-mini/uview-ui/libs/mixin/mpShare.js ***!
+  \*********************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -13195,9 +13196,9 @@ module.exports = {
 /***/ }),
 
 /***/ 72:
-/*!***********************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/pages/index/index.js ***!
-  \***********************************************************************/
+/*!***********************************************************!*\
+  !*** E:/uni-app/cfkj/cub-space-mini/pages/index/index.js ***!
+  \***********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -13283,9 +13284,9 @@ module.exports = {
 /***/ }),
 
 /***/ 73:
-/*!******************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/pages/index/getIndexData.js ***!
-  \******************************************************************************/
+/*!******************************************************************!*\
+  !*** E:/uni-app/cfkj/cub-space-mini/pages/index/getIndexData.js ***!
+  \******************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -13443,9 +13444,9 @@ var __getIndexData = {
 /***/ }),
 
 /***/ 82:
-/*!*********************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/pages/home/home.js ***!
-  \*********************************************************************/
+/*!*********************************************************!*\
+  !*** E:/uni-app/cfkj/cub-space-mini/pages/home/home.js ***!
+  \*********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 

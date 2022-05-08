@@ -9,15 +9,16 @@ export default new Vuex.Store({
 		show: true,
 		bgColor: '#ffffff',
 		borderTop: false,
-		list: [{
-				iconPath: "/static/tabbar/chat.png",
-				selectedIconPath: "/static/tabbar/chat-fill.png",
-				text: '消息',
-				count: 0,
-				isDot: false,
-				customIcon: false,
-				pagePath: "/pages/chat/chat"
-			},
+		list: [
+			// {
+			// 	iconPath: "/static/tabbar/chat.png",
+			// 	selectedIconPath: "/static/tabbar/chat-fill.png",
+			// 	text: '消息',
+			// 	count: 0,
+			// 	isDot: false,
+			// 	customIcon: false,
+			// 	pagePath: "/pages/chat/chat"
+			// },
 			{
 				iconPath: "/static/tabbar/meet.png",
 				selectedIconPath: "/static/tabbar/meet-fill.png",

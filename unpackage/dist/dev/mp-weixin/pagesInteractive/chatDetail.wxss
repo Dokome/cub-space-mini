@@ -55,8 +55,8 @@
   width: 8rpx;
   margin-right: 5rpx;
   border-radius: 4rpx;
-  -webkit-animation-duration: .3s;
-          animation-duration: .3s;
+  -webkit-animation-duration: 0.3s;
+          animation-duration: 0.3s;
   background-color: #000;
   -webkit-animation-fill-mode: forwards;
           animation-fill-mode: forwards;

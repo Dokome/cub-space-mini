@@ -1,9 +1,9 @@
 require('common/vendor.js');(global["webpackJsonp"] = global["webpackJsonp"] || []).push([["pagesInteractive/chatDetail"],{
 
 /***/ 175:
-/*!***************************************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/main.js?{"page":"pagesInteractive%2FchatDetail"} ***!
-  \***************************************************************************************************/
+/*!***************************************************************************************!*\
+  !*** E:/uni-app/cfkj/cub-space-mini/main.js?{"page":"pagesInteractive%2FchatDetail"} ***!
+  \***************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -17,9 +17,9 @@ createPage(_chatDetail.default);
 /***/ }),
 
 /***/ 176:
-/*!**********************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/pagesInteractive/chatDetail.vue ***!
-  \**********************************************************************************/
+/*!**********************************************************************!*\
+  !*** E:/uni-app/cfkj/cub-space-mini/pagesInteractive/chatDetail.vue ***!
+  \**********************************************************************/
 /*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -58,9 +58,9 @@ component.options.__file = "pagesInteractive/chatDetail.vue"
 /***/ }),
 
 /***/ 177:
-/*!*****************************************************************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/pagesInteractive/chatDetail.vue?vue&type=template&id=ebbd7a48&scoped=true& ***!
-  \*****************************************************************************************************************************/
+/*!*****************************************************************************************************************!*\
+  !*** E:/uni-app/cfkj/cub-space-mini/pagesInteractive/chatDetail.vue?vue&type=template&id=ebbd7a48&scoped=true& ***!
+  \*****************************************************************************************************************/
 /*! exports provided: render, staticRenderFns, recyclableRender, components */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -80,9 +80,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ 178:
-/*!*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--16-0!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/template.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-uni-app-loader/page-meta.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!C:/Users/Dokom/Desktop/cfkj/cub-space-mini/pagesInteractive/chatDetail.vue?vue&type=template&id=ebbd7a48&scoped=true& ***!
-  \*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*!*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--16-0!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/template.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-uni-app-loader/page-meta.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!E:/uni-app/cfkj/cub-space-mini/pagesInteractive/chatDetail.vue?vue&type=template&id=ebbd7a48&scoped=true& ***!
+  \*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns, recyclableRender, components */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -162,9 +162,9 @@ render._withStripped = true
 /***/ }),
 
 /***/ 179:
-/*!***********************************************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/pagesInteractive/chatDetail.vue?vue&type=script&lang=js& ***!
-  \***********************************************************************************************************/
+/*!***********************************************************************************************!*\
+  !*** E:/uni-app/cfkj/cub-space-mini/pagesInteractive/chatDetail.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -178,14 +178,120 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ 180:
-/*!******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--12-1!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/script.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!C:/Users/Dokom/Desktop/cfkj/cub-space-mini/pagesInteractive/chatDetail.vue?vue&type=script&lang=js& ***!
-  \******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*!******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--12-1!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/script.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!E:/uni-app/cfkj/cub-space-mini/pagesInteractive/chatDetail.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -333,16 +439,29 @@ var innerAudioContext = uni.createInnerAudioContext();var _default =
       }
       // 获取信息过程
       var tim = this.tim;
-      var promise = tim.getMessageList({ conversationID: this.requestId, count: 15, nextReqMessageID: this.nextReqMessageID });
-      promise.then(function (imResponse) {
-        if (!!_this.nextReqMessageID && _this.nextReqMessageID === imResponse.data.nextReqMessageID) return;
+      var promise = tim.getMessageList({
+        conversationID: this.requestId,
+        count: 15,
+        nextReqMessageID: this.nextReqMessageID });
+
+      promise.
+      then(function (imResponse) {
+        if (
+        !!_this.nextReqMessageID &&
+        _this.nextReqMessageID === imResponse.data.nextReqMessageID)
+
+        return;
         // 渲染数据
         var _iterator = _createForOfIteratorHelper(imResponse.data.messageList),_step;try {for (_iterator.s(); !(_step = _iterator.n()).done;) {var msg = _step.value;
             if (msg.payload.text) {
-              _this.$set(msg.payload, 'textDom', _this.TextMsgParser(msg.payload.text));
+              _this.$set(
+              msg.payload,
+              'textDom',
+              _this.TextMsgParser(msg.payload.text));
+
             }
           }
-          // 
+          //
         } catch (err) {_iterator.e(err);} finally {_iterator.f();}_this.msgList = imResponse.data.messageList.concat(_this.msgList); // 消息列表。
         _this.nextReqMessageID = imResponse.data.nextReqMessageID; // 用于续拉，分页续拉时需传入该字段。
         _this.isCompleted = imResponse.data.isCompleted; // 表示是否已经拉完所有消息。
@@ -355,7 +474,8 @@ var innerAudioContext = uni.createInnerAudioContext();var _default =
         _this.scrollTimmer = setTimeout(function () {
           _this.scrollTimmer = null;
         }, 200);
-      }).catch(function (err) {
+      }).
+      catch(function (err) {
         console.log(err);
       });
       this.$forceUpdate();
@@ -414,11 +534,13 @@ var innerAudioContext = uni.createInnerAudioContext();var _default =
       // 主动撤回消息
       var tim = this.tim;
       var promise = tim.revokeMessage(message);
-      promise.then(function (imResponse) {
+      promise.
+      then(function (imResponse) {
         // 消息撤回成功
         _this3.$set(message, 'isRevoked', true);
-        console.log("撤回成功");
-      }).catch(function (imError) {
+        console.log('撤回成功');
+      }).
+      catch(function (imError) {
         if (imError.code == 20016) {
           return uni.showToast({
             title: '已超过2分钟无法撤回~',
@@ -431,10 +553,12 @@ var innerAudioContext = uni.createInnerAudioContext();var _default =
     deleteRevokedMsg: function deleteRevokedMsg(message) {var _this4 = this;
       var tim = this.tim;
       var promise = tim.deleteMessage([message]);
-      promise.then(function (imResponse) {
+      promise.
+      then(function (imResponse) {
         // 删除消息成功
         _this4.$set(message, 'isDeleted', true);
-      }).catch(function (imError) {
+      }).
+      catch(function (imError) {
         // 删除消息失败
         console.warn('deleteMessage error:', imError);
       });
@@ -442,7 +566,9 @@ var innerAudioContext = uni.createInnerAudioContext();var _default =
     emojicontentRender: function emojicontentRender(content) {
       return content.replace(/\[([\S\s]+?)\]/g, function (name) {
         if (_emoji.emojiMap[name]) {
-          return "<img src=\"".concat(_emoji.emojiUrl + _emoji.emojiMap[name], "\" class=\"emojiStyle\"></img>");
+          return "<img src=\"".concat(
+          _emoji.emojiUrl + _emoji.emojiMap[name], "\" class=\"emojiStyle\"></img>");
+
         } else {
           return name;
         }
@@ -463,7 +589,13 @@ var innerAudioContext = uni.createInnerAudioContext();var _default =
       return this.$cache.get('userId');
     },
     chatStyle: function chatStyle() {
-      var colorPair = ['#F8D90A, #FFF', '#0396FF, #FFF', '#EA5455, #FFF', '#7360F0, #FFF', '#32CCBC, #FFF'];
+      var colorPair = [
+      '#F8D90A, #FFF',
+      '#0396FF, #FFF',
+      '#EA5455, #FFF',
+      '#7360F0, #FFF',
+      '#32CCBC, #FFF'];
+
       var base = this.pageTitle.charCodeAt(0) % 10 >> 1;
       return colorPair[base].split(',');
     },
@@ -480,17 +612,17 @@ var innerAudioContext = uni.createInnerAudioContext();var _default =
     // 第一次获取消息列表
     this.getMessageList();
     this.userIdTo = options.userIdTo;
-    // 
+    //
     var eventChannel = this.getOpenerEventChannel();
     // 监听acceptDataFromOpenerPage事件，获取上一页面通过eventChannel传送到当前页面的数据
     eventChannel.on('acceptDataFromOpenerPage', function (data) {
       _this5.userInfo = data.data;
     });
-    // 
+    //
     // 收到消息
-    uni.$off("reciveChatMsg");
-    uni.$off("keyboardChange");
-    uni.$on("keyboardChange", function (height, inputState) {
+    uni.$off('reciveChatMsg');
+    uni.$off('keyboardChange');
+    uni.$on('keyboardChange', function (height, inputState) {
       _this5.inputState = inputState;
       _this5.paddingHeight = height;
       _this5.$nextTick(function () {
@@ -498,10 +630,14 @@ var innerAudioContext = uni.createInnerAudioContext();var _default =
         _this5.$forceUpdate();
       });
     });
-    uni.$on("reciveChatMsg", function (data) {
+    uni.$on('reciveChatMsg', function (data) {
       data = data.filter(function (item) {
         if (item.payload.text) {
-          _this5.$set(item.payload, 'textDom', _this5.TextMsgParser(item.payload.text));
+          _this5.$set(
+          item.payload,
+          'textDom',
+          _this5.TextMsgParser(item.payload.text));
+
         }
         return item.from === _this5.userIdTo || item.to === _this5.userIdTo;
       });
@@ -522,7 +658,7 @@ var innerAudioContext = uni.createInnerAudioContext();var _default =
     });
   },
   onUnload: function onUnload() {
-    uni.$off("reciveChatMsg");
+    uni.$off('reciveChatMsg');
     innerAudioContext.stop();
   } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
@@ -530,9 +666,9 @@ var innerAudioContext = uni.createInnerAudioContext();var _default =
 /***/ }),
 
 /***/ 181:
-/*!********************************************************************************************************************************************!*\
-  !*** C:/Users/Dokom/Desktop/cfkj/cub-space-mini/pagesInteractive/chatDetail.vue?vue&type=style&index=0&id=ebbd7a48&lang=scss&scoped=true& ***!
-  \********************************************************************************************************************************************/
+/*!********************************************************************************************************************************!*\
+  !*** E:/uni-app/cfkj/cub-space-mini/pagesInteractive/chatDetail.vue?vue&type=style&index=0&id=ebbd7a48&lang=scss&scoped=true& ***!
+  \********************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -546,9 +682,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ 182:
-/*!**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/mini-css-extract-plugin/dist/loader.js??ref--8-oneOf-1-0!./node_modules/css-loader/dist/cjs.js??ref--8-oneOf-1-1!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--8-oneOf-1-2!./node_modules/postcss-loader/src??ref--8-oneOf-1-3!./node_modules/sass-loader/dist/cjs.js??ref--8-oneOf-1-4!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--8-oneOf-1-5!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!C:/Users/Dokom/Desktop/cfkj/cub-space-mini/pagesInteractive/chatDetail.vue?vue&type=style&index=0&id=ebbd7a48&lang=scss&scoped=true& ***!
-  \**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*!**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/mini-css-extract-plugin/dist/loader.js??ref--8-oneOf-1-0!./node_modules/css-loader/dist/cjs.js??ref--8-oneOf-1-1!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--8-oneOf-1-2!./node_modules/postcss-loader/src??ref--8-oneOf-1-3!./node_modules/sass-loader/dist/cjs.js??ref--8-oneOf-1-4!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--8-oneOf-1-5!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!E:/uni-app/cfkj/cub-space-mini/pagesInteractive/chatDetail.vue?vue&type=style&index=0&id=ebbd7a48&lang=scss&scoped=true& ***!
+  \**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
